@@ -1,6 +1,6 @@
-class CreateApplicationErrors < ActiveRecord::Migration[7.1]
+class CreateApplicationErrors < ActiveRecord::Migration[8.0]
   def change
-    create_table :application_errors do |t|
+    create_table :application_errors, id: :uuid do |t|
       t.text :message, null: false
       t.integer :level, null: false, default: 0
       t.text :calling_function

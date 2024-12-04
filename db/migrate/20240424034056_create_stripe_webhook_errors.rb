@@ -1,6 +1,6 @@
-class CreateStripeWebhookErrors < ActiveRecord::Migration[7.1]
+class CreateStripeWebhookErrors < ActiveRecord::Migration[8.0]
   def change
-    create_table :stripe_webhook_errors do |t|
+    create_table :stripe_webhook_errors, id: :uuid do |t|
       t.string :message
       t.string :stripe_customer_id
       t.json :event_object

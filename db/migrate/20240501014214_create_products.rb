@@ -1,6 +1,6 @@
-class CreateProducts < ActiveRecord::Migration[7.1]
+class CreateProducts < ActiveRecord::Migration[8.0]
   def change
-    create_table :products do |t|
+    create_table :products, id: :uuid do |t|
       t.string :stripe_product_id, limit: 128
       t.string :name, limit: 128, null: false
       t.string :description

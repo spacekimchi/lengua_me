@@ -1,7 +1,7 @@
-class CreateProductPrices < ActiveRecord::Migration[7.1]
+class CreateProductPrices < ActiveRecord::Migration[8.0]
   def change
-    create_table :product_prices do |t|
-      t.references :product, null: false, foreign_key: true
+    create_table :product_prices, id: :uuid do |t|
+      t.references :product, type: :uuid, null: false, foreign_key: true
       t.string :stripe_price_id, limit: 128
       t.string :name, limit: 128, null: false
       t.integer :price, null: false, default: 0 # price in cents
