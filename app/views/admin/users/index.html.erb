@@ -1,0 +1,38 @@
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Email</th>
+      <th>Username</th>
+      <th>Stripe Customer ID</th>
+      <th>Verification Token</th>
+      <th>Verified At</th>
+      <th>Admin?</th>
+      <th>Super Admin?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.email %></td>
+        <td><%= user.username %></td>
+        <td><%= user.stripe_customer_id %></td>
+        <td><%= user.verification_token %></td>
+        <td id="send-verification-email-<%= user.id %>">
+          <%= render partial: 'send_verification_email', locals: { user: user } %>
+        </td>
+        <td id="admin-toggle-<%= user.id %>">
+          <%= render partial: 'admin_toggle', locals: { user: user } %>
+        </td>
+        <td id="super-admin-toggle-<%= user.id %>">
+          <%= render partial: 'super_admin_toggle', locals: { user: user } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New User', new_admin_user_path %>

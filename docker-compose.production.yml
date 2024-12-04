@@ -1,0 +1,68 @@
+services:
+  db:
+    image: postgres:16.3
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    mem_limit: 500m
+    networks:
+      - backend
+
+  goodjob:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+      args:
+        - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+    command: bundle exec rails good_job:start
+    depends_on:
+      - db
+    volumes:
+      - ./log:/rails/log
+      - ./tmp:/rails/tmp
+      - ./storage:/rails/storage
+    env_file:
+      - .env
+    environment:
+      - RAILS_ENV=production
+    networks:
+      - backend
+    mem_limit: 500m
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+      args:
+        - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+    volumes:
+      - rails_log:/rails/log
+      - rails_storage:/rails/storage
+      - rails_tmp:/rails/tmp
+    env_file:
+      - ".env"
+    ports:
+      - "8080:3000"
+    depends_on:
+      - db
+      - goodjob
+    environment:
+      - GUI_AVAILABLE=false
+      - RAILS_ENV=production
+      - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+    mem_limit: 1g
+    networks:
+      - backend
+
+volumes:
+  pgdata: {}
+  rails_log:
+  rails_storage:
+  rails_tmp:
+
+networks:
+  backend:
+
