@@ -1,6 +1,6 @@
-class CreateRoles < ActiveRecord::Migration[7.1]
+class CreateRoles < ActiveRecord::Migration[8.0]
   def change
-    create_table :roles do |t|
+    create_table :roles, id: :uuid do |t|
       t.integer :name
       t.string :description
 
