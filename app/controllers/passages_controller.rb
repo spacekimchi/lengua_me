@@ -1,0 +1,61 @@
+class PassagesController < ApplicationController
+  def show
+    @passage = Passage.find(params[:id])
+  end
+
+  def index
+    @passages = Passage.all.includes(:sentences)
+  end
+
+  def new
+  end
+
+  def create
+    pgs = PassageGeneratorService.new(subject: params[:subject], grade_level: params[:grade_level])
+    title_and_sentences = pgs.call
+    all_sentences = title_and_sentences[:sentences]
+    title = title_and_sentences[:title]
+    ActiveRecord::Base.transaction do
+      @passage = Passage.create!(title: title)
+      language = Language.english
+      all_sentences.each_with_index do |sentence, idx|
+        a = Sentence.create!(passage: @passage, language: language, content: sentence, order_idx: idx)
+      end
+    end
+    respond_to do |format|
+      if @passage.present?
+        flash.now[:success] = "The passage was successfully created."
+
+        format.turbo_stream
+      else
+        flash.now[:error] = "Failed to create the passage."
+        format.turbo_stream { render partial: 'partials/flash', status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def translate
+    @passage = Passage.find(params[:id])
+    language = Language.find_by(name: params[:language].downcase)
+    sentences = PassageTranslatorService.new(sentences: @passage.sentences.pluck(:content), language: language.name).call[:sentences]
+    @sentence_translations = []
+
+    ActiveRecord::Base.transaction do
+      sentences.each_with_index do |sentence, idx|
+        @sentence_translations.append(SentenceTranslation.create!(language: language, sentence: @passage.sentences.find_by(order_idx: idx), text: sentence))
+      end
+    end
+
+    debugger
+    respond_to do |format|
+      if @sentence_translations.present?
+        flash.now[:success] = "The passage was successfully translated."
+
+        format.turbo_stream
+      else
+        flash.now[:error] = "Failed to translate the passage."
+        format.turbo_stream { render partial: 'partials/flash', status: :unprocessable_entity }
+      end
+    end
+  end
+end

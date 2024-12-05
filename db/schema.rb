@@ -10,11 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_03_024728) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_04_030942) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pgcrypto"
 
-  create_table "application_errors", force: :cascade do |t|
+  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.uuid "record_id", null: false
+    t.uuid "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "application_errors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "message", null: false
     t.integer "level", default: 0, null: false
     t.text "calling_function"
@@ -119,8 +148,31 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_024728) do
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
   end
 
-  create_table "product_prices", force: :cascade do |t|
-    t.bigint "product_id", null: false
+  create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_languages_on_name", unique: true
+  end
+
+  create_table "passage_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "passage_id", null: false
+    t.uuid "topic_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["passage_id", "topic_id"], name: "index_passage_topics_on_passage_id_and_topic_id", unique: true
+    t.index ["passage_id"], name: "index_passage_topics_on_passage_id"
+    t.index ["topic_id"], name: "index_passage_topics_on_topic_id"
+  end
+
+  create_table "passages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "title", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "product_prices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id", null: false
     t.string "stripe_price_id", limit: 128
     t.string "name", limit: 128, null: false
     t.integer "price", default: 0, null: false
@@ -136,7 +188,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_024728) do
     t.index ["stripe_price_id"], name: "index_product_prices_on_stripe_price_id", unique: true
   end
 
-  create_table "products", force: :cascade do |t|
+  create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "stripe_product_id", limit: 128
     t.string "name", limit: 128, null: false
     t.string "description"
@@ -147,7 +199,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_024728) do
     t.index ["stripe_product_id"], name: "index_products_on_stripe_product_id", unique: true
   end
 
-  create_table "roles", force: :cascade do |t|
+  create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "name"
     t.string "description"
     t.datetime "created_at", null: false
@@ -155,7 +207,29 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_024728) do
     t.index ["name"], name: "index_roles_on_name", unique: true
   end
 
-  create_table "stripe_webhook_errors", force: :cascade do |t|
+  create_table "sentence_translations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "sentence_id", null: false
+    t.uuid "language_id", null: false
+    t.text "text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id"], name: "index_sentence_translations_on_language_id"
+    t.index ["sentence_id", "language_id"], name: "index_sentence_translations_on_sentence_id_and_language_id", unique: true
+    t.index ["sentence_id"], name: "index_sentence_translations_on_sentence_id"
+  end
+
+  create_table "sentences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "language_id"
+    t.uuid "passage_id"
+    t.text "content", default: ""
+    t.integer "order_idx", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id"], name: "index_sentences_on_language_id"
+    t.index ["passage_id"], name: "index_sentences_on_passage_id"
+  end
+
+  create_table "stripe_webhook_errors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "message"
     t.string "stripe_customer_id"
     t.json "event_object"
@@ -165,9 +239,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_024728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "support_ticket_messages", force: :cascade do |t|
-    t.bigint "support_ticket_id", null: false
-    t.bigint "user_id", null: false
+  create_table "support_ticket_messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "support_ticket_id", null: false
+    t.uuid "user_id", null: false
     t.text "content", null: false
     t.text "recipient_email"
     t.boolean "internal", default: false
@@ -177,15 +251,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_024728) do
     t.index ["user_id"], name: "index_support_ticket_messages_on_user_id"
   end
 
-  create_table "support_tickets", force: :cascade do |t|
-    t.bigint "user_id"
+  create_table "support_tickets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
     t.string "author_email", null: false
     t.string "subject", null: false
     t.integer "status", default: 0, null: false
     t.integer "priority", default: 0, null: false
     t.text "content", null: false
     t.datetime "resolved_at"
-    t.bigint "assigned_to_id"
+    t.uuid "assigned_to_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["assigned_to_id"], name: "index_support_tickets_on_assigned_to_id"
@@ -195,19 +269,26 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_024728) do
     t.index ["user_id"], name: "index_support_tickets_on_user_id"
   end
 
-  create_table "user_roles", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "role_id", null: false
+  create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_topics_on_name", unique: true
+  end
+
+  create_table "user_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["role_id"], name: "index_user_roles_on_role_id"
     t.index ["user_id"], name: "index_user_roles_on_user_id"
   end
 
-  create_table "user_subscriptions", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "product_id"
-    t.bigint "product_price_id"
+  create_table "user_subscriptions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "product_id"
+    t.uuid "product_price_id"
     t.string "stripe_subscription_id", limit: 128
     t.string "status"
     t.bigint "current_period_start"
@@ -220,7 +301,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_024728) do
     t.index ["user_id"], name: "index_user_subscriptions_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username", null: false
@@ -238,7 +319,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_024728) do
     t.index ["stripe_customer_id"], name: "index_users_on_stripe_customer_id", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "passage_topics", "passages"
+  add_foreign_key "passage_topics", "topics"
   add_foreign_key "product_prices", "products"
+  add_foreign_key "sentence_translations", "languages"
+  add_foreign_key "sentence_translations", "sentences"
+  add_foreign_key "sentences", "languages"
+  add_foreign_key "sentences", "passages"
   add_foreign_key "support_ticket_messages", "support_tickets"
   add_foreign_key "support_ticket_messages", "users"
   add_foreign_key "support_tickets", "users"

@@ -15,6 +15,8 @@ Rails.application.configure do
   # Enable server timing.
   config.server_timing = true
 
+  config.log_level = :debug
+
   config.force_ssl = false
   config.session_store :cookie_store, key: '_lengua_me', secure: false, same_site: :lax, signed: false
 

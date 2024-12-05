@@ -78,6 +78,11 @@ Rails.application.routes.draw do
   namespace :stripe do
     post 'webhooks', to: 'webhooks#create'
   end
+  resources :passages do
+    member do
+      post 'translate'
+    end
+  end
 
   resource :checkout, only: %i[new show]
   resources :products, only: %i[index show]
