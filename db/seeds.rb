@@ -28,3 +28,13 @@ regular_user = User.find_or_create_by(email: 'reg@jinz.co') do |user|
   user.username = "reg"
 end
 
+topics = ['sports', 'dating', 'travel', 'food', 'hobbies', 'world news', 'career', 'education', 'art', 'health', 'technology', 'daily life and routines', 'environmental']
+topics.each do |topic|
+  Topic.find_or_create_by(name: topic)
+end
+
+languages = ['english', 'spanish', 'korean', 'french', 'russian', 'mandarin', 'portuguese', 'japanese', 'hindi', 'bengali', 'vietnamese', 'italian', 'turkish', 'arabic']
+languages.each do |language|
+  Language.find_or_create_by(name: language)
+end
+

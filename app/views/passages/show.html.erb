@@ -1,0 +1,22 @@
+<div>
+  <%= @passage.title %>
+  <div>
+    <% @passage.sentences.each do |sentence| %>
+      <div>
+        <%= sentence.order_idx %>. <%= sentence.content %>
+        <div style="padding-left: 13px;">
+          Translations: 
+          <% sentence.translations.each do |translation| %>
+            <%= translation.text %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= button_to "Translate to spanish",
+  translate_passage_path(@passage),
+  method: :post,
+  params: { language: 'spanish' },
+  form: { data: { turbo_stream: true } },
+  class: "btn" %>

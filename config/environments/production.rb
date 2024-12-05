@@ -62,9 +62,9 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.sendgrid.net',
     port: 587,
-    domain: ENV.fetch("DOMAIN"), # Replace with your verified domain
+    domain: ENV.fetch("DOMAIN", "localhost:3000"), # Replace with your verified domain
     user_name: 'apikey', # This is literal; use 'apikey' as the username
-    password: ENV.fetch("SENDGRID_API_KEY"), # Replace with your SendGrid API Key
+    password: Rails.application.credentials.dig(:sendgrid, :api_key), # Replace with your SendGrid API Key
     authentication: :plain,
     enable_starttls_auto: true
   }

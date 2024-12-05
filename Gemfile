@@ -37,6 +37,11 @@ gem "stripe"
 # GoodJob for job processing
 gem "good_job"
 
+# LLM models
+gem "ruby-openai"
+
+gem "json-schema"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -61,7 +66,6 @@ group :development, :test do
   gem "faker"
   gem "rspec-rails"
   gem 'factory_bot_rails'
-
 end
 
 group :development do

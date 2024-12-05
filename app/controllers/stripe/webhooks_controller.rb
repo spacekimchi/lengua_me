@@ -3,7 +3,7 @@ module Stripe
     skip_before_action :verify_authenticity_token
 
     def create
-      endpoint_secret = ENV['STRIPE_SIGNING_SECRET']
+      endpoint_secret = Rails.application.credentials.dig(:stripe, :signing_secret)
       payload = request.body.read
       sig_header = request.env['HTTP_STRIPE_SIGNATURE']
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)

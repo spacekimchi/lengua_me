@@ -1,0 +1,17 @@
+<div class="passages-index-container">
+  <h1>Passages</h1>
+  <% Passage::GRADE_LEVELS.each do |grade_level| %>
+    <%= button_to "New passage for grade level #{grade_level}",
+      passages_path,
+      method: :post,
+      params: { subject: 'Food and Cuisine', grade_level: grade_level },
+      form: { data: { turbo_stream: true } },
+      class: "btn" %>
+  <% end %>
+
+  <div id="passages-list">
+    <% @passages.each do |passage| %>
+      <%= render partial: 'passages/partials/index_row', locals: { passage: passage } %>
+    <% end %>
+  </div>
+</div>
