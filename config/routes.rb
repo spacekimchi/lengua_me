@@ -71,6 +71,7 @@ Rails.application.routes.draw do
     end
   end
   if Rails.env.development?
+    mount GoodJob::Engine => 'good_job'
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
@@ -78,6 +79,12 @@ Rails.application.routes.draw do
   namespace :stripe do
     post 'webhooks', to: 'webhooks#create'
   end
+
+  resources :topics, param: :name do
+    resources :passage_reader, controller: 'topics/passage_reader'
+    resources :passage_writer, controller: 'topics/passage_writer'
+  end
+
   resources :passages do
     member do
       post 'translate'

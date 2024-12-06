@@ -8,7 +8,7 @@ class PassageGeneratorService
     properties: {
       title: {
         type: 'string',
-        description: 'Up to a few words on what the sentences are about. Something more specific than the subject I passed.'
+        description: 'Up to a few words on what the sentences are about. Something more specific than the topic I passed.'
       },
       sentences: {
         type: 'array',
@@ -20,7 +20,7 @@ class PassageGeneratorService
       }
     },
     additionalProperties: false,
-    required: ['sentences']
+    required: ['sentences', 'title']
   }.freeze
 
   FUNCTION = {
@@ -29,14 +29,13 @@ class PassageGeneratorService
     parameters: SCHEMA
   }.freeze
 
-  # subject: subject matter for generator
-  # grade_level: grade level for the generator
-  def initialize(subject:, grade_level:, language: 'English', translations: ['Spanish'])
+  # topic: topic matter for generator
+  # difficulty: difficulty level for the generator
+  def initialize(topic:, difficulty:, language: 'English')
     @client = OpenAI::Client.new
     @model = 'gpt-4' # Correct model name
-    @subject = subject
-    @grade_level = grade_level
-    @translations = translations
+    @topic = topic
+    @difficulty = difficulty
   end
 
   # Public method to execute the service
@@ -55,8 +54,7 @@ class PassageGeneratorService
         messages: [
           {
             role: 'user',
-            content: "I am trying to practice my #{@language} conjugations. Give me a passage that uses past tense conjugations for me to read and practice. The sentences should be related to each other and form some sort of situation or story to help learn about using the language in real life while pertaining to this subject:  #{@subject}."
-
+            content: "Create some passage or conversation in #{@language}. The sentences should be related to each other and be about #{@topic.name}. Ensure it is written for a #{@difficulty} language learner level. Double check the output to make sure there are no spelling or grammar mistakes. Also give me a good title for the text."
           }
         ],
         temperature: 1.2,

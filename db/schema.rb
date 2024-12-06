@@ -167,6 +167,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_04_030942) do
 
   create_table "passages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "title", default: ""
+    t.integer "difficulty", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

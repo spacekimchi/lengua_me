@@ -7,16 +7,20 @@
         <div style="padding-left: 13px;">
           Translations: 
           <% sentence.translations.each do |translation| %>
-            <%= translation.text %>
+            <div style="padding-left: 13px;">
+              <%= translation.language.name.capitalize %>: <%= translation.text %>
+            </div>
           <% end %>
         </div>
       </div>
     <% end %>
   </div>
 </div>
-<%= button_to "Translate to spanish",
-  translate_passage_path(@passage),
-  method: :post,
-  params: { language: 'spanish' },
-  form: { data: { turbo_stream: true } },
-  class: "btn" %>
+<% @languages.each do |language| %>
+  <%= button_to "Translate to #{language.name}",
+    translate_passage_path(@passage),
+    method: :post,
+    params: { language_id: language.id },
+    form: { data: { turbo_stream: true } },
+    class: "btn" %>
+<% end %>

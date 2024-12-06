@@ -1,0 +1,20 @@
+<div>
+  <h1><%= @topic.name.titleize %></h1>
+  <% Passage.difficulties.keys.each do |difficulty| %>
+    <%= button_to "New passage for #{difficulty.to_s} difficulty",
+      passages_path,
+      method: :post,
+      params: { topic_id: @topic, difficulty: difficulty },
+      form: { data: { turbo_stream: true } },
+      class: "btn" %>
+  <% end %>
+  <div>
+    <ul>
+      <% @passages.each do |passage| %>
+        <li>
+          <%= link_to passage.title, topic_passage_reader_path(urlify(@topic.name), passage) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

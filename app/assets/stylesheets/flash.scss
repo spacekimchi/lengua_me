@@ -1,3 +1,5 @@
+@use "variables";
+
 // Define the shake animation
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
@@ -25,22 +27,22 @@
     padding: 5px 11px;
     border-radius: 3px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* horizontal, vertical, blur, color */
-    background-color: $OFF_WHITE;
+    background-color: variables.$OFF_WHITE;
     font-size: 19px;
     font-weight: 600;
     animation: shake 0.25s ease, fadeOut 0.5s ease 2s forwards; // Add fadeOut animation
     animation-iteration-count: 1;
     &.success, &.notice {
-        border: solid 3px $FLASH_BORDER_GREEN;
+        border: solid 3px variables.$FLASH_BORDER_GREEN;
     }
     &.info {
-        border: solid 3px $FLASH_BORDER_BLUE;
+        border: solid 3px variables.$FLASH_BORDER_BLUE;
     }
     &.warn, &.alert {
-        border: solid 3px $Y_COMBINATOR_ORANGE;
+        border: solid 3px variables.$Y_COMBINATOR_ORANGE;
     }
     &.error {
-        border: solid 3px $FLASH_BORDER_RED;
+        border: solid 3px variables.$FLASH_BORDER_RED;
     }
   }
 }

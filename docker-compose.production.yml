@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile.production
       args:
         - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-    command: bundle exec rails good_job:start
+    command: bundle exec good_job start
     depends_on:
       - db
     volumes:

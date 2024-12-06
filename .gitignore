@@ -48,5 +48,7 @@ storage/*
 # For ctags
 tags
 
+keys
+
 # I don't use solargraph, but yes
 .solargraph.yml
