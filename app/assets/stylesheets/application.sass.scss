@@ -1,7 +1,7 @@
-@import "variables";
-@import "table";
-@import "flash";
-@import "navigation";
+@use "variables";
+@use "table";
+@use "flash";
+@use "navigation";
 
 body {
     max-width: 1080px;

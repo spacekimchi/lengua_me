@@ -20,11 +20,11 @@ services:
       context: .
       args:
         - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-    command: bundle exec rails good_job:start
+    command: bash -c "bin/rails db:migrate && bundle exec good_job start"
     depends_on:
       - db
     volumes:
-      - .:/app
+      - .:/rails
     env_file:
       - .env
     environment:

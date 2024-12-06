@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def super_admin?
     current_user&.super_admin?
   end
+
+  def deurlify(urlified_string)
+    urlified_string.tr('-', ' ')
+  end
 end

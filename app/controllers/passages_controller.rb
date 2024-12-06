@@ -1,22 +1,26 @@
 class PassagesController < ApplicationController
   def show
     @passage = Passage.find(params[:id])
+    @languages = Language.all
   end
 
   def index
     @passages = Passage.all.includes(:sentences)
+    @topics = Topic.all
   end
 
   def new
   end
 
   def create
-    pgs = PassageGeneratorService.new(subject: params[:subject], grade_level: params[:grade_level])
+    @topic = Topic.find(params[:topic_id])
+    pgs = PassageGeneratorService.new(topic: @topic, difficulty: params[:difficulty])
     title_and_sentences = pgs.call
     all_sentences = title_and_sentences[:sentences]
     title = title_and_sentences[:title]
     ActiveRecord::Base.transaction do
-      @passage = Passage.create!(title: title)
+      @passage = Passage.create!(title: title, difficulty: params[:difficulty].to_sym)
+      @passage.passage_topics.create!(topic: @topic)
       language = Language.english
       all_sentences.each_with_index do |sentence, idx|
         a = Sentence.create!(passage: @passage, language: language, content: sentence, order_idx: idx)
@@ -25,7 +29,6 @@ class PassagesController < ApplicationController
     respond_to do |format|
       if @passage.present?
         flash.now[:success] = "The passage was successfully created."
-
         format.turbo_stream
       else
         flash.now[:error] = "Failed to create the passage."
@@ -36,7 +39,7 @@ class PassagesController < ApplicationController
 
   def translate
     @passage = Passage.find(params[:id])
-    language = Language.find_by(name: params[:language].downcase)
+    language = Language.find(params[:language_id])
     sentences = PassageTranslatorService.new(sentences: @passage.sentences.pluck(:content), language: language.name).call[:sentences]
     @sentence_translations = []
 
@@ -46,7 +49,6 @@ class PassagesController < ApplicationController
       end
     end
 
-    debugger
     respond_to do |format|
       if @sentence_translations.present?
         flash.now[:success] = "The passage was successfully translated."

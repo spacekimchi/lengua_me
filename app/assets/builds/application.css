@@ -10,10 +10,53 @@ table tbody td {
   text-align: center;
 }
 
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20%, 60% {
+    transform: translateX(-3px);
+  }
+  40%, 80% {
+    transform: translateX(3px);
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 #flash {
-  position: absolute;
+  position: fixed;
   left: 50%;
   transform: translate(-50%);
+  top: 33px;
+  z-index: 2;
+}
+#flash .flash {
+  padding: 5px 11px;
+  border-radius: 3px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* horizontal, vertical, blur, color */
+  background-color: #F6F1E9;
+  font-size: 19px;
+  font-weight: 600;
+  animation: shake 0.25s ease, fadeOut 0.5s ease 2s forwards;
+  animation-iteration-count: 1;
+}
+#flash .flash.success, #flash .flash.notice {
+  border: solid 3px #6EC207;
+}
+#flash .flash.info {
+  border: solid 3px #3876BF;
+}
+#flash .flash.warn, #flash .flash.alert {
+  border: solid 3px #FF6600;
+}
+#flash .flash.error {
+  border: solid 3px #E72929;
 }
 
 .top-nav-container {
@@ -136,7 +179,7 @@ table tbody td {
   .top-nav-container nav#top-nav .nav-links button {
     width: 100%;
     padding: 1rem;
-    border-bottom: 1px solid #fdb086;
+    border-bottom: 1px solid rgb(252.8793103448, 175.8275862069, 134.1206896552);
   }
   .top-nav-container nav#top-nav .nav-links.active {
     right: 0;

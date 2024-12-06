@@ -21,7 +21,7 @@ class PassageTranslatorService
 
   FUNCTION = {
     name: 'generate_passage',
-    description: 'Generates a passage containing English sentences for practice.',
+    description: 'Generates a passage containing sentences translated in the target language for practice.',
     parameters: SCHEMA
   }.freeze
 
@@ -50,7 +50,7 @@ class PassageTranslatorService
         messages: [
           {
             role: 'user',
-            content: "I am giving a list of sentences. I want you to translate each sentence to this language: `#{@language}`. I am trying to use this to learn languages so make sure the translations are accurate and fit in with the overall sentences. The translated sentences should follow the same order and there should be the same amount of translated sentences as original ones. These are the sentences: #{@sentences.to_s}"
+            content: "I am giving a list of sentences. I want you to translate each sentence to this language: `#{@language.name}`. I am trying to use this to learn languages so make sure the translations are accurate and fit in with the overall sentences. The translated sentences should follow the same order and there should be the same amount of translated sentences as original ones. These are the sentences: #{@sentences.to_s}"
 
           }
         ],

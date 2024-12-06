@@ -2,17 +2,25 @@
 #
 # Table name: user_subscriptions
 #
-#  id                     :bigint           not null, primary key
-#  user_id                :bigint           not null
-#  product_id             :bigint
-#  product_price_id       :bigint
+#  id                     :uuid             not null, primary key
+#  user_id                :uuid             not null
+#  product_id             :uuid
+#  product_price_id       :uuid
 #  stripe_subscription_id :string(128)
 #  status                 :string
-#  current_period_start   :bigint
-#  current_period_end     :bigint
+#  current_period_start   :integer
+#  current_period_end     :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
+# Indexes
+#
+#  index_user_subscriptions_on_product_id              (product_id)
+#  index_user_subscriptions_on_product_price_id        (product_price_id)
+#  index_user_subscriptions_on_stripe_subscription_id  (stripe_subscription_id) UNIQUE
+#  index_user_subscriptions_on_user_id                 (user_id)
+#
+
 class UserSubscription < ApplicationRecord
   FREQUENCIES = {
     MONTHLY: 'monthly'.freeze,
