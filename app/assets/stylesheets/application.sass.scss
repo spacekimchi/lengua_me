@@ -2,11 +2,45 @@
 @use "table";
 @use "flash";
 @use "navigation";
+@use "breadcrumbs";
+@use "topics/passage_writer/show";
 
 body {
-    max-width: 1080px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    font-size: 16px; /* Base font size for rem units */
     background-color: white;
     color: black;
-    margin: auto;
+    margin: 0px;
+    padding: 0px;
+
+    .main-content {
+        margin: 0.5rem;
+        max-width: 1080px;
+        margin: auto;
+        padding: 0.5rem;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    button.button {
+        padding: 7px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+
+        &:hover {
+            filter: brightness(85%); /* Darkens the color */
+            &:active {
+                transform: scale(0.96);
+            }
+        }
+    }
+
+    .bold {
+        font-weight: bold;
+    }
 }
 

@@ -12,7 +12,7 @@
     <ul>
       <% @passages.each do |passage| %>
         <li>
-          <%= link_to passage.title, topic_passage_reader_path(urlify(@topic.name), passage) %>
+          <%= link_to passage.title, topic_passage_writer_path(urlify(@topic.name), passage) %>
         </li>
       <% end %>
     </ul>
