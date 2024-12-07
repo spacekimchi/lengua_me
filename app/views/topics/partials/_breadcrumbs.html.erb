@@ -1,0 +1,12 @@
+<div class="breadcrumbs">
+  <%= link_to 'All Topics', topics_path %>
+  <span> &gt; </span>
+  <% if @topic.present? %>
+    <%= link_to @topic.name.titleize, topic_path(name: @topic.name) %>
+    <span> &gt; </span>
+  <% end %>
+  <% if @passage.present? %>
+    <span><%= @passage.title %></span>
+  <% end %>
+</div>
+

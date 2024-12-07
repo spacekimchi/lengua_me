@@ -1,24 +1,64 @@
-// app/javascript/controllers/sentence_writer_controller.js
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = [
     "writerContainer",
-    "prevButton",
-    "nextButton",
     "textArea",
-    "checkButton",
-    "skipButton",
-    "checkResult"
-  ]
+    "checkResult",
+    "checkAndSkip",
+    "incorrectDiv",
+    "correctDiv",
+    "checkAndSkipDiv"
+  ];
 
   connect() {
-    this.sentences = JSON.parse(this.element.dataset.sentences)
-    this.currentIndex = parseInt(this.element.dataset.currentIndex, 10) || 0
-    this.renderSentence(this.currentIndex)
+    this.sentences = JSON.parse(this.element.dataset.sentences);
+    this.currentIndex = parseInt(this.element.dataset.currentIndex, 10) || 0;
+    this.finishedSentence = false;
+    this.initialLoad = true;
+    this.renderSentence(this.currentIndex);
+    this.textAreaTarget.focus();
+    document.addEventListener("keydown", this.handleKeyDown.bind(this));
+    this.textAreaTarget.addEventListener('input', this.handleInput.bind(this));
   }
 
-  check() {
+  handleInput(event) {
+    // Check if the value actually changed
+    if (["insertText", "deleteContentBackward", "deleteContentForward", "deleteSoftLineBackward", "deleteWordBackward", "insertFromPaste"].includes(event.inputType)) {
+      this.resetActionDivs();
+    }
+  }
+
+  handleKeyDown(event) {
+    if (!event.ctrlKey) { return; }
+    this.playAudio();
+    if (event.key === "]" && this.currentIndex < this.sentences.length) {
+      this.next();
+    } else if (event.key === "[" && 0 < this.currentIndex) {
+      this.prev();
+    }
+  }
+
+  playAudio() {
+    const audio = document.querySelector(`audio#audio-${this.currentIndex}`);
+    if (audio) {
+      audio.play().catch(() => {});
+    }
+  }
+
+  disconnect() {
+    document.removeEventListener("keydown", this.handleKeyDown.bind(this));
+    this.textAreaTarget.removeEventListener('input', this.handleInput.bind(this));
+  }
+
+  check(event) {
+    if (event.type === "keydown" && event.key !== "Enter") { return; }
+
+    event.preventDefault();
+    if (event.type === "keydown" && event.key === "Enter" && this.finishedSentence) {
+      this.next();
+      return;
+    }
     const inputText = this.textAreaTarget.value;
     const currentSentence = this.sentences[this.currentIndex].content;
 
@@ -30,112 +70,148 @@ export default class extends Controller {
     const tokens = currentSentence.match(/\w+|\W+/g) || [];
 
     // Keep track of normalization for final correctness check
-    const normalizedActualFull = actualWords.join('').toLowerCase();
-    const normalizedInputFull = inputWords.join('').toLowerCase();
+    const normalizedActualFull = actualWords.join("").toLowerCase();
+    const normalizedInputFull = inputWords.join("").toLowerCase();
 
     const resultTokens = tokens.map(token => {
       if (/\w+/.test(token)) {
         // Word token
         const actualWord = token;
-        const actualChars = actualWord.split('');
-        const normalizedActual = actualWord.replace(/[^a-z0-9]/gi, '').toLowerCase();
+        const actualChars = actualWord.split("");
+        const normalizedActual = actualWord.replace(/[^a-z0-9]/gi, "").toLowerCase();
 
-        const inputWord = inputWords[wordIndex] || '';
+        const inputWord = inputWords[wordIndex] || "";
         wordIndex++;
 
-        const normalizedInput = inputWord.replace(/[^a-z0-9]/gi, '').toLowerCase();
+        const normalizedInput = inputWord.replace(/[^a-z0-9]/gi, "").toLowerCase();
 
         let inputPos = 0;
         let actualPos = 0;
 
         const newChars = actualChars.map(ch => {
           if (/[a-z0-9]/i.test(ch)) {
-            const actualChar = normalizedActual[actualPos] || '';
-            const inputChar = normalizedInput[inputPos] || '';
+            const actualChar = normalizedActual[actualPos] || "";
+            const inputChar = normalizedInput[inputPos] || "";
             actualPos++;
             inputPos++;
 
             if (actualChar === inputChar) {
               return ch;
             } else {
-              return '*';
+              return "*";
             }
           } else {
             return ch; // punctuation inside word stays the same
           }
         });
 
-        return newChars.join('');
+        return newChars.join("");
       } else {
         // Non-word token (spaces, punctuation)
         return token;
       }
     });
 
-    this.checkResultTarget.textContent = resultTokens.join('');
 
     // After constructing the result, check if normalized strings match
     if (normalizedActualFull === normalizedInputFull) {
       // Append a div indicating correctness
-      const correctDiv = document.createElement('div');
-      correctDiv.textContent = 'Correct!';
-      this.checkResultTarget.appendChild(correctDiv);
+      this.showCorrectDiv();
+      this.checkResultTarget.textContent = "";
+      this.textAreaTarget.value = this.sentences[this.currentIndex].content;
+      this.textAreaTarget.classList = "success";
+      this.finishedSentence = true;
     } else {
       // Append a div indicating incorrectness
-      const correctDiv = document.createElement('div');
-      correctDiv.textContent = 'Incorrect!';
-      this.checkResultTarget.appendChild(correctDiv);
+      this.checkResultTarget.textContent = resultTokens.join("");
+      this.showIncorrectDiv();
     }
   }
 
-
-
-
   skip() {
     // You can define what should happen on skip, for now do nothing or implement logic
+    this.showCorrectDiv();
+    this.textAreaTarget.value = this.sentences[this.currentIndex].content;
+  }
+
+  showCorrectDiv() {
+    this.correctDivTarget.style.display = "flex";
+    this.incorrectDivTarget.style.display = "none";
+    this.checkAndSkipDivTarget.style.display = "none";
+  }
+
+  showIncorrectDiv() {
+    this.incorrectDivTarget.style.display = "flex";
+    this.correctDivTarget.style.display = "none";
+    this.checkAndSkipDivTarget.style.display = "none";
   }
 
   prev() {
     if (this.currentIndex > 0) {
-      this.currentIndex -= 1
-      this.renderSentence(this.currentIndex)
+      this.currentIndex -= 1;
+      this.renderSentence(this.currentIndex);
     }
   }
 
   next() {
     if (this.currentIndex < this.sentences.length - 1) {
-      this.currentIndex += 1
-      this.renderSentence(this.currentIndex)
+      this.currentIndex += 1;
+      this.renderSentence(this.currentIndex);
     }
   }
 
   renderSentence(index) {
-    const writerContainer = this.writerContainerTarget
-    const sentence = this.sentences[index]
+    const writerContainer = this.writerContainerTarget;
+    const sentence = this.sentences[index];
 
     // Clear current content
-    writerContainer.innerHTML = ''
+    writerContainer.innerHTML = "";
 
     // If there is an audio file, add an audio player
     if (sentence.audio_url) {
-      const audio = document.createElement('audio')
-      audio.controls = true
-      audio.src = sentence.audio_url
-      writerContainer.appendChild(audio)
+      const audio = document.createElement("audio");
+      audio.id = `audio-${this.currentIndex}`;
+      audio.className = "sentence-writer-audio";
+      audio.controls = true;
+      audio.src = sentence.audio_url;
+      audio.onplay = this.focusTextArea.bind(this);
+
+      writerContainer.appendChild(audio);
+
+      // If not the initial load, autoplay the audio
+      if (!this.initialLoad) {
+        this.playAudio();
+      }
     }
 
     // Show the correct sentence (this might be optional if you want to hide it from the user)
-    const sentenceDiv = document.createElement('div')
-    sentenceDiv.classList.add('sentence-writer')
-    sentenceDiv.textContent = sentence.content
-    writerContainer.appendChild(sentenceDiv)
+    const sentenceDiv = document.createElement("div");
+    sentenceDiv.classList.add("sentence-writer");
+    sentenceDiv.textContent = sentence.content;
+    writerContainer.appendChild(sentenceDiv);
 
-    // Update current index data attribute
-    this.element.dataset.currentIndex = index
+    this.element.dataset.currentIndex = index;
 
-    // Clear the textarea and check result whenever we load a new sentence
-    this.textAreaTarget.value = ''
-    this.checkResultTarget.textContent = ''
+    this.resetValues();
+    this.initialLoad = false;
+  }
+
+  focusTextArea() {
+    this.textAreaTarget.focus();
+  }
+
+  resetValues() {
+    this.textAreaTarget.value = "";
+    this.checkResultTarget.textContent = "";
+    this.textAreaTarget.classList = "";
+    this.finishedSentence = false
+    this.resetActionDivs();
+  }
+
+  resetActionDivs() {
+    this.correctDivTarget.style.display = "none";
+    this.incorrectDivTarget.style.display = "none";
+    this.checkAndSkipDivTarget.style.display = "flex";
   }
 }
 

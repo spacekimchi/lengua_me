@@ -60,4 +60,10 @@ class PassagesController < ApplicationController
       end
     end
   end
+
+  def translations
+    @passage = Passage.find(params[:id])
+    target_language = Language.find_by(code: params[:language_code])
+    @sentences = Sentence.where(passage_id: params[:id]).includes(:translations).where(translations: { language: target_language })
+  end
 end

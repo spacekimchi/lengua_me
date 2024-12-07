@@ -1,0 +1,107 @@
+@use "../../variables" as v;
+
+.passage-writer-show-container {
+    .sentence-card-main-container {
+        display: flex;
+        justify-content: space-between;
+        .sentence-card-attempt-container {
+            width: 48%;
+        }
+    }
+
+    .sentence-writer-card {
+        border-radius: 5px;
+        padding: 19px 17px;
+        @include v.shadow-style;
+
+        .sentence-writer-navigation {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .check-result {
+        display: flex;
+        align-items: center;
+
+        .warning {
+            color: v.$warning;
+            margin-right: 0.25rem;
+        }
+
+        .success {
+            color: v.$success;
+            margin-right: 0.25rem;
+        }
+        .check-result-actions {
+            margin-left: auto;
+        }
+    }
+
+    .check-result-text {
+        font-size: 1.5rem;
+    }
+
+    .sentence-writer-card-info-container {
+        width: 48%;
+
+        > div {
+            border: solid 1px v.$shadow-color;
+            border-radius: 5px;
+            padding: 0.75rem;
+
+            &:not(:last-child) {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+
+    .sentence-writer-audio {
+        width: 100%;
+    }
+
+    button {
+        font-size: 1rem;
+
+        &.success-button {
+            background-color: v.$success;
+            color: white;
+        }
+
+        &.alert-button {
+            background-color: v.$warning;
+            color: white;
+        }
+    }
+
+
+    textarea {
+        resize: none;
+        margin: 0.5rem 0;
+        width: 100%;
+        position: relative;
+        border: solid 1px black;
+        border-radius: 5px;
+        padding: 0.75rem;
+        box-sizing: border-box;
+
+        &.success {
+            outline: none;
+            border: solid 3px v.$success;
+        }
+    }
+
+    @include v.respond-to(mobile) {
+        .sentence-card-main-container {
+            display: flex;
+            flex-direction: column;
+            .sentence-card-attempt-container {
+                width: 100%;
+            }
+        }
+
+        .sentence-writer-card-info-container {
+            width: 100%;
+            margin-top: 1rem;
+        }
+    }
+}
