@@ -26,6 +26,7 @@ class PassagesController < ApplicationController
         a = Sentence.create!(passage: @passage, language: language, content: sentence, order_idx: idx)
       end
     end
+
     respond_to do |format|
       if @passage.present?
         flash.now[:success] = "The passage was successfully created."
@@ -40,7 +41,7 @@ class PassagesController < ApplicationController
   def translate
     @passage = Passage.find(params[:id])
     language = Language.find(params[:language_id])
-    sentences = PassageTranslatorService.new(sentences: @passage.sentences.pluck(:content), language: language.name).call[:sentences]
+    sentences = PassageTranslatorService.new(sentences: @passage.sentences.pluck(:content), language: language).call[:sentences]
     @sentence_translations = []
 
     ActiveRecord::Base.transaction do
@@ -64,6 +65,12 @@ class PassagesController < ApplicationController
   def translations
     @passage = Passage.find(params[:id])
     target_language = Language.find_by(code: params[:language_code])
-    @sentences = Sentence.where(passage_id: params[:id]).includes(:translations).where(translations: { language: target_language })
+    @sentences = Sentence.where(passage_id: params[:id])
+      .joins(:translations)
+      .where(sentence_translations: { language_id: target_language.id })
+      .order(:order_idx)
+      .select('sentences.id as sentence_id, sentences.content as content, sentences.order_idx as order_idx, sentence_translations.text as translation_text')
+
+    render json: { sentences: @sentences }, status: :ok
   end
 end

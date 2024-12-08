@@ -2,14 +2,18 @@
 #
 # Table name: products
 #
-#  id                :bigint           not null, primary key
-#  stripe_product_id :string(128)
-#  name              :string(128)      not null
+#  id                :uuid             not null, primary key
 #  description       :string
 #  for_subscription  :boolean          default(TRUE), not null
 #  is_active         :boolean          default(TRUE), not null
+#  name              :string(128)      not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  stripe_product_id :string(128)
+#
+# Indexes
+#
+#  index_products_on_stripe_product_id  (stripe_product_id) UNIQUE
 #
 require 'rails_helper'
 

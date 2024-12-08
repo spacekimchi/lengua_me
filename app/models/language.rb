@@ -13,7 +13,7 @@
 #
 
 class Language < ApplicationRecord
-  ENGLISH = 'english'.freeze
+  ENGLISH = 'English'.freeze
 
   LANGUAGE_CODES = {
     'aa' => 'Afar',

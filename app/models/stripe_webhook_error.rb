@@ -2,14 +2,14 @@
 #
 # Table name: stripe_webhook_errors
 #
-#  id                 :bigint           not null, primary key
-#  message            :string
-#  stripe_customer_id :string
+#  id                 :uuid             not null, primary key
 #  event_object       :json
 #  event_type         :string
 #  is_resolved        :boolean          default(FALSE)
+#  message            :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  stripe_customer_id :string
 #
 class StripeWebhookError < ApplicationRecord
   TYPES = {
