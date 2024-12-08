@@ -2,22 +2,21 @@
 #
 # Table name: application_errors
 #
-#  id               :bigint           not null, primary key
-#  message          :text
-#  level            :integer
-#  code             :integer
+#  id               :uuid             not null, primary key
+#  backtrace        :text
 #  calling_function :text
-#  stack_trace      :text
-#  url              :text
-#  user_id          :text
-#  user_ip          :text
-#  user_agent       :text
-#  is_resolved      :boolean
-#  resolved_at      :datetime
-#  notes            :text
 #  data             :jsonb
+#  is_resolved      :boolean
+#  level            :integer          default("triage"), not null
+#  message          :text             not null
+#  notes            :text
+#  resolved_at      :datetime
+#  url              :text
+#  user_agent       :text
+#  user_ip          :text
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  user_id          :text
 #
 class ApplicationError < ApplicationRecord
   enum :level, [:triage, :low, :medium, :high, :critical], default: :triage

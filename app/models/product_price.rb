@@ -2,18 +2,28 @@
 #
 # Table name: product_prices
 #
-#  id              :bigint           not null, primary key
-#  product_id      :bigint           not null
-#  stripe_price_id :string(128)
+#  id              :uuid             not null, primary key
+#  currency        :string           default("usd")
+#  description     :string
+#  interval        :integer          not null
+#  is_active       :boolean          default(TRUE), not null
+#  lookup_key      :string(128)
 #  name            :string(128)      not null
 #  price           :integer          default(0), not null
-#  is_active       :boolean          default(TRUE), not null
-#  interval        :integer          not null
-#  description     :string
-#  lookup_key      :string(128)
-#  currency        :string           default("usd")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  product_id      :uuid             not null
+#  stripe_price_id :string(128)
+#
+# Indexes
+#
+#  index_product_prices_on_lookup_key       (lookup_key) UNIQUE
+#  index_product_prices_on_product_id       (product_id)
+#  index_product_prices_on_stripe_price_id  (stripe_price_id) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (product_id => products.id)
 #
 class ProductPrice < ApplicationRecord
   PER_UNIT = 'per_unit'.freeze

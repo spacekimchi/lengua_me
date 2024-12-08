@@ -88,6 +88,7 @@ Rails.application.routes.draw do
   resources :passages do
     member do
       post 'translate'
+      get 'translations'
     end
   end
 

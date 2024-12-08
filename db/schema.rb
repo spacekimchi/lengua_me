@@ -150,8 +150,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_04_030942) do
 
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "name"
+    t.text "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_languages_on_code", unique: true
     t.index ["name"], name: "index_languages_on_name", unique: true
   end
 
@@ -272,6 +274,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_04_030942) do
 
   create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "name", null: false
+    t.text "description", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_topics_on_name", unique: true

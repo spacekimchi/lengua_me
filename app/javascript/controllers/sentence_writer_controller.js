@@ -1,6 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+  static values = {
+    id: String
+  };
+
   static targets = [
     "writerContainer",
     "textArea",
@@ -8,18 +12,71 @@ export default class extends Controller {
     "checkAndSkip",
     "incorrectDiv",
     "correctDiv",
-    "checkAndSkipDiv"
+    "checkAndSkipDiv",
+    "languageSelect",
+    "translationsOutput",
+    "skipDiv",
   ];
 
   connect() {
+    const defaultLanguage = "en";
+    const storedLanguageCode = localStorage.getItem("languageCode") || defaultLanguage;
+
+    // Set the selected language in the dropdown based on localStorage
+    this.languageSelectTarget.value = storedLanguageCode;
+
+    // Fetch initial translations
+
     this.sentences = JSON.parse(this.element.dataset.sentences);
     this.currentIndex = parseInt(this.element.dataset.currentIndex, 10) || 0;
     this.finishedSentence = false;
     this.initialLoad = true;
     this.renderSentence(this.currentIndex);
+    this.fetchTranslations(storedLanguageCode);
     this.textAreaTarget.focus();
+
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
     this.textAreaTarget.addEventListener('input', this.handleInput.bind(this));
+  }
+
+  changeLanguage() {
+    const newLanguageCode = this.languageSelectTarget.value;
+    // Update localStorage with the new language selection
+    localStorage.setItem('languageCode', newLanguageCode);
+    // Fetch new translations
+    this.fetchTranslations(newLanguageCode);
+  }
+
+  fetchTranslations(languageCode) {
+    const passageId = this.idValue;
+    fetch(`/passages/${passageId}/translations?language_code=${languageCode}`, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then(data => {
+      this.translations = data.sentences;
+      this.displayTranslation();
+      return data;
+    })
+    .catch(error => {
+      console.error("Error fetching translations:", error);
+    });
+  }
+
+  displayTranslation() {
+    this.translationsOutputTarget.innerHTML = '';
+    if (this.translations && this.translations[this.currentIndex]) {
+      const p = document.createElement('p');
+      p.textContent = this.translations[this.currentIndex].translation_text;
+      this.translationsOutputTarget.appendChild(p);
+    }
   }
 
   handleInput(event) {
@@ -55,7 +112,7 @@ export default class extends Controller {
     if (event.type === "keydown" && event.key !== "Enter") { return; }
 
     event.preventDefault();
-    if (event.type === "keydown" && event.key === "Enter" && this.finishedSentence) {
+    if (event.type === "keydown" && event.key === "Enter" && (this.finishedSentence || this.skippedSentence)) {
       this.next();
       return;
     }
@@ -130,12 +187,21 @@ export default class extends Controller {
 
   skip() {
     // You can define what should happen on skip, for now do nothing or implement logic
-    this.showCorrectDiv();
+    this.showSkipDiv();
+    this.skippedSentence = true;
     this.textAreaTarget.value = this.sentences[this.currentIndex].content;
   }
 
   showCorrectDiv() {
     this.correctDivTarget.style.display = "flex";
+    this.incorrectDivTarget.style.display = "none";
+    this.checkAndSkipDivTarget.style.display = "none";
+    this.skipDivTarget.style.display = "none";
+  }
+
+  showSkipDiv() {
+    this.skipDivTarget.style.display = "flex";
+    this.correctDivTarget.style.display = "none";
     this.incorrectDivTarget.style.display = "none";
     this.checkAndSkipDivTarget.style.display = "none";
   }
@@ -144,6 +210,7 @@ export default class extends Controller {
     this.incorrectDivTarget.style.display = "flex";
     this.correctDivTarget.style.display = "none";
     this.checkAndSkipDivTarget.style.display = "none";
+    this.skipDivTarget.style.display = "none";
   }
 
   prev() {
@@ -177,11 +244,6 @@ export default class extends Controller {
       audio.onplay = this.focusTextArea.bind(this);
 
       writerContainer.appendChild(audio);
-
-      // If not the initial load, autoplay the audio
-      if (!this.initialLoad) {
-        this.playAudio();
-      }
     }
 
     // Show the correct sentence (this might be optional if you want to hide it from the user)
@@ -193,6 +255,12 @@ export default class extends Controller {
     this.element.dataset.currentIndex = index;
 
     this.resetValues();
+
+    // If not the initial load, autoplay the audio
+    if (!this.initialLoad) {
+      this.displayTranslation();
+      this.playAudio();
+    }
     this.initialLoad = false;
   }
 
@@ -204,13 +272,15 @@ export default class extends Controller {
     this.textAreaTarget.value = "";
     this.checkResultTarget.textContent = "";
     this.textAreaTarget.classList = "";
-    this.finishedSentence = false
+    this.finishedSentence = false;
+    this.skippedSentence = false;
     this.resetActionDivs();
   }
 
   resetActionDivs() {
     this.correctDivTarget.style.display = "none";
     this.incorrectDivTarget.style.display = "none";
+    this.skipDivTarget.style.display = "none";
     this.checkAndSkipDivTarget.style.display = "flex";
   }
 }
