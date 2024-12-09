@@ -70,7 +70,7 @@
          <div class="sentence-writer-card-info-container">
            <div class="sentence-translations-container">
              <label for="language-select">Translation:</label>
-             <select id="language-select" data-sentence-writer-target="languageSelect" data-action="change->sentence-writer#changeLanguage">
+             <select id="language-select" data-sentence-writer-target="translateLanguageSelect" data-action="change->sentence-writer#changeLanguage">
                <% @language_codes.each do |code, name| %>
                  <option value="<%= code %>"><%= name %></option>
                <% end %>

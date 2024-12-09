@@ -13,7 +13,7 @@ export default class extends Controller {
     "incorrectDiv",
     "correctDiv",
     "checkAndSkipDiv",
-    "languageSelect",
+    "translateLanguageSelect",
     "translationsOutput",
     "skipDiv",
     "wordPronunciationsDiv",
@@ -22,10 +22,10 @@ export default class extends Controller {
 
   connect() {
     const defaultLanguage = "en";
-    const storedLanguageCode = localStorage.getItem("languageCode") || defaultLanguage;
+    const storedTranslateLanguageCode = localStorage.getItem("translateLanguageCode") || defaultLanguage;
 
     // Set the selected language in the dropdown based on localStorage
-    this.languageSelectTarget.value = storedLanguageCode;
+    this.translateLanguageSelectTarget.value = storedTranslateLanguageCode;
 
     // Fetch initial translations
     this.sentences = JSON.parse(this.element.dataset.sentences);
@@ -33,7 +33,7 @@ export default class extends Controller {
     this.finishedSentence = false;
     this.initialLoad = true;
     this.renderSentence(this.currentIndex);
-    this.fetchTranslations(storedLanguageCode);
+    this.fetchTranslations(storedTranslateLanguageCode);
     this.textAreaTarget.focus();
 
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
@@ -41,9 +41,9 @@ export default class extends Controller {
   }
 
   changeLanguage() {
-    const newLanguageCode = this.languageSelectTarget.value;
+    const newLanguageCode = this.translateLanguageSelectTarget.value;
     // Update localStorage with the new language selection
-    localStorage.setItem('languageCode', newLanguageCode);
+    localStorage.setItem('translateLanguageCode', newLanguageCode);
     // Fetch new translations
     this.fetchTranslations(newLanguageCode);
   }
@@ -80,9 +80,6 @@ export default class extends Controller {
     }
   }
 
-  fetchPronunciation(event) {
-  }
-
   showPronunciationsDiv() {
     this.wordPronunciationsDivTarget.style.display = "flex";
     this.wordPronunciationsTextTarget.innerHTML = "";
@@ -107,6 +104,7 @@ export default class extends Controller {
           // Create and append a span for the current word
           const span = document.createElement('span');
           span.className = "pronunciation-word-container";
+          span.onclick = this.fetchWordPronunciation.bind(this);
           const wordSpan = document.createElement('span');
           wordSpan.textContent = curWord;
           wordSpan.className = "pronunciation-word";
@@ -141,6 +139,29 @@ export default class extends Controller {
 
   isWhitespace(char) {
     return char.match(/\s/) !== null;
+  }
+
+  fetchWordPronunciation(event) {
+    const word = event.target.parentElement.querySelector(".pronunciation-word").innerText;
+    const originalLanguage = "en";
+    fetch(`/pronunciations/${word}?translate_language=${this.translateLanguageSelectTarget.value}&original_language=${originalLanguage}`, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then(data => {
+      debugger
+      return data;
+    })
+    .catch(error => {
+      console.error("Error fetching translations:", error);
+    });
   }
 
   handleInput(event) {

@@ -22,9 +22,9 @@ class TtsVoice < ApplicationRecord
   has_many :words, through: :pronunciations, source: :word
 
   validates :language_code, presence: true
-  validates :gender, presence: true
   validates :name, presence: true
   validates :provider_id, presence: true
 
   enum :provider, [:google, :elevenlabs, :playht], default: :google
+  enum :gender, [:female, :male], default: :female
 end

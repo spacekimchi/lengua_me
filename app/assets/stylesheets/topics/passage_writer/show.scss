@@ -64,6 +64,8 @@
         flex-direction: column;
 
         .pronunciation-words {
+            word-break: break-word;
+
             .pronunciation-word-container {
                 cursor: pointer;
 

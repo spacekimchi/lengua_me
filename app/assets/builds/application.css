@@ -252,6 +252,9 @@ table tbody td {
   display: none;
   flex-direction: column;
 }
+.passage-writer-show-container .sentence-pronunciations-container .pronunciation-words {
+  word-break: break-word;
+}
 .passage-writer-show-container .sentence-pronunciations-container .pronunciation-words .pronunciation-word-container {
   cursor: pointer;
 }

@@ -18,12 +18,17 @@ class PassagesController < ApplicationController
     title_and_sentences = pgs.call
     all_sentences = title_and_sentences[:sentences]
     title = title_and_sentences[:title]
+    language = Language.english
+
     ActiveRecord::Base.transaction do
       @passage = Passage.create!(title: title, difficulty: params[:difficulty].to_sym)
       @passage.passage_topics.create!(topic: @topic)
-      language = Language.english
-      all_sentences.each_with_index do |sentence, idx|
-        a = Sentence.create!(passage: @passage, language: language, content: sentence, order_idx: idx)
+
+      all_sentences.each_with_index do |sentence_content, idx|
+        sentence = Sentence.create!(passage: @passage, language: language, content: sentence_content, order_idx: idx)
+
+        # Create words for this sentence
+        create_words_for_sentence(sentence, language)
       end
     end
 
@@ -72,5 +77,27 @@ class PassagesController < ApplicationController
       .select('sentences.id as sentence_id, sentences.content as content, sentences.order_idx as order_idx, sentence_translations.text as translation_text')
 
     render json: { sentences: @sentences }, status: :ok
+  end
+
+  private
+
+  def create_words_for_sentence(sentence, language)
+    # Define separators that should be replaced with spaces
+    separators = /[,\;\:\.\!\?\-\—\(\)\[\]\{\}\"`\|\/\\\@\#\$\%\^\&\*\_\+\=\<\>\~]/
+
+    # Normalize the sentence by replacing separators with spaces
+    normalized = sentence.content.gsub(separators, ' ')
+
+    # Split on spaces to get raw words
+    raw_words = normalized.split(' ').reject(&:blank?)
+
+    raw_words.each do |w|
+      # Downcase to keep consistency
+      word_text = w.downcase.strip
+
+      # Use find_or_create_by to avoid duplicates
+      # (assuming unique constraint on [language_id, text])
+      Word.find_or_create_by(language: language, text: word_text) if word_text.present?
+    end
   end
 end
