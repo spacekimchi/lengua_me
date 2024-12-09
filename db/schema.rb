@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_04_030942) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_08_154747) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -202,6 +202,17 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_04_030942) do
     t.index ["stripe_product_id"], name: "index_products_on_stripe_product_id", unique: true
   end
 
+  create_table "pronunciations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "word_id", null: false
+    t.uuid "tts_voice_id", null: false
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tts_voice_id"], name: "index_pronunciations_on_tts_voice_id"
+    t.index ["word_id", "tts_voice_id"], name: "index_pronunciations_on_word_id_and_tts_voice_id", unique: true
+    t.index ["word_id"], name: "index_pronunciations_on_word_id"
+  end
+
   create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "name"
     t.string "description"
@@ -280,6 +291,18 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_04_030942) do
     t.index ["name"], name: "index_topics_on_name", unique: true
   end
 
+  create_table "tts_voices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "accent"
+    t.text "language_code", null: false
+    t.text "gender", null: false
+    t.text "name", null: false
+    t.text "provider_id", null: false
+    t.integer "provider", default: 0, null: false
+    t.index ["language_code"], name: "index_tts_voices_on_language_code"
+    t.index ["name", "provider"], name: "index_tts_voices_on_name_and_provider", unique: true
+    t.index ["provider"], name: "index_tts_voices_on_provider"
+  end
+
   create_table "user_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "role_id", null: false
@@ -323,11 +346,22 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_04_030942) do
     t.index ["stripe_customer_id"], name: "index_users_on_stripe_customer_id", unique: true
   end
 
+  create_table "words", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "language_id", null: false
+    t.text "text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id", "text"], name: "index_words_on_language_id_and_text", unique: true
+    t.index ["language_id"], name: "index_words_on_language_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "passage_topics", "passages"
   add_foreign_key "passage_topics", "topics"
   add_foreign_key "product_prices", "products"
+  add_foreign_key "pronunciations", "tts_voices"
+  add_foreign_key "pronunciations", "words"
   add_foreign_key "sentence_translations", "languages"
   add_foreign_key "sentence_translations", "sentences"
   add_foreign_key "sentences", "languages"
@@ -341,4 +375,5 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_04_030942) do
   add_foreign_key "user_subscriptions", "product_prices"
   add_foreign_key "user_subscriptions", "products"
   add_foreign_key "user_subscriptions", "users"
+  add_foreign_key "words", "languages"
 end

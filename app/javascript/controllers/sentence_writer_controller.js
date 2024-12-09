@@ -16,6 +16,8 @@ export default class extends Controller {
     "languageSelect",
     "translationsOutput",
     "skipDiv",
+    "wordPronunciationsDiv",
+    "wordPronunciationsText"
   ];
 
   connect() {
@@ -26,7 +28,6 @@ export default class extends Controller {
     this.languageSelectTarget.value = storedLanguageCode;
 
     // Fetch initial translations
-
     this.sentences = JSON.parse(this.element.dataset.sentences);
     this.currentIndex = parseInt(this.element.dataset.currentIndex, 10) || 0;
     this.finishedSentence = false;
@@ -71,12 +72,75 @@ export default class extends Controller {
   }
 
   displayTranslation() {
-    this.translationsOutputTarget.innerHTML = '';
+    this.translationsOutputTarget.innerHTML = "";
     if (this.translations && this.translations[this.currentIndex]) {
       const p = document.createElement('p');
       p.textContent = this.translations[this.currentIndex].translation_text;
       this.translationsOutputTarget.appendChild(p);
     }
+  }
+
+  fetchPronunciation(event) {
+  }
+
+  showPronunciationsDiv() {
+    this.wordPronunciationsDivTarget.style.display = "flex";
+    this.wordPronunciationsTextTarget.innerHTML = "";
+
+    const sentence = this.normalizeWhitespace(this.sentences[this.currentIndex].content);
+
+    const separators = {
+      ",": true, ";": true, ":": true, ".": true, "!": true, "?": true, "-": true,
+      "—": true, "(": true, ")": true, "[": true, "]": true, "{": true, "}": true,
+      "\"": true, "`": true, "/": true, "\\": true, "|": true, "@": true, "#": true,
+      "$": true, "%": true, "^": true, "&": true, "*": true, "_": true, "+": true,
+      "=": true, "<": true, ">": true, "~": true
+    };
+
+    let curWord = "";
+
+    for (let i = 0; i < sentence.length; i++) {
+      const c = sentence[i];
+
+      if (this.isWhitespace(c) || separators[c]) {
+        if (curWord) {
+          // Create and append a span for the current word
+          const span = document.createElement('span');
+          span.className = "pronunciation-word-container";
+          const wordSpan = document.createElement('span');
+          wordSpan.textContent = curWord;
+          wordSpan.className = "pronunciation-word";
+          span.appendChild(wordSpan);
+
+          const punctuationSpan = document.createElement('span');
+          if (separators[c]) {
+            punctuationSpan.appendChild(document.createTextNode(c));
+          }
+          punctuationSpan.appendChild(document.createTextNode("\u00A0")); // Non-breaking space
+          span.appendChild(punctuationSpan);
+
+          this.wordPronunciationsTextTarget.appendChild(span);
+          curWord = "";
+        }
+      } else {
+        curWord += c; // Build the current word
+      }
+    }
+
+    // Add the last word if present
+    if (curWord) {
+      const span = document.createElement('span');
+      span.textContent = curWord;
+      this.wordPronunciationsTextTarget.appendChild(span);
+    }
+  }
+
+  normalizeWhitespace(str) {
+    return str.replace(/\s+/g, ' ');
+  }
+
+  isWhitespace(char) {
+    return char.match(/\s/) !== null;
   }
 
   handleInput(event) {
@@ -197,6 +261,9 @@ export default class extends Controller {
     this.incorrectDivTarget.style.display = "none";
     this.checkAndSkipDivTarget.style.display = "none";
     this.skipDivTarget.style.display = "none";
+
+    // For the right part
+    this.showPronunciationsDiv();
   }
 
   showSkipDiv() {
@@ -204,6 +271,9 @@ export default class extends Controller {
     this.correctDivTarget.style.display = "none";
     this.incorrectDivTarget.style.display = "none";
     this.checkAndSkipDivTarget.style.display = "none";
+
+    // For the right part
+    this.showPronunciationsDiv();
   }
 
   showIncorrectDiv() {
@@ -211,6 +281,7 @@ export default class extends Controller {
     this.correctDivTarget.style.display = "none";
     this.checkAndSkipDivTarget.style.display = "none";
     this.skipDivTarget.style.display = "none";
+    this.wordPronunciationsDivTarget.style.display = "none";
   }
 
   prev() {

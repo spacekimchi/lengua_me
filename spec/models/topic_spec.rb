@@ -2,10 +2,11 @@
 #
 # Table name: topics
 #
-#  id         :uuid             not null, primary key
-#  name       :text             not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :uuid             not null, primary key
+#  description :text             default("")
+#  name        :text             not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 # Indexes
 #

@@ -49,12 +49,17 @@ class PassageTranslatorService
         model: @model,
         messages: [
           {
+            role: 'system',
+            content: "You are a translator. You will be given a list of sentences separated by new lines. Translate each sentence to #{@language.name}. The translated sentences should also follow the same order and there should be the same number of sentences and translated sentences. It is imperative that all spelling and grammar are correct."
+
+          },
+          {
             role: 'user',
-            content: "I am giving a list of sentences. I want you to translate each sentence to this language: `#{@language.name}`. I am trying to use this to learn languages so make sure the translations are accurate and fit in with the overall sentences. The translated sentences should follow the same order and there should be the same amount of translated sentences as original ones. These are the sentences: #{@sentences.to_s}"
+            content: @sentences.join("\n")
 
           }
         ],
-        temperature: 1.2,
+        temperature: 0.8,
         functions: [FUNCTION],
         function_call: { name: 'generate_passage' }
       }
