@@ -59,6 +59,34 @@
         width: 100%;
     }
 
+    .sentence-pronunciations-container {
+        display: none;
+        flex-direction: column;
+
+        .pronunciation-words {
+            .pronunciation-word-container {
+                cursor: pointer;
+
+                .pronunciation-word {
+
+                    border-bottom: dotted 2px v.$colombian-blue;
+                }
+
+                &:hover {
+                    .pronunciation-word {
+                        color: v.$colombian-red;
+                    }
+                }
+                &:active {
+                    transform: scale(0.97);
+                }
+                &:not(:last-child) {
+                    margin-right: 3px;
+                }
+            }
+        }
+    }
+
     button {
         font-size: 1rem;
 

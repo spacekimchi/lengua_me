@@ -248,6 +248,25 @@ table tbody td {
 .passage-writer-show-container .sentence-writer-audio {
   width: 100%;
 }
+.passage-writer-show-container .sentence-pronunciations-container {
+  display: none;
+  flex-direction: column;
+}
+.passage-writer-show-container .sentence-pronunciations-container .pronunciation-words .pronunciation-word-container {
+  cursor: pointer;
+}
+.passage-writer-show-container .sentence-pronunciations-container .pronunciation-words .pronunciation-word-container .pronunciation-word {
+  border-bottom: dotted 2px #003087;
+}
+.passage-writer-show-container .sentence-pronunciations-container .pronunciation-words .pronunciation-word-container:hover .pronunciation-word {
+  color: #C8102E;
+}
+.passage-writer-show-container .sentence-pronunciations-container .pronunciation-words .pronunciation-word-container:active {
+  transform: scale(0.97);
+}
+.passage-writer-show-container .sentence-pronunciations-container .pronunciation-words .pronunciation-word-container:not(:last-child) {
+  margin-right: 3px;
+}
 .passage-writer-show-container button {
   font-size: 1rem;
 }

@@ -33,9 +33,4 @@ topics.each do |topic|
   Topic.find_or_create_by(name: topic)
 end
 
-languages = Constants::LANGUAGE_CODES
-
-languages.each do |language|
-  Language.find_or_create_by(code: language[0], name: language[1])
-end
-
+Seeds::TtsVoicesService.call

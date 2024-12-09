@@ -30,16 +30,12 @@ class Sentence < ApplicationRecord
 
   # after_create :enqueue_generate_audio_job
 
-  # validates :voice_type, presence: true, inclusion: { in: TextToSpeechService::VOICE_TYPES.keys.map(&:to_s) }
+  # validates :voice_type, presence: true, inclusion: { in: GoogleTextToSpeechService::VOICE_TYPES.keys.map(&:to_s) }
 
   def generate_audio
-    tts_service = TextToSpeechService.new(
+    tts_service = GoogleTextToSpeechService.new(
       self.content,
-      # language_code: self.language.code,  # Assuming `language` has a `code` attribute like "en-US"
-      # gender: self.language.gender,        # Assuming `language` has a `gender` attribute ("MALE", "FEMALE", "NEUTRAL")
-      language_code: 'en-US',
-      gender: 'FEMALE',
-      voice_type: :wavenet
+      language_code: 'en-US'
     )
 
     audio_data = tts_service.synthesize_speech
