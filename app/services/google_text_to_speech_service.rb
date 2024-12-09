@@ -2,41 +2,10 @@
 require "google/cloud/text_to_speech"
 
 class GoogleTextToSpeechService
-  VOICE_TYPES = {
-    standard: [
-      "en-US-Standard-B",
-      "en-US-Standard-C",
-      "en-US-Standard-D",
-      # Add other Standard voices as needed
-    ],
-    wavenet: [
-      "en-US-Wavenet-A",
-      "en-US-Wavenet-B",
-      "en-US-Wavenet-C",
-      "en-US-Wavenet-D",
-      # Add other Wavenet voices as needed
-    ],
-    neural2: [
-      "en-US-Neural2-A",
-      "en-US-Neural2-B",
-      # Add other Neural2 voices as needed
-    ],
-    studio: [
-      # Add Studio voices if available
-    ],
-    polyglot: [
-      # Add Polyglot voices if available
-    ],
-    journey: [
-      # Add Journey voices if available
-    ]
-  }.freeze
-
   DEFAULT_LANGUAGE_CODE = "en-US"
   DEFAULT_SSML_GENDER = "FEMALE"
   DEFAULT_FEMALE_US_NAME = "en-US-Journey-F".freeze
   DEFAULT_MALE_US_NAME = "en-US-Journey-D".freeze
-
 
   def initialize(
     text,

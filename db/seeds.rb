@@ -33,4 +33,4 @@ topics.each do |topic|
   Topic.find_or_create_by(name: topic)
 end
 
-Seeds::TtsVoicesService.call
+# Seeds::TtsVoicesService.call

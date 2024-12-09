@@ -92,6 +92,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :pronunciations, param: :text, only: %i[show]
+
   resource :checkout, only: %i[new show]
   resources :products, only: %i[index show]
   resource :support_tickets, only: %i[new create]

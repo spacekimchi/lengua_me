@@ -294,13 +294,13 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_154747) do
   create_table "tts_voices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "accent"
     t.text "language_code", null: false
-    t.text "gender", null: false
+    t.integer "gender", default: 0, null: false
     t.text "name", null: false
     t.text "provider_id", null: false
     t.integer "provider", default: 0, null: false
     t.index ["language_code"], name: "index_tts_voices_on_language_code"
-    t.index ["name", "provider"], name: "index_tts_voices_on_name_and_provider", unique: true
     t.index ["provider"], name: "index_tts_voices_on_provider"
+    t.index ["provider_id", "provider"], name: "index_tts_voices_on_provider_id_and_provider", unique: true
   end
 
   create_table "user_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
