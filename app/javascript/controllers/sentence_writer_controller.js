@@ -145,75 +145,29 @@ export default class extends Controller {
 
   showWordPronunciationDiv(event) {
     const parent = event.target.parentElement;
+    const rect = parent.getBoundingClientRect();
     const word = parent.querySelector(".pronunciation-word").innerText;
     const wordTranslation = this.fetchWordPronunciation(word);
 
-    const tooltip = this.pronunciationTooltipTarget
-    tooltip.innerHTML = '<div style="display: flex; flex-direction: row;"><div style="height: 200px; width: 200px;">Block 1</div><div style="height: 125px; width: 125px;">Block 2</div></div>';
-    tooltip.style.display = 'block'; // Show it first so getBoundingClientRect() on tooltip is accurate if needed
+    // Assuming you have a global tooltip controller somewhere in the DOM
+    const tooltipElement = document.querySelector('[data-controller="tooltip"]');
+    const tooltipController = this.application.getControllerForElementAndIdentifier(tooltipElement, "tooltip");
+    tooltipController.show(rect, "Your dynamic HTML content here");
 
-    this.positionTooltip(parent, tooltip);
-
-    // Attach event listeners to update position on resize (and scroll if needed)
     window.addEventListener('resize', this.handleWindowChange.bind(this));
     window.addEventListener('scroll', this.handleWindowChange.bind(this), { passive: true });
+    this.currentWordParent = parent;
   }
 
   handleWindowChange() {
-    // Recalculate tooltip position if it's visible
-    if (this.pronunciationTooltipTarget.style.display !== 'none') {
-      const parent = document.querySelector(".pronunciation-word-container:hover, .pronunciation-word-container:focus");
-      // If we can't detect the hovered/focused parent, you may want to store the current parent element in a variable.
-      // For simplicity, let's assume we stored the last clicked parent in `this.currentWordParent`.
-      if (this.currentWordParent) {
-        this.positionTooltip(this.currentWordParent, this.pronunciationTooltipTarget);
-      }
+    const tooltipElement = document.querySelector('[data-controller="tooltip"]');
+    const tooltipController = this.application.getControllerForElementAndIdentifier(tooltipElement, "tooltip");
+
+    if (tooltipElement.style.display !== 'none' && this.currentWordParent) {
+      const rect = this.currentWordParent.getBoundingClientRect();
+      tooltipController.show(rect);
     }
   }
-
-  positionTooltip(parent, tooltip) {
-    this.currentWordParent = parent;
-
-    const rect = parent.getBoundingClientRect();
-    const tooltipWidth = tooltip.offsetWidth;
-    const tooltipHeight = tooltip.offsetHeight;
-
-    // Desired baseline positioning
-    let left = rect.left + window.scrollX + (rect.width / 2) - (tooltipWidth / 2);
-    let top = rect.bottom + window.scrollY + 10; // 10px below the parent
-
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    const margin = 11; // Minimum margin from viewport edges
-
-    // Clamp horizontally
-    if (left < (window.scrollX + margin)) {
-      left = window.scrollX + margin;
-    } else if (left + tooltipWidth > window.scrollX + viewportWidth - margin) {
-      left = window.scrollX + viewportWidth - margin - tooltipWidth;
-    }
-
-    // Check vertical space below; if not enough, try above
-    if (top + tooltipHeight > window.scrollY + viewportHeight - margin) {
-      // Try placing above the element
-      const abovePos = rect.top + window.scrollY - tooltipHeight - 10;
-      if (abovePos > window.scrollY + margin) {
-        top = abovePos;
-      } else {
-        // If not enough room above, clamp to bottom of viewport
-        top = Math.min(top, window.scrollY + viewportHeight - margin - tooltipHeight);
-      }
-    } else {
-      // Also ensure top doesn't go above the top margin
-      if (top < window.scrollY + margin) {
-        top = window.scrollY + margin;
-      }
-    }
-
-    tooltip.style.left = `${left}px`;
-    tooltip.style.top = `${top}px`;
-  }
-
 
   fetchWordPronunciation(word) {
     if (this.wordPronunciations[word]) {
