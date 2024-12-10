@@ -87,7 +87,11 @@
              </div>
              <div class="pronunciation-words" data-sentence-writer-target="wordPronunciationsText">
              </div>
-             <div data-sentence-writer-target="pronunciationTooltip" class="tooltip" style="display:none;"></div>
+             <div data-controller="tooltip" class="tooltip" style="display:none;">
+               <div class="tooltip-arrow" data-tooltip-target="arrow"></div>
+               <div class="tooltip-content" data-tooltip-target="content"></div>
+             </div>
+
            </div>
            <div class="sentence-comments-container" data-controller="comments">
              Comments
