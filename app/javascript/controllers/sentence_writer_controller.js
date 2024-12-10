@@ -17,7 +17,8 @@ export default class extends Controller {
     "translationsOutput",
     "skipDiv",
     "wordPronunciationsDiv",
-    "wordPronunciationsText"
+    "wordPronunciationsText",
+    "pronunciationTooltip"
   ];
 
   connect() {
@@ -35,6 +36,7 @@ export default class extends Controller {
     this.renderSentence(this.currentIndex);
     this.fetchTranslations(storedTranslateLanguageCode);
     this.textAreaTarget.focus();
+    this.wordPronunciations = {};
 
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
     this.textAreaTarget.addEventListener('input', this.handleInput.bind(this));
@@ -104,7 +106,7 @@ export default class extends Controller {
           // Create and append a span for the current word
           const span = document.createElement('span');
           span.className = "pronunciation-word-container";
-          span.onclick = this.fetchWordPronunciation.bind(this);
+          span.onclick = this.showWordPronunciationDiv.bind(this);
           const wordSpan = document.createElement('span');
           wordSpan.textContent = curWord;
           wordSpan.className = "pronunciation-word";
@@ -141,27 +143,102 @@ export default class extends Controller {
     return char.match(/\s/) !== null;
   }
 
-  fetchWordPronunciation(event) {
-    const word = event.target.parentElement.querySelector(".pronunciation-word").innerText;
-    const originalLanguage = "en";
-    fetch(`/pronunciations/${word}?translate_language=${this.translateLanguageSelectTarget.value}&original_language=${originalLanguage}`, {
-      headers: {
-        'Accept': 'application/json'
+  showWordPronunciationDiv(event) {
+    const parent = event.target.parentElement;
+    const word = parent.querySelector(".pronunciation-word").innerText;
+    const wordTranslation = this.fetchWordPronunciation(word);
+
+    const tooltip = this.pronunciationTooltipTarget
+    tooltip.innerHTML = '<div style="display: flex; flex-direction: row;"><div style="height: 200px; width: 200px;">Block 1</div><div style="height: 125px; width: 125px;">Block 2</div></div>';
+    tooltip.style.display = 'block'; // Show it first so getBoundingClientRect() on tooltip is accurate if needed
+
+    this.positionTooltip(parent, tooltip);
+
+    // Attach event listeners to update position on resize (and scroll if needed)
+    window.addEventListener('resize', this.handleWindowChange.bind(this));
+    window.addEventListener('scroll', this.handleWindowChange.bind(this), { passive: true });
+  }
+
+  handleWindowChange() {
+    // Recalculate tooltip position if it's visible
+    if (this.pronunciationTooltipTarget.style.display !== 'none') {
+      const parent = document.querySelector(".pronunciation-word-container:hover, .pronunciation-word-container:focus");
+      // If we can't detect the hovered/focused parent, you may want to store the current parent element in a variable.
+      // For simplicity, let's assume we stored the last clicked parent in `this.currentWordParent`.
+      if (this.currentWordParent) {
+        this.positionTooltip(this.currentWordParent, this.pronunciationTooltipTarget);
       }
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+    }
+  }
+
+  positionTooltip(parent, tooltip) {
+    this.currentWordParent = parent;
+
+    const rect = parent.getBoundingClientRect();
+    const tooltipWidth = tooltip.offsetWidth;
+    const tooltipHeight = tooltip.offsetHeight;
+
+    // Desired baseline positioning
+    let left = rect.left + window.scrollX + (rect.width / 2) - (tooltipWidth / 2);
+    let top = rect.bottom + window.scrollY + 10; // 10px below the parent
+
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const margin = 11; // Minimum margin from viewport edges
+
+    // Clamp horizontally
+    if (left < (window.scrollX + margin)) {
+      left = window.scrollX + margin;
+    } else if (left + tooltipWidth > window.scrollX + viewportWidth - margin) {
+      left = window.scrollX + viewportWidth - margin - tooltipWidth;
+    }
+
+    // Check vertical space below; if not enough, try above
+    if (top + tooltipHeight > window.scrollY + viewportHeight - margin) {
+      // Try placing above the element
+      const abovePos = rect.top + window.scrollY - tooltipHeight - 10;
+      if (abovePos > window.scrollY + margin) {
+        top = abovePos;
+      } else {
+        // If not enough room above, clamp to bottom of viewport
+        top = Math.min(top, window.scrollY + viewportHeight - margin - tooltipHeight);
       }
-      return response.json();
-    })
-    .then(data => {
-      debugger
-      return data;
-    })
-    .catch(error => {
-      console.error("Error fetching translations:", error);
-    });
+    } else {
+      // Also ensure top doesn't go above the top margin
+      if (top < window.scrollY + margin) {
+        top = window.scrollY + margin;
+      }
+    }
+
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${top}px`;
+  }
+
+
+  fetchWordPronunciation(word) {
+    if (this.wordPronunciations[word]) {
+      return this.wordPronunciations[word]
+    } else {
+      const originalLanguage = "en";
+      fetch(`/pronunciations/${word}?translate_language=${this.translateLanguageSelectTarget.value}&original_language=${originalLanguage}`, {
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then(data => {
+          this.wordPronunciations[word] = data;
+          return data;
+        })
+        .catch(error => {
+          console.error("Error fetching translations:", error);
+        });
+    }
   }
 
   handleInput(event) {

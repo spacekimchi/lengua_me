@@ -342,3 +342,15 @@ body button.button:hover:active {
 body .bold {
   font-weight: bold;
 }
+
+.tooltip {
+  position: absolute;
+  max-width: 90vw;
+  max-height: 100px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  overflow: hidden;
+}

@@ -22,4 +22,9 @@ class Word < ApplicationRecord
   has_many :pronunciations
 
   validates :text, presence: true
+
+  def add_pronunciation(language_code:, gender:)
+    tts_voice = TtsVoice.default_voices(language_code: language_code, gender: gender)
+    pronunciations.find_or_create_by(tts_voice: tts_voice)
+  end
 end

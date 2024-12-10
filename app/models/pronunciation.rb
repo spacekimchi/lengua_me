@@ -24,8 +24,6 @@ class Pronunciation < ApplicationRecord
   belongs_to :word
   belongs_to :tts_voice
 
-  validates :text, presence: true
-
   # Attach one audio file for the pronunciation
   has_one_attached :audio
 
@@ -35,12 +33,12 @@ class Pronunciation < ApplicationRecord
   def generate_audio
     language_code = tts_voice.language_code
     gender = tts_voice.gender
-    name = tts_voice.name
+    name = tts_voice.provider_id
     tts_service = GoogleTextToSpeechService.new(
-      self.word,
+      word.text,
       language_code: language_code,
       gender: gender,
-      name: name
+      voice_name: name
     )
 
     audio_data = tts_service.synthesize_speech
