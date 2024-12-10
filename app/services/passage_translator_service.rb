@@ -37,7 +37,15 @@ class PassageTranslatorService
   # Public method to execute the service
   def call
     response = request_translation
-    parse_response(response)
+    sentences = parse_response(response)
+    ActiveRecord::Base.transaction do
+      sentences.each_with_index do |sentence, idx|
+        SentenceTranslation.create!(language: @language, sentence_id: @sentences[idx][1], text: sentence)
+      end
+    end
+
+  rescue ActiveRecord::RecordInvalid => e
+    nil
   end
 
   private
@@ -55,7 +63,7 @@ class PassageTranslatorService
           },
           {
             role: 'user',
-            content: @sentences.join("\n")
+            content: @sentences.map { |content, id| content }.join("\n")
 
           }
         ],
@@ -80,7 +88,7 @@ class PassageTranslatorService
       return nil
     end
 
-    parsed
+    parsed[:sentences]
   end
 
   # Validates the response against the predefined SCHEMA using json-schema gem

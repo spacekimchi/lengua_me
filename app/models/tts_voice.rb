@@ -27,4 +27,15 @@ class TtsVoice < ApplicationRecord
 
   enum :provider, [:google, :elevenlabs, :playht], default: :google
   enum :gender, [:female, :male], default: :female
+
+  def self.default_voices(language_code:, gender:)
+    case language_code
+    when 'en-US'
+      if gender == :male
+        find_by(gender: gender, provider_id: "en-US-Journey-D", provider: :google)
+      else
+        find_by(gender: gender, provider_id: "en-US-Journey-F", provider: :google)
+      end
+    end
+  end
 end

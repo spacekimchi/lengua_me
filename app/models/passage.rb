@@ -14,4 +14,8 @@ class Passage < ApplicationRecord
   has_many :topics, through: :passage_topics, source: :topic
 
   enum :difficulty, [:basic, :a1, :a2, :b1, :b2, :c1, :c2, :native], default: :basic
+
+  def translate(language:)
+    PassageTranslatorService.new(sentences: sentences.pluck(:content, :id), language: language).call
+  end
 end

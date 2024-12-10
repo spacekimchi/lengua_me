@@ -44,3 +44,15 @@ body {
     }
 }
 
+.tooltip {
+  position: absolute;
+  max-width: 90vw; // or consider max-width: 90vw;
+  max-height: 100px; // Or set a max-height if you have dynamic content
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 999;
+  overflow: hidden;
+  // If you'd like it to resize, consider removing fixed height too and use padding.
+}

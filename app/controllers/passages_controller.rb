@@ -46,19 +46,9 @@ class PassagesController < ApplicationController
   def translate
     @passage = Passage.find(params[:id])
     language = Language.find(params[:language_id])
-    sentences = PassageTranslatorService.new(sentences: @passage.sentences.pluck(:content), language: language).call[:sentences]
-    @sentence_translations = []
-
-    ActiveRecord::Base.transaction do
-      sentences.each_with_index do |sentence, idx|
-        @sentence_translations.append(SentenceTranslation.create!(language: language, sentence: @passage.sentences.find_by(order_idx: idx), text: sentence))
-      end
-    end
-
     respond_to do |format|
-      if @sentence_translations.present?
+      if PassageTranslatorService.new(sentences: @passage.sentences.pluck(:content), language: language).call
         flash.now[:success] = "The passage was successfully translated."
-
         format.turbo_stream
       else
         flash.now[:error] = "Failed to translate the passage."
