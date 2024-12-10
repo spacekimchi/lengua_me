@@ -4,12 +4,14 @@ export default class extends Controller {
   static targets = ["arrow", "content"];
 
   connect() {
-    // Initially hide the tooltip
-    this.element.style.display = 'none';
-    this.hide();
+    this.hide() // Ensure the tooltip is hidden initially
+    // Bind the document click handler to maintain the correct 'this' context
+    this.handleDocumentClick = this.handleDocumentClick.bind(this)
+    this.currentParent = null
   }
 
-  show(parentRect, contentHTML) {
+  show(parent, parentRect, contentHTML) {
+    this.currentParent = parent;
     // Update content if provided
     if (contentHTML) {
       this.contentTarget.innerHTML = contentHTML;
@@ -68,10 +70,39 @@ export default class extends Controller {
     const arrowMargin = 10;
     arrowX = Math.max(arrowMargin, Math.min(tooltipWidth - arrowMargin, arrowX));
     this.arrowTarget.style.left = arrowX + 'px';
+
+    // Add a global click listener to detect clicks outside the tooltip
+    document.addEventListener('click', this.handleDocumentClick)
   }
 
   hide() {
-    this.element.style.display = 'none';
+    this.element.style.display = 'none'
+    this.currentParent = null
+    document.removeEventListener('click', this.handleDocumentClick)
+  }
+
+  /**
+   * Handle global click events to determine if the tooltip should be hidden.
+   * @param {Event} event - The click event.
+   */
+  handleDocumentClick(event) {
+    // If the click is inside the tooltip, do nothing
+    if (this.element.contains(event.target)) {
+      return
+    }
+
+    // If the click is on the parent element, do nothing (prevents immediate hiding when re-clicking the parent)
+    if (this.currentParent && this.currentParent.contains(event.target)) {
+      return
+    }
+
+    // Otherwise, hide the tooltip
+    this.hide()
+  }
+
+  disconnect() {
+    // Ensure the tooltip is hidden and listeners are removed when the controller is disconnected
+    this.hide()
   }
 }
 
