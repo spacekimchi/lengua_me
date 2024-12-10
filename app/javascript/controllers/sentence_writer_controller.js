@@ -17,8 +17,7 @@ export default class extends Controller {
     "translationsOutput",
     "skipDiv",
     "wordPronunciationsDiv",
-    "wordPronunciationsText",
-    "pronunciationTooltip"
+    "wordPronunciationsText"
   ];
 
   connect() {
@@ -152,7 +151,7 @@ export default class extends Controller {
     // Assuming you have a global tooltip controller somewhere in the DOM
     const tooltipElement = document.querySelector('[data-controller="tooltip"]');
     const tooltipController = this.application.getControllerForElementAndIdentifier(tooltipElement, "tooltip");
-    tooltipController.show(rect, "Your dynamic HTML content here");
+    tooltipController.show(parent, rect, "Your dynamic HTML content here");
 
     window.addEventListener('resize', this.handleWindowChange.bind(this));
     window.addEventListener('scroll', this.handleWindowChange.bind(this), { passive: true });
@@ -165,7 +164,7 @@ export default class extends Controller {
 
     if (tooltipElement.style.display !== 'none' && this.currentWordParent) {
       const rect = this.currentWordParent.getBoundingClientRect();
-      tooltipController.show(rect);
+      tooltipController.show(this.currentWordParent, rect);
     }
   }
 
