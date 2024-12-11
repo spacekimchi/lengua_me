@@ -18,4 +18,10 @@ class Passage < ApplicationRecord
   def translate(language:)
     PassageTranslatorService.new(sentences: sentences.pluck(:content, :id), language: language).call
   end
+
+  def sentences_to_speech
+    sentences.each do |sentence|
+      sentence.generate_audio
+    end
+  end
 end

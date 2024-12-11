@@ -1,0 +1,88 @@
+@use "variables" as v;
+
+button.button {
+    font-size: 1rem;
+    padding: 7px;
+    border: solid 1px v.$neutral;
+    border-radius: 3px;
+    background-color: white;
+    cursor: pointer;
+
+    &:hover {
+        background-color: v.$neutral;
+        color: white;
+
+        &:active {
+            transform: scale(0.96);
+        }
+    }
+
+    &:not(:last-child) {
+        margin-right: 5px;
+    }
+
+    &.success-button {
+        border: solid 1px v.$success;
+        background-color: v.$success;
+        color: white;
+
+        &:hover {
+            filter: brightness(110%);
+        }
+    }
+
+    &.action-button {
+        background-color: white;
+        border: solid 1px v.$korean-blue;
+        color: v.$korean-blue;
+
+        &:hover {
+            background-color: v.$korean-blue;
+            color: white;
+        }
+    }
+
+    &.neutral-button {
+        background-color: white;
+        border: solid 1px #686D76;
+        color: #686D76;
+
+        &:hover {
+            background-color: #686D76;
+            color: white;
+        }
+    }
+
+    &.warning-button {
+        background-color: v.$gold-warning;
+        border: solid 1px v.$gold-warning;
+        color: white;
+
+        &:hover {
+            filter: brightness(95%);
+        }
+    }
+
+    &.fatal-button {
+        background-color: white;
+        border: solid 1px v.$colombian-red;
+        color: v.$colombian-red;
+
+        &:hover {
+            background-color: v.$colombian-red;
+            color: white;
+        }
+    }
+
+    &.arrow-button {
+        background-color: white;
+        border: none;
+        padding-left: 11px;
+        padding-right: 11px;
+
+        &:hover {
+            color: v.$korean-blue;
+        }
+    }
+}
+

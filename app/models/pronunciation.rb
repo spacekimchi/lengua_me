@@ -31,6 +31,8 @@ class Pronunciation < ApplicationRecord
   # after_create :enqueue_generate_audio_job
 
   def generate_audio
+    return if audio.attached?
+
     language_code = tts_voice.language_code
     gender = tts_voice.gender
     name = tts_voice.provider_id

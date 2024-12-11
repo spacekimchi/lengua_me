@@ -276,9 +276,98 @@ table tbody td {
   transform: rotateZ(180deg);
 }
 
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+button.button {
+  font-size: 1rem;
+  padding: 7px;
+  border: solid 1px #686D76;
+  border-radius: 3px;
+  background-color: white;
+  cursor: pointer;
+}
+button.button:hover {
+  background-color: #686D76;
+  color: white;
+}
+button.button:hover:active {
+  transform: scale(0.96);
+}
+button.button:not(:last-child) {
+  margin-right: 5px;
+}
+button.button.success-button {
+  border: solid 1px green;
+  background-color: green;
+  color: white;
+}
+button.button.success-button:hover {
+  filter: brightness(110%);
+}
+button.button.action-button {
+  background-color: white;
+  border: solid 1px #0F64CD;
+  color: #0F64CD;
+}
+button.button.action-button:hover {
+  background-color: #0F64CD;
+  color: white;
+}
+button.button.neutral-button {
+  background-color: white;
+  border: solid 1px #686D76;
+  color: #686D76;
+}
+button.button.neutral-button:hover {
+  background-color: #686D76;
+  color: white;
+}
+button.button.warning-button {
+  background-color: #F3C623;
+  border: solid 1px #F3C623;
+  color: white;
+}
+button.button.warning-button:hover {
+  filter: brightness(95%);
+}
+button.button.fatal-button {
+  background-color: white;
+  border: solid 1px #C8102E;
+  color: #C8102E;
+}
+button.button.fatal-button:hover {
+  background-color: #C8102E;
+  color: white;
+}
+button.button.arrow-button {
+  background-color: white;
+  border: none;
+  padding-left: 11px;
+  padding-right: 11px;
+}
+button.button.arrow-button:hover {
+  color: #0F64CD;
+}
+
 .passage-writer-show-container .sentence-card-main-container {
   display: flex;
   justify-content: space-between;
+  min-height: 450px;
 }
 .passage-writer-show-container .sentence-card-main-container .sentence-card-attempt-container {
   width: 48%;
@@ -308,7 +397,8 @@ table tbody td {
   margin-left: auto;
 }
 .passage-writer-show-container .check-result-text {
-  font-size: 1.5rem;
+  margin-top: 11px;
+  font-size: 1rem;
 }
 .passage-writer-show-container .sentence-writer-card-info-container {
   width: 48%;
@@ -324,8 +414,12 @@ table tbody td {
 .passage-writer-show-container .sentence-writer-audio {
   width: 100%;
 }
+.passage-writer-show-container .sentence-writer-sentence-text {
+  display: inline-block;
+  margin: 11px 0;
+}
 .passage-writer-show-container .sentence-pronunciations-container {
-  display: none;
+  display: flex;
   flex-direction: column;
 }
 .passage-writer-show-container .sentence-pronunciations-container .pronunciation-words {
@@ -346,30 +440,30 @@ table tbody td {
 .passage-writer-show-container .sentence-pronunciations-container .pronunciation-words .pronunciation-word-container:not(:last-child) {
   margin-right: 3px;
 }
-.passage-writer-show-container button {
+.passage-writer-show-container .word-pronunciation-container .word-pronunciation-header {
+  font-weight: bold;
   font-size: 1rem;
-}
-.passage-writer-show-container button.success-button {
-  background-color: green;
-  color: white;
-}
-.passage-writer-show-container button.alert-button {
-  background-color: #FCC737;
-  color: white;
+  margin-bottom: 3px;
 }
 .passage-writer-show-container textarea {
   resize: none;
   margin: 0.5rem 0;
+  font-size: 1.25rem;
   width: 100%;
   position: relative;
-  border: solid 1px black;
+  border: solid 1px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   padding: 0.75rem;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 .passage-writer-show-container textarea.success {
   outline: none;
   border: solid 3px green;
+}
+.passage-writer-show-container textarea.warning {
+  outline: none;
+  border: solid 3px #FCC737;
 }
 @media (max-width: 768px) {
   .passage-writer-show-container .sentence-card-main-container {
@@ -403,18 +497,15 @@ body .main-content {
 body .hidden {
   display: none !important;
 }
-body button.button {
-  padding: 7px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-}
-body button.button:hover {
-  filter: brightness(85%); /* Darkens the color */
-}
-body button.button:hover:active {
-  transform: scale(0.96);
-}
 body .bold {
   font-weight: bold;
+}
+body .hidden-vis {
+  visibility: hidden !important;
+}
+body .blur {
+  filter: blur(3px);
+}
+body .blur:hover {
+  filter: blur(0px);
 }

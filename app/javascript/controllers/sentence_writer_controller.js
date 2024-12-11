@@ -17,7 +17,11 @@ export default class extends Controller {
     "translationsOutput",
     "skipDiv",
     "wordPronunciationsDiv",
-    "wordPronunciationsText"
+    "wordPronunciationsText",
+    "infoContainerDiv",
+    "currentIndexNavigation",
+    "leftNav",
+    "rightNav"
   ];
 
   connect() {
@@ -64,7 +68,6 @@ export default class extends Controller {
     })
     .then(data => {
       this.translations = data.sentences;
-      this.displayTranslation();
       return data;
     })
     .catch(error => {
@@ -72,7 +75,7 @@ export default class extends Controller {
     });
   }
 
-  displayTranslation() {
+  setTranslations() {
     this.translationsOutputTarget.innerHTML = "";
     if (this.translations && this.translations[this.currentIndex]) {
       const p = document.createElement('p');
@@ -146,16 +149,99 @@ export default class extends Controller {
     const parent = event.target.parentElement;
     const rect = parent.getBoundingClientRect();
     const word = parent.querySelector(".pronunciation-word").innerText;
-    const wordTranslation = this.fetchWordPronunciation(word);
 
-    // Assuming you have a global tooltip controller somewhere in the DOM
     const tooltipElement = document.querySelector('[data-controller="tooltip"]');
-    const tooltipController = this.application.getControllerForElementAndIdentifier(tooltipElement, "tooltip");
-    tooltipController.show(parent, rect, "Your dynamic HTML content here");
+    const tooltipController = this.application.getControllerForElementAndIdentifier(tooltipElement, "tooltip")
 
-    window.addEventListener('resize', this.handleWindowChange.bind(this));
-    window.addEventListener('scroll', this.handleWindowChange.bind(this), { passive: true });
+    // Show a loader first
+    tooltipController.showLoadingDiv(parent, rect);
+    // Fetch the pronunciation (ensure this method returns a promise or handles async correctly)
+    this.fetchWordPronunciation(word).then(wordPronunciation => {
+      // Get the TooltipController instance
+      let contentHTML = this.createPronunciationContent(word, wordPronunciation);
+      tooltipController.show(parent, rect, contentHTML); // Adjust based on your fetchWordPronunciation response
+
+      // Optionally, manage event listeners in the main controller if needed
+    })
     this.currentWordParent = parent;
+  }
+
+  createPronunciationContent(word, pronunciation) {
+    // Get the TooltipController instance
+    let contentHTML = document.createElement('div');
+    contentHTML.className = 'word-pronunciation-container';
+
+    if (pronunciation.error) {
+      const noPronunciation = document.createElement('p');
+      noPronunciation.textContent = "Pronunciation not available.";
+      contentHTML.appendChild(noPronunciation);
+    } else {
+      // Show the tooltip with the parent element and fetched content
+      const headerContainer = document.createElement('div');
+      headerContainer.className = 'word-pronunciation-header';
+      headerContainer.innerHTML = word;
+
+      contentHTML.appendChild(headerContainer);
+      const buttonContainer = document.createElement('div');
+      buttonContainer.className = 'word-pronunciation-buttons';
+      if (pronunciation.male) {
+        const maleButton = this.createPlayButton(
+          "Male",
+          word,
+          "Play male pronunciation"
+       );
+        maleButton.setAttribute('data-gender', 'male')
+        buttonContainer.appendChild(maleButton);
+
+        const url = pronunciation['male'].url;
+        const audio = new Audio(url);
+        audio.play().catch(error => console.error("Error playing audio:", error));
+      }
+
+      if (pronunciation.female) {
+        const femaleButton = this.createPlayButton(
+          "Female",
+          word,
+          "Play female pronunciation"
+        );
+        femaleButton.setAttribute('data-gender', 'female');
+        buttonContainer.appendChild(femaleButton);
+      }
+      contentHTML.appendChild(buttonContainer);
+    }
+    return contentHTML;
+  }
+
+  /**
+   * Create a play button element.
+   * @param {String} buttonText - The text to display on the button.
+   * @param {String} pronunciationUrl - The URL of the pronunciation audio.
+   * @param {String} ariaLabel - The ARIA label for accessibility.
+   * @returns {HTMLButtonElement} - The configured button element.
+   */
+  createPlayButton(buttonText, word, ariaLabel) {
+    const button = document.createElement('button');
+    button.className = 'button action-button';
+    button.textContent = `🔊 ${buttonText}`;
+    button.setAttribute('data-action', 'click->sentence-writer#playPronunciation');
+    button.setAttribute('data-word', word);
+    button.setAttribute('aria-label', ariaLabel);
+    return button;
+  }
+
+  /**
+   * Handle playing the pronunciation audio.
+   * @param {Event} event - The click event on the play button.
+   */
+  playPronunciation(event) {
+    const word = event.target.getAttribute('data-word');
+    const gender = event.target.getAttribute('data-gender');
+    const pronunciation = this.wordPronunciations[word];
+    if (pronunciation && pronunciation[gender]) {
+      const url = pronunciation[gender].url;
+      const audio = new Audio(url);
+      audio.play().catch(error => console.error("Error playing audio:", error));
+    }
   }
 
   handleWindowChange() {
@@ -170,10 +256,11 @@ export default class extends Controller {
 
   fetchWordPronunciation(word) {
     if (this.wordPronunciations[word]) {
-      return this.wordPronunciations[word]
+      // Return a resolved promise with the cached data
+      return Promise.resolve(this.wordPronunciations[word]);
     } else {
       const originalLanguage = "en";
-      fetch(`/pronunciations/${word}?translate_language=${this.translateLanguageSelectTarget.value}&original_language=${originalLanguage}`, {
+      return fetch(`/pronunciations/${word}?translate_language=${this.translateLanguageSelectTarget.value}&original_language=${originalLanguage}`, {
         headers: {
           'Accept': 'application/json'
         }
@@ -189,7 +276,8 @@ export default class extends Controller {
           return data;
         })
         .catch(error => {
-          console.error("Error fetching translations:", error);
+          console.error("Error fetching pronunciations:", error);
+          return { error: "Pronunciation not available." }; // Fallback content
         });
     }
   }
@@ -233,6 +321,7 @@ export default class extends Controller {
     }
     const inputText = this.textAreaTarget.value;
     const currentSentence = this.sentences[this.currentIndex].content;
+    this.displayNextButtons();
 
     // Extract words (alphanumeric sequences) from both input and actual
     const actualWords = currentSentence.match(/\w+/g) || [];
@@ -270,7 +359,7 @@ export default class extends Controller {
             if (actualChar === inputChar) {
               return ch;
             } else {
-              return "*";
+              return "\u2217";
             }
           } else {
             return ch; // punctuation inside word stays the same
@@ -284,15 +373,12 @@ export default class extends Controller {
       }
     });
 
-
     // After constructing the result, check if normalized strings match
     if (normalizedActualFull === normalizedInputFull) {
       // Append a div indicating correctness
       this.showCorrectDiv();
       this.checkResultTarget.textContent = "";
       this.textAreaTarget.value = this.sentences[this.currentIndex].content;
-      this.textAreaTarget.classList = "success";
-      this.finishedSentence = true;
     } else {
       // Append a div indicating incorrectness
       this.checkResultTarget.textContent = resultTokens.join("");
@@ -300,11 +386,30 @@ export default class extends Controller {
     }
   }
 
+  toggleMismatch() {
+      this.checkResultTarget.textContent = resultTokens.join("");
+  }
+
   skip() {
     // You can define what should happen on skip, for now do nothing or implement logic
     this.showSkipDiv();
     this.skippedSentence = true;
     this.textAreaTarget.value = this.sentences[this.currentIndex].content;
+    this.checkResultTarget.textContent = "";
+  }
+
+  displayNextButtons() {
+    if (this.currentIndex === this.sentences.length - 1) {
+      this.correctDivTarget.querySelector('button.success-button').classList.add('hidden');
+      this.skipDivTarget.querySelector('button.action-button').classList.add('hidden');
+      this.checkAndSkipDivTarget.querySelector('button.neutral-button').classList.add('hidden');
+      this.incorrectDivTarget.querySelector('button.warning-button').classList.add('hidden');
+    } else {
+      this.correctDivTarget.querySelector('button.success-button').classList.remove('hidden');
+      this.skipDivTarget.querySelector('button.action-button').classList.remove('hidden');
+      this.checkAndSkipDivTarget.querySelector('button.neutral-button').classList.remove('hidden');
+      this.incorrectDivTarget.querySelector('button.warning-button').classList.remove('hidden');
+    }
   }
 
   showCorrectDiv() {
@@ -312,9 +417,10 @@ export default class extends Controller {
     this.incorrectDivTarget.style.display = "none";
     this.checkAndSkipDivTarget.style.display = "none";
     this.skipDivTarget.style.display = "none";
+    this.textAreaTarget.classList = "success";
+    this.finishedSentence = true;
 
-    // For the right part
-    this.showPronunciationsDiv();
+    this.showInfoContent();
   }
 
   showSkipDiv() {
@@ -322,9 +428,9 @@ export default class extends Controller {
     this.correctDivTarget.style.display = "none";
     this.incorrectDivTarget.style.display = "none";
     this.checkAndSkipDivTarget.style.display = "none";
+    this.textAreaTarget.classList = "warning";
 
-    // For the right part
-    this.showPronunciationsDiv();
+    this.showInfoContent();
   }
 
   showIncorrectDiv() {
@@ -332,7 +438,15 @@ export default class extends Controller {
     this.correctDivTarget.style.display = "none";
     this.checkAndSkipDivTarget.style.display = "none";
     this.skipDivTarget.style.display = "none";
+    this.textAreaTarget.classList = "warning";
     this.wordPronunciationsDivTarget.style.display = "none";
+    this.finishedSentence = false;
+  }
+
+  showInfoContent() {
+    this.setTranslations();
+    this.showPronunciationsDiv();
+    this.infoContainerDivTarget.style.display = "block";
   }
 
   prev() {
@@ -370,20 +484,36 @@ export default class extends Controller {
 
     // Show the correct sentence (this might be optional if you want to hide it from the user)
     const sentenceDiv = document.createElement("div");
-    sentenceDiv.classList.add("sentence-writer");
+    sentenceDiv.classList.add("sentence-writer-sentence-text");
+    sentenceDiv.classList.add("blur");
     sentenceDiv.textContent = sentence.content;
+    sentenceDiv.onclick = () => { sentenceDiv.classList.toggle('blur'); };
     writerContainer.appendChild(sentenceDiv);
 
     this.element.dataset.currentIndex = index;
 
     this.resetValues();
+    this.setNav();
 
     // If not the initial load, autoplay the audio
     if (!this.initialLoad) {
-      this.displayTranslation();
       this.playAudio();
     }
     this.initialLoad = false;
+  }
+
+  setNav() {
+    if (this.currentIndex === 0) {
+      this.leftNavTarget.classList.add('hidden-vis');
+    } else {
+      this.leftNavTarget.classList.remove('hidden-vis');
+    }
+    if (this.currentIndex === this.sentences.length - 1) {
+      this.rightNavTarget.classList.add('hidden-vis');
+    } else {
+      this.rightNavTarget.classList.remove('hidden-vis');
+    }
+    this.currentIndexNavigationTarget.innerText = `${this.currentIndex + 1} / ${this.sentences.length}`;
   }
 
   focusTextArea() {
@@ -396,6 +526,8 @@ export default class extends Controller {
     this.textAreaTarget.classList = "";
     this.finishedSentence = false;
     this.skippedSentence = false;
+    this.infoContainerDivTarget.style.display = "none";
+    this.textAreaTarget.classList = "";
     this.resetActionDivs();
   }
 
@@ -404,6 +536,7 @@ export default class extends Controller {
     this.incorrectDivTarget.style.display = "none";
     this.skipDivTarget.style.display = "none";
     this.checkAndSkipDivTarget.style.display = "flex";
+    this.displayNextButtons();
   }
 }
 

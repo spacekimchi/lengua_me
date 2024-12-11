@@ -7,6 +7,6 @@ class PronunciationsController < ApplicationController
     male_pronunciation = word.pronunciations.find_by(tts_voice: TtsVoice.default_voices(language_code: tts_code, gender: :male))
     female_pronunciation = word.pronunciations.find_by(tts_voice: TtsVoice.default_voices(language_code: tts_code, gender: :female))
 
-    render json: { male_pronunciation: url_for(male_pronunciation.audio), female_pronunciation: url_for(female_pronunciation.audio), word_text: word.text, pronunciation_text: male_pronunciation.text.presence || female_pronunciation.text }
+    render json: { male: { url: url_for(male_pronunciation.audio) }, female:  { url: url_for(female_pronunciation.audio) }, word_text: word.text, pronunciation_text: male_pronunciation.text.presence || female_pronunciation.text }
   end
 end

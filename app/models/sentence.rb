@@ -33,6 +33,8 @@ class Sentence < ApplicationRecord
   # validates :voice_type, presence: true, inclusion: { in: GoogleTextToSpeechService::VOICE_TYPES.keys.map(&:to_s) }
 
   def generate_audio
+    return if audio.attached?
+
     tts_service = GoogleTextToSpeechService.new(
       self.content,
       language_code: 'en-US'
