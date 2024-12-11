@@ -4,6 +4,7 @@
 @use "navigation";
 @use "breadcrumbs";
 @use "tooltip";
+@use "buttons";
 @use "topics/passage_writer/show";
 
 body {
@@ -26,22 +27,20 @@ body {
         display: none !important;
     }
 
-    button.button {
-        padding: 7px;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-
-        &:hover {
-            filter: brightness(85%); /* Darkens the color */
-            &:active {
-                transform: scale(0.96);
-            }
-        }
-    }
-
     .bold {
         font-weight: bold;
+    }
+
+    .hidden-vis {
+        visibility: hidden !important;
+    }
+
+    .blur {
+        filter: blur(3px);
+
+        &:hover {
+            filter:blur(0px);
+        }
     }
 }
 

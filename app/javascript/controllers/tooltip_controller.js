@@ -8,13 +8,25 @@ export default class extends Controller {
     // Bind the document click handler to maintain the correct 'this' context
     this.handleDocumentClick = this.handleDocumentClick.bind(this)
     this.currentParent = null
+
+    // Attach event listeners to update position on resize (if not already handled)
+    window.addEventListener('resize', this.handleWindowChange.bind(this));
+    window.addEventListener('scroll', this.handleWindowChange.bind(this), { passive: true });
+  }
+
+  showLoadingDiv(parent, rect) {
+    console.log("I AM IN HERE LOADING DIV");
+    const loadingDiv = document.createElement("div");
+    loadingDiv.className = 'loader';
+    this.show(parent, rect, loadingDiv);
   }
 
   show(parent, parentRect, contentHTML) {
     this.currentParent = parent;
     // Update content if provided
     if (contentHTML) {
-      this.contentTarget.innerHTML = contentHTML;
+      this.contentTarget.innerHTML = "";
+      this.contentTarget.appendChild(contentHTML);
     }
 
     // Make visible to measure sizes
@@ -69,10 +81,10 @@ export default class extends Controller {
 
     const arrowMargin = 10;
     arrowX = Math.max(arrowMargin, Math.min(tooltipWidth - arrowMargin, arrowX));
-    this.arrowTarget.style.left = arrowX + 'px';
+    this.arrowTarget.style.left = `${arrowX - 3}px`;
 
     // Add a global click listener to detect clicks outside the tooltip
-    document.addEventListener('click', this.handleDocumentClick)
+    document.addEventListener('click', this.handleDocumentClick);
   }
 
   hide() {
@@ -103,6 +115,16 @@ export default class extends Controller {
   disconnect() {
     // Ensure the tooltip is hidden and listeners are removed when the controller is disconnected
     this.hide()
+  }
+
+  handleWindowChange() {
+    const tooltipElement = document.querySelector('[data-controller="tooltip"]');
+    const tooltipController = this.application.getControllerForElementAndIdentifier(tooltipElement, "tooltip");
+
+    if (tooltipElement.style.display !== 'none' && this.currentParent) {
+      const rect = this.currentParent.getBoundingClientRect();
+      tooltipController.show(this.currentParent, rect);
+    }
   }
 }
 
