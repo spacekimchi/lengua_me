@@ -19,6 +19,13 @@ Rails.application.routes.draw do
   delete "/sign_out" => "sessions#destroy", as: "sign_out"
   get "/sign_up" => "users#new", as: "sign_up"
 
+  # Privacy information
+  resource :support_tickets, only: %i[new create]
+  resources :faq, only: %i[index]
+  resource :privacy_policy, only: %i[show]
+  resource :terms_of_service, only: %i[show]
+  resource :cookie_policy, only: %i[show]
+
   resources :verification, only: [:edit], param: :verification_token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -98,6 +105,4 @@ Rails.application.routes.draw do
 
   resource :checkout, only: %i[new show]
   resources :products, only: %i[index show]
-  resource :support_tickets, only: %i[new create]
-  resources :faq, only: %i[index]
 end
