@@ -85,6 +85,8 @@ Rails.application.routes.draw do
     resources :passage_writer, controller: 'topics/passage_writer'
   end
 
+  get 'passages/:topic_name', to: 'passages#get_by_topic', as: :passages_by_topic
+  get 'passages/:topic_name/passage_writer/:passage_name', to: 'passages#passage_writer', as: :passage_writer
   resources :passages do
     member do
       post 'translate'

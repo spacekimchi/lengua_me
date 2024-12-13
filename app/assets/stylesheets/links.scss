@@ -1,0 +1,9 @@
+@use "variables" as v;
+
+a {
+    color: v.$nav-blue;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

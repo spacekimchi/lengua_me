@@ -1,0 +1,50 @@
+@use "../variables" as v;
+
+.passages-index-container {
+    .topics-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+
+        .topics-list-item {
+            display: flex;
+            flex-direction: column;
+            width: 32%;
+            border: solid 1px v.$shadow-color;
+            border-radius: 5px;
+            margin-bottom: 0.75rem;
+            padding: 1rem;
+
+            .topics-list-item-main {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .topics-list-item-info {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                padding-left: 0.5rem;
+                overflow: hidden;
+
+                .passages-topic-title {
+                    font-size: 1.5rem;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+
+    @include v.respond-to(mobile) {
+        .topics-list {
+            flex-direction: column;
+
+            .topics-list-item {
+                width: 97%;
+            }
+        }
+    }
+}

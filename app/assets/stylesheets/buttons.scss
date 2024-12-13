@@ -1,5 +1,9 @@
 @use "variables" as v;
 
+button {
+    line-height: 1rem;
+}
+
 button.button {
     font-size: 1rem;
     padding: 7px;

@@ -1,26 +1,23 @@
+@use "resets";
 @use "variables";
+@use "headers";
+@use "links";
+@use "buttons";
 @use "table";
+@use "breadcrumbs";
 @use "flash";
 @use "navigation";
-@use "breadcrumbs";
 @use "tooltip";
-@use "buttons";
 @use "topics/passage_writer/show";
+@use "passages/get_by_topic";
+@use "passages/index";
 
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
-    font-size: 16px; /* Base font size for rem units */
-    background-color: white;
-    color: black;
-    margin: 0px;
-    padding: 0px;
-
     .main-content {
         margin: 0.5rem;
-        max-width: 1080px;
+        max-width: 1280px;
         margin: auto;
-        padding: 0.5rem;
+        padding: 4.5rem 0 0 0.5rem;
     }
 
     .hidden {
@@ -37,10 +34,6 @@ body {
 
     .blur {
         filter: blur(3px);
-
-        &:hover {
-            filter:blur(0px);
-        }
     }
 }
 

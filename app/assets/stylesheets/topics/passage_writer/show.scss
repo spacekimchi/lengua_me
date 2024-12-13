@@ -65,6 +65,11 @@
     .sentence-writer-sentence-text {
         display: inline-block;
         margin: 11px 0;
+        cursor: pointer;
+
+        &.blur {
+            cursor: help;
+        }
     }
 
     .sentence-pronunciations-container {
@@ -108,7 +113,7 @@
     textarea {
         resize: none;
         margin: 0.5rem 0;
-        font-size: 1.25rem;
+        font-size: 1rem;
         width: 100%;
         position: relative;
         border: solid 1px v.$shadow-color;
