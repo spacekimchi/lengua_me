@@ -412,6 +412,28 @@ table tbody td {
   }
 }
 
+footer {
+  display: flex;
+  max-width: 1280px;
+  margin: auto;
+  height: 125px;
+}
+footer div {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+footer a {
+  padding: 7px 0;
+}
+@media (max-width: 768px) {
+  footer div {
+    display: flex;
+    flex-direction: column;
+    width: 49%;
+  }
+}
+
 .tooltip {
   position: absolute;
   max-width: 90vw;
