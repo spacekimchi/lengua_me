@@ -28,11 +28,6 @@ regular_user = User.find_or_create_by(email: 'reg@jinz.co') do |user|
   user.username = "reg"
 end
 
-topics = ['sports', 'dating', 'travel', 'food', 'hobbies', 'world news', 'career', 'education', 'art', 'health', 'technology', 'daily life and routines', 'environmental']
-topics.each do |topic|
-  Topic.find_or_create_by(name: topic)
-end
-
 languages = Constants::LANGUAGE_CODES
 
 languages.each do |language|
@@ -40,7 +35,26 @@ languages.each do |language|
 end
 
 language = Language.find_by(code: 'en')
-passage = Passage.find_or_create_by(title: "Caring for Our Environment", difficulty: :a1)
+
+topics = ['sports', 'dating', 'travel', 'food', 'hobbies', 'world news', 'career', 'education', 'art', 'health', 'technology', 'daily life and routines', 'environmental']
+topics.each do |t|
+  topic = Topic.find_or_create_by(name: t)
+  passage = Passage.find_or_create_by(title: "caring for our environment", difficulty: Passage.difficulties.keys.sample)
+  PassageTopic.create(passage: passage, topic: topic)
+  4.times do
+    passage = Passage.find_or_create_by(title: Faker::Coffee.blend_name, difficulty: Passage.difficulties.keys.sample)
+    PassageTopic.create(passage: passage, topic: topic)
+    sentences = Faker::Lorem.sentences
+    translations = Faker::Lorem.sentences
+
+    sentence.each_with_index do |sp, idx|
+      sentence = Sentence.find_or_create_by(passage: passage, content: sp, language: language, order_idx: idx)
+      sentence.translations.find_or_create_by(language: language, text: translation[idx])
+    end
+  end
+end
+
+topic = Topic.find_by(name: 'environmental')
 sentence_params = [
   "We live on Earth.",
   "Our Earth is very beautiful.",
@@ -59,10 +73,47 @@ translation_params = [
   "Hagamos todos nuestra parte para mantener la Tierra limpia."
 ]
 
+passage = Passage.find_by(title: "caring for our environment")
+
 sentence_params.each_with_index do |sp, idx|
-  sentence = Sentence.find_or_create_by(language: language, order_idx: idx)
-  passage.sentences << sentence
+  sentence = Sentence.find_or_create_by(passage: passage, content: sp, language: language, order_idx: idx)
   sentence.translations.find_or_create_by(language: language, text: translation_params[idx])
 end
 
 Seeds::TtsVoicesService.call
+
+words = ["we",
+ "live",
+ "on",
+ "earth",
+ "our",
+ "is",
+ "very",
+ "beautiful",
+ "it",
+ "has",
+ "green",
+ "trees",
+ "and",
+ "blue",
+ "skies",
+ "need",
+ "to",
+ "take",
+ "care",
+ "of",
+ "can",
+ "recycle",
+ "reduce",
+ "waste",
+ "let's",
+ "all",
+ "do",
+ "part",
+ "keep",
+ "clean"]
+
+words.each do |w|
+  word = Word.find_or_create_by(text: w, language: language)
+  word.add_default_pronunciation
+end

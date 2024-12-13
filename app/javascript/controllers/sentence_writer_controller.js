@@ -387,7 +387,7 @@ export default class extends Controller {
   }
 
   toggleMismatch() {
-      this.checkResultTarget.textContent = resultTokens.join("");
+      // this.checkResultTarget.textContent = resultTokens.join("");
   }
 
   skip() {
@@ -403,7 +403,6 @@ export default class extends Controller {
       this.correctDivTarget.querySelector('button.success-button').classList.add('hidden');
       this.skipDivTarget.querySelector('button.action-button').classList.add('hidden');
       this.checkAndSkipDivTarget.querySelector('button.neutral-button').classList.add('hidden');
-      this.incorrectDivTarget.querySelector('button.warning-button').classList.add('hidden');
     } else {
       this.correctDivTarget.querySelector('button.success-button').classList.remove('hidden');
       this.skipDivTarget.querySelector('button.action-button').classList.remove('hidden');

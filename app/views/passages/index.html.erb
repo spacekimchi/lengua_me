@@ -1,6 +1,24 @@
 <div class="passages-index-container">
+  <%= render partial: 'topics/partials/breadcrumbs' %>
   <h1>All Topics</h1>
-  <% @topics.each do |topic| %>
-    <%= link_to topic.name.titleize, topic_path(name: topic.name) %>
-  <% end %>
+  <ul class="topics-list">
+    <% @topics.each do |topic| %>
+      <li class="topics-list-item">
+        <div class="topics-list-item-main">
+          <div style="height: 75px; width: 75px;">
+            <img src="/images/ruby.png">
+          </div>
+          <div class="topics-list-item-info">
+            <%= link_to topic.name.titleize, passages_by_topic_path(topic_name: urlify(topic.name)), class: 'passages-topic-title' %>
+            <div>
+              <span><%= topic.total_passages %> <%= topic.total_passages == 1 ? 'passage' : 'passages' %></span>
+            </div>
+          </div>
+        </div>
+        <div class="hidden">
+          <%= topic.description %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
 </div>

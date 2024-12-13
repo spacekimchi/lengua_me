@@ -1,0 +1,31 @@
+@use "../variables" as v;
+
+.passages-by-topic-container {
+    .passages-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+
+        .passage-link {
+            width: 32%;
+            margin-bottom: 0.75rem;
+        }
+
+        .passage-list-item {
+            border: solid 1px v.$shadow-color;
+            border-radius: 5px;
+            padding: 0.5rem;
+        }
+    }
+
+    @include v.respond-to(mobile) {
+        .passages-list {
+            flex-direction: column;
+
+            .passage-link {
+                width: 98%;
+            }
+        }
+    }
+}

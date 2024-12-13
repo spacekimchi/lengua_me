@@ -14,8 +14,15 @@ export default class extends Controller {
     window.addEventListener('scroll', this.handleWindowChange.bind(this), { passive: true });
   }
 
+  disconnect() {
+    // Ensure tooltip is hidden and listeners are removed
+    this.hide();
+
+    window.removeEventListener('resize', this.handleWindowChange);
+    window.removeEventListener('scroll', this.handleWindowChange, { passive: true });
+  }
+
   showLoadingDiv(parent, rect) {
-    console.log("I AM IN HERE LOADING DIV");
     const loadingDiv = document.createElement("div");
     loadingDiv.className = 'loader';
     this.show(parent, rect, loadingDiv);
@@ -119,6 +126,8 @@ export default class extends Controller {
 
   handleWindowChange() {
     const tooltipElement = document.querySelector('[data-controller="tooltip"]');
+    if (!tooltipElement) return; // Avoid TypeError if the element is missing
+
     const tooltipController = this.application.getControllerForElementAndIdentifier(tooltipElement, "tooltip");
 
     if (tooltipElement.style.display !== 'none' && this.currentParent) {

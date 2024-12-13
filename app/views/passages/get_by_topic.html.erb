@@ -1,6 +1,7 @@
-<div>
+<div class="passages-by-topic-container">
   <%= render partial: 'topics/partials/breadcrumbs' %>
   <h1><%= @topic.name.titleize %></h1>
+  <!--
   <% Passage.difficulties.keys.each do |difficulty| %>
     <%= button_to "New passage for #{difficulty.to_s} difficulty",
       passages_path,
@@ -9,12 +10,15 @@
       form: { data: { turbo_stream: true } },
       class: "btn" %>
   <% end %>
+  -->
   <div>
-    <ul>
-      <% @passages.each do |passage| %>
-        <li>
-          <%= link_to passage.title, topic_passage_writer_path(urlify(@topic.name), passage) %>
-        </li>
+    <ul class="passages-list">
+      <% @passages.each_with_index do |passage, index| %>
+          <%= link_to passage_writer_path(urlify(@topic.name), urlify(passage.title)), class: 'passage-link' do %>
+            <li class="passage-list-item">
+              <%= index + 1 %>. <%= passage.title.titleize %>
+            </li>
+          <% end %>
       <% end %>
     </ul>
   </div>

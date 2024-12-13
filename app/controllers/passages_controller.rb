@@ -5,11 +5,7 @@ class PassagesController < ApplicationController
   end
 
   def index
-    @passages = Passage.all.includes(:sentences)
-    @topics = Topic.all
-  end
-
-  def new
+    @topics = Topic.left_joins(:passages).select('topics.id as id, name, description, COUNT(passages) as total_passages').group('topics.id')
   end
 
   def create
@@ -21,7 +17,7 @@ class PassagesController < ApplicationController
     language = Language.english
 
     ActiveRecord::Base.transaction do
-      @passage = Passage.create!(title: title, difficulty: params[:difficulty].to_sym)
+      @passage = Passage.create!(title: title.downcase, difficulty: params[:difficulty].to_sym)
       @passage.passage_topics.create!(topic: @topic)
 
       all_sentences.each_with_index do |sentence_content, idx|
@@ -67,6 +63,25 @@ class PassagesController < ApplicationController
       .select('sentences.id as sentence_id, sentences.content as content, sentences.order_idx as order_idx, sentence_translations.text as translation_text')
 
     render json: { sentences: @sentences }, status: :ok
+  end
+
+  def get_by_topic
+    @topic = Topic.find_by(name: deurlify(params[:topic_name]))
+    @passages = @topic.passages
+  end
+
+  def passage_writer
+    @topic = Topic.find_by(name: deurlify(params[:topic_name]))
+    @passage = @topic.passages.find_by(title: deurlify(params[:passage_name]))
+    @sentences = @passage.sentences.order(:order_idx)
+    @language_codes = Constants::LANGUAGE_CODES
+    @sentences_data = @sentences.map do |sentence|
+      {
+        content: sentence.content,
+        audio_url: (sentence.audio.attached? ? url_for(sentence.audio) : nil),
+        order_idx: sentence.order_idx
+      }
+    end
   end
 
   private
