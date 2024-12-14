@@ -1,7 +1,7 @@
 <div class="top-nav-container" data-controller="navigation">
   <nav id="top-nav">
-    <%= link_to root_path do %>
-      <img src="/images/logo.png" alt="Logo" style="height: 31px;">
+    <%= link_to root_path, style: 'display: flex; align-items: center;' do %>
+      <img src="/images/logo_small.png" alt="Logo" style="height: 31px;"> <span style="padding-left: 1rem; font-weight: bold; font-size: 1.5rem;">BasedLingo</span>
     <% end %>
 
     <!-- Hamburger Icon -->
@@ -19,7 +19,6 @@
         <li><%= link_to 'Errors', admin_application_errors_path %></li>
       <% else %>
         <li><%= link_to 'Passages', passages_path %></li>
-        <li><%= link_to 'Topics', topics_path %></li>
         <li><%= link_to 'Support', new_support_tickets_path %></li>
         <li><%= link_to 'FAQ', faq_index_path %></li>
       <% end %>

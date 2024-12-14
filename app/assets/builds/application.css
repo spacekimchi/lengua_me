@@ -93,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 2.25rem;
   font-weight: 700;
-  margin: 0 0 2rem;
+  margin: 1.5rem 0 2rem;
 }
 
 h2 {
@@ -123,6 +123,12 @@ h6 {
 
 a {
   color: #0D6EFD;
+}
+a.link-button {
+  border-radius: 5px;
+  padding: 0.75rem;
+  color: white;
+  background-color: #0F64CD;
 }
 a:hover {
   text-decoration: underline;
@@ -413,24 +419,30 @@ table tbody td {
 }
 
 footer {
+  border-top: solid 1px rgba(0, 0, 0, 0.2);
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+footer .footer-container {
   display: flex;
   max-width: 1280px;
   margin: auto;
   height: 125px;
 }
-footer div {
+footer .footer-container div {
   display: flex;
   flex-direction: column;
   width: 25%;
 }
-footer a {
+footer .footer-container a {
   padding: 7px 0;
 }
 @media (max-width: 768px) {
-  footer div {
+  footer .footer-container div {
     display: flex;
     flex-direction: column;
     width: 49%;
+    padding: 0 0.75rem;
   }
 }
 
@@ -527,6 +539,53 @@ footer a {
     transform: rotate(360deg);
   }
 }
+.home-container .header-details {
+  width: 50%;
+}
+.home-container .header-details p {
+  padding: 0.5rem 0;
+}
+.home-container .header-details div {
+  padding: 0.75rem 0;
+}
+.home-container .learning-methods-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.home-container .learning-methods-container .learning-method-group {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.home-container .learning-methods-container .learning-method-group .learning-method-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  width: 48%;
+}
+.home-container .learning-methods-container .learning-method-group .learning-method-item p {
+  width: 80%;
+  padding-top: 1rem;
+}
+.home-container .learning-methods-container .learning-method-group .learning-method-item img {
+  height: 350px;
+  width: 350px;
+}
+@media (max-width: 768px) {
+  .home-container .header-details {
+    width: 100%;
+  }
+  .home-container .learning-methods-container .learning-method-group {
+    flex-direction: column;
+  }
+  .home-container .learning-methods-container .learning-method-group .learning-method-item {
+    width: 98%;
+  }
+}
+
 .passage-writer-show-container .sentence-card-main-container {
   display: flex;
   justify-content: space-between;
@@ -711,11 +770,20 @@ footer a {
   }
 }
 
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
 body .main-content {
-  margin: 0.5rem;
   max-width: 1280px;
+  width: 100%;
   margin: auto;
   padding: 4.5rem 0 0 0.5rem;
+  flex: 1;
 }
 body .hidden {
   display: none !important;
@@ -728,4 +796,13 @@ body .hidden-vis {
 }
 body .blur {
   filter: blur(3px);
+}
+body .line-separator {
+  border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+  margin: 3rem 0;
+}
+@media (max-width: 768px) {
+  body .main-content {
+    padding: 0 0.75rem;
+  }
 }

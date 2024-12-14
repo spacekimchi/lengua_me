@@ -3,6 +3,13 @@
 a {
     color: v.$nav-blue;
 
+    &.link-button {
+        border-radius: 5px;
+        padding: 0.75rem;
+        color: white;
+        background-color: v.$korean-blue;
+    }
+
     &:hover {
         text-decoration: underline;
     }
