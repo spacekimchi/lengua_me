@@ -36,7 +36,7 @@ end
 
 language = Language.find_by(code: 'en')
 
-topics = ['sports', 'dating', 'travel', 'food', 'hobbies', 'world news', 'career', 'education', 'art', 'health', 'technology', 'daily life', ' routines', 'environmental', 'social', 'shopping', 'entertainment', 'personal finances', 'safety', 'personal development', 'community service', 'pets', 'transportation', 'cultural etiquette', 'conversations']
+topics = ['sports', 'dating', 'travel', 'food', 'hobbies', 'world news', 'career', 'education', 'art', 'health', 'technology', 'daily life', ' routines', 'environmental', 'social', 'shopping', 'entertainment', 'personal development', 'community service', 'transportation', 'cultural', 'conversations']
 topics.each do |t|
   topic = Topic.find_or_create_by(name: t)
   passage = Passage.find_or_create_by(title: "caring for our environment", difficulty: Passage.difficulties.keys.sample)
