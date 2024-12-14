@@ -14,6 +14,7 @@
 #
 
 class Topic < ApplicationRecord
+  NAMES = ['sports', 'dating', 'travel', 'food', 'hobbies', 'world news', 'career', 'education', 'art', 'health', 'technology', 'daily life', ' routines', 'environmental', 'social', 'shopping', 'entertainment', 'personal finances', 'safety', 'personal development', 'community service', 'pets', 'transportation', 'cultural etiquette', 'conversations'].freeze
   has_many :passage_topics
   has_many :passages, through: :passage_topics, source: :passage
 
