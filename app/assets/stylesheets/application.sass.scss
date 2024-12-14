@@ -9,16 +9,25 @@
 @use "navigation";
 @use "footer";
 @use "tooltip";
+@use "home";
 @use "topics/passage_writer/show";
 @use "passages/get_by_topic";
 @use "passages/index";
 
+html, body {
+    height: 100%;
+}
+
 body {
+    display: flex;
+    flex-direction: column;
+
     .main-content {
-        margin: 0.5rem;
         max-width: 1280px;
+        width: 100%;
         margin: auto;
         padding: 4.5rem 0 0 0.5rem;
+        flex: 1;
     }
 
     .hidden {
@@ -35,6 +44,17 @@ body {
 
     .blur {
         filter: blur(3px);
+    }
+
+    .line-separator {
+        border-bottom: solid 1px variables.$shadow-color;
+        margin: 3rem 0;
+    }
+
+    @include variables.respond-to(mobile) {
+        .main-content {
+            padding: 0 0.75rem;
+        }
     }
 }
 
