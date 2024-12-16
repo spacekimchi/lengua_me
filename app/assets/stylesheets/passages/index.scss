@@ -1,35 +1,34 @@
 @use "../variables" as v;
 
 .passages-index-container {
-    .topics-list {
+    .difficulties-list {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: space-between;
         align-items: center;
 
-        .topics-list-item {
+        .difficulties-list-item {
             display: flex;
             flex-direction: column;
             width: 32%;
             border: solid 1px v.$shadow-color;
             border-radius: 5px;
-            margin-bottom: 0.75rem;
+            margin: 0 0.5rem 0.75rem 0.5rem;
             padding: 1rem;
 
-            .topics-list-item-main {
+            .difficulties-list-item-main {
                 display: flex;
                 flex-direction: row;
             }
 
-            .topics-list-item-info {
+            .difficulties-list-item-info {
                 display: flex;
                 flex: 1;
                 flex-direction: column;
                 padding-left: 0.5rem;
                 overflow: hidden;
 
-                .passages-topic-title {
+                .passages-difficulty-title {
                     font-size: 1.5rem;
                     text-overflow: ellipsis;
                     overflow: hidden;
@@ -39,10 +38,10 @@
     }
 
     @include v.respond-to(mobile) {
-        .topics-list {
+        .difficulties-list {
             flex-direction: column;
 
-            .topics-list-item {
+            .difficulties-list-item {
                 width: 97%;
             }
         }

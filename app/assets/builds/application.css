@@ -706,67 +706,66 @@ footer .footer-container a {
   }
 }
 
-.passages-by-topic-container .passages-list {
+.passages-by-difficulty-container .passages-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
 }
-.passages-by-topic-container .passages-list .passage-link {
+.passages-by-difficulty-container .passages-list .passage-link {
   width: 32%;
   margin-bottom: 0.75rem;
+  margin-right: 0.75rem;
 }
-.passages-by-topic-container .passages-list .passage-list-item {
+.passages-by-difficulty-container .passages-list .passage-list-item {
   border: solid 1px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   padding: 0.5rem;
 }
 @media (max-width: 768px) {
-  .passages-by-topic-container .passages-list {
+  .passages-by-difficulty-container .passages-list {
     flex-direction: column;
   }
-  .passages-by-topic-container .passages-list .passage-link {
+  .passages-by-difficulty-container .passages-list .passage-link {
     width: 98%;
   }
 }
 
-.passages-index-container .topics-list {
+.passages-index-container .difficulties-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
 }
-.passages-index-container .topics-list .topics-list-item {
+.passages-index-container .difficulties-list .difficulties-list-item {
   display: flex;
   flex-direction: column;
   width: 32%;
   border: solid 1px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  margin-bottom: 0.75rem;
+  margin: 0 0.5rem 0.75rem 0.5rem;
   padding: 1rem;
 }
-.passages-index-container .topics-list .topics-list-item .topics-list-item-main {
+.passages-index-container .difficulties-list .difficulties-list-item .difficulties-list-item-main {
   display: flex;
   flex-direction: row;
 }
-.passages-index-container .topics-list .topics-list-item .topics-list-item-info {
+.passages-index-container .difficulties-list .difficulties-list-item .difficulties-list-item-info {
   display: flex;
   flex: 1;
   flex-direction: column;
   padding-left: 0.5rem;
   overflow: hidden;
 }
-.passages-index-container .topics-list .topics-list-item .topics-list-item-info .passages-topic-title {
+.passages-index-container .difficulties-list .difficulties-list-item .difficulties-list-item-info .passages-difficulty-title {
   font-size: 1.5rem;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 @media (max-width: 768px) {
-  .passages-index-container .topics-list {
+  .passages-index-container .difficulties-list {
     flex-direction: column;
   }
-  .passages-index-container .topics-list .topics-list-item {
+  .passages-index-container .difficulties-list .difficulties-list-item {
     width: 97%;
   }
 }

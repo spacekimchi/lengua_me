@@ -11,7 +11,7 @@
 @use "tooltip";
 @use "home";
 @use "topics/passage_writer/show";
-@use "passages/get_by_topic";
+@use "passages/by_difficulty";
 @use "passages/index";
 
 html, body {

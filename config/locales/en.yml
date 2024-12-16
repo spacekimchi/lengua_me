@@ -29,3 +29,21 @@
 
 en:
   hello: "Hello world"
+  difficulties:
+    basic:
+      description: "Foundational understanding, limited vocabulary, basic phrases and greetings."
+    a1:
+      description: "Can understand and use familiar everyday expressions and basic phrases."
+    a2:
+      description: "Can communicate simple tasks requiring direct exchange of information on familiar topics."
+    b1:
+      description: "Can handle travel, work, and routine tasks with simple, connected speech."
+    b2:
+      description: "Can interact fluently with native speakers and produce clear, detailed text on familiar subjects."
+    c1:
+      description: "Can express complex ideas clearly, fluently, and spontaneously with minimal search for expressions."
+    c2:
+      description: "Can understand almost everything heard or read and express themselves spontaneously, very fluently, and precisely."
+    native:
+      description: "Complete mastery of the language, equivalent to an educated native speaker."
+
