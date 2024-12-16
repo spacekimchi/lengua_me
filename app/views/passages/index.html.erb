@@ -1,21 +1,21 @@
 <div class="passages-index-container">
-  <h1>All Topics</h1>
-  <ul class="topics-list">
-    <% @topics.each do |topic| %>
-      <li class="topics-list-item">
-        <div class="topics-list-item-main">
+  <h1>All Difficulties</h1>
+  <ul class="difficulties-list">
+    <% @difficulties.each do |difficulty| %>
+      <li class="difficulties-list-item">
+        <div class="difficulties-list-item-main">
           <div style="height: 75px; width: 75px;">
             <img src="/images/ruby.png">
           </div>
-          <div class="topics-list-item-info">
-            <%= link_to topic.name.titleize, passages_by_topic_path(topic_name: urlify(topic.name)), class: 'passages-topic-title' %>
+          <div class="difficulties-list-item-info">
+            <%= link_to difficulty.name.titleize, passages_by_difficulty_path(difficulty_name: difficulty.name), class: 'passages-difficulty-title' %>
             <div>
-              <span><%= topic.total_passages %> <%= topic.total_passages == 1 ? 'passage' : 'passages' %></span>
+              <span><%= difficulty.total_passages %> <%= difficulty.total_passages == 1 ? 'passage' : 'passages' %></span>
             </div>
           </div>
         </div>
         <div class="hidden">
-          <%= topic.description %>
+           <%= difficulty.translated_description %>
         </div>
       </li>
     <% end %>

@@ -60,6 +60,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_154747) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "difficulties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "name", null: false
+    t.integer "level", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level"], name: "index_difficulties_on_level", unique: true
+    t.index ["name"], name: "index_difficulties_on_name", unique: true
+  end
+
   create_table "good_job_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -157,21 +167,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_154747) do
     t.index ["name"], name: "index_languages_on_name", unique: true
   end
 
-  create_table "passage_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "passage_id", null: false
-    t.uuid "topic_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["passage_id", "topic_id"], name: "index_passage_topics_on_passage_id_and_topic_id", unique: true
-    t.index ["passage_id"], name: "index_passage_topics_on_passage_id"
-    t.index ["topic_id"], name: "index_passage_topics_on_topic_id"
-  end
-
   create_table "passages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "difficulty_id", null: false
     t.text "title", default: ""
-    t.integer "difficulty", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["difficulty_id"], name: "index_passages_on_difficulty_id"
   end
 
   create_table "product_prices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -237,6 +238,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_154747) do
     t.uuid "passage_id"
     t.text "content", default: ""
     t.integer "order_idx", default: 0
+    t.text "prefix"
+    t.text "hints", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["language_id"], name: "index_sentences_on_language_id"
@@ -281,14 +284,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_154747) do
     t.index ["priority"], name: "index_support_tickets_on_priority"
     t.index ["status"], name: "index_support_tickets_on_status"
     t.index ["user_id"], name: "index_support_tickets_on_user_id"
-  end
-
-  create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "name", null: false
-    t.text "description", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_topics_on_name", unique: true
   end
 
   create_table "tts_voices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -348,6 +343,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_154747) do
 
   create_table "words", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "language_id", null: false
+    t.boolean "is_name", default: false
     t.text "text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -357,8 +353,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_154747) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "passage_topics", "passages"
-  add_foreign_key "passage_topics", "topics"
+  add_foreign_key "passages", "difficulties"
   add_foreign_key "product_prices", "products"
   add_foreign_key "pronunciations", "tts_voices"
   add_foreign_key "pronunciations", "words"

@@ -5,20 +5,18 @@ class PassagesController < ApplicationController
   end
 
   def index
-    @topics = Topic.left_joins(:passages).select('topics.id as id, name, description, COUNT(passages) as total_passages').group('topics.id')
+    @difficulties = Difficulty.ordered.left_joins(:passages).select('difficulties.id as id, name, COUNT(passages) as total_passages').group('difficulties.id')
   end
 
   def create
-    @topic = Topic.find(params[:topic_id])
-    pgs = PassageGeneratorService.new(topic: @topic, difficulty: params[:difficulty])
+    pgs = PassageGeneratorService.new(difficulty: params[:difficulty])
     title_and_sentences = pgs.call
     all_sentences = title_and_sentences[:sentences]
     title = title_and_sentences[:title]
     language = Language.english
 
     ActiveRecord::Base.transaction do
-      @passage = Passage.create!(title: title.downcase, difficulty: params[:difficulty].to_sym)
-      @passage.passage_topics.create!(topic: @topic)
+      @passage = Passage.create!(title: title.downcase, difficulty: Difficulty.find_by(name: params[:difficulty]))
 
       all_sentences.each_with_index do |sentence_content, idx|
         sentence = Sentence.create!(passage: @passage, language: language, content: sentence_content, order_idx: idx)
@@ -65,14 +63,14 @@ class PassagesController < ApplicationController
     render json: { sentences: @sentences }, status: :ok
   end
 
-  def get_by_topic
-    @topic = Topic.find_by(name: deurlify(params[:topic_name]))
-    @passages = @topic.passages
+  def by_difficulty
+    @difficulty = Difficulty.find_by(name: params[:difficulty_name])
+    @passages = @difficulty.passages
   end
 
   def passage_writer
-    @topic = Topic.find_by(name: deurlify(params[:topic_name]))
-    @passage = @topic.passages.find_by(title: deurlify(params[:passage_name]))
+    @difficulty = Difficulty.find_by(name: params[:difficulty_name])
+    @passage = @difficulty.passages.find_by(title: params[:passage_name])
     @sentences = @passage.sentences.order(:order_idx)
     @language_codes = Constants::LANGUAGE_CODES
     @sentences_data = @sentences.map do |sentence|

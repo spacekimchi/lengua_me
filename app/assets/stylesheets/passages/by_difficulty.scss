@@ -1,15 +1,15 @@
 @use "../variables" as v;
 
-.passages-by-topic-container {
+.passages-by-difficulty-container {
     .passages-list {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
         align-items: center;
 
         .passage-link {
             width: 32%;
             margin-bottom: 0.75rem;
+            margin-right: 0.75rem;
         }
 
         .passage-list-item {

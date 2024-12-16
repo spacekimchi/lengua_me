@@ -2,18 +2,24 @@
 #
 # Table name: passages
 #
-#  id         :uuid             not null, primary key
-#  difficulty :integer          default("basic")
-#  title      :text             default("")
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :uuid             not null, primary key
+#  title         :text             default("")
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  difficulty_id :uuid             not null
+#
+# Indexes
+#
+#  index_passages_on_difficulty_id  (difficulty_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (difficulty_id => difficulties.id)
 #
 class Passage < ApplicationRecord
-  has_many :sentences, dependent: :destroy
-  has_many :passage_topics
-  has_many :topics, through: :passage_topics, source: :topic
+  belongs_to :difficulty
 
-  enum :difficulty, [:basic, :a1, :a2, :b1, :b2, :c1, :c2, :native], default: :basic
+  has_many :sentences, dependent: :destroy
 
   def translate(language:)
     PassageTranslatorService.new(sentences: sentences.pluck(:content, :id), language: language).call

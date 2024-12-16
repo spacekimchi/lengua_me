@@ -29,12 +29,11 @@ class PassageGeneratorService
     parameters: SCHEMA
   }.freeze
 
-  # topic: topic matter for generator
   # difficulty: difficulty level for the generator
-  def initialize(topic:, difficulty:, language: 'English')
+  # language: sentence language
+  def initialize(difficulty:, language: 'English')
     @client = OpenAI::Client.new
-    @model = 'gpt-4' # Correct model name
-    @topic = topic
+    @model = 'gpt-4o-mini-2024-07-18' # Correct model name
     @difficulty = difficulty
   end
 
@@ -54,10 +53,32 @@ class PassageGeneratorService
         messages: [
           {
             role: 'user',
-            content: "Create some passage or conversation in #{@language}. The sentences should be related to each other and be about #{@topic.name}. Ensure it is written for a #{@difficulty} language learner level. Double check the output to make sure there are no spelling or grammar mistakes. Also give me a good title for the text."
+            content: "TODO"
           }
         ],
         temperature: 1.2,
+        functions: [FUNCTION],
+        function_call: { name: 'generate_passage' }
+      }
+    )
+
+
+    @client.chat(
+      parameters: {
+        model: @model,
+        messages: [
+          {
+            role: 'system',
+            content: "You are a translator. You will be given a list of sentences separated by new lines. Translate each sentence to #{@language.name}. The translated sentences should also follow the same order and there should be the same number of sentences and translated sentences. It is imperative that all spelling and grammar are correct."
+
+          },
+          {
+            role: 'user',
+            content: @sentences.map { |content, id| content }.join("\n")
+
+          }
+        ],
+        temperature: 0.8,
         functions: [FUNCTION],
         function_call: { name: 'generate_passage' }
       }

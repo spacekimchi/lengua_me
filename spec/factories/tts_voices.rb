@@ -4,7 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  accent        :text
-#  gender        :text             not null
+#  gender        :integer          default("female"), not null
 #  language_code :text             not null
 #  name          :text             not null
 #  provider      :integer          default("google"), not null
@@ -12,9 +12,9 @@
 #
 # Indexes
 #
-#  index_tts_voices_on_language_code      (language_code)
-#  index_tts_voices_on_name_and_provider  (name,provider) UNIQUE
-#  index_tts_voices_on_provider           (provider)
+#  index_tts_voices_on_language_code             (language_code)
+#  index_tts_voices_on_provider                  (provider)
+#  index_tts_voices_on_provider_id_and_provider  (provider_id,provider) UNIQUE
 #
 FactoryBot.define do
   factory :tts_voice do

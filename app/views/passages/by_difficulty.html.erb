@@ -1,0 +1,16 @@
+<div class="passages-by-difficulty-container">
+  <%= render partial: 'passages/partials/breadcrumbs' %>
+  <h1><%= @difficulty.name.titleize %></h1>
+  <div>
+    <ul class="passages-list">
+      <% @passages.each_with_index do |passage, index| %>
+          <%= link_to passage_writer_path(@difficulty.name, passage.title), class: 'passage-link' do %>
+            <li class="passage-list-item">
+              <%= index + 1 %>. <%= passage.title %>
+            </li>
+          <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+

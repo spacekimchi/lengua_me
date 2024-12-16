@@ -4,7 +4,9 @@
 #
 #  id          :uuid             not null, primary key
 #  content     :text             default("")
+#  hints       :text             default([]), is an Array
 #  order_idx   :integer          default(0)
+#  prefix      :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  language_id :uuid
@@ -52,6 +54,26 @@ class Sentence < ApplicationRecord
         filename: "sentence_#{self.id}.mp3",
         content_type: 'audio/mpeg'
       )
+    end
+  end
+
+  def create_words_from_content(language)
+    # Define separators that should be replaced with spaces
+    separators = /[,\;\:\.\!\?\-\—\(\)\[\]\{\}\"`\|\/\\\@\#\$\%\^\&\*\_\+\=\<\>\~]/
+
+    # Normalize the sentence by replacing separators with spaces
+    normalized = content.gsub(separators, ' ')
+
+    # Split on spaces to get raw words
+    raw_words = normalized.split(' ').reject(&:blank?)
+
+    raw_words.each do |w|
+      # Downcase to keep consistency
+      word_text = w.downcase.strip
+
+      # Use find_or_create_by to avoid duplicates
+      # (assuming unique constraint on [language_id, text])
+      Word.find_or_create_by(language: language, text: word_text) if word_text.present?
     end
   end
 

@@ -4,7 +4,9 @@
 #
 #  id          :uuid             not null, primary key
 #  content     :text             default("")
+#  hints       :text             default([]), is an Array
 #  order_idx   :integer          default(0)
+#  prefix      :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  language_id :uuid
