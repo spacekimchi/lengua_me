@@ -48,3 +48,5 @@ Difficulty.create([
 language = Language.find_by(code: 'en')
 
 Seeds::TtsVoicesService.call
+
+Seeds::Topics.call

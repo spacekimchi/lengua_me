@@ -65,21 +65,44 @@ class PassagesController < ApplicationController
 
   def by_difficulty
     @difficulty = Difficulty.find_by(name: params[:difficulty_name])
-    @passages = @difficulty.passages
+    @passages = @difficulty.passages.ordered
   end
 
   def passage_writer
     @difficulty = Difficulty.find_by(name: params[:difficulty_name])
+
+    unless @difficulty
+      redirect_to root_path, alert: "Difficulty not found."
+      return
+    end
+
     @passage = @difficulty.passages.find_by(title: params[:passage_name])
-    @sentences = @passage.sentences.order(:order_idx)
+
+    unless @passage
+      redirect_to difficulty_path(@difficulty), alert: "Passage not found."
+      return
+    end
+
+    @sentences = @passage.sentences
+      .with_attached_audio
+      .select('sentences.id, sentences.content, sentences.order_idx')
+      .order(:order_idx)
+    passage_progress = @passage.passage_progresses.find_by(user: current_user)
+    @current_index = passage_progress&.current_index || 0
+
     @language_codes = Constants::LANGUAGE_CODES
     @sentences_data = @sentences.map do |sentence|
       {
+        id: sentence.id,
         content: sentence.content,
         audio_url: (sentence.audio.attached? ? url_for(sentence.audio) : nil),
         order_idx: sentence.order_idx
       }
     end
+
+    # Utilize model methods to get next and previous passages
+    @next_passage = @passage.next_passage
+    @previous_passage = @passage.previous_passage
   end
 
   private

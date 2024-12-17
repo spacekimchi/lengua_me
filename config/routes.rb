@@ -76,7 +76,9 @@ Rails.application.routes.draw do
     namespace :stripe do
       post 'billing_portal_sessions', to: 'billing_portal_sessions#create'
     end
+    post 'update_passage_progress', to: 'passage_progresses#update_progress', as: :update_passage_progress
   end
+
   if Rails.env.development?
     mount GoodJob::Engine => 'good_job'
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

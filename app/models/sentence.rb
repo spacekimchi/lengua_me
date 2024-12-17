@@ -23,12 +23,14 @@
 #  fk_rails_...  (passage_id => passages.id)
 #
 class Sentence < ApplicationRecord
-  belongs_to :language
-  belongs_to :passage
+  belongs_to :language, optional: true
+  belongs_to :passage, optional: true
 
-  has_many :translations, class_name: 'SentenceTranslation'
+  has_many :translations, class_name: 'SentenceTranslation', dependent: :destroy
 
   has_one_attached :audio
+
+  validates :content, presence: true
 
   # after_create :enqueue_generate_audio_job
 

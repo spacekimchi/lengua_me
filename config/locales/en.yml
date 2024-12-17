@@ -46,4 +46,14 @@ en:
       description: "Can understand almost everything heard or read and express themselves spontaneously, very fluently, and precisely."
     native:
       description: "Complete mastery of the language, equivalent to an educated native speaker."
-
+  categories:
+    dialogue: "Dialogue"
+    narrative: "Narrative"
+    informational: "Informational Text"
+    descriptive: "Descriptive Passage"
+    practical_scenario: "Practical Scenario"
+  exercise_types:
+    mcq: "Multiple-Choice Question"
+    true_false: "True/False"
+    fill_in_blank: "Fill in the Blank"
+    summary: "Summarization"

@@ -130,6 +130,19 @@ a.link-button {
   color: white;
   background-color: #0F64CD;
 }
+a.link-button.success-link {
+  background-color: green;
+}
+a.link-button.neutral-link {
+  background-color: #686D76;
+}
+a.link-button:hover {
+  filter: brightness(110%);
+  text-decoration: none;
+}
+a.link-button:hover:active {
+  transform: scale(0.96);
+}
 a:hover {
   text-decoration: underline;
 }
@@ -691,6 +704,26 @@ footer .footer-container a {
 .passage-writer-show-container textarea.warning {
   outline: none;
   border: solid 3px #FCC737;
+}
+.passage-writer-show-container .sentence-card-completed-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 450px;
+}
+.passage-writer-show-container .sentence-card-completed-container .passage-completed-content {
+  margin: auto;
+}
+.passage-writer-show-container .sentence-card-completed-container .completed-nav-links {
+  margin: 1rem 0;
+}
+.passage-writer-show-container .sentence-card-completed-container .completed-nav-links a:not(:last-child) {
+  margin-right: 0.5rem;
+}
+.passage-writer-show-container .sentence-card-completed-container .passage-completed-text {
+  font-size: 2rem;
+  font-weight: bold;
 }
 @media (max-width: 768px) {
   .passage-writer-show-container .sentence-card-main-container {
