@@ -6,20 +6,27 @@
        data-controller="sentence-writer"
        data-sentence-writer-id-value="<%= @passage.id %>"
        data-sentences="<%= @sentences_data.to_json %>"
-       data-current-index="0">
+       data-current-index="<%= @current_index %>">
        <div class="sentence-writer-navigation" data-sentence-writer-target="navigation">
-         <button class="button arrow-button hidden-vis" data-sentence-writer-target="leftNav" data-action="click->sentence-writer#prev keydown.enter->sentence-writer#prev">
+         <button class="button arrow-button<%= @current_index == 0 ? ' hidden-vis' : '' %>" data-sentence-writer-target="leftNav" data-action="click->sentence-writer#prev keydown.enter->sentence-writer#prev">
            &larr;
          </button>
-         <span data-sentence-writer-target="currentIndexNavigation"><%= "1 / #{@sentences_data.length}" %></span>
+         <span data-sentence-writer-target="currentIndexNavigation"><%= "#{@current_index + 1} / #{@sentences_data.length}" %></span>
          <button class="button arrow-button" data-sentence-writer-target="rightNav" data-action="click->sentence-writer#next keydown.enter->sentence-writer#next">
            &rarr;
          </button>
        </div>
 
-       <div class="sentence-card-main-container">
+       <div class="sentence-card-main-container" data-sentence-writer-target="mainContainer">
          <div class="sentence-card-attempt-container">
-           <div class="card-container" data-sentence-writer-target="writerContainer"></div>
+           <div class="card-container" data-sentence-writer-target="writerContainer">
+             <audio id="audio-<%= @current_index %>" class="sentence-writer-audio" controls src="<%= @sentences_data[@current_index][:audio_url] %>"></audio>
+             <%= content_tag :div, @sentences_data[@current_index][:content],
+               id: 'sentence-blur-hint',
+               class: "sentence-writer-sentence-text blur",
+               onclick: "this.classList.toggle('blur');"
+             %>
+           </div>
            <div>
              <textarea placeholder="Type what you hear.." data-sentence-writer-target="textArea" data-action="keydown.enter->sentence-writer#check"></textarea>
            </div>
@@ -99,6 +106,34 @@
            </div>
            <div class="sentence-comments-container" data-controller="comments">
              Comments
+           </div>
+         </div>
+       </div>
+
+       <div class="sentence-card-completed-container hidden" data-sentence-writer-target="completedContainer">
+         <div class="passage-completed-content">
+           <div class="passage-completed-text">
+             You have completed this passage.<br>Awesome work!
+           </div>
+           <div class="completed-nav-links">
+             <% if @next_passage.present? %>
+               <%= link_to passage_writer_path(@difficulty.name, @next_passage.title), id: 'completed-next-link', class: 'link-button success-link' do %>
+                 Next Passage
+               <% end %>
+             <% end %>
+             <%= link_to passage_writer_path(@difficulty.name, @passage.title), id: 'completed-repeat-link', class: 'link-button' do %>
+               Repeat Passage
+             <% end %>
+             <% if @previous_passage.present? %>
+               <%= link_to passage_writer_path(@difficulty.name, @previous_passage.title), id: 'completed-prev-link', class: 'link-button neutral-link' do %>
+                 Previous Passage
+               <% end %>
+             <% end %>
+           </div>
+           <div>
+             <%= link_to passages_by_difficulty_path(@difficulty.name) do %>
+               All Passages
+             <% end %>
            </div>
          </div>
        </div>

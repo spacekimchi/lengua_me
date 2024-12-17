@@ -21,8 +21,16 @@ export default class extends Controller {
     "infoContainerDiv",
     "currentIndexNavigation",
     "leftNav",
-    "rightNav"
+    "rightNav",
+    "mainContainer",
+    "completedContainer",
+    "navigation"
   ];
+
+  initialize() {
+    this.boundHandleKeyDown = this.handleKeyDown.bind(this);
+    this.boundHandleInput = this.handleInput.bind(this);
+  }
 
   connect() {
     const defaultLanguage = "en";
@@ -34,6 +42,7 @@ export default class extends Controller {
     // Fetch initial translations
     this.sentences = JSON.parse(this.element.dataset.sentences);
     this.currentIndex = parseInt(this.element.dataset.currentIndex, 10) || 0;
+    this.progressIndex = this.currentIndex;
     this.finishedSentence = false;
     this.initialLoad = true;
     this.renderSentence(this.currentIndex);
@@ -41,8 +50,9 @@ export default class extends Controller {
     this.textAreaTarget.focus();
     this.wordPronunciations = {};
 
-    document.addEventListener("keydown", this.handleKeyDown.bind(this));
-    this.textAreaTarget.addEventListener('input', this.handleInput.bind(this));
+    // Event Listeners
+    document.addEventListener("keydown", this.boundHandleKeyDown);
+    this.textAreaTarget.addEventListener('input', this.boundHandleInput);
   }
 
   changeLanguage() {
@@ -244,16 +254,6 @@ export default class extends Controller {
     }
   }
 
-  handleWindowChange() {
-    const tooltipElement = document.querySelector('[data-controller="tooltip"]');
-    const tooltipController = this.application.getControllerForElementAndIdentifier(tooltipElement, "tooltip");
-
-    if (tooltipElement.style.display !== 'none' && this.currentWordParent) {
-      const rect = this.currentWordParent.getBoundingClientRect();
-      tooltipController.show(this.currentWordParent, rect);
-    }
-  }
-
   fetchWordPronunciation(word) {
     if (this.wordPronunciations[word]) {
       // Return a resolved promise with the cached data
@@ -290,6 +290,25 @@ export default class extends Controller {
   }
 
   handleKeyDown(event) {
+    if (this.onCompletedViewPage && this.currentIndex == this.sentences.length) {
+      if (event.key === "Enter") {
+        if (this.enterCount === 0) {
+          this.enterCount += 1;
+        } else if (this.completedContainerTarget.querySelector('#completed-next-link')) {
+          this.enterCount = 0;
+          this.completedContainerTarget.querySelector('#completed-next-link').click();
+        }
+      } else if (!event.ctrlKey && (event.key === 'p' || event.key === 'P')) {
+        if (this.completedContainerTarget.querySelector('#completed-prev-link')) {
+          this.completedContainerTarget.querySelector('#completed-prev-link').click();
+        }
+      } else if (!event.ctrlKey && (event.key === 'r' || event.key === 'R')) {
+        if (this.completedContainerTarget.querySelector('#completed-repeat-link')) {
+          this.completedContainerTarget.querySelector('#completed-repeat-link').click();
+        }
+      }
+      return;
+    }
     if (!event.ctrlKey) { return; }
     this.playAudio();
     if (event.key === "]" && this.currentIndex < this.sentences.length) {
@@ -307,8 +326,8 @@ export default class extends Controller {
   }
 
   disconnect() {
-    document.removeEventListener("keydown", this.handleKeyDown.bind(this));
-    this.textAreaTarget.removeEventListener('input', this.handleInput.bind(this));
+    document.removeEventListener("keydown", this.boundHandleKeyDown);
+    this.textAreaTarget.removeEventListener('input', this.boundHandleInput);
   }
 
   check(event) {
@@ -319,71 +338,129 @@ export default class extends Controller {
       this.next();
       return;
     }
+
     const inputText = this.textAreaTarget.value;
     const currentSentence = this.sentences[this.currentIndex].content;
     this.displayNextButtons();
 
+    // Normalize function: Decompose accented characters and remove diacritics
+    const normalizeText = (text) => {
+      return text
+        .normalize("NFD") // Decompose characters
+        .replace(/[\u0300-\u036f]/g, "") // Remove diacritics
+        .toLowerCase(); // Convert to lowercase
+    };
+
+    // Function to remove punctuation
+    const removePunctuation = (text) => {
+      return text.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
+    };
+
+    // Normalize and remove punctuation from actual and input texts
+    const normalizedActual = normalizeText(currentSentence);
+    const normalizedInput = normalizeText(inputText);
+
+    const cleanActual = removePunctuation(normalizedActual);
+    const cleanInput = removePunctuation(normalizedInput);
+
     // Extract words (alphanumeric sequences) from both input and actual
-    const actualWords = currentSentence.match(/\w+/g) || [];
-    const inputWords = inputText.match(/\w+/g) || [];
+    const actualWords = cleanActual.match(/\w+/g) || [];
+    const inputWords = cleanInput.match(/\w+/g) || [];
 
-    let wordIndex = 0; // track which word we're comparing
-    const tokens = currentSentence.match(/\w+|\W+/g) || [];
+    let wordIndex = 0; // Track which word we're comparing
+    const tokens = currentSentence.match(/\w+|\W+/g) || []; // Original tokens with punctuation
 
-    // Keep track of normalization for final correctness check
-    const normalizedActualFull = actualWords.join("").toLowerCase();
-    const normalizedInputFull = inputWords.join("").toLowerCase();
-
+    // Comparison tokens
     const resultTokens = tokens.map(token => {
       if (/\w+/.test(token)) {
         // Word token
         const actualWord = token;
         const actualChars = actualWord.split("");
-        const normalizedActual = actualWord.replace(/[^a-z0-9]/gi, "").toLowerCase();
+        const normalizedActualWord = normalizeText(actualWord);
 
         const inputWord = inputWords[wordIndex] || "";
         wordIndex++;
 
-        const normalizedInput = inputWord.replace(/[^a-z0-9]/gi, "").toLowerCase();
+        const normalizedInputWord = normalizeText(inputWord);
 
         let inputPos = 0;
         let actualPos = 0;
 
         const newChars = actualChars.map(ch => {
           if (/[a-z0-9]/i.test(ch)) {
-            const actualChar = normalizedActual[actualPos] || "";
-            const inputChar = normalizedInput[inputPos] || "";
+            const actualChar = normalizedActualWord[actualPos] || "";
+            const inputChar = normalizedInputWord[inputPos] || "";
             actualPos++;
             inputPos++;
 
             if (actualChar === inputChar) {
               return ch;
             } else {
-              return "\u2217";
+              return "\u2217"; // Indicate mismatch
             }
           } else {
-            return ch; // punctuation inside word stays the same
+            return ch; // Punctuation inside word stays the same
           }
         });
 
         return newChars.join("");
       } else {
-        // Non-word token (spaces, punctuation)
+        // Non-word token (spaces, punctuation) - Keep as is
         return token;
       }
     });
 
-    // After constructing the result, check if normalized strings match
-    if (normalizedActualFull === normalizedInputFull) {
+    // After constructing the result, check if normalized and cleaned strings match
+    if (cleanActual === cleanInput) {
       // Append a div indicating correctness
       this.showCorrectDiv();
-      this.checkResultTarget.textContent = "";
-      this.textAreaTarget.value = this.sentences[this.currentIndex].content;
+      if (this.progressIndex <= this.currentIndex) {
+        this.updatePassageProgress(this.currentIndex + 1);
+      }
     } else {
       // Append a div indicating incorrectness
       this.checkResultTarget.textContent = resultTokens.join("");
       this.showIncorrectDiv();
     }
+  }
+
+  updatePassageProgress(idx) {
+    this.progressIndex = idx;
+    const loggedIn = document.querySelector('meta[name="current-user"]').content === "true";
+
+    if (!loggedIn) {
+      console.warn("User not logged in, skipping sentence completion.");
+      return;
+    }
+    const passageId = this.idValue;
+
+    // Define the request payload
+    const payload = {
+      passage_id: passageId,
+      current_index: idx
+    };
+
+    fetch(`/update_passage_progress`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Failed to complete the sentence.");
+        }
+      })
+      .then((data) => {
+        console.log("SENTENCE COMPLETED:", data); // Success message
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
   }
 
   toggleMismatch() {
@@ -400,7 +477,7 @@ export default class extends Controller {
 
   displayNextButtons() {
     if (this.currentIndex === this.sentences.length - 1) {
-      this.correctDivTarget.querySelector('button.success-button').classList.add('hidden');
+      // this.correctDivTarget.querySelector('button.success-button').classList.add('hidden');
       this.skipDivTarget.querySelector('button.action-button').classList.add('hidden');
       this.checkAndSkipDivTarget.querySelector('button.neutral-button').classList.add('hidden');
     } else {
@@ -417,6 +494,8 @@ export default class extends Controller {
     this.checkAndSkipDivTarget.style.display = "none";
     this.skipDivTarget.style.display = "none";
     this.textAreaTarget.classList = "success";
+    this.checkResultTarget.textContent = "";
+    this.textAreaTarget.value = this.sentences[this.currentIndex].content;
     this.finishedSentence = true;
 
     this.showInfoContent();
@@ -459,22 +538,29 @@ export default class extends Controller {
     if (this.currentIndex < this.sentences.length - 1) {
       this.currentIndex += 1;
       this.renderSentence(this.currentIndex);
+      this.focusTextArea();
+    } else if (this.currentIndex === this.sentences.length - 1) {
+      this.currentIndex += 1;
+      this.renderCompletedView();
     }
+  }
+
+  renderCompletedView() {
+    this.mainContainerTarget.style.display = 'none';
+    this.navigationTarget.style.display = 'none';
+    this.completedContainerTarget.classList.remove('hidden');
+    this.onCompletedViewPage = true;
+    this.enterCount = 0;
   }
 
   renderSentence(index) {
     const writerContainer = this.writerContainerTarget;
     const sentence = this.sentences[index];
 
-    // Clear current content
-    writerContainer.innerHTML = "";
-
     // If there is an audio file, add an audio player
     if (sentence.audio_url) {
-      const audio = document.createElement("audio");
-      audio.id = `audio-${this.currentIndex}`;
-      audio.className = "sentence-writer-audio";
-      audio.controls = true;
+      const audio = writerContainer.querySelector('audio');
+      audio.id = `audio-${index}`;
       audio.src = sentence.audio_url;
       audio.onplay = this.focusTextArea.bind(this);
 
@@ -482,16 +568,17 @@ export default class extends Controller {
     }
 
     // Show the correct sentence (this might be optional if you want to hide it from the user)
-    const sentenceDiv = document.createElement("div");
-    sentenceDiv.classList.add("sentence-writer-sentence-text");
+    const sentenceDiv = writerContainer.querySelector('div#sentence-blur-hint');
     sentenceDiv.classList.add("blur");
     sentenceDiv.textContent = sentence.content;
-    sentenceDiv.onclick = () => { sentenceDiv.classList.toggle('blur'); };
-    writerContainer.appendChild(sentenceDiv);
 
     this.element.dataset.currentIndex = index;
 
-    this.resetValues();
+    if (this.currentIndex < this.progressIndex) {
+      this.showCorrectDiv();
+    } else {
+      this.resetValues();
+    }
     this.setNav();
 
     // If not the initial load, autoplay the audio

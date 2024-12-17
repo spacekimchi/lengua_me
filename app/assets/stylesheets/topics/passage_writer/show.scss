@@ -134,6 +134,32 @@
         }
     }
 
+    .sentence-card-completed-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        min-height: 450px;
+
+        .passage-completed-content {
+            margin: auto;
+        }
+
+        .completed-nav-links {
+            margin: 1rem 0;
+            a {
+                &:not(:last-child) {
+                    margin-right: 0.5rem;
+                }
+            }
+        }
+
+        .passage-completed-text {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+    }
+
     @include v.respond-to(mobile) {
         .sentence-card-main-container {
             display: flex;

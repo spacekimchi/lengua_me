@@ -48,11 +48,11 @@ button.button {
 
     &.neutral-button {
         background-color: white;
-        border: solid 1px #686D76;
-        color: #686D76;
+        border: solid 1px v.$neutral;
+        color: v.$neutral;
 
         &:hover {
-            background-color: #686D76;
+            background-color: v.$neutral;
             color: white;
         }
     }

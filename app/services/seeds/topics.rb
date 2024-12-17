@@ -1,7 +1,9 @@
 module Seeds
   class Topics
     def self.call
-
+      seed_a1
+      seed_a2
+      seed_b1
     end
 
     def self.seed_a2
@@ -15,7 +17,7 @@ module Seeds
           content.each do |passage|
             p = Passage.find_or_create_by(difficulty: d, title: passage[0])
             passage[1].each_with_index do |sentence, idx|
-              prefix, content = sentence.split(': ')
+              prefix, content = sentence.split(': ', 2)
               if content
                 s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content)
               else
@@ -38,7 +40,7 @@ module Seeds
           content.each do |passage|
             p = Passage.find_or_create_by(difficulty: d, title: passage[0])
             passage[1].each_with_index do |sentence, idx|
-              prefix, content = sentence.split(': ')
+              prefix, content = sentence.split(': ', 2)
               if content
                 s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content)
               else
@@ -841,6 +843,59 @@ module Seeds
 
     def self.a2_topics
       [
+        ["Describing My Neighborhood", [
+          "I live in a quiet neighborhood with tree-lined streets and friendly neighbors.",
+          "There is a small park at the end of my street where children play and people walk their dogs.",
+          "My house has a beautiful garden with colorful flowers and a cozy patio.",
+          "Nearby, there is a grocery store, a bakery, and a few cafes where I like to spend my afternoons.",
+          "The community center hosts various activities, including yoga classes and art workshops.",
+          "Every Sunday, there is a farmer's market where local farmers sell fresh fruits and vegetables.",
+          "Public transportation is easily accessible, making it convenient to travel to the city center.",
+          "Overall, my neighborhood is a pleasant and safe place to live."
+        ]],
+
+        ["Booking a Hotel Room", [
+          "Alex: Good afternoon, I'd like to book a room for two nights.",
+          "Receptionist: Certainly! For what dates?",
+          "Alex: From June 10th to June 12th.",
+          "Receptionist: We have a single room available with a queen bed for $80 per night.",
+          "Alex: That sounds good. Does the room include breakfast?",
+          "Receptionist: Yes, breakfast is included in the price.",
+          "Alex: Great. Can I also request a non-smoking room?",
+          "Receptionist: Of course. I've noted that down.",
+          "Alex: Perfect. How can I pay for the booking?",
+          "Receptionist: We accept credit cards or cash upon arrival.",
+          "Alex: I'll pay with my credit card. Here's my information.",
+          "Receptionist: Thank you, Alex. Your reservation is confirmed. We look forward to your stay!",
+          "Alex: Thank you very much. See you soon!"
+        ]],
+
+        ["A Weekend Hiking Trip", [
+          "Last Saturday, Maria and her friends decided to go hiking in the nearby mountains.",
+          "They packed their backpacks with water, sandwiches, and a map of the trail.",
+          "Early in the morning, they set off and enjoyed the fresh air and beautiful scenery.",
+          "As they climbed higher, the path became steeper and the view more stunning.",
+          "After a few hours, they reached the summit just in time for lunch.",
+          "They sat together, ate their sandwiches, and took pictures of the breathtaking landscape.",
+          "On the way down, they encountered a small stream and decided to take a short break.",
+          "The trip was a great success, and everyone felt accomplished and happy.",
+          "They plan to go hiking again next month to explore a different trail."
+        ]],
+
+        ["At the Grocery Store", [
+          "Sarah: Hi, can I help you find something?",
+          "John: Yes, I'm looking for whole wheat bread. Do you have any?",
+          "Sarah: Yes, it's right over there in aisle 3.",
+          "John: Great, thank you. Also, where can I find the dairy products?",
+          "Sarah: The dairy section is in aisle 5, next to the bakery.",
+          "John: Perfect. And do you sell almond milk?",
+          "Sarah: Yes, we have several brands of almond milk in the refrigerated section.",
+          "John: Awesome. I'll take a loaf of bread and a carton of almond milk, please.",
+          "Sarah: Sure thing. That will be $5.50.",
+          "John: Here you go. Thank you for your help!",
+          "Sarah: You're welcome! Have a great day!"
+        ]],
+
         ["Playing Soccer with Friends", [
           "Maria: Hi Tom! Do you want to play soccer this weekend?",
           "Tom: Sure, Maria! I love soccer. Where should we go?",

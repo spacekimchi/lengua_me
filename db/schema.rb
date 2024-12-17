@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_08_154747) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_16_210051) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -167,11 +167,25 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_154747) do
     t.index ["name"], name: "index_languages_on_name", unique: true
   end
 
+  create_table "passage_progresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "passage_id", null: false
+    t.integer "current_index", default: 0
+    t.integer "completed_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["passage_id"], name: "index_passage_progresses_on_passage_id"
+    t.index ["user_id", "passage_id"], name: "index_passage_progresses_on_user_id_and_passage_id", unique: true
+    t.index ["user_id"], name: "index_passage_progresses_on_user_id"
+  end
+
   create_table "passages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "difficulty_id", null: false
     t.text "title", default: ""
+    t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["difficulty_id", "position"], name: "index_passages_on_difficulty_id_and_position", unique: true
     t.index ["difficulty_id"], name: "index_passages_on_difficulty_id"
   end
 
@@ -353,6 +367,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_154747) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "passage_progresses", "passages"
+  add_foreign_key "passage_progresses", "users"
   add_foreign_key "passages", "difficulties"
   add_foreign_key "product_prices", "products"
   add_foreign_key "pronunciations", "tts_voices"
