@@ -7,14 +7,16 @@
         align-items: center;
 
         .passage-link {
-            width: 32%;
             margin-bottom: 0.75rem;
             margin-right: 0.75rem;
+            border: solid 1px v.$shadow-color;
+            border-radius: 5px;
+            width: 32%;
         }
 
         .passage-list-item {
-            border: solid 1px v.$shadow-color;
-            border-radius: 5px;
+            display: block;
+            width: 100%;
             padding: 0.5rem;
         }
     }

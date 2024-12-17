@@ -4,11 +4,11 @@
   <div>
     <ul class="passages-list">
       <% @passages.each_with_index do |passage, index| %>
-          <%= link_to passage_writer_path(@difficulty.name, passage.title), class: 'passage-link' do %>
-            <li class="passage-list-item">
-              <%= index + 1 %>. <%= passage.title %>
-            </li>
+        <li class="passage-link">
+          <%= link_to passage_writer_path(@difficulty.name, passage.title), class: 'passage-list-item' do %>
+            <%= index + 1 %>. <%= passage.title %>
           <% end %>
+        </li>
       <% end %>
     </ul>
   </div>
