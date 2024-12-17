@@ -754,6 +754,11 @@ footer .footer-container a {
   border-radius: 5px;
   padding: 0.5rem;
 }
+@media (min-width: 769px) and (max-width: 1024px) {
+  .passages-by-difficulty-container .passages-list .passage-link {
+    width: 48%;
+  }
+}
 @media (max-width: 768px) {
   .passages-by-difficulty-container .passages-list {
     flex-direction: column;
@@ -772,7 +777,7 @@ footer .footer-container a {
 .passages-index-container .difficulties-list .difficulties-list-item {
   display: flex;
   flex-direction: column;
-  width: 32%;
+  width: 30%;
   border: solid 1px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   margin: 0 0.5rem 0.75rem 0.5rem;
@@ -793,6 +798,11 @@ footer .footer-container a {
   font-size: 1.5rem;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .passages-index-container .difficulties-list .difficulties-list-item {
+    width: 47%;
+  }
 }
 @media (max-width: 768px) {
   .passages-index-container .difficulties-list {

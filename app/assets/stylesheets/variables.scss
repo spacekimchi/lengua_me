@@ -30,7 +30,9 @@ $nav-hover: #FFFFFF;
 $nav-text: #FFFFFF;
 $nav-font-size: 1rem;
 $nav-padding: 0.5rem 0rem;
-$nav-breakpoint: 768px;
+$mobile-breakpoint: 480px;
+$tablet-breakpoint: 768px;
+$desktop-breakpoint: 1024px;
 
 // Mixins
 
@@ -41,10 +43,19 @@ $nav-breakpoint: 768px;
 
 @mixin respond-to($breakpoint) {
   @if $breakpoint == mobile {
-    @media (max-width: $nav-breakpoint) { @content; }
+    @media (max-width: #{$tablet-breakpoint}) {
+      @content;
+    }
+  }
+  @else if $breakpoint == tablet {
+    @media (min-width: #{$tablet-breakpoint + 1}) and (max-width: #{$desktop-breakpoint}) {
+      @content;
+    }
   }
   @else if $breakpoint == desktop {
-    @media (min-width: $nav-breakpoint + 1px) { @content; }
+    @media (min-width: #{$desktop-breakpoint + 1}) {
+      @content;
+    }
   }
 }
 
