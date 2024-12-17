@@ -10,7 +10,7 @@
         .difficulties-list-item {
             display: flex;
             flex-direction: column;
-            width: 32%;
+            width: 30%;
             border: solid 1px v.$shadow-color;
             border-radius: 5px;
             margin: 0 0.5rem 0.75rem 0.5rem;
@@ -33,6 +33,14 @@
                     text-overflow: ellipsis;
                     overflow: hidden;
                 }
+            }
+        }
+    }
+
+    @include v.respond-to(tablet) {
+        .difficulties-list {
+            .difficulties-list-item {
+                width: 47%;
             }
         }
     }

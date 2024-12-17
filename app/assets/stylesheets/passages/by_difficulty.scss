@@ -19,6 +19,14 @@
         }
     }
 
+    @include v.respond-to(tablet) {
+        .passages-list {
+            .passage-link {
+                width: 48%;
+            }
+        }
+    }
+
     @include v.respond-to(mobile) {
         .passages-list {
             flex-direction: column;

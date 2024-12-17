@@ -3,23 +3,35 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["arrow", "content"];
 
-  connect() {
-    this.hide() // Ensure the tooltip is hidden initially
-    // Bind the document click handler to maintain the correct 'this' context
-    this.handleDocumentClick = this.handleDocumentClick.bind(this)
-    this.currentParent = null
+  initialize() {
+    // Bind event handlers once and store the references
+    this.boundHandleDocumentClick = this.handleDocumentClick.bind(this);
+    this.boundHandleWindowChange = this.handleWindowChange.bind(this);
+  }
 
-    // Attach event listeners to update position on resize (if not already handled)
-    window.addEventListener('resize', this.handleWindowChange.bind(this));
-    window.addEventListener('scroll', this.handleWindowChange.bind(this), { passive: true });
+  connect() {
+    console.log("Tooltip controller connected");
+
+    this.hide();
+    this.currentParent = null;
+
+    // Attach event listeners using the stored bound functions
+    window.addEventListener('resize', this.boundHandleWindowChange);
+    window.addEventListener('scroll', this.boundHandleWindowChange, { passive: true });
   }
 
   disconnect() {
-    // Ensure tooltip is hidden and listeners are removed
+    console.log("Tooltip controller disconnected");
+
+    // Ensure tooltip is hidden
     this.hide();
 
-    window.removeEventListener('resize', this.handleWindowChange);
-    window.removeEventListener('scroll', this.handleWindowChange, { passive: true });
+    // Remove event listeners using the stored bound functions
+    window.removeEventListener('resize', this.boundHandleWindowChange);
+    window.removeEventListener('scroll', this.boundHandleWindowChange, { passive: true });
+
+    // Remove document click listener if it was added
+    document.removeEventListener('click', this.boundHandleDocumentClick);
   }
 
   showLoadingDiv(parent, rect) {
