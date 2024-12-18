@@ -4,6 +4,7 @@
 @use "headers";
 @use "links";
 @use "buttons";
+@use "form";
 @use "table";
 @use "pagy";
 @use "breadcrumbs";
@@ -30,6 +31,13 @@ body {
         margin: auto;
         padding: 4.5rem 0.5rem 0.5rem 0.5rem;
         flex: 1;
+        .other-links {
+            display: flex;
+            flex-direction: column;
+            &:not(:last-child) {
+                margin-bottom: 0.5rem;
+            }
+        }
     }
 
     .hidden {

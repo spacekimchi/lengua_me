@@ -7,25 +7,26 @@ We're here to help! Please do not hesitate to contact us with any questions, com
 Once you submit this form, someone from our team will get back to you as soon as possible.
 </p>
 
-<%= form_for @support_ticket do |form| %>
+<%= form_for @support_ticket, html: { class: 'form' } do |form| %>
   <%= form.hidden_field :status, value: SupportTicket::OPEN %>
   <%= form.hidden_field :priority, value: SupportTicket::LOW %>
 
   <div class="text-field">
     <%= form.label :author_email, 'Email:' %>
-    <%= form.email_field :author_email %>
+    <%= form.email_field :author_email, class: 'input-field' %>
   </div>
 
   <div class="text-field">
-    <%= form.label :subject %>
-    <%= form.text_field :subject %>
+    <%= form.label :subject, 'Subject:' %>
+    <%= form.text_field :subject, class: 'input-field' %>
   </div>
 
-  <div>
-    <%= form.text_area :content %>
+  <div class="text-field">
+    <%= form.label :content, 'Content:' %>
+    <%= form.text_area :content, class: 'textarea-field' %>
   </div>
 
   <div class="submit-field">
-    <%= form.submit 'Submit' %>
+    <%= form.submit 'Submit', class: 'submit-button' %>
   </div>
 <% end %>

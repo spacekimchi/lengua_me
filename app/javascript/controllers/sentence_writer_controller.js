@@ -306,6 +306,10 @@ export default class extends Controller {
         if (this.completedContainerTarget.querySelector('#completed-repeat-link')) {
           this.completedContainerTarget.querySelector('#completed-repeat-link').click();
         }
+      } else if (!event.ctrlKey && event.key === 'b') {
+        if (this.completedContainerTarget.querySelector('#all-passages-link')) {
+          this.completedContainerTarget.querySelector('#all-passages-link').click();
+        }
       }
       return;
     }
