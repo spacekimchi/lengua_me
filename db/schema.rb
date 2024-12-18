@@ -13,7 +13,9 @@
 ActiveRecord::Schema[8.0].define(version: 2024_12_16_210051) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_trgm"
   enable_extension "pgcrypto"
+  enable_extension "unaccent"
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -183,10 +185,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_16_210051) do
     t.uuid "difficulty_id", null: false
     t.text "title", default: ""
     t.integer "position", null: false
+    t.text "search_text", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["difficulty_id", "position"], name: "index_passages_on_difficulty_id_and_position", unique: true
     t.index ["difficulty_id"], name: "index_passages_on_difficulty_id"
+    t.index ["search_text"], name: "index_passages_on_search_text_trgm", opclass: :gin_trgm_ops, using: :gin
   end
 
   create_table "product_prices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

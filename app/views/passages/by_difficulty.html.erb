@@ -1,16 +1,31 @@
+
+<!-- app/views/passages/by_difficulty.html.erb -->
 <div class="passages-by-difficulty-container">
   <%= render partial: 'passages/partials/breadcrumbs' %>
   <h1><%= @difficulty.name.titleize %></h1>
   <div>
     <div class="pagy-container">
+      <!-- Pagination Controls -->
       <%== pagy_nav(@pagy) %>
+
+      <!-- Search Form -->
+      <%= form_with url: passages_by_difficulty_path(difficulty_name: @difficulty.name), method: :get, local: true, class: 'search-form' do %>
+        <input
+          type="text"
+          name="q"
+          value="<%= params[:q] %>"
+          placeholder="Search by position and title"
+          class="search-input"
+        >
+        <%= submit_tag 'Search', class: 'search-button' %>
+      <% end %>
     </div>
     <ul class="passages-list">
       <% @passages.each_with_index do |passage, index| %>
         <li class="passage-link">
           <% if current_user %>
             <% completed_count = @passage_progresses[passage.id]&.completed_count.to_i %>
-            <% if 0 < completed_count %>
+            <% if completed_count > 0 %>
               <%= inline_svg('star-filled.svg', class: "icon star-icon star-filled star-#{[completed_count, 5].min}") %>
             <% else %>
               <%= inline_svg('empty-star.svg', class: 'icon star-icon') %>

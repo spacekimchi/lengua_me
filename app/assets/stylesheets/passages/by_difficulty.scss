@@ -21,22 +21,28 @@
   }
 }
 
-
 .passages-by-difficulty-container {
-    .passages-list {
+    .pagy-container {
         display: flex;
-        flex-wrap: wrap;
+        justify-content: space-between;
         align-items: center;
-        align-content: flex-start;
+        margin-bottom: 1rem;
+    }
+
+    .passages-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+        justify-items: start; // Aligns items to the start horizontally
+        align-items: start; // Aligns items to the start vertically
 
         .passage-link {
-            margin-bottom: 0.75rem;
-            margin-right: 0.75rem;
             border: solid 1px v.$shadow-color;
             border-radius: 5px;
-            width: 32%;
             display: flex;
             align-items: center;
+            box-sizing: border-box;
+            width: 100%
         }
 
         .passage-list-item {
@@ -80,19 +86,13 @@
 
     @include v.respond-to(tablet) {
         .passages-list {
-            .passage-link {
-                width: 48%;
-            }
+            grid-template-columns: repeat(2, 1fr); // 2 items per row on tablet
         }
     }
 
     @include v.respond-to(mobile) {
         .passages-list {
-            flex-direction: column;
-
-            .passage-link {
-                width: 98%;
-            }
+            grid-template-columns: 1fr; // 1 item per row on mobile
         }
     }
 }

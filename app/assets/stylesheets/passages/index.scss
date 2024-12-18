@@ -1,57 +1,88 @@
 @use "../variables" as v;
 
 .passages-index-container {
+    h1 {
+        text-align: left;
+        margin-bottom: 2rem;
+    }
+
     .difficulties-list {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
 
         .difficulties-list-item {
             display: flex;
             flex-direction: column;
-            width: 30%;
             border: solid 1px v.$shadow-color;
             border-radius: 5px;
-            margin: 0 0.5rem 0.75rem 0.5rem;
-            padding: 1rem;
+            padding: 0.5rem;
+            background-color: #fff;
+            box-shadow: 0 1px 4px v.$shadow-color; /* horizontal, vertical, blur, color */
 
             .difficulties-list-item-main {
                 display: flex;
                 flex-direction: row;
+                align-items: center;
+
+                img {
+                    height: 75px;
+                    width: 75px;
+                    object-fit: cover;
+                    border-radius: 3px;
+                }
+
+                .difficulties-list-item-info {
+                    display: flex;
+                    flex-direction: column;
+                    padding-left: 0.5rem;
+                    overflow: hidden;
+                    width: 100%;
+
+                    .passages-difficulty-title {
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: v.$nav-blue;
+                        text-decoration: none;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+
+                        /* Handle text overflow */
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    span {
+                        font-size: 1rem;
+                        color: black;
+                    }
+                }
             }
 
-            .difficulties-list-item-info {
-                display: flex;
-                flex: 1;
-                flex-direction: column;
-                padding-left: 0.5rem;
-                overflow: hidden;
-
-                .passages-difficulty-title {
-                    font-size: 1.5rem;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                }
+            .hidden {
+                display: none;
             }
         }
     }
 
+    /* Responsive Layouts */
+
     @include v.respond-to(tablet) {
         .difficulties-list {
-            .difficulties-list-item {
-                width: 47%;
-            }
+            grid-template-columns: repeat(2, 1fr); // 2 columns on tablet
         }
     }
 
     @include v.respond-to(mobile) {
         .difficulties-list {
-            flex-direction: column;
-
-            .difficulties-list-item {
-                width: 97%;
-            }
+            grid-template-columns: 1fr; // 1 column on mobile
         }
     }
 }
+
