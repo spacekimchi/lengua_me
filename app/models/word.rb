@@ -3,6 +3,7 @@
 # Table name: words
 #
 #  id          :uuid             not null, primary key
+#  is_name     :boolean          default(FALSE)
 #  text        :text             not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

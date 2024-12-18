@@ -1,10 +1,33 @@
 @use "../variables" as v;
 
+@keyframes fillAnimation {
+  0% {
+    fill: #ff0000; // Red
+  }
+  20% {
+    fill: #ffa500; // Orange
+  }
+  40% {
+    fill: #ffff00; // Yellow
+  }
+  60% {
+    fill: #008000; // Green
+  }
+  80% {
+    fill: #0000ff; // Blue
+  }
+  100% {
+    fill: #ff0000; // Red
+  }
+}
+
+
 .passages-by-difficulty-container {
     .passages-list {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
+        align-content: flex-start;
 
         .passage-link {
             margin-bottom: 0.75rem;
@@ -12,12 +35,46 @@
             border: solid 1px v.$shadow-color;
             border-radius: 5px;
             width: 32%;
+            display: flex;
+            align-items: center;
         }
 
         .passage-list-item {
             display: block;
             width: 100%;
-            padding: 0.5rem;
+            padding: 0.5rem 0.5rem 0.5rem 0;
+        }
+    }
+
+    .star-icon {
+        height: 25px;
+        width: 25px;
+        margin: 0 0.25rem;
+        fill: black;
+
+        &.star-filled {
+            height: 21px;
+            width: 21px;
+        }
+
+        &.star-1 {
+            fill: #7E1891;
+        }
+
+        &.star-2 {
+            fill: #E73879;
+        }
+
+        &.star-3 {
+            fill: #F26B0F;
+        }
+
+        &.star-4 {
+            fill: #FCC737;
+        }
+
+        &.star-5 {
+            animation: fillAnimation 5s infinite linear;
         }
     }
 
@@ -39,3 +96,4 @@
         }
     }
 }
+

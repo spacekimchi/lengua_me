@@ -2,11 +2,12 @@
 #
 # Table name: difficulties
 #
-#  id         :uuid             not null, primary key
-#  level      :integer          not null
-#  name       :text             not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :uuid             not null, primary key
+#  description :text
+#  level       :integer          not null
+#  name        :text             not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 # Indexes
 #

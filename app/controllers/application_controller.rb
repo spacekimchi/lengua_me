@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
-  before_action :set_app_name
-
+  include Pagy::Backend
   include Clearance::Controller
+
+  before_action :set_app_name
 
   helper_method :super_admin?
 

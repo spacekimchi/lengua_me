@@ -65,7 +65,18 @@ class PassagesController < ApplicationController
 
   def by_difficulty
     @difficulty = Difficulty.find_by(name: params[:difficulty_name])
-    @passages = @difficulty.passages.ordered
+    passages = Passage
+             .by_difficulty(@difficulty)
+             .select('passages.id, passages.title, passages.position')
+             .ordered
+    @pagy, @passages = pagy(passages, limit: 30)
+    if current_user
+      # Fetch the current user's passage progresses for these passages
+      @passage_progresses = PassageProgress
+                             .where(user: current_user, passage: @passages.pluck(:id))
+                             .select('passage_progresses.passage_id, passage_progresses.completed_count, passage_progresses.current_index')
+                             .index_by(&:passage_id)
+    end
   end
 
   def passage_writer

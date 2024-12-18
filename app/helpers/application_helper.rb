@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include ::Pagy::Frontend
+
   def inline_svg(filename, options = {})
     file_path = Rails.root.join("public/icons", filename)
     if File.exist?(file_path)
