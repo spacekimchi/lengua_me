@@ -766,6 +766,11 @@ footer .footer-container a {
 .passage-writer-show-container .sentence-card-completed-container .passage-completed-content {
   margin: auto;
 }
+.passage-writer-show-container .sentence-card-completed-container .success {
+  color: green;
+  height: 50px;
+  width: 50px;
+}
 .passage-writer-show-container .sentence-card-completed-container .completed-nav-links {
   margin: 1rem 0;
 }

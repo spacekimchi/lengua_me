@@ -145,6 +145,12 @@
             margin: auto;
         }
 
+        .success {
+            color: v.$success;
+            height: 50px;
+            width: 50px;
+        }
+
         .completed-nav-links {
             margin: 1rem 0;
             a {
