@@ -5,10 +5,8 @@
   <h1><%= @difficulty.name.titleize %></h1>
   <div>
     <div class="pagy-container">
-      <!-- Pagination Controls -->
       <%== pagy_nav(@pagy) %>
 
-      <!-- Search Form -->
       <%= form_with url: passages_by_difficulty_path(difficulty_name: @difficulty.name), method: :get, local: true, class: 'search-form' do %>
         <input
           type="text"

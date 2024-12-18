@@ -84,6 +84,26 @@ body {
 }
 
 /* Variables */
+@keyframes fillAnimation {
+  0% {
+    fill: #ff0000;
+  }
+  20% {
+    fill: #ffa500;
+  }
+  40% {
+    fill: #ffff00;
+  }
+  60% {
+    fill: #008000;
+  }
+  80% {
+    fill: #0000ff;
+  }
+  100% {
+    fill: #ff0000;
+  }
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: "Helvetica Neue", Arial, sans-serif;
   line-height: 1.2;
@@ -795,31 +815,34 @@ footer .footer-container a {
   }
 }
 
-@keyframes fillAnimation {
-  0% {
-    fill: #ff0000;
-  }
-  20% {
-    fill: #ffa500;
-  }
-  40% {
-    fill: #ffff00;
-  }
-  60% {
-    fill: #008000;
-  }
-  80% {
-    fill: #0000ff;
-  }
-  100% {
-    fill: #ff0000;
-  }
-}
 .passages-by-difficulty-container .pagy-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+}
+.passages-by-difficulty-container .pagy-container .search-input {
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+}
+.passages-by-difficulty-container .pagy-container .search-button {
+  padding: 0.25rem 1rem;
+  border: solid 1px #0F64CD;
+  color: #F6F1E9;
+  background-color: #0F64CD;
+  border-radius: 3px;
+}
+.passages-by-difficulty-container .pagy-container .search-button:hover {
+  cursor: pointer;
+  color: white;
+  filter: brightness(110%);
+}
+.passages-by-difficulty-container .pagy-container .search-button:hover:active {
+  transform: scale(97%);
+}
+.passages-by-difficulty-container .pagy-container .search-button:last-child {
+  margin-left: 1rem;
 }
 .passages-by-difficulty-container .passages-list {
   display: grid;
@@ -872,6 +895,18 @@ footer .footer-container a {
   }
 }
 @media (max-width: 768px) {
+  .passages-by-difficulty-container .pagy-container {
+    align-items: flex-start;
+    flex-direction: column-reverse;
+  }
+  .passages-by-difficulty-container .pagy-container .search-form {
+    display: flex;
+    width: 100%;
+    margin: 0 0 0.75rem 0;
+  }
+  .passages-by-difficulty-container .pagy-container .search-form .search-input {
+    flex: 1;
+  }
   .passages-by-difficulty-container .passages-list {
     grid-template-columns: 1fr;
   }

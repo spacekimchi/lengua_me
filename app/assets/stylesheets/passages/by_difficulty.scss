@@ -1,25 +1,5 @@
 @use "../variables" as v;
-
-@keyframes fillAnimation {
-  0% {
-    fill: #ff0000; // Red
-  }
-  20% {
-    fill: #ffa500; // Orange
-  }
-  40% {
-    fill: #ffff00; // Yellow
-  }
-  60% {
-    fill: #008000; // Green
-  }
-  80% {
-    fill: #0000ff; // Blue
-  }
-  100% {
-    fill: #ff0000; // Red
-  }
-}
+@use "../animations";
 
 .passages-by-difficulty-container {
     .pagy-container {
@@ -27,6 +7,32 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1rem;
+
+        .search-input {
+            border: solid 1px v.$shadow-color;
+            border-radius: 3px;
+            padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+        }
+        .search-button {
+            padding: 0.25rem 1rem;
+            border: solid 1px v.$korean-blue;
+            color: v.$OFF_WHITE;
+            background-color: v.$korean-blue;
+            border-radius: 3px;
+
+            &:hover {
+                cursor: pointer;
+                color: white;
+                filter: brightness(110%);
+                &:active {
+                    transform: scale(97%);
+                }
+            }
+
+            &:last-child {
+                margin-left: 1rem;
+            }
+        }
     }
 
     .passages-list {
@@ -91,6 +97,20 @@
     }
 
     @include v.respond-to(mobile) {
+        .pagy-container {
+            align-items: flex-start;
+            flex-direction: column-reverse;
+
+            .search-form {
+                display: flex;
+                width: 100%;
+                margin: 0 0 0.75rem 0;
+
+                .search-input {
+                    flex: 1;
+                }
+            }
+        }
         .passages-list {
             grid-template-columns: 1fr; // 1 item per row on mobile
         }

@@ -1,0 +1,21 @@
+@keyframes fillAnimation {
+  0% {
+    fill: #ff0000; // Red
+  }
+  20% {
+    fill: #ffa500; // Orange
+  }
+  40% {
+    fill: #ffff00; // Yellow
+  }
+  60% {
+    fill: #008000; // Green
+  }
+  80% {
+    fill: #0000ff; // Blue
+  }
+  100% {
+    fill: #ff0000; // Red
+  }
+}
+
