@@ -2,11 +2,22 @@
   <%= render partial: 'passages/partials/breadcrumbs' %>
   <h1><%= @difficulty.name.titleize %></h1>
   <div>
+    <div class="pagy-container">
+      <%== pagy_nav(@pagy) %>
+    </div>
     <ul class="passages-list">
       <% @passages.each_with_index do |passage, index| %>
         <li class="passage-link">
+          <% if current_user %>
+            <% completed_count = @passage_progresses[passage.id]&.completed_count.to_i %>
+            <% if 0 < completed_count %>
+              <%= inline_svg('star-filled.svg', class: "icon star-icon star-filled star-#{[completed_count, 5].min}") %>
+            <% else %>
+              <%= inline_svg('empty-star.svg', class: 'icon star-icon') %>
+            <% end %>
+          <% end %>
           <%= link_to passage_writer_path(@difficulty.name, passage.title), class: 'passage-list-item' do %>
-            <%= index + 1 %>. <%= passage.title %>
+            <%= passage.position %>. <%= passage.title %>
           <% end %>
         </li>
       <% end %>

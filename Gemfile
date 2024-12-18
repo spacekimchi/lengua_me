@@ -44,6 +44,8 @@ gem "json-schema"
 
 gem "google-cloud-text_to_speech"
 
+gem "pagy"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

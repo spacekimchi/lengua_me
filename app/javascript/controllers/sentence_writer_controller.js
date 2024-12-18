@@ -311,7 +311,7 @@ export default class extends Controller {
     }
     if (!event.ctrlKey) { return; }
     this.playAudio();
-    if (event.key === "]" && this.currentIndex < this.sentences.length) {
+    if (event.key === "]" && this.currentIndex < this.sentences.length - 1) {
       this.next();
     } else if (event.key === "[" && 0 < this.currentIndex) {
       this.prev();
