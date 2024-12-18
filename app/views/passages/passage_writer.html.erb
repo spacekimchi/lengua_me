@@ -112,21 +112,24 @@
 
        <div class="sentence-card-completed-container hidden" data-sentence-writer-target="completedContainer">
          <div class="passage-completed-content">
+
            <div class="passage-completed-text">
-             You have completed this passage.<br>Awesome work!
+             You have completed this passage.
+             <br>
+             Awesome work!
            </div>
            <div class="completed-nav-links">
              <% if @next_passage.present? %>
                <%= link_to passage_writer_path(@difficulty.name, @next_passage.title), id: 'completed-next-link', class: 'link-button success-link' do %>
-                 Next Passage
+                 Continue
                <% end %>
              <% end %>
              <%= link_to passage_writer_path(@difficulty.name, @passage.title), id: 'completed-repeat-link', class: 'link-button' do %>
-               Repeat Passage
+               Repeat
              <% end %>
              <% if @previous_passage.present? %>
                <%= link_to passage_writer_path(@difficulty.name, @previous_passage.title), id: 'completed-prev-link', class: 'link-button neutral-link' do %>
-                 Previous Passage
+                 Previous
                <% end %>
              <% end %>
            </div>
