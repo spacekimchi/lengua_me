@@ -1,0 +1,102 @@
+@use "variables" as v;
+
+form.form {
+    display: grid;
+    grid-template-columns: max-content 1fr; // 150px for labels, remaining space for inputs
+    grid-gap: 1rem 2rem; // 1rem row gap, 2rem column gap
+    align-items: start;
+    max-width: 50%;
+    margin: 1rem 0;
+
+    /* Style for each text-field */
+    .text-field {
+        display: contents; // Allows children to participate in the grid layout
+    }
+
+    /* Labels */
+    label {
+        text-align: left;
+        padding-top: 0.125rem; // Vertically align label with input
+        font-weight: bold;
+    }
+
+    /* Input Fields */
+    .input-field {
+        width: 100%; // Ensure inputs take full width of their grid cell
+        border: 1px solid v.$shadow-color;
+        padding: 0.125rem 0.5rem;
+        border-radius: 4px;
+        font-size: 1rem;
+        box-sizing: border-box; // Include padding and border in the element's total width and height
+    }
+
+    /* Textarea Field */
+    .textarea-field {
+        width: 100%; // Ensure textarea takes full width of its grid cell
+        height: 150px; // Set a fixed height for textarea
+        border: 1px solid v.$shadow-color;
+        padding: 0.5rem;
+        border-radius: 4px;
+        font-size: 1rem;
+        resize: vertical; // Allow vertical resizing
+        box-sizing: border-box;
+    }
+
+    /* Submit Button */
+    .submit-field {
+        grid-column: 2 / 3;
+        justify-self: start;
+
+        .submit-button {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid v.$korean-blue;
+            color: v.$OFF_WHITE;
+            background-color: v.$korean-blue;
+            border-radius: 3px;
+            font-size: 1rem;
+            transition: filter 0.3s ease, transform 0.1s ease;
+
+            &:hover {
+                cursor: pointer;
+                filter: brightness(110%);
+            }
+
+            &:active {
+                transform: scale(0.97);
+            }
+        }
+    }
+
+    /* Responsive Design */
+
+    @include v.respond-to(tablet) {
+        grid-template-columns: 120px 1fr; // Adjust label width for tablet
+        grid-gap: 0.75rem 1.5rem; // Adjust gaps for tablet
+    }
+
+    @include v.respond-to(mobile) {
+        grid-template-columns: 100px 1fr; // Adjust label width for mobile
+        grid-gap: 0.5rem 1rem; // Adjust gaps for mobile
+
+        /* Stack labels above inputs if desired */
+        .text-field {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 0.25rem;
+        }
+
+        label {
+            text-align: left;
+        }
+
+        .input-field, .textarea-field {
+            width: 100%;
+        }
+
+        .submit-field {
+            grid-column: 1 / -1; // Span all columns
+            justify-self: center; // Center the submit button
+        }
+    }
+}
+

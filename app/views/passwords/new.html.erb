@@ -3,14 +3,18 @@
 
   <p><%= t(".description") %></p>
 
-  <%= form_for :password, url: passwords_path do |form| %>
+  <%= form_for :password, url: passwords_path, html: { class: 'form' } do |form| %>
     <div class="text-field">
       <%= form.label :email %>
-      <%= form.email_field :email %>
+      <%= form.email_field :email, class: 'input-field' %>
     </div>
 
     <div class="submit-field">
-      <%= form.submit %>
+      <%= form.submit t('.submit'), class: 'submit-button' %>
     </div>
   <% end %>
+</div>
+
+<div class="other-links">
+  <%= link_to t(".sign_in"), sign_in_path %>
 </div>
