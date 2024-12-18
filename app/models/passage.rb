@@ -19,11 +19,32 @@
 #  fk_rails_...  (difficulty_id => difficulties.id)
 #
 class Passage < ApplicationRecord
+  include PgSearch::Model
   belongs_to :difficulty
 
   has_many :sentences, dependent: :destroy
   has_many :passage_progresses, dependent: :destroy
 
+  pg_search_scope :search_by_position_and_title,
+                  against: [:position, :title],
+                  using: {
+                    tsearch: {
+                      prefix: true,
+                      any_word: true,
+                      dictionary: 'simple'
+                    },
+                    trigram: {}
+                  },
+                  ignoring: :accents
+
+  # ILIKE '%text%'-Style Search Scope
+  scope :search_like, ->(query) {
+    return all if query.blank?
+
+    sanitized_query = "%#{sanitize_sql_like(query)}%"
+
+    where("CAST(position AS TEXT) || '. ' || title ILIKE :q", q: sanitized_query)
+  }
   scope :ordered, -> { order(:position) }
   scope :by_difficulty, ->(difficulty) { where(difficulty: difficulty) }
   scope :with_user_progress, ->(user) {

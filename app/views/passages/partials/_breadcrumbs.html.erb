@@ -1,18 +1,11 @@
 <div class="breadcrumbs">
+  <%= link_to 'All Difficulties', passages_path %>
   <% if @difficulty.nil? %>
-    <%= 'All Difficulties' %>
-  <% else %>
-    <%= link_to 'All Difficulties', passages_path %>
     <span> / </span>
-    <% if @passage.present? %>
-      <%= link_to @difficulty.name.titleize, passages_by_difficulty_path(difficulty_name: urlify(@difficulty.name)) %>
-    <% else %>
-      <%= @difficulty.name.titleize %>
-    <% end %>
+    <%= link_to @difficulty.name.titleize, passages_by_difficulty_path(difficulty_name: urlify(@difficulty.name)) %>
   <% end %>
   <% if @passage.present? %>
-    <span> / </span>
-    <span><%= @passage.title.titleize %></span>
+    <%= link_to passage_writer_path(@difficulty.name, @passage.title) %>
   <% end %>
 </div>
 
