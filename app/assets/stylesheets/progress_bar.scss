@@ -1,0 +1,52 @@
+// Define variables for easy customization
+$progress-bar-height: 0.5rem;
+$progress-bar-bg: #e0e0e0;
+$progress-fill-bg: #3498db;
+$progress-text-color: black;
+$progress-border-radius: 15px;
+$progress-transition: width 0.5s ease;
+
+// Container for the progress bar
+.progress-container {
+    display: flex;
+    width: 95%;
+    align-self: flex-start;
+    align-items: center;
+    margin-bottom: 5px;
+    margin-left: 5px;
+
+    .progress-bar {
+        position: relative;
+        background-color: $progress-bar-bg;
+        border-radius: $progress-border-radius;
+        height: $progress-bar-height;
+        width: 100%;
+        overflow: hidden;
+
+        /* Optional: Add a subtle shadow */
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+
+        /* Use the CSS variable --progress to set the fill width */
+        --progress: 0%;
+
+        /* Positioning the fill and text */
+        display: flex;
+        align-items: center;
+
+        /* Progress Fill */
+        .progress-fill {
+            background-color: $progress-fill-bg;
+            height: 100%;
+            width: var(--progress);
+            transition: $progress-transition;
+            border-radius: $progress-border-radius 0 0 $progress-border-radius;
+        }
+    }
+    /* Progress Text */
+    .progress-text {
+        text-align: center;
+        color: $progress-text-color;
+        pointer-events: none; // Allows clicks to pass through if needed
+        margin-right: 5px;
+    }
+}

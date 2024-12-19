@@ -104,6 +104,14 @@ body {
     fill: #ff0000;
   }
 }
+@keyframes spinAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: "Helvetica Neue", Arial, sans-serif;
   line-height: 1.2;
@@ -113,7 +121,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 2.25rem;
   font-weight: 700;
-  margin: 1.5rem 0 2rem;
+  margin: 1.5rem 0 1rem;
 }
 
 h2 {
@@ -306,18 +314,20 @@ form.form .submit-field .submit-button:active {
   form.form {
     grid-template-columns: 120px 1fr;
     grid-gap: 0.75rem 1.5rem;
+    max-width: 75%;
   }
 }
 @media (max-width: 768px) {
   form.form {
     grid-template-columns: 100px 1fr;
     grid-gap: 0.5rem 1rem;
+    max-width: 100%;
     /* Stack labels above inputs if desired */
   }
   form.form .text-field {
     display: grid;
-    grid-template-columns: 1fr;
     grid-gap: 0.25rem;
+    grid-column: 1/3;
   }
   form.form label {
     text-align: left;
@@ -328,6 +338,10 @@ form.form .submit-field .submit-button:active {
   form.form .submit-field {
     grid-column: 1/-1;
     justify-self: center;
+    width: 100%;
+  }
+  form.form .submit-field input[type=submit] {
+    width: 100%;
   }
 }
 
@@ -394,7 +408,7 @@ table tbody td {
 }
 
 .breadcrumbs {
-  font-size: 1rem;
+  font-size: 1.125rem;
   padding: 11px 0;
 }
 
@@ -757,6 +771,76 @@ footer .footer-container a {
   }
 }
 
+.progress-container {
+  display: flex;
+  width: 95%;
+  align-self: flex-start;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  /* Progress Text */
+}
+.progress-container .progress-bar {
+  position: relative;
+  background-color: #e0e0e0;
+  border-radius: 15px;
+  height: 0.5rem;
+  width: 100%;
+  overflow: hidden;
+  /* Optional: Add a subtle shadow */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  /* Use the CSS variable --progress to set the fill width */
+  --progress: 0%;
+  /* Positioning the fill and text */
+  display: flex;
+  align-items: center;
+  /* Progress Fill */
+}
+.progress-container .progress-bar .progress-fill {
+  background-color: #3498db;
+  height: 100%;
+  width: var(--progress);
+  transition: width 0.5s ease;
+  border-radius: 15px 0 0 15px;
+}
+.progress-container .progress-text {
+  text-align: center;
+  color: black;
+  pointer-events: none;
+  margin-right: 5px;
+}
+
+.passage-writer-show-container .passage-writer-title-container {
+  display: flex;
+  align-items: center;
+}
+.passage-writer-show-container .passage-writer-title-container .star-icon {
+  margin-left: 3px;
+  height: 45px;
+  width: 45px;
+  vertical-align: bottom;
+}
+.passage-writer-show-container .passage-writer-title-container .star-icon.star-filled {
+  height: 37px;
+  width: 37px;
+  vertical-align: top;
+}
+.passage-writer-show-container .passage-writer-title-container .star-icon.star-1 {
+  fill: #7E1891;
+}
+.passage-writer-show-container .passage-writer-title-container .star-icon.star-2 {
+  fill: #E73879;
+}
+.passage-writer-show-container .passage-writer-title-container .star-icon.star-3 {
+  fill: #F26B0F;
+}
+.passage-writer-show-container .passage-writer-title-container .star-icon.star-4 {
+  fill: #FCC737;
+}
+.passage-writer-show-container .passage-writer-title-container .star-icon.star-5 {
+  animation: fillAnimation 2s ease-in-out infinite;
+  -webkit-animation: fillAnimation 2s ease-in-out infinite;
+}
 .passage-writer-show-container .sentence-card-main-container {
   display: flex;
   justify-content: space-between;
@@ -940,14 +1024,19 @@ footer .footer-container a {
   border: solid 1px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
   box-sizing: border-box;
   width: 100%;
+}
+.passages-by-difficulty-container .passages-list .passage-link .passage-title-container {
+  display: flex;
+  align-items: center;
 }
 .passages-by-difficulty-container .passages-list .passage-list-item {
   display: block;
   width: 100%;
-  padding: 0.5rem 0.5rem 0.5rem 0;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 .passages-by-difficulty-container .star-icon {
   height: 25px;
@@ -1002,7 +1091,7 @@ footer .footer-container a {
 }
 .passages-index-container h1 {
   text-align: left;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .passages-index-container .difficulties-list {
   display: grid;

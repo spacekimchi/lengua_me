@@ -68,7 +68,9 @@ class PassagesController < ApplicationController
     search_query = params[:q]
 
     passages = Passage.by_difficulty(@difficulty)
-      .select('passages.id, passages.title, passages.position')
+      .joins(:sentences)
+      .select('passages.id, passages.title, passages.position, count(sentences) as total_sentences')
+      .group('passages.id')
       .ordered
     passages = passages.search_like(search_query) if search_query.present?
 
@@ -101,8 +103,8 @@ class PassagesController < ApplicationController
       .with_attached_audio
       .select('sentences.id, sentences.content, sentences.order_idx')
       .order(:order_idx)
-    passage_progress = @passage.passage_progresses.find_by(user: current_user)
-    @current_index = passage_progress&.current_index || 0
+    @passage_progress = @passage.passage_progresses.find_by(user: current_user)
+    @current_index = @passage_progress&.current_index || 0
 
     @language_codes = Constants::LANGUAGE_CODES
     @sentences_data = @sentences.map do |sentence|

@@ -1,6 +1,18 @@
 <div class="passage-writer-show-container">
   <%= render partial: 'passages/partials/breadcrumbs' %>
-  <h1><%= @passage.title %></h1>
+  <div class="passage-writer-title-container">
+    <h1>
+      <%= @passage.position %>. <%= @passage.title %>
+      <% if current_user %>
+        <% completed_count = @passage_progress&.completed_count.to_i %>
+        <% if completed_count > 0 %>
+          <%= inline_svg('star-filled.svg', class: "icon star-icon star-filled star-#{[completed_count, 5].min}") %>
+        <% else %>
+          <%= inline_svg('empty-star.svg', class: 'icon star-icon') %>
+        <% end %>
+      <% end %>
+    </h1>
+  </div>
 
   <div class="sentence-writer-card"
        data-controller="sentence-writer"
