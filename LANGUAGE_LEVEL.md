@@ -72,4 +72,62 @@
   * Problem-Solving: Situations where characters solve a simple problem, such as fixing a flat tire or finding a lost item.
   * Decision Making: Scenarios where characters make choices, like selecting a restaurant or planning a trip.
 
+### Types of passages for B2 level
 
+1. Current Events and News:
+    Global Issues: Discussions on climate change, political developments, and technological advancements.
+    Local News: Analyzing news from different regions to understand diverse perspectives.
+
+2. Health and Wellness:
+    Nutrition and Diets: Exploring various diets, their benefits, and cultural significance.
+    Mental Health: Discussing stress management, mindfulness, and psychological well-being.
+
+3. Education and Career Development:
+    Higher Education Systems: Comparing educational structures across countries.
+    Career Planning: Strategies for job searching, resume writing, and interview techniques.
+
+4. Technology and Innovation:
+    Digital Transformation: Impact of technology on daily life and future job markets.
+    Emerging Technologies: Exploring AI, renewable energy, and biotechnology advancements.
+
+5. Environmental Sustainability:
+    Conservation Efforts: Initiatives to protect natural resources and biodiversity.
+    Sustainable Living: Practices like recycling, sustainable fashion, and green energy usage.
+
+6. Cultural Diversity and Society:
+    Traditions and Festivals: Learning about various cultural celebrations and their significance.
+    Social Issues: Addressing topics like immigration, gender equality, and human rights.
+
+7. Travel and Tourism:
+    Destination Guides: Describing famous landmarks, local cuisines, and travel tips.
+    Cultural Exchange: Sharing experiences of living abroad and understanding different lifestyles.
+
+8. Arts and Entertainment:
+    Literature and Film: Analyzing books, movies, and their cultural impacts.
+    Music and Performing Arts: Exploring different genres and their historical contexts.
+
+9. Personal Development and Lifestyle:
+    Time Management: Techniques for effective scheduling and productivity.
+    Hobbies and Interests: Sharing and discussing personal hobbies to build vocabulary.
+
+10. Ethics and Philosophy:
+    Moral Dilemmas: Debating ethical issues to develop critical thinking and argumentation skills.
+    Philosophical Concepts: Introducing basic philosophical ideas and their applications.
+
+### Types of passages for C1 level
+
+1. Complex Sentence Structures: These passages utilize a variety of sentence types, including compound and complex sentences, to convey detailed and nuanced ideas.
+
+2. Advanced Vocabulary: The passages incorporate sophisticated vocabulary and terminology relevant to each topic, expanding learners' lexical range.
+
+3. In-depth Analysis: Topics are explored thoroughly, encouraging critical thinking and deeper understanding of the subject matter.
+
+4. Variety in Perspective: Passages present multiple viewpoints or delve into theoretical discussions, reflecting the ability to understand and articulate complex arguments.
+
+5. Cohesive Devices: Effective use of transitional phrases and connectors ensures logical flow and coherence throughout the passages.
+
+6. Cultural and Societal Relevance: Topics are chosen for their relevance to contemporary global issues, fostering engagement and practical application of language skills.
+
+7. Clear and Concise Language: Despite the advanced level, the language remains clear and precise, ensuring that ideas are effectively communicated without unnecessary complexity.
+
+8. Relatable Scenarios: Even with advanced topics, the passages incorporate scenarios and examples that learners can relate to, aiding comprehension and retention.

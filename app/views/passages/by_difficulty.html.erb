@@ -12,7 +12,7 @@
           type="text"
           name="q"
           value="<%= params[:q] %>"
-          placeholder="Search by position and title"
+          placeholder="Search"
           class="search-input"
         >
         <%= submit_tag 'Search', class: 'search-button' %>
@@ -20,17 +20,31 @@
     </div>
     <ul class="passages-list">
       <% @passages.each_with_index do |passage, index| %>
+        <% completed_count = @passage_progresses[passage.id]&.completed_count.to_i %>
+        <% current_index = @passage_progresses[passage.id]&.current_index.to_i %>
+        <% progress_percent = ((current_index / passage.total_sentences.to_f).round(2) * 100).to_i %>
         <li class="passage-link">
-          <% if current_user %>
-            <% completed_count = @passage_progresses[passage.id]&.completed_count.to_i %>
-            <% if completed_count > 0 %>
-              <%= inline_svg('star-filled.svg', class: "icon star-icon star-filled star-#{[completed_count, 5].min}") %>
-            <% else %>
-              <%= inline_svg('empty-star.svg', class: 'icon star-icon') %>
+          <div class="passage-title-container">
+            <% if current_user %>
+              <% if completed_count > 0 %>
+                <%= inline_svg('star-filled.svg', class: "icon star-icon star-filled star-#{[completed_count, 5].min}") %>
+              <% else %>
+                <%= inline_svg('empty-star.svg', class: 'icon star-icon') %>
+              <% end %>
             <% end %>
-          <% end %>
-          <%= link_to passage_writer_path(@difficulty.name, passage.title), class: 'passage-list-item' do %>
-            <%= passage.position %>. <%= passage.title %>
+            <%= link_to passage_writer_path(@difficulty.name, passage.title), class: 'passage-list-item' do %>
+              <%= passage.position %>. <%= passage.title %>
+            <% end %>
+          </div>
+          <!-- Progress Bar Example -->
+          <% if 0 < current_index && current_index < passage.total_sentences %>
+            <div class="progress-container">
+              <span class="progress-text"><%= current_index %>/<%= passage.total_sentences %></span>
+              <div class="progress-bar" style="--progress: <%= progress_percent %>%;">
+                <div class="progress-fill"></div>
+              </div>
+            </div>
+          <% else %>
           <% end %>
         </li>
       <% end %>

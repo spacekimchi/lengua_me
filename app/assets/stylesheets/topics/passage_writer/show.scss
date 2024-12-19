@@ -1,6 +1,48 @@
 @use "../../variables" as v;
+@use "../../animations";
 
 .passage-writer-show-container {
+    .passage-writer-title-container {
+        display: flex;
+        align-items: center;
+
+        .star-icon {
+            margin-left: 3px;
+            height: 45px;
+            width: 45px;
+            vertical-align: bottom;
+
+            &.star-filled {
+                height: 37px;
+                width: 37px;
+                vertical-align: top;
+            }
+
+            &.star-1 {
+                fill: #7E1891;
+            }
+
+            &.star-2 {
+                fill: #E73879;
+            }
+
+            &.star-3 {
+                fill: #F26B0F;
+            }
+
+            &.star-4 {
+                fill: #FCC737;
+            }
+
+            &.star-5 {
+                animation: fillAnimation 2s ease-in-out infinite;
+                -webkit-animation: fillAnimation 2s ease-in-out infinite;
+                //animation: spinAnimation 5s linear infinite, fillAnimation 2s ease-in-out infinite;
+                //-webkit-animation: spinAnimation 5s linear infinite, fillAnimation 2s ease-in-out infinite;
+            }
+        }
+    }
+
     .sentence-card-main-container {
         display: flex;
         justify-content: space-between;
