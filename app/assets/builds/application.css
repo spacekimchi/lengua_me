@@ -1032,6 +1032,7 @@ footer .footer-container a {
 .passages-by-difficulty-container .passages-list .passage-link .passage-title-container {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 .passages-by-difficulty-container .passages-list .passage-list-item {
   display: block;
