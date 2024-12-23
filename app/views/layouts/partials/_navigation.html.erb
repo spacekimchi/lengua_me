@@ -44,6 +44,19 @@
       </div>
     </ul>
   </nav>
+  <nav id="top-nav-secondary">
+    <span class="right-section">
+      <div style="position: relative; display: inline-block;" data-controller="popup">
+        <%= link_to "In-progress", passages_in_progress_path,
+          data: { action: "click->popup#showLoading", turbo_frame: "in_progress_popup", turbo_stream: true },
+          class: "button" %>
+
+        <turbo-frame id="in_progress_popup" data-popup-target="popupFrame">
+          <!-- Initially empty; will show loading spinner on click, then content after response -->
+        </turbo-frame>
+      </div>
+    </span>
+  </nav>
 </div>
 
 <script>

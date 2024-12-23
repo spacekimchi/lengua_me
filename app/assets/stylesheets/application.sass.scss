@@ -13,6 +13,8 @@
 @use "footer";
 @use "tooltip";
 @use "home";
+@use "modal";
+@use "popup";
 @use "progress_bar";
 @use "topics/passage_writer/show";
 @use "passages/by_difficulty";
@@ -30,7 +32,7 @@ body {
         max-width: 1280px;
         width: 100%;
         margin: auto;
-        padding: 4.5rem 0.5rem 0.5rem 0.5rem;
+        padding: 5.5rem 0.5rem 0.5rem 0.5rem;
         flex: 1;
         .other-links {
             display: flex;
@@ -64,7 +66,7 @@ body {
 
     @include variables.respond-to(mobile) {
         .main-content {
-            padding: 0 0.75rem;
+            padding: 4.5rem 0.75rem 0.5rem 0.75rem;
         }
     }
 }

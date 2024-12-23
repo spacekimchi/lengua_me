@@ -1,4 +1,6 @@
 class PassagesController < ApplicationController
+  before_action :require_login, only: [:in_progress]
+
   def show
     @passage = Passage.find(params[:id])
     @languages = Language.all
@@ -119,6 +121,16 @@ class PassagesController < ApplicationController
     # Utilize model methods to get next and previous passages
     @next_passage = @passage.next_passage
     @previous_passage = @passage.previous_passage
+  end
+
+  def in_progress
+    @passage_progresses = current_user.passage_progresses.in_progress
+
+    respond_to do |format|
+      format.turbo_stream
+      format.json { render json: { passage_progresses: @passage_progresses }, status: :ok }
+      format.html { redirect_back fallback_location: root_path, error: "Please enable JavaScript to see the in-progress popup." }
+    end
   end
 
   private

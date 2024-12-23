@@ -4,6 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  position      :integer          not null
+#  search_text   :text             default("")
 #  title         :text             default("")
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -13,6 +14,7 @@
 #
 #  index_passages_on_difficulty_id               (difficulty_id)
 #  index_passages_on_difficulty_id_and_position  (difficulty_id,position) UNIQUE
+#  index_passages_on_search_text_trgm            (search_text) USING gin
 #
 # Foreign Keys
 #

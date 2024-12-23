@@ -1,0 +1,7 @@
+<% percent = ((current_index / total.to_f).round(2) * 100).to_i %>
+<div class="progress-container">
+  <span class="progress-text"><%= current_index %>/<%= total %></span>
+  <div class="progress-bar" style="--progress: <%= percent %>%;">
+    <div class="progress-fill"></div>
+  </div>
+</div>

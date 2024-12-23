@@ -25,6 +25,20 @@ class PassageProgress < ApplicationRecord
   belongs_to :user
   belongs_to :passage
 
+  scope :in_progress, -> {
+    where('current_index > 0')
+      .joins(passage: [:sentences, :difficulty])
+      .select(
+        'passage_progresses.id',
+        'passages.title',
+        'difficulties.name as difficulty',
+        'COUNT(sentences.id) AS sentences_count',
+        'passage_progresses.current_index',
+        'ROUND((passage_progresses.current_index::decimal / COUNT(sentences.id)::decimal)*100)::int AS percent_complete'
+      )
+        .group('passage_progresses.id, passages.title, passage_progresses.current_index, difficulties.name')
+  }
+
   before_save :check_current_index
 
   def check_current_index

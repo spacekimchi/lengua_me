@@ -10,9 +10,25 @@
     width: 100%;
     padding: 0.5rem 0rem; // Added padding for better spacing
     transition: box-shadow 0.3s ease;
+    flex-direction: column;
+    align-items: center;
 
     &.scrolled {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow when scrolled */
+    }
+
+    nav#top-nav-secondary {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        position: relative; // For positioning the nav links on mobile
+        max-width: 1280px;
+        width: 100%;
+
+        .right-section {
+            margin-left: auto;
+            margin-right: 0.5rem;
+        }
     }
 
     nav#top-nav {
