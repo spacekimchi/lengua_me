@@ -52,3 +52,5 @@ keys
 
 # I don't use solargraph, but yes
 .solargraph.yml
+
+/config/credentials/production.key

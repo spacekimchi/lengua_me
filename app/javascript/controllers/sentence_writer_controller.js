@@ -528,7 +528,15 @@ export default class extends Controller {
   showInfoContent() {
     this.setTranslations();
     this.showPronunciationsDiv();
-    this.infoContainerDivTarget.style.display = "block";
+    this.setDisplayInfoDiv(true);
+  }
+
+  setDisplayInfoDiv(shouldShow) {
+    if (shouldShow) {
+      this.infoContainerDivTarget.style.display = "flex";
+    } else {
+      this.infoContainerDivTarget.style.display = "none";
+    }
   }
 
   prev() {
@@ -616,7 +624,7 @@ export default class extends Controller {
     this.textAreaTarget.classList = "";
     this.finishedSentence = false;
     this.skippedSentence = false;
-    this.infoContainerDivTarget.style.display = "none";
+    this.setDisplayInfoDiv(false);
     this.textAreaTarget.classList = "";
     this.resetActionDivs();
   }

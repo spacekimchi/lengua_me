@@ -1,0 +1,102 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install sshpass
+      run: sudo apt-get install sshpass
+
+    - name: Deploy to Server
+      env:
+        # Ip of server
+        HOST: ${{ secrets.HOST }}
+        # User on the server we are using
+        USER: ${{ secrets.USERNAME }}
+        # Private key that is ssh enabled on the server (from local machine or something)
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        # Password for the ssh key
+        SSH_KEY_PASSPHRASE: ${{ secrets.SSH_KEY_PASSPHRASE }}
+      run: |
+        echo "Copying over SSH keys..."
+        # Creating the ssh directory and adding the key
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        eval $(ssh-agent -s)
+        # Adding passphrase here because we cannot type into the github deploy
+        echo "$SSH_KEY_PASSPHRASE" | SSH_ASKPASS=/usr/bin/echo ssh-add ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+        SERVER="${USER}@${HOST}"
+
+        echo "SSHing into server..."
+        ssh -v -o StrictHostKeyChecking=no $SERVER << 'EOL'
+          # Navigate to your application directory
+          cd /home/jhg/workspace/lengua_me
+
+          echo "Pulling latest changes..."
+          # Pull the latest changes
+          git pull origin master || exit 1
+
+          echo "Building containers... "
+          # Build and restart Docker containers
+          docker-compose -f docker-compose.production.yml down
+          docker-compose -f docker-compose.production.yml build
+          docker-compose -f docker-compose.production.yml up -d || exit 1
+
+          echo "Migrating database..."
+          # Run database migrations
+          # docker-compose -f docker-compose.production.yml run --rm web rails db:migrate
+          docker-compose -f docker-compose.production.yml exec web bundle exec rails db:migrate
+
+          echo "Precompiling assets..."
+          # Precompile assets
+          # docker-compose -f docker-compose.production.yml run --rm web rails assets:precompile RAILS_ENV=production
+          docker-compose -f docker-compose.production.yml exec web bundle exec rails assets:precompile RAILS_ENV=production
+
+          echo "Clearing rails cache..."
+          # Clear Rails cache
+          # docker-compose -f docker-compose.production.yml run --rm web rails rails:cache:clear
+          docker-compose -f docker-compose.production.yml exec web bundle exec rails rails:cache:clear
+
+          echo "Restarting Nginx..."
+          # Restart Nginx
+          sudo systemctl restart nginx
+
+          echo "Cleaning up old Docker images..."
+          docker system prune -af --volumes
+
+          # echo "Tagging deployment..."
+          # git tag -a "deploy-$(date +%Y%m%d%H%M%S)" -m "Deployment on $(date)"
+          # git push --tags
+
+          # echo "Deployment completed successfully at $(date)"
+        EOL
+
+        # Add some kind of health check
+        # curl -f http://localhost:3000/health || exit 1
+
+        #     - name: Notify on Success
+        #       if: success()
+        #       uses: 8398a7/action-slack@v3
+        #       with:
+        #         status: ${{ job.status }}
+        #         text: Deployment to production server succeeded!
+        #         webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        # 
+        #     - name: Notify on Failure
+        #       if: failure()
+        #       uses: 8398a7/action-slack@v3
+        #       with:
+        #         status: ${{ job.status }}
+        #         text: Deployment to production server failed!
+        #         webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+

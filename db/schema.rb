@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_16_210051) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_21_010732) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -167,6 +167,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_16_210051) do
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_languages_on_code", unique: true
     t.index ["name"], name: "index_languages_on_name", unique: true
+  end
+
+  create_table "notes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "passage_id"
+    t.text "content", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["passage_id"], name: "index_notes_on_passage_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "passage_progresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -371,6 +381,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_16_210051) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "notes", "passages"
+  add_foreign_key "notes", "users"
   add_foreign_key "passage_progresses", "passages"
   add_foreign_key "passage_progresses", "users"
   add_foreign_key "passages", "difficulties"

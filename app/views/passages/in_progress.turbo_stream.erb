@@ -1,0 +1,17 @@
+<turbo-stream action="replace" target="in_progress_popup">
+  <template>
+    <turbo-frame id="in_progress_popup" data-popup-target="popupFrame">
+      <div class="popup">
+        <h2>In-progress Passages</h2>
+        <ul>
+          <% @passage_progresses.each do |progress| %>
+            <li>
+              <strong><%= link_to progress.title, passage_writer_path(progress.difficulty, progress.title), data: { turbo: false } %></strong>
+              <%= render partial: 'partials/progress_bar', formats: :html, locals: { current_index: progress.current_index, total: progress.sentences_count } %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </turbo-frame>
+  </template>
+</turbo-stream>
