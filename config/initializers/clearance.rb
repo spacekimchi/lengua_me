@@ -3,14 +3,14 @@ Clearance.configure do |config|
   if Rails.env.development?
     config.cookie_domain = 'localhost'
   else
-    config.cookie_domain = '.lenguamecom'
+    config.cookie_domain = '.basedlingo.com'
   end
   config.cookie_expiration = lambda { |cookies| 1.year.from_now.utc }
   config.cookie_name = "_traders_session"
   config.cookie_path = "/"
   config.routes = false
   config.httponly = true
-  config.mailer_sender = "jin@lenguamecom"
+  config.mailer_sender = "jin@basedlingo.com"
   config.password_strategy = Clearance::PasswordStrategies::BCrypt
   config.redirect_url = "/"
   config.rotate_csrf_on_sign_in = true

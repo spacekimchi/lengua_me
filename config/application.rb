@@ -16,7 +16,7 @@ module LenguaMe
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
-    config.action_mailer.default_url_options = { host: "lenguamecom" }
+    config.action_mailer.default_url_options = { host: "basedlingo.com" }
 
     config.generators do |g|
       # These will create a stub for a model when a new one is generated
