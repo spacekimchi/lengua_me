@@ -15,6 +15,8 @@ Rails.application.configure do
   # Turn on fragment caching in view templates.
   config.action_controller.perform_caching = true
 
+  config.require_master_key = ENV["SECRET_KEY_BASE_DUMMY"].nil?
+
   config.session_store :cookie_store, key: '_basedlingo_session', secure: true
 
   # Cache assets for far-future expiry since they are all digest stamped.
@@ -80,6 +82,10 @@ Rails.application.configure do
 
   # Only use :id for inspections in production.
   config.active_record.attributes_for_inspect = [ :id ]
+  config.hosts = [
+    "basedlingo.com",
+    "www.basedlingo.com"
+  ]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
