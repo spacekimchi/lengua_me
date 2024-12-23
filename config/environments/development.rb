@@ -18,7 +18,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   config.force_ssl = false
-  config.session_store :cookie_store, key: '_lengua_me', secure: false, same_site: :lax, signed: false
+  config.session_store :cookie_store, key: '_basedlingo', secure: false, same_site: :lax, signed: false
 
   # Enable/disable Action Controller caching. By default Action Controller caching is disabled.
   # Run rails dev:cache to toggle Action Controller caching.
