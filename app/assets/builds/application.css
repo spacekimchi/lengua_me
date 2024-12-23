@@ -903,6 +903,16 @@ footer .footer-container a {
   margin-right: 5px;
 }
 
+.faq-container {
+  padding-top: 1rem;
+}
+.faq-container .faq-item p {
+  text-indent: 2rem;
+}
+.faq-container .faq-item:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
 .passage-writer-show-container .passage-writer-title-container {
   display: flex;
   align-items: center;
