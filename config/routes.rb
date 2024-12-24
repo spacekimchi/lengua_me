@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :passwords, controller: "passwords", only: [:create, :new]
   resource :session, controller: "sessions", only: [:create]
 
+  post :send_verification_email, to: "users#send_verification_email"
+
   resources :users, controller: "users", only: [:create] do
     resources :purchased_products
     resource :password, controller: "passwords", only: [:edit, :update]
@@ -26,7 +28,7 @@ Rails.application.routes.draw do
   resource :terms_of_service, only: %i[show]
   resource :cookie_policy, only: %i[show]
 
-  resources :verification, only: [:edit], param: :verification_token
+  resources :verifications, only: [:edit], param: :verification_token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # An example of using clearance to put route guarding in the routes level

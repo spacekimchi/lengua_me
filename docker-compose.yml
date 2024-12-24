@@ -20,6 +20,7 @@ services:
       context: .
       args:
         - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+        - SENDGRID_API_KEY=${SENDGRID_API_KEY} # Add this line
     command: bash -c "bin/rails db:migrate && bundle exec good_job start"
     depends_on:
       - db
@@ -40,6 +41,7 @@ services:
       dockerfile: Dockerfile
       args:
         - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+        - SENDGRID_API_KEY=${SENDGRID_API_KEY} # Add this line
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/rails
@@ -54,6 +56,7 @@ services:
     environment:
       - GUI_AVAILABLE=false
       - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY} # Add this line
     mem_limit: 1g
     stdin_open: true
     tty: true

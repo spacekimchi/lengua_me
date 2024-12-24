@@ -19,6 +19,11 @@ ENV RAILS_ENV="development" \
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
+# Accept SENDGRID_API_KEY as a build argument
+ARG SENDGRID_API_KEY
+# Set SENDGRID_API_KEY as an environment variable during build
+ENV SENDGRID_API_KEY=${SENDGRID_API_KEY}
+
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential curl git libpq-dev libvips node-gyp pkg-config python-is-python3

@@ -41,9 +41,19 @@ Rails.application.configure do
 
   # Make template changes take effect immediately.
   config.action_mailer.perform_caching = false
-
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    domain: 'basedlingo.com', # Replace with your verified domain
+    user_name: 'apikey', # This is literal; use 'apikey' as the username
+    password: Rails.application.credentials.dig(:sendgrid, :api_key), # Replace with your SendGrid API Key
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
   # Set localhost to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+  config.action_mailer.default_url_options = { host: "localhost", port: 3002 }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
