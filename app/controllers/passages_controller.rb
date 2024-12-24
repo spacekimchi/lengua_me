@@ -76,7 +76,7 @@ class PassagesController < ApplicationController
       .ordered
     passages = passages.search_like(search_query) if search_query.present?
 
-    @pagy, @passages = pagy(passages, items: 30)
+    @pagy, @passages = pagy(passages, limit: 30)
 
     if current_user
       @passage_progresses = PassageProgress
