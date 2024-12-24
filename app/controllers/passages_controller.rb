@@ -103,7 +103,7 @@ class PassagesController < ApplicationController
 
     @sentences = @passage.sentences
       .with_attached_audio
-      .select('sentences.id, sentences.content, sentences.order_idx')
+      .select('sentences.id, sentences.content, sentences.order_idx, sentences.prefix')
       .order(:order_idx)
     @passage_progress = @passage.passage_progresses.find_by(user: current_user)
     @current_index = @passage_progress&.current_index || 0
@@ -114,7 +114,8 @@ class PassagesController < ApplicationController
         id: sentence.id,
         content: sentence.content,
         audio_url: (sentence.audio.attached? ? url_for(sentence.audio) : nil),
-        order_idx: sentence.order_idx
+        order_idx: sentence.order_idx,
+        prefix: sentence.prefix
       }
     end
 

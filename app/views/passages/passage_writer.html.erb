@@ -33,11 +33,21 @@
          <div class="sentence-card-attempt-container">
            <div class="card-container" data-sentence-writer-target="writerContainer">
              <audio id="audio-<%= @current_index %>" class="sentence-writer-audio" controls src="<%= @sentences_data[@current_index][:audio_url] %>"></audio>
-             <%= content_tag :div, @sentences_data[@current_index][:content],
+
+             <%= content_tag :div,
                id: 'sentence-blur-hint',
-               class: "sentence-writer-sentence-text blur",
-               onclick: "this.classList.toggle('blur');"
-             %>
+               class: 'sentence-writer-sentence-text',
+               onclick: "this.querySelector('.content-blur').classList.toggle('blur');" do %>
+               <span class="sentence-prefix">
+                 <% if @sentences_data[@current_index][:prefix].present? %>
+                   <%= @sentences_data[@current_index][:prefix] %>: 
+                 <% end %>
+               </span>
+
+               <span class="content-blur blur">
+                 <%= @sentences_data[@current_index][:content] %>
+               </span>
+             <% end %>
            </div>
            <div>
              <textarea placeholder="Type what you hear.." data-sentence-writer-target="textArea" data-action="keydown.enter->sentence-writer#check"></textarea>
@@ -116,7 +126,7 @@
              </div>
 
            </div>
-           <div class="sentence-comments-container" data-controller="comments">
+           <div class="sentence-comments-container hidden" data-controller="comments">
              Comments
            </div>
          </div>

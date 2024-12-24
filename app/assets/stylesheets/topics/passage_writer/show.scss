@@ -112,6 +112,10 @@
         margin: 11px 0;
         cursor: pointer;
 
+        .sentence-prefix {
+            font-weight: bold;
+        }
+
         &.blur {
             cursor: help;
         }
