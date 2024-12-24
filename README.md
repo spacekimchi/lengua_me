@@ -170,6 +170,7 @@ we can run
 EDITOR="code --wait" bin/rails credentials:edit --environment production
 to create a production master key and copy those files into the production server.
 Edit the config/environment/production.rb file to include this
+
 ```config.require_master_key = ENV["SECRET_KEY_BASE_DUMMY"].nil?```
 
 

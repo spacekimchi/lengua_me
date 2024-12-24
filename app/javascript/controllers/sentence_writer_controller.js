@@ -581,8 +581,11 @@ export default class extends Controller {
 
     // Show the correct sentence (this might be optional if you want to hide it from the user)
     const sentenceDiv = writerContainer.querySelector('div#sentence-blur-hint');
-    sentenceDiv.classList.add("blur");
-    sentenceDiv.textContent = sentence.content;
+    if (sentence.prefix) {
+      sentenceDiv.querySelector('.sentence-prefix').textContent = `${sentence.prefix}:`;
+    }
+    sentenceDiv.querySelector('.content-blur').classList.add("blur");
+    sentenceDiv.querySelector('.content-blur').textContent = sentence.content;
 
     this.element.dataset.currentIndex = index;
 

@@ -1002,6 +1002,9 @@ footer .footer-container a {
   margin: 11px 0;
   cursor: pointer;
 }
+.passage-writer-show-container .sentence-writer-sentence-text .sentence-prefix {
+  font-weight: bold;
+}
 .passage-writer-show-container .sentence-writer-sentence-text.blur {
   cursor: help;
 }
