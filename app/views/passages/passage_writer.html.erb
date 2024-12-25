@@ -20,13 +20,34 @@
        data-sentences="<%= @sentences_data.to_json %>"
        data-current-index="<%= @current_index %>">
        <div class="sentence-writer-navigation" data-sentence-writer-target="navigation">
-         <button class="button arrow-button<%= @current_index == 0 ? ' hidden-vis' : '' %>" data-sentence-writer-target="leftNav" data-action="click->sentence-writer#prev keydown.enter->sentence-writer#prev">
+         <button  type="button" class="button arrow-button<%= @current_index == 0 ? ' hidden-vis' : '' %>" data-sentence-writer-target="leftNav" data-action="click->sentence-writer#prev keydown.enter->sentence-writer#prev">
            &larr;
          </button>
          <span data-sentence-writer-target="currentIndexNavigation"><%= "#{@current_index + 1} / #{@sentences_data.length}" %></span>
          <button class="button arrow-button" data-sentence-writer-target="rightNav" data-action="click->sentence-writer#next keydown.enter->sentence-writer#next">
            &rarr;
          </button>
+         <div class="passage-actions">
+           <div class="passage-options-container" data-controller="tooltip">
+             <button type="button" class="passage-options-button" data-action="tooltip#displayTooltip">
+               <%= inline_svg('ellipsis.svg', class: 'icon') %>
+             </button>
+             <div id="options-tooltip" class="tooltip tooltip-below hidden" data-tooltip-target="tooltip">
+               <div class="tooltip-arrow" data-tooltip-target="arrow"></div>
+               <div class="tooltip-content passage-options-list" data-tooltip-target="content">
+                 <button type="button" onclick="navigator.clipboard.writeText(window.location.href).then(() => {})">
+                   Copy passage url
+                 </button>
+                 <% if current_user.present? %>
+                   <%= button_to 'Reset progress', update_passage_progress_path, method: :post, params: { passage_id: @passage.id, current_index: 0 } %>
+                 <% end %>
+                 <% if current_user&.super_admin? %>
+                   <%= button_to 'Translate progress', update_passage_progress_path, method: :post, params: { passage_id: @passage.id, current_index: 0 } %>
+                 <% end %>
+               </div>
+             </div>
+           </div>
+         </div>
        </div>
 
        <div class="sentence-card-main-container" data-sentence-writer-target="mainContainer">
@@ -113,13 +134,13 @@
              </div>
            </div>
 
-           <div class="sentence-pronunciations-container" data-sentence-writer-target="wordPronunciationsDiv">
+           <div class="sentence-pronunciations-container" data-sentence-writer-target="wordPronunciationsDiv" data-controller="tooltip">
              <div>
                Pronunciations
              </div>
              <div class="pronunciation-words" data-sentence-writer-target="wordPronunciationsText">
              </div>
-             <div style="display: none;" data-controller="tooltip" data-tooltip-target="tooltip" class="tooltip tooltip-below">
+             <div class="tooltip tooltip-below hidden" data-tooltip-target="tooltip">
                <div class="tooltip-arrow" data-tooltip-target="arrow"></div>
                <div class="tooltip-content" data-tooltip-target="content">
                </div>

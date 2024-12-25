@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["arrow", "content"];
+  static targets = ["arrow", "content", "tooltip"];
 
   initialize() {
     // Bind event handlers once and store the references
@@ -10,8 +10,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("Tooltip controller connected");
-
     this.hide();
     this.currentParent = null;
 
@@ -21,8 +19,6 @@ export default class extends Controller {
   }
 
   disconnect() {
-    console.log("Tooltip controller disconnected");
-
     // Ensure tooltip is hidden
     this.hide();
 
@@ -40,6 +36,12 @@ export default class extends Controller {
     this.show(parent, rect, loadingDiv);
   }
 
+  displayTooltip(event) {
+    event.preventDefault();
+    const element = this.element.querySelector('button[data-action="tooltip#displayTooltip"]');
+    this.show(element, element.getBoundingClientRect());
+  }
+
   show(parent, parentRect, contentHTML) {
     this.currentParent = parent;
     // Update content if provided
@@ -49,10 +51,10 @@ export default class extends Controller {
     }
 
     // Make visible to measure sizes
-    this.element.style.display = 'block';
+    this.tooltipTarget.classList.remove('hidden');
 
-    const tooltipWidth = this.element.offsetWidth;
-    const tooltipHeight = this.element.offsetHeight;
+    const tooltipWidth = this.tooltipTarget.offsetWidth;
+    const tooltipHeight = this.tooltipTarget.offsetHeight;
 
     // Position the tooltip (this logic can be similar to what you had before)
     let left = parentRect.left + window.scrollX + (parentRect.width / 2) - (tooltipWidth / 2);
@@ -70,7 +72,7 @@ export default class extends Controller {
     }
 
     // Remove any old classes
-    this.element.classList.remove('tooltip--above', 'tooltip--below');
+    this.tooltipTarget.classList.remove('tooltip--above', 'tooltip--below');
 
     // Check vertical space below; if not enough, try above
     if (top + tooltipHeight > window.scrollY + viewportHeight - margin) {
@@ -78,20 +80,20 @@ export default class extends Controller {
       const abovePos = parentRect.top + window.scrollY - tooltipHeight - 10;
       if (abovePos > window.scrollY + margin) {
         top = abovePos;
-        this.element.classList.add('tooltip--above');
+        this.tooltipTarget.classList.add('tooltip--above');
       } else {
         top = Math.min(top, window.scrollY + viewportHeight - margin - tooltipHeight);
-        this.element.classList.add('tooltip--below');
+        this.tooltipTarget.classList.add('tooltip--below');
       }
     } else {
-      this.element.classList.add('tooltip--below');
+      this.tooltipTarget.classList.add('tooltip--below');
       if (top < window.scrollY + margin) {
         top = window.scrollY + margin;
       }
     }
 
-    this.element.style.left = `${left}px`;
-    this.element.style.top = `${top}px`;
+    this.tooltipTarget.style.left = `${left}px`;
+    this.tooltipTarget.style.top = `${top}px`;
 
     // Position arrow
     const parentCenterX = parentRect.left + (parentRect.width / 2) + window.scrollX;
@@ -103,13 +105,13 @@ export default class extends Controller {
     this.arrowTarget.style.left = `${arrowX - 3}px`;
 
     // Add a global click listener to detect clicks outside the tooltip
-    document.addEventListener('click', this.handleDocumentClick);
+    document.addEventListener('click', this.boundHandleDocumentClick);
   }
 
   hide() {
-    this.element.style.display = 'none'
-    this.currentParent = null
-    document.removeEventListener('click', this.handleDocumentClick)
+    this.tooltipTarget.classList.add('hidden');
+    this.currentParent = null;
+    document.removeEventListener('click', this.boundHandleDocumentClick);
   }
 
   /**
@@ -118,7 +120,7 @@ export default class extends Controller {
    */
   handleDocumentClick(event) {
     // If the click is inside the tooltip, do nothing
-    if (this.element.contains(event.target)) {
+    if (this.tooltipTarget.contains(event.target)) {
       return
     }
 
@@ -137,14 +139,12 @@ export default class extends Controller {
   }
 
   handleWindowChange() {
-    const tooltipElement = document.querySelector('[data-controller="tooltip"]');
+    const tooltipElement = this.tooltipTarget;
     if (!tooltipElement) return; // Avoid TypeError if the element is missing
 
-    const tooltipController = this.application.getControllerForElementAndIdentifier(tooltipElement, "tooltip");
-
-    if (tooltipElement.style.display !== 'none' && this.currentParent) {
+    if (!tooltipElement.classList.contains('hidden') && this.currentParent) {
       const rect = this.currentParent.getBoundingClientRect();
-      tooltipController.show(this.currentParent, rect);
+      this.show(this.currentParent, rect);
     }
   }
 }
