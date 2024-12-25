@@ -11,8 +11,12 @@ class PassageProgressesController < ApplicationController
       else
         format.json { render json: { message: 'Failed to update progress!' }, status: :unprocessable_entity }
       end
+      format.html { redirect_back fallback_location: :passages_path, status: :ok }
     end
   rescue StandardError => e
-    render json: { error: "Internal server error" }, status: :internal_server_error
+    respond_to do |format|
+      format.json { render json: { error: "Internal server error" }, status: :internal_server_error }
+      format.html { redirect_back fallback_location: :passages_path, status: :internal_server_error }
+    end
   end
 end

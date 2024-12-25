@@ -24,7 +24,8 @@ export default class extends Controller {
     "rightNav",
     "mainContainer",
     "completedContainer",
-    "navigation"
+    "navigation",
+    "passageWriterOptions"
   ];
 
   initialize() {
@@ -160,8 +161,7 @@ export default class extends Controller {
     const rect = parent.getBoundingClientRect();
     const word = parent.querySelector(".pronunciation-word").innerText;
 
-    const tooltipElement = document.querySelector('[data-controller="tooltip"]');
-    const tooltipController = this.application.getControllerForElementAndIdentifier(tooltipElement, "tooltip")
+    const tooltipController = this.application.getControllerForElementAndIdentifier(this.wordPronunciationsDivTarget, "tooltip")
 
     // Show a loader first
     tooltipController.showLoadingDiv(parent, rect);
@@ -460,7 +460,6 @@ export default class extends Controller {
         }
       })
       .then((data) => {
-        console.log("SENTENCE COMPLETED:", data); // Success message
       })
       .catch((error) => {
         console.error(error.message);

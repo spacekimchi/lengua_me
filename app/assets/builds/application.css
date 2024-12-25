@@ -961,6 +961,25 @@ footer .footer-container a {
 .passage-writer-show-container .sentence-writer-card .sentence-writer-navigation {
   margin-bottom: 0.5rem;
 }
+.passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions {
+  float: right;
+}
+.passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .icon {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+.passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .passage-options-container .passage-options-button:hover {
+  cursor: pointer;
+}
+.passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .passage-options-container .passage-options-list button {
+  padding: 5px 3px;
+}
+.passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .passage-options-container .passage-options-list button:hover {
+  text-decoration: underline;
+}
+.passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .passage-options-container button {
+  cursor: pointer;
+}
 .passage-writer-show-container .check-result {
   display: flex;
   align-items: center;

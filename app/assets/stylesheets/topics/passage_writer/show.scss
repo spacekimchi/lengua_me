@@ -60,6 +60,36 @@
 
         .sentence-writer-navigation {
             margin-bottom: 0.5rem;
+
+            .passage-actions {
+                float: right;
+
+                .icon {
+                    height: 1.5rem;
+                    width: 1.5rem;
+                }
+
+                .passage-options-container {
+                    .passage-options-button {
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+
+                    .passage-options-list {
+                        button {
+                            padding: 5px 3px;
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+
+                    button {
+                        cursor: pointer;
+                    }
+                }
+            }
         }
     }
 
