@@ -1,7 +1,7 @@
 <turbo-stream action="replace" target="in_progress_popup">
   <template>
     <turbo-frame id="in_progress_popup" data-popup-target="popupFrame">
-      <div class="popup">
+      <div class="in-progress-popup popup">
         <% if @passage_progresses.present? %>
           <ul>
             <% @passage_progresses.each do |progress| %>

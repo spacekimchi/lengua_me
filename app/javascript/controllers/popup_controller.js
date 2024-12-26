@@ -12,6 +12,14 @@ export default class extends Controller {
     document.removeEventListener('click', this.handleDocumentClickBound);
   }
 
+  displayPopup() {
+    this.popupFrameTarget.classList.remove('hidden');
+  }
+
+  hidePopup() {
+    this.popupFrameTarget.classList.add('hidden');
+  }
+
   showLoading(event) {
     this.popupFrameTarget.innerHTML = `
       <div class="popup" style="position:absolute; top:100%; left:0; background:#fff; border:1px solid #ddd; box-shadow:0 4px 8px rgba(0,0,0,0.1); padding:1rem;">
@@ -23,8 +31,8 @@ export default class extends Controller {
 
   handleDocumentClick(event) {
     const popup = this.popupFrameTarget.querySelector('.popup');
-    if (popup && !popup.contains(event.target)) {
-      this.popupFrameTarget.innerHTML = "";
+    if (popup && !this.element.contains(event.target)) {
+      this.hidePopup();
     }
   }
 }

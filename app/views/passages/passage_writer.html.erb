@@ -28,19 +28,25 @@
            &rarr;
          </button>
          <div class="passage-actions">
-           <div class="passage-options-container" data-controller="tooltip">
-             <button type="button" class="passage-options-button" data-action="tooltip#displayTooltip">
+           <div class="passage-options-container" data-controller="popup">
+             <button type="button" class="passage-options-button" data-action="popup#displayPopup">
                <%= inline_svg('ellipsis.svg', class: 'icon') %>
              </button>
-             <div id="options-tooltip" class="tooltip tooltip-below hidden" data-tooltip-target="tooltip">
-               <div class="tooltip-arrow" data-tooltip-target="arrow"></div>
-               <div class="tooltip-content passage-options-list" data-tooltip-target="content">
-                 <button type="button" onclick="navigator.clipboard.writeText(window.location.href).then(() => {})">
+             <div class="hidden" style="position: relative;" data-popup-target="popupFrame">
+               <div class="passage-options-items popup">
+                 <% if @previous_passage.present? %>
+                   <%= link_to 'Previous Passage', passage_writer_path(@difficulty.name, @previous_passage.title) %>
+                 <% end %>
+                 <% if @next_passage.present? %>
+                   <br>
+                   <%= link_to 'Next Passage', passage_writer_path(@difficulty.name, @next_passage.title) %>
+                 <% end %>
+                 <button type="button" onclick="navigator.clipboard.writeText(window.location.href).then(() => {})" data-action="popup#hidePopup">
                    Copy passage url
                  </button>
                  <% if current_user.present? %>
                    <br>
-                   <button type="button" data-action="click->sentence-writer#resetProgress">Reset progress</button>
+                   <button type="button" data-action="click->sentence-writer#resetProgress popup#hidePopup">Reset progress</button>
                  <% end %>
                </div>
              </div>

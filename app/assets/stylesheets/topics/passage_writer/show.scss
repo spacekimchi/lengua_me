@@ -76,12 +76,19 @@
                         }
                     }
 
-                    .passage-options-list {
-                        button {
+                    .passage-options-items {
+                        min-width: 175px;
+
+                        a, button {
                             padding: 5px 3px;
+                        }
+                        button {
                             &:hover {
                                 text-decoration: underline;
                             }
+                        }
+                        a {
+                            color: black;
                         }
                     }
 

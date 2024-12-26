@@ -6,9 +6,15 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    padding: 1rem;
+    padding: 0.5rem;
     z-index: 1000;
-    width: 275px;
+
+    button {
+        padding: 0.25rem 0.25rem;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 .spinner {
     width: 20px;
