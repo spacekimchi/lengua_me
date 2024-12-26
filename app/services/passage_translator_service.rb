@@ -40,7 +40,9 @@ class PassageTranslatorService
     sentences = parse_response(response)
     ActiveRecord::Base.transaction do
       sentences.each_with_index do |sentence, idx|
-        SentenceTranslation.create!(language: @language, sentence_id: @sentences[idx][1], text: sentence)
+        translation = SentenceTranslation.find_or_initialize_by(language: @language, sentence_id: @sentences[idx][1])
+        translation.text = sentence
+        translation.save
       end
     end
 

@@ -39,10 +39,8 @@
                    Copy passage url
                  </button>
                  <% if current_user.present? %>
-                   <%= button_to 'Reset progress', update_passage_progress_path, method: :post, params: { passage_id: @passage.id, current_index: 0 } %>
-                 <% end %>
-                 <% if current_user&.super_admin? %>
-                   <%= button_to 'Translate progress', update_passage_progress_path, method: :post, params: { passage_id: @passage.id, current_index: 0 } %>
+                   <br>
+                   <button type="button" data-action="click->sentence-writer#resetProgress">Reset progress</button>
                  <% end %>
                </div>
              </div>
@@ -123,7 +121,7 @@
          <div style="display: none;" class="sentence-writer-card-info-container" data-sentence-writer-target="infoContainerDiv">
            <div class="sentence-translations-container">
              <label for="language-select">Translation:</label>
-             <select id="language-select" data-sentence-writer-target="translateLanguageSelect" data-action="change->sentence-writer#changeLanguage">
+             <select id="language-select" class="translation-select" data-sentence-writer-target="translateLanguageSelect" data-action="change->sentence-writer#changeLanguage">
                <% @language_codes.each do |code, name| %>
                  <option value="<%= code %>"><%= name %></option>
                <% end %>

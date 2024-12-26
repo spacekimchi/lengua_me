@@ -10,7 +10,7 @@ local:
 wasabi:
   service: S3
   access_key_id: <%= Rails.application.credentials.dig(:wasabi, :access_key_id) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:azure_storage, :secret_access_key) %>
+  secret_access_key: <%= Rails.application.credentials.dig(:wasabi, :secret_access_key) %>
   region: us-central-1
   endpoint: https://s3.us-central-1.wasabisys.com
   bucket: basedlingodev
