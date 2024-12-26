@@ -35,7 +35,6 @@ module Constants
                     ['dv', 'Divehi'],
                     ['dz', 'Dzongkha'],
                     ['ee', 'Ewe'],
-                    ['el', 'Greek, Modern (1453–)'],
                     ['en', 'English'],
                     ['eo', 'Esperanto'],
                     ['es', 'Spanish'],
@@ -174,13 +173,13 @@ module Constants
                     ['uz', 'Uzbek'],
                     ['ve', 'Venda'],
                     ['vi', 'Vietnamese'],
-                    ['vo', 'Volapük'],
                     ['wa', 'Walloon'],
                     ['wo', 'Wolof'],
                     ['xh', 'Xhosa'],
                     ['yi', 'Yiddish'],
                     ['yo', 'Yoruba'],
                     ['za', 'Zhuang'],
-                    ['zh', 'Chinese'],
+                    ['cmn', 'Mandarin'],
+                    ['yue', 'Cantonese'],
                     ['zu' 'Zulu']]
 end

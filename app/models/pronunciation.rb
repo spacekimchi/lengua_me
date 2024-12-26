@@ -52,7 +52,7 @@ class Pronunciation < ApplicationRecord
 
       self.audio.attach(
         io: tempfile,
-        filename: "#{self.word}.mp3",
+        filename: "#{name}_#{language_code}_#{gender}_#{self.word.text}.mp3",
         content_type: 'audio/mpeg'
       )
     end

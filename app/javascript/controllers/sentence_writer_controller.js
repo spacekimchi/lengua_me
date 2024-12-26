@@ -25,7 +25,7 @@ export default class extends Controller {
     "mainContainer",
     "completedContainer",
     "navigation",
-    "passageWriterOptions"
+    "resetPassageProgress"
   ];
 
   initialize() {
@@ -34,26 +34,30 @@ export default class extends Controller {
   }
 
   connect() {
+    // Set the selected language in the dropdown based on localStorage
     const defaultLanguage = "en";
     const storedTranslateLanguageCode = localStorage.getItem("translateLanguageCode") || defaultLanguage;
-
-    // Set the selected language in the dropdown based on localStorage
+    this.fetchTranslations(storedTranslateLanguageCode);
     this.translateLanguageSelectTarget.value = storedTranslateLanguageCode;
 
-    // Fetch initial translations
     this.sentences = JSON.parse(this.element.dataset.sentences);
     this.currentIndex = parseInt(this.element.dataset.currentIndex, 10) || 0;
-    this.progressIndex = this.currentIndex;
-    this.finishedSentence = false;
-    this.initialLoad = true;
-    this.renderSentence(this.currentIndex);
-    this.fetchTranslations(storedTranslateLanguageCode);
-    this.textAreaTarget.focus();
     this.wordPronunciations = {};
+    this.initialLoad = true;
+
+    this.setCurrentIndex(this.currentIndex);
 
     // Event Listeners
     document.addEventListener("keydown", this.boundHandleKeyDown);
     this.textAreaTarget.addEventListener('input', this.boundHandleInput);
+  }
+
+  setCurrentIndex(idx) {
+    this.currentIndex = idx;
+    this.progressIndex = this.currentIndex;
+    this.finishedSentence = false;
+    this.renderSentence(this.currentIndex);
+    this.textAreaTarget.focus();
   }
 
   changeLanguage() {
@@ -79,6 +83,7 @@ export default class extends Controller {
     })
     .then(data => {
       this.translations = data.sentences;
+      this.setTranslations();
       return data;
     })
     .catch(error => {
@@ -165,6 +170,7 @@ export default class extends Controller {
 
     // Show a loader first
     tooltipController.showLoadingDiv(parent, rect);
+
     // Fetch the pronunciation (ensure this method returns a promise or handles async correctly)
     this.fetchWordPronunciation(word).then(wordPronunciation => {
       // Get the TooltipController instance
@@ -280,6 +286,11 @@ export default class extends Controller {
           return { error: "Pronunciation not available." }; // Fallback content
         });
     }
+  }
+
+  resetProgress(event) {
+    this.setCurrentIndex(0);
+    this.updatePassageProgress(0);
   }
 
   handleInput(event) {
@@ -482,7 +493,7 @@ export default class extends Controller {
     if (this.currentIndex === this.sentences.length - 1) {
       // this.correctDivTarget.querySelector('button.success-button').classList.add('hidden');
       this.skipDivTarget.querySelector('button.action-button').classList.add('hidden');
-      this.checkAndSkipDivTarget.querySelector('button.neutral-button').classList.add('hidden');
+      // this.checkAndSkipDivTarget.querySelector('button.neutral-button').classList.add('hidden');
     } else {
       this.correctDivTarget.querySelector('button.success-button').classList.remove('hidden');
       this.skipDivTarget.querySelector('button.action-button').classList.remove('hidden');

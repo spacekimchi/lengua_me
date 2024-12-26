@@ -44,6 +44,7 @@ class Language < ApplicationRecord
     'ce' => 'Chechen',
     'ch' => 'Chamorro',
     'co' => 'Corsican',
+    'cmn' => 'Mandarin',
     'cr' => 'Cree',
     'cs' => 'Czech',
     'cu' => 'Church Slavic',
@@ -199,8 +200,8 @@ class Language < ApplicationRecord
     'xh' => 'Xhosa',
     'yi' => 'Yiddish',
     'yo' => 'Yoruba',
+    'yue' => 'Cantonese',
     'za' => 'Zhuang',
-    'zh' => 'Chinese',
     'zu' => 'Zulu'
   }.freeze
 
