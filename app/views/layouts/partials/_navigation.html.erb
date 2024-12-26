@@ -53,7 +53,7 @@
             data: { action: "click->popup#showLoading", turbo_frame: "in_progress_popup", turbo_stream: true },
             class: "button" %>
 
-          <turbo-frame id="in_progress_popup" data-popup-target="popupFrame">
+          <turbo-frame id="in_progress_popup" class="hidden" data-popup-target="popupFrame">
             <!-- Initially empty; will show loading spinner on click, then content after response -->
           </turbo-frame>
         </div>

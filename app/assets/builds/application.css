@@ -488,6 +488,9 @@ table tbody td {
   margin-left: auto;
   margin-right: 0.5rem;
 }
+.top-nav-container nav#top-nav-secondary .in-progress-popup {
+  min-width: 250px;
+}
 .top-nav-container nav#top-nav {
   display: flex;
   align-items: center;
@@ -841,9 +844,14 @@ footer .footer-container a {
   border: 1px solid #ddd;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
+  padding: 0.5rem;
   z-index: 1000;
-  width: 275px;
+}
+.popup button {
+  padding: 0.25rem 0.25rem;
+}
+.popup button:hover {
+  text-decoration: underline;
 }
 
 .spinner {
@@ -970,11 +978,17 @@ footer .footer-container a {
 .passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .passage-options-container .passage-options-button:hover {
   cursor: pointer;
 }
-.passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .passage-options-container .passage-options-list button {
+.passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .passage-options-container .passage-options-items {
+  min-width: 175px;
+}
+.passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .passage-options-container .passage-options-items a, .passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .passage-options-container .passage-options-items button {
   padding: 5px 3px;
 }
-.passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .passage-options-container .passage-options-list button:hover {
+.passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .passage-options-container .passage-options-items button:hover {
   text-decoration: underline;
+}
+.passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .passage-options-container .passage-options-items a {
+  color: black;
 }
 .passage-writer-show-container .sentence-writer-card .sentence-writer-navigation .passage-actions .passage-options-container button {
   cursor: pointer;
