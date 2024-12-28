@@ -1,11 +1,11 @@
 <div class="passages-by-difficulty-container">
   <%= render partial: 'passages/partials/breadcrumbs' %>
-  <h1><%= @difficulty.name.titleize %></h1>
+  <h1><%= @category %></h1>
   <div>
     <div class="pagy-container">
       <%== pagy_nav(@pagy) %>
 
-      <%= form_with url: passages_by_difficulty_path(difficulty_name: @difficulty.name), method: :get, local: true, class: 'search-form' do %>
+      <%= form_with url: passages_by_category_path(category_name: params[:category_name]), method: :get, local: true, class: 'search-form' do %>
         <input
           type="text"
           name="q"
@@ -29,7 +29,7 @@
                 <%= inline_svg('empty-star.svg', class: 'icon star-icon') %>
               <% end %>
             <% end %>
-            <%= link_to passage_writer_path(@difficulty.name, passage.title), class: 'passage-list-item' do %>
+            <%= link_to passage_writer_path(params[:category_name], passage.title), class: 'passage-list-item' do %>
               <%= passage.position %>. <%= passage.title %>
             <% end %>
           </div>

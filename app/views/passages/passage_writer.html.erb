@@ -35,11 +35,11 @@
              <div class="hidden" style="position: relative;" data-popup-target="popupFrame">
                <div class="passage-options-items popup">
                  <% if @previous_passage.present? %>
-                   <%= link_to 'Previous Passage', passage_writer_path(@difficulty.name, @previous_passage.title) %>
+                   <%= link_to 'Previous Passage', passage_writer_path(params[:category_name], @previous_passage.title) %>
                    <br>
                  <% end %>
                  <% if @next_passage.present? %>
-                   <%= link_to 'Next Passage', passage_writer_path(@difficulty.name, @next_passage.title) %>
+                   <%= link_to 'Next Passage', passage_writer_path(params[:category_name], @next_passage.title) %>
                    <br>
                  <% end %>
                  <button type="button" onclick="navigator.clipboard.writeText(window.location.href).then(() => {})" data-action="popup#hidePopup">
@@ -168,21 +168,21 @@
            </div>
            <div class="completed-nav-links">
              <% if @next_passage.present? %>
-               <%= link_to passage_writer_path(@difficulty.name, @next_passage.title), id: 'completed-next-link', class: 'link-button success-link' do %>
+               <%= link_to passage_writer_path(params[:category_name], @next_passage.title), id: 'completed-next-link', class: 'link-button success-link' do %>
                  Continue
                <% end %>
              <% end %>
-             <%= link_to passage_writer_path(@difficulty.name, @passage.title), id: 'completed-repeat-link', class: 'link-button' do %>
+             <%= link_to passage_writer_path(params[:category_name], @passage.title), id: 'completed-repeat-link', class: 'link-button' do %>
                Repeat
              <% end %>
              <% if @previous_passage.present? %>
-               <%= link_to passage_writer_path(@difficulty.name, @previous_passage.title), id: 'completed-prev-link', class: 'link-button neutral-link' do %>
+               <%= link_to passage_writer_path(params[:category_name], @previous_passage.title), id: 'completed-prev-link', class: 'link-button neutral-link' do %>
                  Previous
                <% end %>
              <% end %>
            </div>
            <div>
-             <%= link_to passages_by_difficulty_path(@difficulty.name), id: 'all-passages-link' do %>
+             <%= link_to passages_by_category_path(params[:category_name]), id: 'all-passages-link' do %>
                All Passages
              <% end %>
            </div>

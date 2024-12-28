@@ -20,8 +20,8 @@ module Seeds
         en = Language.english
         a2_content.each do |content|
           content.each do |passage|
-            p = Passage.find_or_create_by(difficulty: d, title: passage[0])
             category = passage[2]
+            p = Passage.find_or_create_by(difficulty: d, title: passage[0], category: category)
             voice_gender = passage[3]
             passage[1].each_with_index do |sentence, idx|
               prefix, content = sentence.split(': ', 2)
@@ -50,8 +50,8 @@ module Seeds
         en = Language.english
         b1_content.each do |content|
           content.each do |passage|
-            p = Passage.find_or_create_by(difficulty: d, title: passage[0])
             category = passage[2]
+            p = Passage.find_or_create_by(difficulty: d, title: passage[0], category: category)
             voice_gender = passage[3]
             passage[1].each_with_index do |sentence, idx|
               prefix, content = sentence.split(': ', 2)
@@ -80,8 +80,8 @@ module Seeds
         en = Language.english
         b2_content.each do |content|
           content.each do |passage|
-            p = Passage.find_or_create_by(difficulty: d, title: passage[0])
             category = passage[2]
+            p = Passage.find_or_create_by(difficulty: d, title: passage[0], category: category)
             voice_gender = passage[3]
             passage[1].each_with_index do |sentence, idx|
               prefix, content = sentence.split(': ', 2)
@@ -110,8 +110,8 @@ module Seeds
         en = Language.english
         c1_content.each do |content|
           content.each do |passage|
-            p = Passage.find_or_create_by(difficulty: d, title: passage[0])
             category = passage[2]
+            p = Passage.find_or_create_by(difficulty: d, title: passage[0], category: category)
             voice_gender = passage[3]
             passage[1].each_with_index do |sentence, idx|
               prefix, content = sentence.split(': ', 2)
@@ -140,8 +140,8 @@ module Seeds
         en = Language.english
         c2_content.each do |content|
           content.each do |passage|
-            p = Passage.find_or_create_by(difficulty: d, title: passage[0])
             category = passage[2]
+            p = Passage.find_or_create_by(difficulty: d, title: passage[0], category: category)
             voice_gender = passage[3]
             passage[1].each_with_index do |sentence, idx|
               prefix, content = sentence.split(': ', 2)
@@ -189,8 +189,8 @@ module Seeds
         en = Language.english
         a1_content.each do |content|
           content.each do |passage|
-            p = Passage.find_or_create_by(difficulty: d, title: passage[0])
             category = passage[2]
+            p = Passage.find_or_create_by(difficulty: d, title: passage[0], category: category)
             voice_gender = passage[3]
             passage[1].each_with_index do |sentence, idx|
               prefix, content = sentence.split(': ', 2)
@@ -840,7 +840,6 @@ module Seeds
         ["Sophia's Participation in a Korean Wedding", future, :short_story, :female]
       ]
     end
-
 
     def self.conversations_a1
       [

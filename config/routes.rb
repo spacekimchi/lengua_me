@@ -97,8 +97,9 @@ Rails.application.routes.draw do
   end
 
   # get 'passages/:topic_name', to: 'passages#get_by_topic', as: :passages_by_topic
-  get 'passages/by_difficulty/:difficulty_name', to: 'passages#by_difficulty', as: :passages_by_difficulty
-  get 'passages/by_difficulty/:difficulty_name/passage_writer/:passage_name', to: 'passages#passage_writer', as: :passage_writer
+  get 'passages/by_category/:category_name', to: 'passages#by_category', as: :passages_by_category
+  get 'passages/by_category/:category_name/passage_writer/:passage_name', to: 'passages#passage_writer', as: :passage_writer
+
   get 'passages/in_progress', to: 'passages#in_progress', as: :passages_in_progress
   resources :passages do
     member do
