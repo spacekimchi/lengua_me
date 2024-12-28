@@ -1,12 +1,12 @@
 <div class="breadcrumbs">
   <%= link_to 'All Passages', passages_path %>
-  <% if @difficulty.present? %>
+  <% if @category.present? %>
     <span> / </span>
-    <%= link_to @difficulty.name.titleize, passages_by_difficulty_path(difficulty_name: urlify(@difficulty.name)) %>
+    <%= link_to @category, passages_by_category_path(category_name: params[:category_name]) %>
   <% end %>
   <% if @passage.present? %>
     <span> / </span>
-    <%= link_to @passage.title.titleize, passage_writer_path(@difficulty.name, @passage.title) %>
+    <%= link_to @passage.title.titleize, passage_writer_path(params[:category_name], @passage.title) %>
   <% end %>
 </div>
 

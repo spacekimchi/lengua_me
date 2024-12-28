@@ -30,6 +30,7 @@ class Pronunciation < ApplicationRecord
   has_one_attached :audio
 
   scope :without_audio, -> { where.missing(:audio_attachment) }
+  scope :with_audio, -> { joins(:audio_attachment) }
 
   # Optionally, you may want to generate audio after the record is created
   # after_create :enqueue_generate_audio_job

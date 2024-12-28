@@ -23,7 +23,7 @@
 class Passage < ApplicationRecord
   include PgSearch::Model
 
-  enum :category, [:short_story, :conversation], default: :short_story
+  enum :category, [:unassigned, :short_stories, :conversations], default: :unassigned
 
   belongs_to :difficulty
 
@@ -51,8 +51,9 @@ class Passage < ApplicationRecord
     where("CAST(position AS TEXT) || '. ' || title ILIKE :q", q: sanitized_query)
   }
   scope :ordered, -> { order(:position) }
-  scope :by_difficulty, ->(difficulty) { where(difficulty: difficulty) }
-  scope :with_user_progress, ->(user) {
+  scope :by_difficulty, -> (difficulty) { where(difficulty: difficulty) }
+  scope :by_category, -> (category) { where(category: category) }
+  scope :with_user_progress, -> (user) {
     return all unless user
 
     left_outer_joins(:passage_progresses)
@@ -76,18 +77,18 @@ class Passage < ApplicationRecord
   end
 
   def next_passage
-    difficulty.passages.ordered.where("position > ?", position).first
+    Passage.by_category(category).ordered.where("position > ?", position).first
   end
 
   def previous_passage
-    difficulty.passages.ordered.where("position < ?", position).last
+    Passage.by_category(category).ordered.where("position < ?", position).last
   end
 
   private
 
   def set_position
     # Find the maximum position within the same difficulty
-    max_position = difficulty.passages.maximum(:position) || 0
+    max_position = Passage.by_category(category).maximum(:position) || 0
     self.position = max_position + 1
   end
 end

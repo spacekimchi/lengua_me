@@ -1,22 +1,25 @@
 <div class="passages-index-container">
   <h1>All Passages</h1>
-  <h3>By Difficulty</h3>
+
+  <h3>By Category</h3>
   <ul class="difficulties-list">
-    <% @difficulties.each do |difficulty| %>
+    <% @categories.each do |category| %>
       <li class="difficulties-list-item">
         <div class="difficulties-list-item-main">
           <div style="height: 75px; width: 75px;">
             <img src="/images/ruby.png">
           </div>
           <div class="difficulties-list-item-info">
-            <%= link_to difficulty.name.titleize, passages_by_difficulty_path(difficulty_name: difficulty.name), class: 'passages-difficulty-title' %>
+            <% name = Passage.categories.key(category.name) %>
+            <% titleized_name = Passage.categories.key(category.name).gsub('_', ' ').titleize %>
+            <%= link_to titleized_name, passages_by_category_path(category_name: name), class: 'passages-difficulty-title' %>
             <div>
-              <span><%= difficulty.total_passages %> <%= difficulty.total_passages == 1 ? 'passage' : 'passages' %></span>
+              <span><%= category.total_passages %> <%= category.total_passages == 1 ? 'passage' : 'passages' %></span>
             </div>
           </div>
         </div>
         <div class="hidden">
-           <%= difficulty.translated_description %>
+          Some kind of description
         </div>
       </li>
     <% end %>

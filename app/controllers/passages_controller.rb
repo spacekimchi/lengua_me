@@ -7,7 +7,7 @@ class PassagesController < ApplicationController
   end
 
   def index
-    @difficulties = Difficulty.ordered.left_joins(:passages).select('difficulties.id as id, name, COUNT(passages) as total_passages').group('difficulties.id')
+    @categories = Passage.joins(:difficulty).group(:category).select("passages.category as name, count(passages.id) as total_passages, min(difficulties.level) as min_difficulty, max(difficulties.level) as max_difficulty")
   end
 
   def create
@@ -65,11 +65,17 @@ class PassagesController < ApplicationController
     render json: { sentences: @sentences }, status: :ok
   end
 
-  def by_difficulty
-    @difficulty = Difficulty.find_by(name: params[:difficulty_name])
+  def by_category
     search_query = params[:q]
 
-    passages = Passage.by_difficulty(@difficulty)
+    unless Passage.categories.keys.include?(params[:category_name])
+      redirect_to root_path, alert: "Category not found."
+      return
+    end
+
+    @category = params[:category_name].gsub('_', ' ').titleize
+
+    passages = Passage.by_category(params[:category_name])
       .joins(:sentences)
       .select('passages.id, passages.title, passages.position, count(sentences) as total_sentences')
       .group('passages.id')
@@ -87,14 +93,14 @@ class PassagesController < ApplicationController
   end
 
   def passage_writer
-    @difficulty = Difficulty.find_by(name: params[:difficulty_name])
-
-    unless @difficulty
-      redirect_to root_path, alert: "Difficulty not found."
+    unless Passage.categories.keys.include?(params[:category_name])
+      redirect_to root_path, alert: "Category not found."
       return
     end
 
-    @passage = @difficulty.passages.find_by(title: params[:passage_name])
+    @category = params[:category_name].gsub('_', ' ').titleize
+
+    @passage = Passage.by_category(params[:category_name]).find_by(title: params[:passage_name])
 
     unless @passage
       redirect_to difficulty_path(@difficulty), alert: "Passage not found."
