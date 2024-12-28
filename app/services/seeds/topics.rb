@@ -13,18 +13,25 @@ module Seeds
       a2_content = []
       a2_content.push(conversations_a2)
       a2_content.push(a2_topics)
+      male_voice = TtsVoice.find_by(language_code: 'en-US', gender: :male, provider_id: 'en-US-Journey-D')
+      female_voice = TtsVoice.find_by(language_code: 'en-US', gender: :female, provider_id: 'en-US-Journey-F')
       ActiveRecord::Base.transaction do
         d = Difficulty.find_by(level: 2)
         en = Language.english
         a2_content.each do |content|
           content.each do |passage|
             p = Passage.find_or_create_by(difficulty: d, title: passage[0])
+            category = passage[2]
+            voice_gender = passage[3]
             passage[1].each_with_index do |sentence, idx|
               prefix, content = sentence.split(': ', 2)
               if content
-                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content)
+                prefix, gender = prefix.split(', ')
+                voice = gender.to_sym == :male || voice_gender == :male ? male_voice : female_voice
+                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content, tts_voice: voice)
               else
-                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, content: prefix)
+                voice = voice_gender == :male ? male_voice : female_voice
+                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, content: prefix, tts_voice: voice)
               end
               s.create_words_from_content(en)
             end
@@ -36,18 +43,25 @@ module Seeds
     def self.seed_b1
       b1_content = []
       b1_content.push(b1_topics)
+      male_voice = TtsVoice.find_by(language_code: 'en-US', gender: :male, provider_id: 'en-US-Journey-D')
+      female_voice = TtsVoice.find_by(language_code: 'en-US', gender: :female, provider_id: 'en-US-Journey-F')
       ActiveRecord::Base.transaction do
         d = Difficulty.find_by(level: 3)
         en = Language.english
         b1_content.each do |content|
           content.each do |passage|
             p = Passage.find_or_create_by(difficulty: d, title: passage[0])
+            category = passage[2]
+            voice_gender = passage[3]
             passage[1].each_with_index do |sentence, idx|
               prefix, content = sentence.split(': ', 2)
               if content
-                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content)
+                prefix, gender = prefix.split(', ')
+                voice = gender.to_sym == :male || voice_gender == :male ? male_voice : female_voice
+                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content, tts_voice: voice)
               else
-                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, content: prefix)
+                voice = voice_gender == :male ? male_voice : female_voice
+                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, content: prefix, tts_voice: voice)
               end
               s.create_words_from_content(en)
             end
@@ -59,18 +73,25 @@ module Seeds
     def self.seed_b2
       b2_content = []
       b2_content.push(b2_topics)
+      male_voice = TtsVoice.find_by(language_code: 'en-US', gender: :male, provider_id: 'en-US-Journey-D')
+      female_voice = TtsVoice.find_by(language_code: 'en-US', gender: :female, provider_id: 'en-US-Journey-F')
       ActiveRecord::Base.transaction do
         d = Difficulty.find_by(level: 4)
         en = Language.english
         b2_content.each do |content|
           content.each do |passage|
             p = Passage.find_or_create_by(difficulty: d, title: passage[0])
+            category = passage[2]
+            voice_gender = passage[3]
             passage[1].each_with_index do |sentence, idx|
               prefix, content = sentence.split(': ', 2)
               if content
-                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content)
+                prefix, gender = prefix.split(', ')
+                voice = gender.to_sym == :male || voice_gender == :male ? male_voice : female_voice
+                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content, tts_voice: voice)
               else
-                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, content: prefix)
+                voice = voice_gender == :male ? male_voice : female_voice
+                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, content: prefix, tts_voice: voice)
               end
               s.create_words_from_content(en)
             end
@@ -82,18 +103,25 @@ module Seeds
     def self.seed_c1
       c1_content = []
       c1_content.push(c1_topics)
+      male_voice = TtsVoice.find_by(language_code: 'en-US', gender: :male, provider_id: 'en-US-Journey-D')
+      female_voice = TtsVoice.find_by(language_code: 'en-US', gender: :female, provider_id: 'en-US-Journey-F')
       ActiveRecord::Base.transaction do
         d = Difficulty.find_by(level: 5)
         en = Language.english
         c1_content.each do |content|
           content.each do |passage|
             p = Passage.find_or_create_by(difficulty: d, title: passage[0])
+            category = passage[2]
+            voice_gender = passage[3]
             passage[1].each_with_index do |sentence, idx|
               prefix, content = sentence.split(': ', 2)
               if content
-                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content)
+                prefix, gender = prefix.split(', ')
+                voice = gender.to_sym == :male || voice_gender == :male ? male_voice : female_voice
+                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content, tts_voice: voice)
               else
-                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, content: prefix)
+                voice = voice_gender == :male ? male_voice : female_voice
+                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, content: prefix, tts_voice: voice)
               end
               s.create_words_from_content(en)
             end
@@ -105,18 +133,25 @@ module Seeds
     def self.seed_c2
       c2_content = []
       c2_content.push(c2_topics)
+      male_voice = TtsVoice.find_by(language_code: 'en-US', gender: :male, provider_id: 'en-US-Journey-D')
+      female_voice = TtsVoice.find_by(language_code: 'en-US', gender: :female, provider_id: 'en-US-Journey-F')
       ActiveRecord::Base.transaction do
         d = Difficulty.find_by(level: 6)
         en = Language.english
         c2_content.each do |content|
           content.each do |passage|
             p = Passage.find_or_create_by(difficulty: d, title: passage[0])
+            category = passage[2]
+            voice_gender = passage[3]
             passage[1].each_with_index do |sentence, idx|
               prefix, content = sentence.split(': ', 2)
               if content
-                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content)
+                prefix, gender = prefix.split(', ')
+                voice = gender.to_sym == :male || voice_gender == :male ? male_voice : female_voice
+                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content, tts_voice: voice)
               else
-                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, content: prefix)
+                voice = voice_gender == :male ? male_voice : female_voice
+                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, content: prefix, tts_voice: voice)
               end
               s.create_words_from_content(en)
             end
@@ -147,18 +182,25 @@ module Seeds
       a1_content.push(shopping_a1)
       a1_content.push(transportation_a1)
       a1_content.push(conversations_a1)
+      male_voice = TtsVoice.find_by(language_code: 'en-US', gender: :male, provider_id: 'en-US-Journey-D')
+      female_voice = TtsVoice.find_by(language_code: 'en-US', gender: :female, provider_id: 'en-US-Journey-F')
       ActiveRecord::Base.transaction do
         d = Difficulty.find_by(level: 1)
         en = Language.english
         a1_content.each do |content|
           content.each do |passage|
             p = Passage.find_or_create_by(difficulty: d, title: passage[0])
+            category = passage[2]
+            voice_gender = passage[3]
             passage[1].each_with_index do |sentence, idx|
-              prefix, content = sentence.split(': ')
+              prefix, content = sentence.split(': ', 2)
               if content
-                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content)
+                prefix, gender = prefix.split(', ')
+                voice = gender.to_sym == :male || voice_gender == :male ? male_voice : female_voice
+                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, prefix: prefix, content: content, tts_voice: voice)
               else
-                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, content: prefix)
+                voice = voice_gender == :male ? male_voice : female_voice
+                s = Sentence.find_or_create_by(language: en, passage: p, order_idx: idx + 1, content: prefix, tts_voice: voice)
               end
               s.create_words_from_content(en)
             end
@@ -172,7 +214,7 @@ module Seeds
       weights = ["David goes to the gym every morning.", "He uses the treadmill to walk.", "David also lifts light weights.", "He enjoys exercising.", "At the gym, David meets his friends.", "They talk and help each other.", "Going to the gym keeps David strong."]
       event = ["Last Friday, the school had a race.", "All students joined.", "Emily ran fast and won the first prize.", "Tom came second, and Lily came third.", "The race was exciting.", "Everyone clapped for the runners.", "It was a great day."]
       team = ["Lucy plays volleyball with her team.", "They practice passing and serving.", "During the game, Lucy and her teammates work together.", "They cheer each other on.", "Lucy makes good plays and blocks the ball.", "The team celebrates their win with a smile."]
-      [['Basketball Game', basketball], ['Weightlifting Dave', weights], ['The School Race', event], ['Lucy plays volleyball', team]]
+      [['Basketball Game', basketball, :short_story, :female], ['Weightlifting Dave', weights, :short_story, :male], ['The School Race', event, :short_story, :male], ['Lucy plays volleyball', team, :short_story, :female]]
     end
 
     def self.dating_a1
@@ -206,9 +248,9 @@ module Seeds
       ]
 
       [
-        ["Anna and Tom's First Date", past],
-        ["Maria and John's Current Relationship", present],
-        ["Emily and Mark's Upcoming Date", future]
+        ["Anna and Tom's First Date", past, :short_story, :male],
+        ["Maria and John's Current Relationship", present, :short_story, :female],
+        ["Emily and Mark's Upcoming Date", future, :short_story, :male]
       ]
     end
 
@@ -239,9 +281,9 @@ module Seeds
       ]
 
       [
-        ["John's Trip to Paris", past],
-        ["Sara's Weekend Mountain Adventure", present],
-        ["Mike's Upcoming Journey to Japan", future]
+        ["John's Trip to Paris", past, :short_story, :male],
+        ["Sara's Weekend Mountain Adventure", present, :short_story, :female],
+        ["Mike's Upcoming Journey to Japan", future, :short_story, :male]
       ]
     end
 
@@ -273,9 +315,9 @@ module Seeds
       ]
 
       [
-        ["Lisa's Homemade Birthday Cake", past],
-        ["Tom's School Lunch Today", present],
-        ["Tom's New Lunch Menu Tomorrow", future]
+        ["Lisa's Homemade Birthday Cake", past, :short_story, :female],
+        ["Tom's School Lunch Today", present, :short_story, :male],
+        ["Tom's New Lunch Menu Tomorrow", future, :short_story, :male]
       ]
     end
 
@@ -308,9 +350,9 @@ module Seeds
       ]
 
       [
-        ["Alex's Garden Painting Project", past],
-        ["Nina's Gardening Routine", present],
-        ["Sam's Guitar Learning Journey", future]
+        ["Alex's Garden Painting Project", past, :short_story, :male],
+        ["Nina's Gardening Routine", present, :short_story, :female],
+        ["Sam's Guitar Learning Journey", future, :short_story, :male]
       ]
     end
 
@@ -340,9 +382,9 @@ module Seeds
       ]
 
       [
-        ["The New President's First Year", past],
-        ["World Leaders' Climate Conference", present],
-        ["Upcoming Global Pollution Agreement", future]
+        ["The New President's First Year", past, :short_story, :male],
+        ["World Leaders' Climate Conference", present, :short_story, :female],
+        ["Upcoming Global Pollution Agreement", future, :short_story, :female]
       ]
     end
 
@@ -372,9 +414,9 @@ module Seeds
       ]
 
       [
-        ["Maria's First Job Experience", past],
-        ["David's Teaching Career Today", present],
-        ["Linda's Future at the Bank", future]
+        ["Maria's First Job Experience", past, :short_story, :female],
+        ["David's Teaching Career Today", present, :short_story, :male],
+        ["Linda's Future at the Bank", future, :short_story, :female]
       ]
     end
 
@@ -404,9 +446,9 @@ module Seeds
       ]
 
       [
-        ["Alex's Recent School Test", past],
-        ["Sarah's English Studies Today", present],
-        ["Daniel's First Day at a New School", future]
+        ["Alex's Recent School Test", past, :short_story, :male],
+        ["Sarah's English Studies Today", present, :short_story, :female],
+        ["Daniel's First Day at a New School", future, :short_story, :male]
       ]
     end
 
@@ -436,9 +478,9 @@ module Seeds
       ]
 
       [
-        ["Anna's Visit to the Art Museum", past],
-        ["Carlos's Current Art Project", present],
-        ["Maria's Upcoming Painting Class", future]
+        ["Anna's Visit to the Art Museum", past, :short_story, :female],
+        ["Carlos's Current Art Project", present, :short_story, :male],
+        ["Maria's Upcoming Painting Class", future, :short_story, :female]
       ]
     end
 
@@ -470,9 +512,9 @@ module Seeds
       ]
 
       [
-        ["Emma's Recent Illness and Recovery", past],
-        ["Liam's Daily Healthy Eating Habits", present],
-        ["Sophia's Upcoming Exercise Plan", future]
+        ["Emma's Recent Illness and Recovery", past, :short_story, :female],
+        ["Liam's Daily Healthy Eating Habits", present, :short_story, :male],
+        ["Sophia's Upcoming Exercise Plan", future, :short_story, :female]
       ]
     end
 
@@ -501,9 +543,9 @@ module Seeds
       ]
 
       [
-        ["Ben's First Smartphone Experience", past],
-        ["Mia's Current Online Classes", present],
-        ["Noah's Future with a New Tablet", future]
+        ["Ben's First Smartphone Experience", past, :short_story, :male],
+        ["Mia's Current Online Classes", present, :short_story, :female],
+        ["Noah's Future with a New Tablet", future, :short_story, :male]
       ]
     end
 
@@ -533,9 +575,9 @@ module Seeds
       ]
 
       [
-        ["Olivia's Shopping Trip Yesterday", past],
-        ["Ethan's Morning Routine Today", present],
-        ["Ava's Weekend Visit to Grandparents", future]
+        ["Olivia's Shopping Trip Yesterday", past, :short_story, :female],
+        ["Ethan's Morning Routine Today", present, :short_story, :male],
+        ["Ava's Weekend Visit to Grandparents", future, :short_story, :male]
       ]
     end
 
@@ -565,9 +607,9 @@ module Seeds
       ]
 
       [
-        ["Anna's Spring Clean-Up Event", past],
-        ["Tom's Daily Recycling Habits", present],
-        ["Sara's Tree Planting Initiative", future]
+        ["Anna's Spring Clean-Up Event", past, :short_story, :female],
+        ["Tom's Daily Recycling Habits", present, :short_story, :male],
+        ["Sara's Tree Planting Initiative", future, :short_story, :female]
       ]
     end
 
@@ -597,9 +639,9 @@ module Seeds
       ]
 
       [
-        ["Jake's Birthday Celebration", past],
-        ["Mia's Current Study Group", present],
-        ["Lily's Upcoming School Club Membership", future]
+        ["Jake's Birthday Celebration", past, :short_story, :male],
+        ["Mia's Current Study Group", present, :short_story, :female],
+        ["Lily's Upcoming School Club Membership", future, :short_story, :female]
       ]
     end
 
@@ -630,9 +672,9 @@ module Seeds
       ]
 
       [
-        ["Ben's Grocery Shopping with Mom", past],
-        ["Emma's Online Shopping Today", present],
-        ["Ryan's School Supplies Shopping Plan", future]
+        ["Ben's Grocery Shopping with Mom", past, :short_story, :male],
+        ["Emma's Online Shopping Today", present, :short_story, :female],
+        ["Ryan's School Supplies Shopping Plan", future, :short_story, :male]
       ]
     end
 
@@ -662,9 +704,9 @@ module Seeds
       ]
 
       [
-        ["Sophia's Family Movie Night", past],
-        ["Liam's Upcoming Concert Attendance", present],
-        ["Olivia's Future Dance Class", future]
+        ["Sophia's Family Movie Night", past, :short_story, :female],
+        ["Liam's Upcoming Concert Attendance", present, :short_story, :male],
+        ["Olivia's Future Dance Class", future, :short_story, :female]
       ]
     end
 
@@ -696,9 +738,9 @@ module Seeds
       ]
 
       [
-        ["My First Public Speaking Experience", past],
-        ["Sara's Photography Course", present],
-        ["Tom's Marathon Training Goals", future]
+        ["My First Public Speaking Experience", past, :short_story, :female],
+        ["Sara's Photography Course", present, :short_story, :female],
+        ["Tom's Marathon Training Goals", future, :short_story, :male]
       ]
     end
 
@@ -728,9 +770,9 @@ module Seeds
       ]
 
       [
-        ["Emma's Volunteering at the Food Bank", past],
-        ["Jake's Neighborhood Charity Drive", present],
-        ["Lily's Beach Clean-Up Initiative", future]
+        ["Emma's Volunteering at the Food Bank", past, :short_story, :female],
+        ["Jake's Neighborhood Charity Drive", present, :short_story, :male],
+        ["Lily's Beach Clean-Up Initiative", future, :short_story, :female]
       ]
     end
 
@@ -760,9 +802,9 @@ module Seeds
       ]
 
       [
-        ["Ben's Bike Riding Journey", past],
-        ["Mia's Daily Bus Commute", present],
-        ["Alex's Driving Lessons Ahead", future]
+        ["Ben's Bike Riding Journey", past, :short_story, :male],
+        ["Mia's Daily Bus Commute", present, :short_story, :female],
+        ["Alex's Driving Lessons Ahead", future, :short_story, :male]
       ]
     end
 
@@ -793,9 +835,9 @@ module Seeds
       ]
 
       [
-        ["Anna's Cultural Experience in Japan", past],
-        ["Carlos's Study of Cultural Etiquettes", present],
-        ["Sophia's Participation in a Korean Wedding", future]
+        ["Anna's Cultural Experience in Japan", past, :short_story, :female],
+        ["Carlos's Study of Cultural Etiquettes", present, :short_story, :male],
+        ["Sophia's Participation in a Korean Wedding", future, :short_story, :female]
       ]
     end
 
@@ -803,113 +845,113 @@ module Seeds
     def self.conversations_a1
       [
         ["Emma's Public Speaking Experience", [
-          "Emma: I remember my first public speaking event.",
-          "Teacher: Oh, how did it go?",
-          "Emma: I was nervous but excited. I talked about my favorite book.",
-          "Teacher: Did you enjoy it?",
-          "Emma: Yes, everyone clapped. I felt proud and happy."
-        ]],
+          "Emma, female: I remember my first public speaking event.",
+          "Teacher, male: Oh, how did it go?",
+          "Emma, female: I was nervous but excited. I talked about my favorite book.",
+          "Teacher, male: Did you enjoy it?",
+          "Emma, female: Yes, everyone clapped. I felt proud and happy."
+        ], :conversation],
 
         ["Online Photography Course", [
-          "Sara: Hi Mia, what are you doing today?",
-          "Mia: Hi Sara! I'm taking an online photography course.",
-          "Sara: That sounds interesting. Are you enjoying it?",
-          "Mia: Yes, I love learning new things. I practice taking pictures every evening.",
-          "Sara: Great! Keep it up."
-        ]],
+          "Sara, female: Hi Mia, what are you doing today?",
+          "Mia, female: Hi Sara! I'm taking an online photography course.",
+          "Sara, female: That sounds interesting. Are you enjoying it?",
+          "Mia, female: Yes, I love learning new things. I practice taking pictures every evening.",
+          "Sara, female: Great! Keep it up."
+        ], :conversation],
 
         ["Marathon Training Goal", [
-          "Tom: Hey Jake, I have a new goal.",
-          "Jake: Really? What is it?",
-          "Tom: I want to run a marathon next year.",
-          "Jake: That's amazing! How will you prepare?",
-          "Tom: I will start training this spring. I hope to stay healthy and strong."
-        ]],
+          "Tom, male: Hey Jake, I have a new goal.",
+          "Jake, male: Really? What is it?",
+          "Tom, male: I want to run a marathon next year.",
+          "Jake, male: That's amazing! How will you prepare?",
+          "Tom, male: I will start training this spring. I hope to stay healthy and strong."
+        ], :conversation],
 
         ["Volunteering at the Food Bank", [
-          "Emma: Last month, I volunteered at the food bank.",
-          "Liam: That's nice! What did you do?",
-          "Emma: I sorted canned goods and packed food boxes.",
-          "Liam: Did you enjoy helping?",
-          "Emma: Yes, it felt good to help others. I met new people too."
-        ]],
+          "Emma, female: Last month, I volunteered at the food bank.",
+          "Liam, male: That's nice! What did you do?",
+          "Emma, female: I sorted canned goods and packed food boxes.",
+          "Liam, male: Did you enjoy helping?",
+          "Emma, female: Yes, it felt good to help others. I met new people too."
+        ], :conversation],
 
         ["Charity Drive Organization", [
-          "Jake: Hi Lily, I'm organizing a charity drive this weekend.",
-          "Lily: That's wonderful! What are you collecting?",
-          "Jake: We're collecting clothes and toys for children.",
-          "Lily: I’d love to help. When and where?",
-          "Jake: Saturday at the community center from 10 AM to 2 PM."
-        ]],
+          "Jake, male: Hi Lily, I'm organizing a charity drive this weekend.",
+          "Lily, female: That's wonderful! What are you collecting?",
+          "Jake, male: We're collecting clothes and toys for children.",
+          "Lily, female: I’d love to help. When and where?",
+          "Jake, male: Saturday at the community center from 10 AM to 2 PM."
+        ], :conversation],
 
         ["Beach Clean-Up Event", [
-          "Lily: Next month, I will organize a beach clean-up.",
-          "Sophia: That sounds great! How can I join?",
-          "Lily: You can bring your friends and family. We will meet at the beach at 9 AM.",
-          "Sophia: I’ll be there. Let’s make the beach clean together.",
-          "Lily: Perfect, I’m glad you can help."
-        ]],
+          "Lily, female: Next month, I will organize a beach clean-up.",
+          "Sophia, female: That sounds great! How can I join?",
+          "Lily, female: You can bring your friends and family. We will meet at the beach at 9 AM.",
+          "Sophia, female: I’ll be there. Let’s make the beach clean together.",
+          "Lily, female: Perfect, I’m glad you can help."
+        ], :conversation],
 
         ["Learning to Ride a Bike", [
-          "Ben: Two years ago, I learned to ride a bike.",
-          "Dad: That's right! You were very determined.",
-          "Ben: I was scared at first, but I didn't give up.",
-          "Dad: And now you ride every day.",
-          "Ben: Yes, I feel free and happy when I ride."
-        ]],
+          "Ben, male: Two years ago, I learned to ride a bike.",
+          "Dad, male: That's right! You were very determined.",
+          "Ben, male: I was scared at first, but I didn't give up.",
+          "Dad, male: And now you ride every day.",
+          "Ben, male: Yes, I feel free and happy when I ride."
+        ], :conversation],
 
         ["Taking the Bus", [
-          "Mia: Good morning, Jake!",
-          "Jake: Good morning, Mia! Are you taking the bus today?",
-          "Mia: Yes, I am. The bus arrives at 7:30 AM.",
-          "Jake: Do you like riding the bus?",
-          "Mia: Yes, I enjoy talking to my friends during the ride."
-        ]],
+          "Mia, female: Good morning, Jake!",
+          "Jake, male: Good morning, Mia! Are you taking the bus today?",
+          "Mia, female: Yes, I am. The bus arrives at 7:30 AM.",
+          "Jake, male: Do you like riding the bus?",
+          "Mia, female: Yes, I enjoy talking to my friends during the ride."
+        ], :conversation],
 
         ["Driving Lessons Plan", [
-          "Alex: Hey Tom, I have plans for next year.",
-          "Tom: Oh? What are you planning to do?",
-          "Alex: I will start driving lessons.",
-          "Tom: That’s exciting! When will you begin?",
-          "Alex: I will start next month. I want to drive to work soon."
-        ]],
+          "Alex, male: Hey Tom, I have plans for next year.",
+          "Tom, male: Oh? What are you planning to do?",
+          "Alex, male: I will start driving lessons.",
+          "Tom, male: That’s exciting! When will you begin?",
+          "Alex, male: I will start next month. I want to drive to work soon."
+        ], :conversation],
 
         ["Trip to Japan", [
-          "Anna: Last summer, I visited Japan.",
-          "Mia: That sounds amazing! What did you do there?",
-          "Anna: I attended a traditional tea ceremony.",
-          "Mia: How was it?",
-          "Anna: It was peaceful. I learned to bow respectfully and watch how the tea was prepared."
-        ]]
+          "Anna, female: Last summer, I visited Japan.",
+          "Mia, female: That sounds amazing! What did you do there?",
+          "Anna, female: I attended a traditional tea ceremony.",
+          "Mia, female: How was it?",
+          "Anna, female: It was peaceful. I learned to bow respectfully and watch how the tea was prepared."
+        ], :conversation]
       ]
     end
 
     def self.conversations_a2
       [
         ["Ordering at Bella Italia", [
-          "Server: Good evening, welcome to Bella Italia! May I help you with your order?",
-          "Customer: Yes, I would like the spaghetti carbonara, please.",
-          "Server: Excellent choice. Would you like it as it is, or do you have any special requests?",
-          "Customer: Could you please make it without cheese? I cannot eat dairy.",
-          "Server: Sure, we can prepare it without cheese. Would you like extra vegetables instead?",
-          "Customer: Yes, that sounds great. Could you add some mushrooms and spinach?",
-          "Server: Absolutely. Let me confirm: spaghetti carbonara without cheese, with mushrooms and spinach added.",
-          "Customer: Perfect! That is exactly what I want.",
-          "Server: Wonderful. Your meal will be ready shortly. Enjoy your dinner!"
-        ]],
+          "Server, male: Good evening, welcome to Bella Italia! May I help you with your order?",
+          "Customer, female: Yes, I would like the spaghetti carbonara, please.",
+          "Server, male: Excellent choice. Would you like it as it is, or do you have any special requests?",
+          "Customer, female: Could you please make it without cheese? I cannot eat dairy.",
+          "Server, male: Sure, we can prepare it without cheese. Would you like extra vegetables instead?",
+          "Customer, female: Yes, that sounds great. Could you add some mushrooms and spinach?",
+          "Server, male: Absolutely. Let me confirm: spaghetti carbonara without cheese, with mushrooms and spinach added.",
+          "Customer, female: Perfect! That is exactly what I want.",
+          "Server, male: Wonderful. Your meal will be ready shortly. Enjoy your dinner!"
+        ], :conversation],
 
         ["First Dance Lesson at the Studio", [
-          "Alex: Hi! It’s nice to meet you here at the dance studio.",
-          "Bella: Hi Alex! I’m excited. I love dancing.",
-          "Alex: Me too. Do you know this dance step?",
-          "Bella: I’m not sure. Can you show me?",
-          "Alex: Sure. First, stand straight. Then move your left foot forward.",
-          "Bella: Okay, like this?",
-          "Alex: Yes, perfect! Now add a small turn.",
-          "Bella: This is fun. I feel happy dancing with you.",
-          "Alex: I feel happy too. You dance very well.",
-          "Bella: Thank you, Alex. Let’s keep dancing!"
-        ]]
+          "Alex, male: Hi! It’s nice to meet you here at the dance studio.",
+          "Bella, female: Hi Alex! I’m excited. I love dancing.",
+          "Alex, male: Me too. Do you know this dance step?",
+          "Bella, female: I’m not sure. Can you show me?",
+          "Alex, male: Sure. First, stand straight. Then move your left foot forward.",
+          "Bella, female: Okay, like this?",
+          "Alex, male: Yes, perfect! Now add a small turn.",
+          "Bella, female: This is fun. I feel happy dancing with you.",
+          "Alex, male: I feel happy too. You dance very well.",
+          "Bella, female: Thank you, Alex. Let’s keep dancing!"
+        ], :conversation]
       ]
     end
 
@@ -924,24 +966,22 @@ module Seeds
           "Every Sunday, there is a farmer's market where local farmers sell fresh fruits and vegetables.",
           "Public transportation is easily accessible, making it convenient to travel to the city center.",
           "Overall, my neighborhood is a pleasant and safe place to live."
-        ]],
-
+        ], :short_story, :female],
         ["Booking a Hotel Room", [
-          "Alex: Good afternoon, I'd like to book a room for two nights.",
-          "Receptionist: Certainly! For what dates?",
-          "Alex: From June 10th to June 12th.",
-          "Receptionist: We have a single room available with a queen bed for $80 per night.",
-          "Alex: That sounds good. Does the room include breakfast?",
-          "Receptionist: Yes, breakfast is included in the price.",
-          "Alex: Great. Can I also request a non-smoking room?",
-          "Receptionist: Of course. I've noted that down.",
-          "Alex: Perfect. How can I pay for the booking?",
-          "Receptionist: We accept credit cards or cash upon arrival.",
-          "Alex: I'll pay with my credit card. Here's my information.",
-          "Receptionist: Thank you, Alex. Your reservation is confirmed. We look forward to your stay!",
-          "Alex: Thank you very much. See you soon!"
-        ]],
-
+          "Alex, male: Good afternoon, I'd like to book a room for two nights.",
+          "Receptionist, female: Certainly! For what dates?",
+          "Alex, male: From June 10th to June 12th.",
+          "Receptionist, female: We have a single room available with a queen bed for $80 per night.",
+          "Alex, male: That sounds good. Does the room include breakfast?",
+          "Receptionist, female: Yes, breakfast is included in the price.",
+          "Alex, male: Great. Can I also request a non-smoking room?",
+          "Receptionist, female: Of course. I've noted that down.",
+          "Alex, male: Perfect. How can I pay for the booking?",
+          "Receptionist, female: We accept credit cards or cash upon arrival.",
+          "Alex, male: I'll pay with my credit card. Here's my information.",
+          "Receptionist, female: Thank you, Alex. Your reservation is confirmed. We look forward to your stay!",
+          "Alex, male: Thank you very much. See you soon!"
+        ], :conversation],
         ["A Weekend Hiking Trip", [
           "Last Saturday, Maria and her friends decided to go hiking in the nearby mountains.",
           "They packed their backpacks with water, sandwiches, and a map of the trail.",
@@ -952,68 +992,62 @@ module Seeds
           "On the way down, they encountered a small stream and decided to take a short break.",
           "The trip was a great success, and everyone felt accomplished and happy.",
           "They plan to go hiking again next month to explore a different trail."
-        ]],
-
+        ], :short_story, :female],
         ["At the Grocery Store", [
-          "Sarah: Hi, can I help you find something?",
-          "John: Yes, I'm looking for whole wheat bread. Do you have any?",
-          "Sarah: Yes, it's right over there in aisle 3.",
-          "John: Great, thank you. Also, where can I find the dairy products?",
-          "Sarah: The dairy section is in aisle 5, next to the bakery.",
-          "John: Perfect. And do you sell almond milk?",
-          "Sarah: Yes, we have several brands of almond milk in the refrigerated section.",
-          "John: Awesome. I'll take a loaf of bread and a carton of almond milk, please.",
-          "Sarah: Sure thing. That will be $5.50.",
-          "John: Here you go. Thank you for your help!",
-          "Sarah: You're welcome! Have a great day!"
-        ]],
-
+          "Sarah, female: Hi, can I help you find something?",
+          "John, male: Yes, I'm looking for whole wheat bread. Do you have any?",
+          "Sarah, female: Yes, it's right over there in aisle 3.",
+          "John, male: Great, thank you. Also, where can I find the dairy products?",
+          "Sarah, female: The dairy section is in aisle 5, next to the bakery.",
+          "John, male: Perfect. And do you sell almond milk?",
+          "Sarah, female: Yes, we have several brands of almond milk in the refrigerated section.",
+          "John, male: Awesome. I'll take a loaf of bread and a carton of almond milk, please.",
+          "Sarah, female: Sure thing. That will be $5.50.",
+          "John, male: Here you go. Thank you for your help!",
+          "Sarah, female: You're welcome! Have a great day!"
+        ], :conversation],
         ["Playing Soccer with Friends", [
-          "Maria: Hi Tom! Do you want to play soccer this weekend?",
-          "Tom: Sure, Maria! I love soccer. Where should we go?",
-          "Maria: There's a new park near my house. It's perfect for a game.",
-          "Tom: Great! I felt excited when I saw the park last week. The field looks big and green.",
-          "Maria: Awesome! I'll bring the soccer ball. Do you have your cleats?",
-          "Tom: Yes, I do. I wore them last Saturday. They are very comfortable.",
-          "Maria: Perfect. I’m looking forward to our game. It will be fun!",
-          "Tom: Me too! Let’s invite some friends to join us."
-        ]],
-
+          "Maria, female: Hi Tom! Do you want to play soccer this weekend?",
+          "Tom, male: Sure, Maria! I love soccer. Where should we go?",
+          "Maria, female: There's a new park near my house. It's perfect for a game.",
+          "Tom, male: Great! I felt excited when I saw the park last week. The field looks big and green.",
+          "Maria, female: Awesome! I'll bring the soccer ball. Do you have your cleats?",
+          "Tom, male: Yes, I do. I wore them last Saturday. They are very comfortable.",
+          "Maria, female: Perfect. I’m looking forward to our game. It will be fun!",
+          "Tom, male: Me too! Let’s invite some friends to join us."
+        ], :conversation],
         ["Meeting at the Café", [
-          "Emma: Hi Jake! It’s nice to meet you in person.",
-          "Jake: Hi Emma! I’m happy to finally see you. How are you today?",
-          "Emma: I’m good, thank you. The café looks cozy, doesn’t it?",
-          "Jake: Yes, it does. I felt a bit nervous, but now I’m relaxed.",
-          "Emma: That’s understandable. I’m excited to talk and get to know each other.",
-          "Jake: Me too. What do you like to do in your free time?",
-          "Emma: I enjoy reading and going for walks. How about you?",
-          "Jake: I love playing guitar and watching movies. Maybe we can do something together sometime.",
-          "Emma: I’d like that. Let’s plan something fun soon!"
-        ]],
-
+          "Emma, female: Hi Jake! It’s nice to meet you in person.",
+          "Jake, male: Hi Emma! I’m happy to finally see you. How are you today?",
+          "Emma, female: I’m good, thank you. The café looks cozy, doesn’t it?",
+          "Jake, male: Yes, it does. I felt a bit nervous, but now I’m relaxed.",
+          "Emma, female: That’s understandable. I’m excited to talk and get to know each other.",
+          "Jake, male: Me too. What do you like to do in your free time?",
+          "Emma, female: I enjoy reading and going for walks. How about you?",
+          "Jake, male: I love playing guitar and watching movies. Maybe we can do something together sometime.",
+          "Emma, female: I’d like that. Let’s plan something fun soon!"
+        ], :conversation],
         ["Planning a Trip to Paris", [
-          "Liam: Hey Sophie, I’m thinking about visiting Paris next summer. What do you think?",
-          "Sophie: That sounds amazing! I’ve always wanted to see the Eiffel Tower.",
-          "Liam: Yes, and we can visit the Louvre Museum too. It has many beautiful paintings.",
-          "Sophie: I’m excited! Have you booked the flights yet?",
-          "Liam: Not yet. I will book them tomorrow. We should also find a good hotel.",
-          "Sophie: Good idea. I felt happy when I saw pictures of Paris online. It looks so romantic.",
-          "Liam: Me too. Let’s make a list of places we want to visit.",
-          "Sophie: Sure! I can’t wait for our adventure."
-        ]],
-
+          "Liam, male: Hey Sophie, I’m thinking about visiting Paris next summer. What do you think?",
+          "Sophie, female: That sounds amazing! I’ve always wanted to see the Eiffel Tower.",
+          "Liam, male: Yes, and we can visit the Louvre Museum too. It has many beautiful paintings.",
+          "Sophie, female: I’m excited! Have you booked the flights yet?",
+          "Liam, male: Not yet. I will book them tomorrow. We should also find a good hotel.",
+          "Sophie, female: Good idea. I felt happy when I saw pictures of Paris online. It looks so romantic.",
+          "Liam, male: Me too. Let’s make a list of places we want to visit.",
+          "Sophie, female: Sure! I can’t wait for our adventure."
+        ], :conversation],
         ["Gardening as a Hobby", [
-          "Jake: I spend every Saturday morning gardening. It’s my favorite hobby.",
-          "Friend: That sounds nice, Jake. What do you like to grow?",
-          "Jake: I grow flowers and vegetables. Last week, I planted tomatoes and sunflowers.",
-          "Friend: Wow! How do you take care of them?",
-          "Jake: I water them every day and make sure they get enough sunlight. It makes me happy to see them grow.",
-          "Friend: I’d like to try gardening too. It must be relaxing.",
-          "Jake: You should! It’s a great way to spend time outdoors and enjoy nature.",
-          "Friend: Maybe next weekend, you can show me your garden.",
-          "Jake: I’d love to. Let’s plan for it!"
-        ]],
-
+          "Jake, male: I spend every Saturday morning gardening. It’s my favorite hobby.",
+          "Friend, male: That sounds nice, Jake. What do you like to grow?",
+          "Jake, male: I grow flowers and vegetables. Last week, I planted tomatoes and sunflowers.",
+          "Friend, male: Wow! How do you take care of them?",
+          "Jake, male: I water them every day and make sure they get enough sunlight. It makes me happy to see them grow.",
+          "Friend, male: I’d like to try gardening too. It must be relaxing.",
+          "Jake, male: You should! It’s a great way to spend time outdoors and enjoy nature.",
+          "Friend, male: Maybe next weekend, you can show me your garden.",
+          "Jake, male: I’d love to. Let’s plan for it!"
+        ], :conversation],
         ["Climate Change Summit", [
           "The United Nations held a summit yesterday to discuss climate change.",
           "Leaders from around the world attended the meeting.",
@@ -1021,44 +1055,39 @@ module Seeds
           "Maria, a reporter, asked the delegates about their commitments.",
           "One delegate responded, 'We are committed to investing in renewable energy sources.'",
           "The summit concluded with a unanimous agreement to take immediate action."
-        ]],
-
+        ], :short_story, :female],
         ["Job Interview Preparation", [
           "John is preparing for his job interview next week.",
           "He practices answering common interview questions with his friend, Lisa.",
-          "John: I am excited about this opportunity. Can you help me with my resume?",
-          "Lisa: Sure, John. Let's highlight your skills and experiences relevant to the job.",
+          "John, male: I am excited about this opportunity. Can you help me with my resume?",
+          "Lisa, female: Sure, John. Let's highlight your skills and experiences relevant to the job.",
           "They review his resume together, making sure it showcases his strengths.",
           "John feels more confident after the practice session."
-        ]],
-
+        ], :short_story, :male],
         ["Improving Spanish with Online Courses", [
           "Sara attends an online course to improve her Spanish.",
           "She finds the interactive lessons very engaging.",
           "Every evening, she dedicates two hours to studying.",
-          "Sara: I enjoy learning new vocabulary and practicing conversations.",
+          "Sara, female: I enjoy learning new vocabulary and practicing conversations.",
           "Her teacher provides feedback to help her progress.",
           "Sara feels motivated as she notices her improvement each week."
-        ]],
-
+        ], :short_story, :male],
         ["Adopting a Healthier Lifestyle", [
           "Tom decided to adopt a healthier lifestyle.",
           "He starts by eating more vegetables and fruits.",
           "Tom joins a local gym to exercise regularly.",
           "He also schedules annual check-ups with his doctor.",
-          "Tom: I want to feel more energetic and reduce my stress levels.",
+          "Tom, male: I want to feel more energetic and reduce my stress levels.",
           "After a few months, Tom notices significant improvements in his health."
-        ]],
-
+        ], :short_story, :female],
         ["Excitement About a New Smartphone", [
           "Emma is excited about the latest smartphone release.",
           "She visits the store to see the new features.",
-          "Salesperson: This model has an improved camera and longer battery life.",
+          "Salesperson, male: This model has an improved camera and longer battery life.",
           "Emma tries out the phone and takes some pictures.",
           "She appreciates the sleek design and user-friendly interface.",
           "Emma decides to purchase the smartphone to enhance her daily tasks."
         ]],
-
         ["A Day in My Life", [
           "I wake up at 5:30 every morning.",
           "First, I work on my side project for one hour.",
@@ -1069,8 +1098,7 @@ module Seeds
           "After the gym, I return home to my wife and kids.",
           "We have dinner together and talk about our day.",
           "Before bed, I read a book to relax."
-        ]],
-
+        ], :short_story, :male],
         ["Autumn Season Description", [
           "Autumn is my favorite season.",
           "The trees change their colors to red, orange, and yellow.",
@@ -1080,8 +1108,7 @@ module Seeds
           "The sunsets are beautiful with warm colors.",
           "Birds fly south to find warmer places.",
           "Autumn is a time of change and beauty."
-        ]],
-
+        ], :short_story, :female],
         ["Concert Night with Friends", [
           "Last weekend, I went to a concert with my friends.",
           "The band played many popular songs.",
@@ -1091,8 +1118,7 @@ module Seeds
           "It was a fun evening full of laughter and joy.",
           "I love spending time with friends at events like this.",
           "Music brings us together and creates happy memories."
-        ]],
-
+        ], :short_story, :female],
         ["Developing Good Habits to Reach Goals", [
           "I want to reach my goals this year.",
           "To do that, I need to develop good habits.",
@@ -1102,8 +1128,7 @@ module Seeds
           "I practice time management to use my day wisely.",
           "Staying positive keeps me motivated.",
           "With these habits, I believe I can achieve my dreams."
-        ]],
-
+        ], :short_story, :male],
         ["Community Service and Helping Orphans", [
           "I love helping others in my community.",
           "Every Saturday, my friend Anna and I go to a community center.",
@@ -1113,8 +1138,7 @@ module Seeds
           "Sometimes, we read stories and play games with them.",
           "Helping others makes me feel fulfilled and grateful.",
           "I look forward to our community service every week."
-        ]],
-
+        ], :short_story, :female],
         ["Cultural Heritage of South Korea", [
           "South Korea has a rich cultural heritage.",
           "One important tradition is the celebration of Chuseok.",
@@ -1124,19 +1148,18 @@ module Seeds
           "South Korea is also known for its beautiful temples and palaces.",
           "K-pop and Korean dramas are popular around the world.",
           "The culture of South Korea blends modern and traditional elements seamlessly."
-        ]],
-
+        ], :short_story, :female],
         ["Skating Rink Outing with Friends", [
-          "Alex: Hi! I'm so glad we could come to the skating rink together.",
-          "Jamie: Me too, Alex! I've been looking forward to this all week.",
-          "Alex: You skate really well. I love watching you glide on the ice.",
-          "Jamie: Thank you! You make it look easy. Maybe you can teach me some moves.",
-          "Alex: I'd love to. How about we start with some simple spins?",
-          "Jamie: Sounds fun! I'm excited to learn from you.",
-          "Alex: You're doing great! Your smile makes skating even more enjoyable.",
-          "Jamie: You're very kind, Alex. I'm having a wonderful time with you.",
-          "Alex: Let's grab some hot chocolate after skating. It's a perfect day.",
-          "Jamie: That sounds perfect. I can't wait!"
+          "Alex, male: Hi! I'm so glad we could come to the skating rink together.",
+          "Jamie, female: Me too, Alex! I've been looking forward to this all week.",
+          "Alex, male: You skate really well. I love watching you glide on the ice.",
+          "Jamie, female: Thank you! You make it look easy. Maybe you can teach me some moves.",
+          "Alex, male: I'd love to. How about we start with some simple spins?",
+          "Jamie, female: Sounds fun! I'm excited to learn from you.",
+          "Alex, male: You're doing great! Your smile makes skating even more enjoyable.",
+          "Jamie, female: You're very kind, Alex. I'm having a wonderful time with you.",
+          "Alex, male: Let's grab some hot chocolate after skating. It's a perfect day.",
+          "Jamie, female: That sounds perfect. I can't wait!"
         ]]
       ]
     end
@@ -1152,7 +1175,7 @@ module Seeds
           "I cheered loudly each time the Tigers passed the ball with skill and confidence.",
           "Although I could barely sit still, the team remained calm, controlling the pace of the match.",
           "In the end, when the referee signaled the final goal, the entire stadium erupted with joy and pride."
-        ]],
+        ], :short_story, :male],
 
         ["Motorbike Journey Through Vietnam", [
           "Last year, I spent twelve months traveling through Vietnam on a motorbike.",
@@ -1163,7 +1186,7 @@ module Seeds
           "Sometimes I stayed in simple guesthouses, where I met other travelers and exchanged advice.",
           "By the end of the year, I had formed lasting friendships and gained a deeper respect for Vietnamese culture.",
           "The experience taught me independence, patience, and a love for life on the road."
-        ]],
+        ], :short_story, :male],
 
         ["Making Fresh Pasta at Home", [
           "Making fresh pasta at home is a simple yet rewarding process.",
@@ -1174,7 +1197,7 @@ module Seeds
           "Simmer the sauce gently so the flavors can blend together.",
           "Roll out the dough until it’s thin, then cut it into long strips to form pasta ribbons.",
           "Finally, cook the pasta in boiling water and serve it with the fragrant tomato sauce on top."
-        ]],
+        ], :short_story, :male],
 
         ["Weekend Camping in the Mountains", [
           "I enjoy spending my weekends camping in the mountains near a quiet lake.",
@@ -1185,7 +1208,7 @@ module Seeds
           "Later, I explore small trails leading deeper into the forest, discovering wildflowers and hidden streams.",
           "Back at my campsite, I relax by a small fire, enjoying the warmth and simplicity of nature.",
           "These quiet moments in the mountains help me feel refreshed and ready for the week ahead."
-        ]],
+        ], :short_story, :female],
 
         ["History of South American Indigenous People", [
           "The indigenous people of South America have a rich and diverse history that spans thousands of years.",
@@ -1196,27 +1219,27 @@ module Seeds
           "Today, their cultural heritage continues to influence modern South American societies, preserving ancient customs and knowledge.",
           "Efforts are being made to protect indigenous rights and promote the preservation of their languages and traditions.",
           "Understanding the history of South America's indigenous people is essential for appreciating the continent's cultural diversity and resilience."
-        ]],
+        ], :short_story, :female],
 
         ["Career Decisions After High School", [
-          "Emma: Hey Liam, have you thought about what you want to do after high school?",
-          "Liam: Yeah, I've been considering a few options.",
-          "Liam: I'm not sure whether to start a trade, go to college, or maybe even start my own business.",
-          "Emma: Those are all great choices.",
-          "Emma: What interests you the most?",
-          "Liam: I really like working with my hands, so a trade like carpentry or plumbing could be a good fit.",
-          "Liam: But I also enjoy learning new things, so college is appealing too.",
-          "Emma: True. College can open up many opportunities, but starting a trade can get you into the workforce faster.",
-          "Emma: Have you thought about what business you might want to start?",
-          "Liam: I've always had ideas for a small tech startup, but I'm not sure if I have the right skills yet.",
-          "Emma: Maybe you could combine your interests.",
-          "Emma: You could start with a trade and take some college courses on the side, or look for business programs that focus on trades.",
-          "Liam: That's a good point.",
-          "Liam: I guess it's about finding a balance between what I enjoy and what will provide stability.",
-          "Emma: Exactly. It might also help to talk to a career counselor or shadow professionals in each field to see what suits you best.",
-          "Liam: Thanks, Emma. I appreciate your advice.",
-          "Liam: I'll start exploring these options more."
-        ]],
+          "Emma, female: Hey Liam, have you thought about what you want to do after high school?",
+          "Liam, male: Yeah, I've been considering a few options.",
+          "Liam, male: I'm not sure whether to start a trade, go to college, or maybe even start my own business.",
+          "Emma, female: Those are all great choices.",
+          "Emma, female: What interests you the most?",
+          "Liam, male: I really like working with my hands, so a trade like carpentry or plumbing could be a good fit.",
+          "Liam, male: But I also enjoy learning new things, so college is appealing too.",
+          "Emma, female: True. College can open up many opportunities, but starting a trade can get you into the workforce faster.",
+          "Emma, female: Have you thought about what business you might want to start?",
+          "Liam, male: I've always had ideas for a small tech startup, but I'm not sure if I have the right skills yet.",
+          "Emma, female: Maybe you could combine your interests.",
+          "Emma, female: You could start with a trade and take some college courses on the side, or look for business programs that focus on trades.",
+          "Liam, male: That's a good point.",
+          "Liam, male: I guess it's about finding a balance between what I enjoy and what will provide stability.",
+          "Emma, female: Exactly. It might also help to talk to a career counselor or shadow professionals in each field to see what suits you best.",
+          "Liam, male: Thanks, Emma. I appreciate your advice.",
+          "Liam, male: I'll start exploring these options more."
+        ], :conversation],
 
         ["Maintaining a Balanced Lifestyle", [
           "Maintaining a balanced lifestyle is crucial for overall health and well-being.",
@@ -1227,7 +1250,7 @@ module Seeds
           "Adequate sleep is essential for the body to repair itself and for the mind to function properly.",
           "Balancing work or school with leisure time prevents burnout and promotes a healthier, happier life.",
           "By prioritizing balance, individuals can achieve their health goals and enjoy a higher quality of life."
-        ]],
+        ], :short_story, :female],
 
         ["The Impact of the Internet", [
           "The invention of the internet has revolutionized the way we live, work, and communicate.",
@@ -1239,7 +1262,7 @@ module Seeds
           "Entertainment has also been impacted, with streaming services providing on-demand access to movies, music, and games.",
           "However, the internet has also introduced challenges, including concerns about privacy, cybersecurity, and the spread of misinformation.",
           "Despite these issues, the internet continues to evolve, driving innovation and shaping the future of society in profound ways."
-        ]],
+        ], :short_story, :male],
 
         ["Understanding Global Warming", [
           "Global warming is one of the most pressing issues facing our planet today.",
@@ -1252,7 +1275,7 @@ module Seeds
           "To combat global warming, it is essential to reduce carbon emissions and switch to renewable energy sources.",
           "Individuals can contribute by conserving energy, recycling, and supporting environmentally friendly policies.",
           "Addressing global warming requires global cooperation and immediate action to ensure a sustainable future for all."
-        ]],
+        ], :short_story, :female],
 
         ["The Importance of Grit", [
           "Grit is a key trait that contributes to personal and professional success.",
@@ -1265,7 +1288,7 @@ module Seeds
           "Research has shown that grit is a better predictor of success than intelligence or talent alone.",
           "To build grit, it is helpful to cultivate a growth mindset, believing that abilities can be developed through dedication.",
           "By developing grit, people can overcome obstacles, achieve their goals, and lead fulfilling lives."
-        ]],
+        ], :short_story, :female],
         ["Benefits of Community Service", [
           "Engaging in community service is a meaningful way to bring joy into one's life.",
           "Volunteering allows individuals to connect with others and make a positive impact on their communities.",
@@ -1277,7 +1300,7 @@ module Seeds
           "Community service encourages empathy and understanding, as volunteers work alongside diverse groups of people.",
           "By dedicating time and effort to help others, individuals can create lasting positive change.",
           "Ultimately, community service not only benefits those in need but also enriches the lives of the volunteers themselves."
-        ]],
+        ], :short_story, :female],
         ["Role of Dance in the Latin Community", [
           "Dance plays a significant role in the Latin community, reflecting its vibrant culture and rich traditions.",
           "From salsa and bachata to tango and merengue, Latin dances are known for their energetic and expressive movements.",
@@ -1289,19 +1312,19 @@ module Seeds
           "In addition to entertainment, Latin dance promotes physical fitness and coordination.",
           "Through dance, the Latin community preserves its cultural identity and passes traditions down to future generations.",
           "Overall, dance is not just an art form but a vital aspect of cultural life in the Latin community, embodying its spirit and diversity."
-        ]],
+        ], :short_story, :female],
         ["Planning an Evening Out", [
-          "Sarah: Hey Mike, what do you feel like doing tonight?",
-          "Mike: I'm not sure. Maybe we could go to that new restaurant downtown.",
-          "Sarah: That sounds good, but I was also thinking about seeing a movie. There's a great comedy playing.",
-          "Mike: True, I've heard the reviews are excellent. Or we could go to a concert if you're up for some live music.",
-          "Sarah: Live music sounds fun! What kind of bands are playing?",
-          "Mike: There's a jazz band and an indie rock group. Which one do you prefer?",
-          "Sarah: I love jazz! It would be a nice change from our usual outings.",
-          "Mike: Perfect, let's go to the jazz concert then. After that, we can grab a late-night coffee.",
-          "Sarah: Sounds like a plan. I'm excited for the evening!",
-          "Mike: Me too. It'll be a great way to relax and enjoy some good music together."
-        ]],
+          "Sarah, female: Hey Mike, what do you feel like doing tonight?",
+          "Mike, male: I'm not sure. Maybe we could go to that new restaurant downtown.",
+          "Sarah, female: That sounds good, but I was also thinking about seeing a movie. There's a great comedy playing.",
+          "Mike, male: True, I've heard the reviews are excellent. Or we could go to a concert if you're up for some live music.",
+          "Sarah, female: Live music sounds fun! What kind of bands are playing?",
+          "Mike, male: There's a jazz band and an indie rock group. Which one do you prefer?",
+          "Sarah, female: I love jazz! It would be a nice change from our usual outings.",
+          "Mike, male: Perfect, let's go to the jazz concert then. After that, we can grab a late-night coffee.",
+          "Sarah, female: Sounds like a plan. I'm excited for the evening!",
+          "Mike, male: Me too. It'll be a great way to relax and enjoy some good music together."
+        ], :conversation],
         ["Daily Life in the City", [
           "Life in the city is always busy.",
           "People wake up early to catch the bus or train to work.",
@@ -1313,7 +1336,7 @@ module Seeds
           "Families often eat dinner together and talk about their day.",
           "On weekends, people enjoy visiting museums, theaters, or shopping malls.",
           "The city never seems to sleep."
-        ]],
+        ], :short_story, :male],
         ["A Weekend at the Beach", [
           "Last weekend, my friends and I went to the beach.",
           "The weather was perfect—sunny and warm.",
@@ -1325,7 +1348,7 @@ module Seeds
           "In the afternoon, we relaxed and read books under the shade.",
           "Before leaving, we watched the sunset, which was stunning.",
           "It was a fun and relaxing day, and we all agreed to come back soon."
-        ]],
+        ], :short_story, :female],
         ["Learning a New Skill", [
           "Two months ago, I decided to learn how to cook.",
           "At first, I only knew how to make simple dishes like pasta and scrambled eggs.",
@@ -1337,7 +1360,7 @@ module Seeds
           "Cooking has become a relaxing hobby for me.",
           "My friends are happy too because I often invite them for dinner.",
           "Learning to cook has been a rewarding experience."
-        ]],
+        ], :short_story, :female],
         ["Saving for the Future", [
           "Saving money is important for the future.",
           "John decided to invest his money to secure his financial stability.",
@@ -1359,7 +1382,7 @@ module Seeds
           "Saving is a habit that John practices every day.",
           "He encourages others to start saving as soon as possible.",
           "John knows that his efforts today will benefit him tomorrow."
-        ]],
+        ], :short_story, :male],
         ["A New Beginning Abroad", [
           "Anna is a teenager from Spain starting her first year of college abroad.",
           "She feels both excited and nervous about the new experience.",
@@ -1381,7 +1404,7 @@ module Seeds
           "By the end of the semester, Anna feels at home.",
           "She is proud of herself for overcoming the challenges.",
           "Anna looks forward to the rest of her college journey abroad."
-        ]],
+        ], :short_story, :female],
         ["Exploring Different Fruits", [
           "Fruits come in many shapes, sizes, and flavors.",
           "Apples are sweet and crunchy, perfect for a healthy snack.",
@@ -1403,7 +1426,7 @@ module Seeds
           "Avocados are creamy and rich, often used in salads.",
           "Papayas have a sweet taste and are good for digestion.",
           "Each fruit has its own unique flavor and benefits."
-        ]],
+        ], :short_story, :female],
         ["Finding the Right Partner", [
           "Finding the right partner is important for a happy life.",
           "Sarah believes that trust is the foundation of a good relationship.",
@@ -1425,56 +1448,56 @@ module Seeds
           "They enjoy learning new things together.",
           "Sarah and Michael feel happy and fulfilled in their relationship.",
           "Finding the right partner leads to a supportive and loving life."
-        ]],
+        ], :short_story, :female],
         [
           "Volunteering at a Community Event",
           [
-            "Anna: Hi Mark, have you heard about the community clean-up this weekend?",
-            "Mark: No, I haven't. What's it about?",
-            "Anna: It's an event where we help clean up the local park and improve the playground.",
-            "Mark: That sounds great! How can I sign up?",
-            "Anna: You can register online or just show up at the park on Saturday morning.",
-            "Mark: I'm interested. Do we need to bring any supplies?",
-            "Anna: They will provide gloves and trash bags. Just wear comfortable clothes and shoes.",
-            "Mark: Perfect. I'll bring my friends too. It will be fun working together.",
-            "Anna: The more people we have, the more impact we can make on the environment.",
-            "Mark: I agree. It's a good way to give back to the community and meet new people."
-          ]
+            "Anna, female: Hi Mark, have you heard about the community clean-up this weekend?",
+            "Mark, male: No, I haven't. What's it about?",
+            "Anna, female: It's an event where we help clean up the local park and improve the playground.",
+            "Mark, male: That sounds great! How can I sign up?",
+            "Anna, female: You can register online or just show up at the park on Saturday morning.",
+            "Mark, male: I'm interested. Do we need to bring any supplies?",
+            "Anna, female: They will provide gloves and trash bags. Just wear comfortable clothes and shoes.",
+            "Mark, male: Perfect. I'll bring my friends too. It will be fun working together.",
+            "Anna, female: The more people we have, the more impact we can make on the environment.",
+            "Mark, male: I agree. It's a good way to give back to the community and meet new people."
+          ], :conversation
         ],
         [
           "Planning a Trip with Friends",
           [
-            "Lily: Hey everyone, I'm thinking about planning a trip to the mountains next month.",
-            "James: That sounds awesome! When exactly are you planning to go?",
-            "Lily: I'm looking at the first weekend of June. Does that work for everyone?",
-            "Sophie: June is perfect for me. I love hiking and enjoying nature.",
-            "James: Count me in! What activities do you have in mind?",
-            "Lily: We can go hiking, have picnics, and maybe even try some camping if we have time.",
-            "Sophie: Camping would be fun, but I'll need to borrow some gear first.",
-            "James: I have extra tents and sleeping bags we can use. No worries!",
-            "Lily: Great! I'll book a campsite and send out the details later this week.",
-            "Sophie: Awesome. I'll start preparing some snacks and meals for the trip.",
-            "James: I'll take care of the transportation. We can rent a van to make it easier.",
-            "Lily: Perfect. I'm really excited about this trip. It's going to be a great adventure!",
-            "Sophie: Me too! Thanks for organizing, Lily.",
-            "James: Looking forward to it as well. It's going to be a memorable trip."
-          ]
+            "Lily, female: Hey everyone, I'm thinking about planning a trip to the mountains next month.",
+            "James, male: That sounds awesome! When exactly are you planning to go?",
+            "Lily, female: I'm looking at the first weekend of June. Does that work for everyone?",
+            "Sophie, female: June is perfect for me. I love hiking and enjoying nature.",
+            "James, male: Count me in! What activities do you have in mind?",
+            "Lily, female: We can go hiking, have picnics, and maybe even try some camping if we have time.",
+            "Sophie, female: Camping would be fun, but I'll need to borrow some gear first.",
+            "James, male: I have extra tents and sleeping bags we can use. No worries!",
+            "Lily, female: Great! I'll book a campsite and send out the details later this week.",
+            "Sophie, female: Awesome. I'll start preparing some snacks and meals for the trip.",
+            "James, male: I'll take care of the transportation. We can rent a van to make it easier.",
+            "Lily, female: Perfect. I'm really excited about this trip. It's going to be a great adventure!",
+            "Sophie, female: Me too! Thanks for organizing, Lily.",
+            "James, male: Looking forward to it as well. It's going to be a memorable trip."
+          ], :conversation
         ],
         [
           "Starting a Cooking Class",
           [
-            "Maria: Hi Tom, I've decided to start taking a cooking class. Would you like to join me?",
-            "Tom: That sounds interesting! What kind of cooking class is it?",
-            "Maria: It's an Italian cuisine class. We'll learn how to make pasta, pizza, and other traditional dishes.",
-            "Tom: I've always wanted to learn how to cook Italian food. When does it start?",
-            "Maria: The classes begin next Saturday evening. They meet every week for two hours.",
-            "Tom: Great! How much does it cost?",
-            "Maria: It's 50 dollars for the entire course, which includes all the ingredients and recipes.",
-            "Tom: I'm in. It will be fun to learn something new and delicious.",
-            "Maria: Awesome! I'll sign us up and send you the details.",
-            "Tom: Looking forward to it. Maybe we can cook together at home too.",
-            "Maria: Definitely. It will be a great way to practice what we learn in class."
-          ]
+            "Maria, female: Hi Tom, I've decided to start taking a cooking class. Would you like to join me?",
+            "Tom, male: That sounds interesting! What kind of cooking class is it?",
+            "Maria, female: It's an Italian cuisine class. We'll learn how to make pasta, pizza, and other traditional dishes.",
+            "Tom, male: I've always wanted to learn how to cook Italian food. When does it start?",
+            "Maria, female: The classes begin next Saturday evening. They meet every week for two hours.",
+            "Tom, male: Great! How much does it cost?",
+            "Maria, female: It's 50 dollars for the entire course, which includes all the ingredients and recipes.",
+            "Tom, male: I'm in. It will be fun to learn something new and delicious.",
+            "Maria, female: Awesome! I'll sign us up and send you the details.",
+            "Tom, male: Looking forward to it. Maybe we can cook together at home too.",
+            "Maria, female: Definitely. It will be a great way to practice what we learn in class."
+          ], :conversation
         ]
       ]
     end
@@ -1501,7 +1524,7 @@ module Seeds
             "Moreover, political leaders must balance economic growth with environmental protection.",
             "As the world continues to change, it is essential to address these global issues collectively.",
             "By working together, we can create a more sustainable and prosperous future for everyone."
-          ]
+          ], :short_story, :female
         ],
         [
           "Understanding Local News",
@@ -1523,7 +1546,7 @@ module Seeds
             "Moreover, local news often features success stories of local businesses and entrepreneurs, inspiring others to contribute to the economy.",
             "By following local news, people can better appreciate the diversity and resilience of their own regions.",
             "This knowledge empowers them to take an active role in shaping the future of their communities."
-          ]
+          ], :short_story, :female
         ],
         [
           "Exploring Diverse Diets",
@@ -1544,7 +1567,7 @@ module Seeds
             "It's important to choose a diet that aligns with one's health goals and cultural preferences.",
             "Consulting with nutritionists can provide personalized guidance for adopting a suitable diet.",
             "By appreciating the variety of diets worldwide, we can make informed choices that support our health and honor our cultural heritage."
-          ]
+          ], :short_story, :male
         ],
         [
           "Stress Management and Mindfulness",
@@ -1568,7 +1591,7 @@ module Seeds
             "By taking proactive steps to manage stress and practice mindfulness, individuals can achieve greater psychological well-being.",
             "It is important to destigmatize mental health discussions to encourage more people to seek help when needed.",
             "Supporting each other in managing stress and promoting mental health fosters a healthier and more resilient society."
-          ]
+          ], :short_story, :female
         ],
         [
           "Education Around the World",
@@ -1593,7 +1616,7 @@ module Seeds
             "Understanding these differences also helps educators develop more effective teaching strategies and curricula.",
             "As globalization continues to influence higher education, these systems are likely to evolve, incorporating elements from one another to enhance learning outcomes.",
             "Ultimately, the diversity of higher education systems contributes to a rich and varied global academic landscape."
-          ]
+          ], :short_story, :female
         ],
         [
           "Career Planning",
@@ -1618,7 +1641,7 @@ module Seeds
             "Understanding labor market trends and adapting strategies accordingly can improve job search effectiveness.",
             "Financial planning also plays a role, ensuring that individuals can support themselves while seeking new opportunities.",
             "By implementing these strategies, individuals can navigate the job market more effectively and move closer to achieving their career aspirations."
-          ]
+          ], :short_story, :female
         ],
         [
           "Digital Transformation",
@@ -1643,7 +1666,7 @@ module Seeds
             "Ensuring equitable access to technology is essential for maximizing its positive impact on society.",
             "As digital transformation continues to evolve, it is crucial for individuals and organizations to stay informed and adaptable to thrive in the changing landscape.",
             "By embracing technology, we can create a more connected, efficient, and innovative future."
-          ]
+          ], :short_story, :male
         ],
         [
           "Exploring Emerging Technologies",
@@ -1667,7 +1690,7 @@ module Seeds
             "Furthermore, public awareness and understanding of these technologies are important for their successful implementation.",
             "As AI, renewable energy, and biotechnology continue to evolve, they hold the promise of creating a more sustainable and efficient world.",
             "Balancing innovation with ethical considerations will be critical in harnessing the full potential of these emerging technologies."
-          ]
+          ], :short_story, :male
         ],
         [
           "Natural Resources and Biodiversity",
@@ -1692,7 +1715,7 @@ module Seeds
             "The success of these initiatives depends on the collective actions of individuals, communities, and governments working towards a common goal of environmental sustainability.",
             "As threats like climate change and pollution continue, ongoing commitment to conservation is more important than ever.",
             "Through dedicated efforts, we can safeguard the natural world and promote a harmonious relationship between humans and nature."
-          ]
+          ], :short_story, :male
         ],
         [
           "Recycling, Fashion, and Green Energy",
@@ -1717,7 +1740,7 @@ module Seeds
             "Sustainable living not only benefits the planet but also enhances personal well-being by creating healthier living spaces and communities.",
             "As more people embrace sustainability, the cumulative effect can lead to substantial environmental improvements.",
             "Ultimately, adopting sustainable living practices is a responsibility we all share to ensure a better future for generations to come."
-          ]
+          ], :short_story, :female
         ],
         [
           "Cultural Traditions and Festivals",
@@ -1741,7 +1764,7 @@ module Seeds
             "Maria looks forward to the festival every year as a way to connect with her heritage.",
             "The success of the festival has inspired other cities to host similar events.",
             "Overall, cultural traditions and festivals play a crucial role in preserving and celebrating diversity."
-          ]
+          ], :short_story, :male
         ],
         [
           "Gender Equality At Work",
@@ -1765,7 +1788,7 @@ module Seeds
             "Emma believes that continuous effort is necessary to maintain gender equality.",
             "She encourages other organizations to adopt similar practices for a fairer workplace.",
             "Overall, promoting gender equality benefits both employees and the organization as a whole."
-          ]
+          ], :short_story, :female
         ],
         [
           "Famous Landmarks Of The World",
@@ -1789,7 +1812,7 @@ module Seeds
             "Local guides provide valuable information about the history and significance of each site.",
             "Preserving these landmarks is crucial for future generations to appreciate.",
             "Whether it's natural or man-made, famous landmarks continue to inspire and awe people worldwide."
-          ]
+          ], :short_story, :male
         ],
         [
           "The Impact of Literature and Film",
@@ -1813,7 +1836,7 @@ module Seeds
             "Moreover, literature and film provide a form of escape and entertainment for many people.",
             "They offer a way to relax while still engaging with meaningful content.",
             "Overall, literature and film play a significant role in shaping cultural narratives and individual perspectives."
-          ]
+          ], :short_story, :male
         ],
         [
           "Time Management for Life",
@@ -1839,7 +1862,7 @@ module Seeds
             "Over time, his time management skills have significantly improved his productivity.",
             "Alex encourages others to adopt effective time management practices for a more balanced life.",
             "Ultimately, mastering time management allows him to achieve his goals and enjoy his free time."
-          ]
+          ], :short_story, :male
         ]
       ]
     end
@@ -1867,7 +1890,7 @@ module Seeds
             "These alternatives offer new ways for remote workers to interact and collaborate effectively.",
             "As the landscape continues to evolve, continuous adaptation and open-mindedness will be key to thriving in a remote work environment.",
             "Ultimately, the future of remote work promises greater flexibility and inclusivity, reshaping the traditional notions of the workplace."
-          ]
+          ], :short_story, :male
         ],
         [
           "Economic Inequality and Social Mobility",
@@ -1891,7 +1914,7 @@ module Seeds
             "Entrepreneurship and small business support are vital in creating opportunities and fostering innovation within diverse communities.",
             "Ultimately, reducing economic inequality and enhancing social mobility are fundamental for building equitable and sustainable societies.",
             "By prioritizing these issues, nations can ensure that all individuals have the chance to achieve their full potential and contribute meaningfully to the economy."
-          ]
+          ], :short_story, :female
         ],
         [
           "Social Media and Relationships",
@@ -1915,7 +1938,7 @@ module Seeds
             "Research indicates that mindful and intentional use of social media can strengthen rather than weaken interpersonal connections.",
             "Ultimately, the impact of social media on relationships depends largely on how individuals choose to engage with these platforms.",
             "By fostering a balanced and conscious approach to social media usage, it is possible to harness its advantages while minimizing its drawbacks."
-          ]
+          ], :short_story, :female
         ],
         [
           "Leadership in Modern Organizations",
@@ -1941,7 +1964,7 @@ module Seeds
             "Moreover, ethical leadership emphasizes integrity and responsibility, setting a moral example for the entire organization.",
             "In today's diverse and dynamic workplace, adopting a multifaceted leadership approach can enhance organizational resilience and success.",
             "Ultimately, the most effective leadership style depends on the unique characteristics of the team and the specific goals of the organization."
-          ]
+          ], :short_story, :male
         ],
         [
           "The Role of Innovation in Business",
@@ -1966,7 +1989,7 @@ module Seeds
             "However, managing the risks associated with innovation is crucial, as not all initiatives will yield successful outcomes.",
             "Balancing risk-taking with strategic planning ensures that resources are allocated effectively and that failures do not derail overall business objectives.",
             "Ultimately, the role of innovation in business growth cannot be overstated, as it drives progress, enhances competitiveness, and contributes to long-term success."
-          ]
+          ], :short_story, :male
         ],
         [
           "Climate Change and International Cooperation",
@@ -1990,7 +2013,7 @@ module Seeds
             "Educational initiatives raise awareness about the importance of sustainable practices at the individual and community levels.",
             "Ultimately, the success of climate change policies depends on the collective will and collaborative spirit of the international community.",
             "By working together, nations can mitigate the adverse effects of climate change and secure a healthier planet for future generations."
-          ]
+          ], :short_story, :female
         ],
         [
           "The Intersection of Technology and Privacy",
@@ -2014,7 +2037,7 @@ module Seeds
             "Ethical frameworks and guidelines for technology development can help navigate the complexities of privacy in the modern world.",
             "Ultimately, the intersection of technology and privacy demands continuous dialogue and adaptive strategies to ensure that advancements do not come at the expense of individual rights.",
             "By fostering a culture of transparency and accountability, society can harness the benefits of technology while maintaining the sanctity of personal privacy."
-          ]
+          ], :short_story, :male
         ],
         [
           "Cultural Heritage Preservation",
@@ -2038,7 +2061,7 @@ module Seeds
             "Authentic restoration practices ensure that heritage sites retain their historical integrity while adapting to contemporary needs.",
             "International cooperation and knowledge exchange enhance global efforts in cultural preservation.",
             "By prioritizing cultural heritage, modern societies honor their past, enrich their present, and inspire future generations."
-          ]
+          ], :short_story, :male
         ],
         [
           "Media and Public Opinion",
@@ -2062,7 +2085,7 @@ module Seeds
             "Media ownership concentration raises concerns about the diversity of viewpoints and the potential for monopolistic control over information.",
             "Regulatory frameworks aim to ensure a balanced and fair media landscape, promoting plurality and preventing misinformation.",
             "Ultimately, the influence of media on public opinion underscores the responsibility of media creators and consumers alike to uphold truth and integrity in the dissemination and reception of information."
-          ]
+          ], :short_story, :female
         ],
         [
           "The Evolution of Democratic Institutions",
@@ -2087,116 +2110,116 @@ module Seeds
             "The resilience of democratic institutions is continually tested by internal and external pressures, necessitating ongoing reforms and adaptations.",
             "Ultimately, the evolution of democratic institutions reflects the dynamic interplay between societal values, technological advancements, and the pursuit of equitable governance.",
             "By embracing change while upholding core democratic principles, societies can sustain and enhance the effectiveness of their democratic institutions."
-          ]
+          ], :short_story, :female
         ],
         [
           "Balancing Work and Personal Life",
           [
-            "Emma: Hi Liam, I've been feeling overwhelmed with balancing my job and personal life lately.",
-            "Liam: I'm sorry to hear that, Emma. What's been the most challenging part for you?",
-            "Emma: It's the constant juggling between long work hours and trying to maintain a healthy social life.",
-            "Liam: Have you considered setting clearer boundaries between work and personal time?",
-            "Emma: Yes, I've tried, but the pressure to meet deadlines often spills over into my evenings.",
-            "Liam: Maybe implementing a strict schedule could help. Allocate specific times for work and stick to them.",
-            "Emma: That's a good idea. I also think prioritizing tasks more effectively could reduce my stress levels.",
-            "Liam: Absolutely. Using tools like to-do lists or digital planners might help you stay organized.",
-            "Emma: I've heard about mindfulness practices being beneficial. Do you think that could work for me?",
-            "Liam: Definitely. Incorporating short meditation sessions into your daily routine can improve focus and reduce anxiety.",
-            "Emma: I'll give that a try. Additionally, I want to ensure I spend quality time with my family and friends.",
-            "Liam: Communicating your needs with your employer might also provide some flexibility in your schedule.",
-            "Emma: True. I'll discuss possible adjustments with my manager to see if there's any leeway.",
-            "Liam: Remember, it's important to take care of yourself to perform well both professionally and personally.",
-            "Emma: Thanks, Liam. I feel more optimistic about finding a better balance now."
-          ]
+            "Emma, female: Hi Liam, I've been feeling overwhelmed with balancing my job and personal life lately.",
+            "Liam, male: I'm sorry to hear that, Emma. What's been the most challenging part for you?",
+            "Emma, female: It's the constant juggling between long work hours and trying to maintain a healthy social life.",
+            "Liam, male: Have you considered setting clearer boundaries between work and personal time?",
+            "Emma, female: Yes, I've tried, but the pressure to meet deadlines often spills over into my evenings.",
+            "Liam, male: Maybe implementing a strict schedule could help. Allocate specific times for work and stick to them.",
+            "Emma, female: That's a good idea. I also think prioritizing tasks more effectively could reduce my stress levels.",
+            "Liam, male: Absolutely. Using tools like to-do lists or digital planners might help you stay organized.",
+            "Emma, female: I've heard about mindfulness practices being beneficial. Do you think that could work for me?",
+            "Liam, male: Definitely. Incorporating short meditation sessions into your daily routine can improve focus and reduce anxiety.",
+            "Emma, female: I'll give that a try. Additionally, I want to ensure I spend quality time with my family and friends.",
+            "Liam, male: Communicating your needs with your employer might also provide some flexibility in your schedule.",
+            "Emma, female: True. I'll discuss possible adjustments with my manager to see if there's any leeway.",
+            "Liam, male: Remember, it's important to take care of yourself to perform well both professionally and personally.",
+            "Emma, female: Thanks, Liam. I feel more optimistic about finding a better balance now."
+          ], :conversation
         ],
         [
           "Exploring Career Opportunities Abroad",
           [
-            "Sophia: Hey Raj, I've been thinking about pursuing my career overseas. What do you think?",
-            "Raj: That sounds exciting! Which countries are you considering, and what field are you interested in?",
-            "Sophia: I'm looking at Germany and Canada, especially in the field of renewable energy engineering.",
-            "Raj: Both countries have strong industries in that sector. Have you researched the visa and work permit requirements?",
-            "Sophia: Yes, I've started gathering information, but the process seems quite complex and time-consuming.",
-            "Raj: It definitely requires careful planning. Maybe reaching out to professionals who have made similar moves could provide valuable insights.",
-            "Sophia: That's a good idea. I'm also concerned about adapting to a new culture and possibly facing language barriers.",
-            "Raj: Immersing yourself in the language before moving can help. Additionally, many international companies offer support for expatriates.",
-            "Sophia: True. I'm considering taking advanced German language courses to better prepare myself.",
-            "Raj: That would be beneficial. Networking with industry professionals in those countries can also open up job opportunities.",
-            "Sophia: I've joined some online forums and LinkedIn groups related to renewable energy in Germany and Canada.",
-            "Raj: Great move. Attending international conferences or webinars can further expand your network.",
-            "Sophia: I'm also looking into scholarships and grants that support international career development.",
-            "Raj: Securing financial support can alleviate some of the stress associated with relocating and settling abroad.",
-            "Sophia: Overall, I'm excited about the prospects but aware of the challenges. Your advice has been really helpful!",
-            "Raj: I'm glad to help. Remember, thorough preparation is key to making a successful transition to working abroad.",
-            "Sophia: I'll keep that in mind. Thanks again, Raj!"
-          ]
+            "Sophia, female: Hey Raj, I've been thinking about pursuing my career overseas. What do you think?",
+            "Raj, male: That sounds exciting! Which countries are you considering, and what field are you interested in?",
+            "Sophia, female: I'm looking at Germany and Canada, especially in the field of renewable energy engineering.",
+            "Raj, male: Both countries have strong industries in that sector. Have you researched the visa and work permit requirements?",
+            "Sophia, female: Yes, I've started gathering information, but the process seems quite complex and time-consuming.",
+            "Raj, male: It definitely requires careful planning. Maybe reaching out to professionals who have made similar moves could provide valuable insights.",
+            "Sophia, female: That's a good idea. I'm also concerned about adapting to a new culture and possibly facing language barriers.",
+            "Raj, male: Immersing yourself in the language before moving can help. Additionally, many international companies offer support for expatriates.",
+            "Sophia, female: True. I'm considering taking advanced German language courses to better prepare myself.",
+            "Raj, male: That would be beneficial. Networking with industry professionals in those countries can also open up job opportunities.",
+            "Sophia, female: I've joined some online forums and LinkedIn groups related to renewable energy in Germany and Canada.",
+            "Raj, male: Great move. Attending international conferences or webinars can further expand your network.",
+            "Sophia, female: I'm also looking into scholarships and grants that support international career development.",
+            "Raj, male: Securing financial support can alleviate some of the stress associated with relocating and settling abroad.",
+            "Sophia, female: Overall, I'm excited about the prospects but aware of the challenges. Your advice has been really helpful!",
+            "Raj, male: I'm glad to help. Remember, thorough preparation is key to making a successful transition to working abroad.",
+            "Sophia, female: I'll keep that in mind. Thanks again, Raj!"
+          ], :conversation
         ],
         [
           "Navigating Mental Health Challenges",
           [
-            "Daniel: Hi Mia, I've been struggling with anxiety lately and it's affecting my daily life.",
-            "Mia: I'm really sorry to hear that, Daniel. Have you talked to anyone about how you're feeling?",
-            "Daniel: Not yet. I feel embarrassed and don't want to burden my friends and family.",
-            "Mia: You shouldn't have to go through this alone. Speaking with a mental health professional might help.",
-            "Daniel: I've considered it, but I'm not sure where to start or what to expect from therapy.",
-            "Mia: Many therapists offer initial consultations to discuss your concerns and outline a potential treatment plan.",
-            "Daniel: That makes sense. I'm also worried about the stigma associated with seeking help for mental health.",
-            "Mia: Unfortunately, stigma still exists, but it's slowly changing as more people speak openly about their experiences.",
-            "Daniel: I've noticed that support groups and online communities are becoming more prevalent. Maybe joining one could provide some relief.",
-            "Mia: Absolutely. Connecting with others who understand what you're going through can be incredibly comforting and empowering.",
-            "Daniel: I'm also trying to practice self-care, like exercising and maintaining a healthy diet, but it's hard to stay consistent.",
-            "Mia: Establishing a routine and setting small, achievable goals can make self-care more manageable.",
-            "Daniel: That's a good point. I should try to integrate these habits more effectively into my daily life.",
-            "Mia: Remember, it's okay to ask for help and take things one step at a time. Recovery is a gradual process.",
-            "Daniel: Thank you, Mia. Your support means a lot to me.",
-            "Mia: Anytime, Daniel. I'm here for you, and together we can find ways to navigate these challenges."
-          ]
+            "Daniel, male: Hi Mia, I've been struggling with anxiety lately and it's affecting my daily life.",
+            "Mia, female: I'm really sorry to hear that, Daniel. Have you talked to anyone about how you're feeling?",
+            "Daniel, male: Not yet. I feel embarrassed and don't want to burden my friends and family.",
+            "Mia, female: You shouldn't have to go through this alone. Speaking with a mental health professional might help.",
+            "Daniel, male: I've considered it, but I'm not sure where to start or what to expect from therapy.",
+            "Mia, female: Many therapists offer initial consultations to discuss your concerns and outline a potential treatment plan.",
+            "Daniel, male: That makes sense. I'm also worried about the stigma associated with seeking help for mental health.",
+            "Mia, female: Unfortunately, stigma still exists, but it's slowly changing as more people speak openly about their experiences.",
+            "Daniel, male: I've noticed that support groups and online communities are becoming more prevalent. Maybe joining one could provide some relief.",
+            "Mia, female: Absolutely. Connecting with others who understand what you're going through can be incredibly comforting and empowering.",
+            "Daniel, male: I'm also trying to practice self-care, like exercising and maintaining a healthy diet, but it's hard to stay consistent.",
+            "Mia, female: Establishing a routine and setting small, achievable goals can make self-care more manageable.",
+            "Daniel, male: That's a good point. I should try to integrate these habits more effectively into my daily life.",
+            "Mia, female: Remember, it's okay to ask for help and take things one step at a time. Recovery is a gradual process.",
+            "Daniel, male: Thank you, Mia. Your support means a lot to me.",
+            "Mia, female: Anytime, Daniel. I'm here for you, and together we can find ways to navigate these challenges."
+          ], :conversation
         ],
         [
           "Embracing Sustainable Living Practices",
           [
-            "Lily: Hey Sam, I've been trying to adopt more sustainable living practices. Do you have any tips?",
-            "Sam: That's awesome, Lily! One of the simplest things you can do is reduce single-use plastics by using reusable bags and containers.",
-            "Lily: I've started using a reusable water bottle and shopping bags, but I'm looking for more ways to be eco-friendly.",
-            "Sam: Great start! You might also consider composting your kitchen waste. It reduces landfill contributions and creates nutrient-rich soil for gardening.",
-            "Lily: I have a small garden, so that sounds perfect. What about energy consumption at home?",
-            "Sam: Switching to energy-efficient appliances and LED lighting can significantly lower your energy usage. Also, unplugging devices when they're not in use helps save power.",
-            "Lily: I'll look into that. I've also heard a lot about the importance of supporting local and organic food producers.",
-            "Sam: Definitely. Buying locally sourced and organic products reduces your carbon footprint and supports sustainable farming practices.",
-            "Lily: I'm also interested in reducing my water usage. Any suggestions?",
-            "Sam: Installing low-flow showerheads and fixing any leaks can make a big difference. Additionally, being mindful of your water usage while doing chores can help conserve water.",
-            "Lily: I've been trying to minimize waste by recycling and reusing items. It's challenging but rewarding.",
-            "Sam: It can be challenging at first, but once it becomes a habit, it feels natural. You can also explore upcycling projects to give new life to old items.",
-            "Lily: I'm planning to reduce my meat consumption and incorporate more plant-based meals into my diet.",
-            "Sam: That's a fantastic way to lower your environmental impact. There are so many delicious plant-based recipes to try!",
-            "Lily: Lastly, I'm considering using public transportation or biking more instead of driving. It feels like a big change.",
-            "Sam: It is a significant change, but it not only reduces emissions but also promotes a healthier lifestyle. You might find that you enjoy it more than you expected.",
-            "Lily: Thanks for all the tips, Sam. I'm motivated to continue making sustainable choices.",
-            "Sam: You're welcome, Lily! Every small step counts towards a more sustainable future."
-          ]
+            "Lily, female: Hey Sam, I've been trying to adopt more sustainable living practices. Do you have any tips?",
+            "Sam, male: That's awesome, Lily! One of the simplest things you can do is reduce single-use plastics by using reusable bags and containers.",
+            "Lily, female: I've started using a reusable water bottle and shopping bags, but I'm looking for more ways to be eco-friendly.",
+            "Sam, male: Great start! You might also consider composting your kitchen waste. It reduces landfill contributions and creates nutrient-rich soil for gardening.",
+            "Lily, female: I have a small garden, so that sounds perfect. What about energy consumption at home?",
+            "Sam, male: Switching to energy-efficient appliances and LED lighting can significantly lower your energy usage. Also, unplugging devices when they're not in use helps save power.",
+            "Lily, female: I'll look into that. I've also heard a lot about the importance of supporting local and organic food producers.",
+            "Sam, male: Definitely. Buying locally sourced and organic products reduces your carbon footprint and supports sustainable farming practices.",
+            "Lily, female: I'm also interested in reducing my water usage. Any suggestions?",
+            "Sam, male: Installing low-flow showerheads and fixing any leaks can make a big difference. Additionally, being mindful of your water usage while doing chores can help conserve water.",
+            "Lily, female: I've been trying to minimize waste by recycling and reusing items. It's challenging but rewarding.",
+            "Sam, male: It can be challenging at first, but once it becomes a habit, it feels natural. You can also explore upcycling projects to give new life to old items.",
+            "Lily, female: I'm planning to reduce my meat consumption and incorporate more plant-based meals into my diet.",
+            "Sam, male: That's a fantastic way to lower your environmental impact. There are so many delicious plant-based recipes to try!",
+            "Lily, female: Lastly, I'm considering using public transportation or biking more instead of driving. It feels like a big change.",
+            "Sam, male: It is a significant change, but it not only reduces emissions but also promotes a healthier lifestyle. You might find that you enjoy it more than you expected.",
+            "Lily, female: Thanks for all the tips, Sam. I'm motivated to continue making sustainable choices.",
+            "Sam, male: You're welcome, Lily! Every small step counts towards a more sustainable future."
+          ], :conversation
         ],
         [
           "The Influence of Social Media on Relationships",
           [
-            "Olivia: Hi Ethan, have you ever thought about how social media affects our personal relationships?",
-            "Ethan: Definitely, Olivia. On one hand, it helps us stay connected with friends and family, especially those who live far away.",
-            "Olivia: True, but I've noticed that it can also create misunderstandings and conflicts. What do you think causes that?",
-            "Ethan: I believe it's partly due to the lack of non-verbal cues in online communication. Misinterpretations are common when we rely solely on text or emojis.",
-            "Olivia: That's a good point. I've also seen how people curate their lives online, which can lead to unrealistic comparisons and feelings of inadequacy.",
-            "Ethan: Exactly. The pressure to present a perfect image can strain self-esteem and even relationships, as individuals may feel they need to compete or hide their true selves.",
-            "Olivia: Additionally, excessive use of social media can reduce the quality time we spend with our loved ones, as attention is divided between online and offline interactions.",
-            "Ethan: Yes, setting boundaries around social media usage is important to maintain healthy relationships. For example, having device-free times can enhance face-to-face communication.",
-            "Olivia: I've also read that social media can facilitate long-distance relationships by providing a platform for regular interaction and shared experiences.",
-            "Ethan: That's true. However, it requires trust and effective communication to ensure that the digital interactions complement rather than replace genuine connection.",
-            "Olivia: Another aspect is the role of social media in conflict resolution. Sometimes, issues escalate online due to the immediate and public nature of platforms.",
-            "Ethan: Handling conflicts privately and respectfully is crucial. Public disputes can harm relationships and reputations beyond the immediate parties involved.",
-            "Olivia: On a positive note, social media can also be a tool for support and community building, especially for individuals with shared interests or challenges.",
-            "Ethan: Absolutely. Finding like-minded communities can provide a sense of belonging and support, which strengthens personal relationships.",
-            "Olivia: Overall, it's about finding a balance and being mindful of how we use social media in our relationships.",
-            "Ethan: Agreed. By being intentional and respectful in our online interactions, we can harness the benefits of social media while minimizing its potential drawbacks.",
-            "Olivia: Thanks for the insightful conversation, Ethan. It's given me a lot to think about.",
-            "Ethan: Anytime, Olivia! It's important to continually evaluate how our digital habits impact our personal lives."
-          ]
+            "Olivia, female: Hi Ethan, have you ever thought about how social media affects our personal relationships?",
+            "Ethan, male: Definitely, Olivia. On one hand, it helps us stay connected with friends and family, especially those who live far away.",
+            "Olivia, female: True, but I've noticed that it can also create misunderstandings and conflicts. What do you think causes that?",
+            "Ethan, male: I believe it's partly due to the lack of non-verbal cues in online communication. Misinterpretations are common when we rely solely on text or emojis.",
+            "Olivia, female: That's a good point. I've also seen how people curate their lives online, which can lead to unrealistic comparisons and feelings of inadequacy.",
+            "Ethan, male: Exactly. The pressure to present a perfect image can strain self-esteem and even relationships, as individuals may feel they need to compete or hide their true selves.",
+            "Olivia, female: Additionally, excessive use of social media can reduce the quality time we spend with our loved ones, as attention is divided between online and offline interactions.",
+            "Ethan, male: Yes, setting boundaries around social media usage is important to maintain healthy relationships. For example, having device-free times can enhance face-to-face communication.",
+            "Olivia, female: I've also read that social media can facilitate long-distance relationships by providing a platform for regular interaction and shared experiences.",
+            "Ethan, male: That's true. However, it requires trust and effective communication to ensure that the digital interactions complement rather than replace genuine connection.",
+            "Olivia, female: Another aspect is the role of social media in conflict resolution. Sometimes, issues escalate online due to the immediate and public nature of platforms.",
+            "Ethan, male: Handling conflicts privately and respectfully is crucial. Public disputes can harm relationships and reputations beyond the immediate parties involved.",
+            "Olivia, female: On a positive note, social media can also be a tool for support and community building, especially for individuals with shared interests or challenges.",
+            "Ethan, male: Absolutely. Finding like-minded communities can provide a sense of belonging and support, which strengthens personal relationships.",
+            "Olivia, female: Overall, it's about finding a balance and being mindful of how we use social media in our relationships.",
+            "Ethan, male: Agreed. By being intentional and respectful in our online interactions, we can harness the benefits of social media while minimizing its potential drawbacks.",
+            "Olivia, female: Thanks for the insightful conversation, Ethan. It's given me a lot to think about.",
+            "Ethan, male: Anytime, Olivia! It's important to continually evaluate how our digital habits impact our personal lives."
+          ], :conversation
         ]
       ]
     end
@@ -2224,7 +2247,7 @@ module Seeds
             "Balancing exploration with preservation is essential to ensure that space remains a domain for peaceful and constructive endeavors.",
             "Ultimately, the impact of space exploration extends far beyond the scientific and technological realms, influencing societal values and aspirations.",
             "As humanity continues to push the boundaries of what is possible, space exploration remains a testament to our enduring curiosity and resilience."
-          ]
+          ], :short_story, :male
         ],
         [
           "Blockchain Applications Beyond Cryptocurrency",
@@ -2249,7 +2272,7 @@ module Seeds
             "Addressing these challenges requires collaborative efforts between technologists, policymakers, and industry stakeholders to harness blockchain's full potential.",
             "As blockchain technology continues to mature, its transformative impact is poised to extend far beyond its initial cryptocurrency applications, driving innovation and efficiency across the global economy.",
             "Embracing blockchain's diverse applications can lead to more transparent, secure, and equitable systems in various facets of society."
-          ]
+          ], :short_story, :male
         ],
         [
           "Cultural Diplomacy and International Relations",
@@ -2275,7 +2298,7 @@ module Seeds
             "The success of these initiatives depends on the collective actions of individuals, communities, and governments working towards a common goal of environmental sustainability.",
             "As threats like climate change and pollution continue, ongoing commitment to conservation is more important than ever.",
             "Through dedicated efforts, we can safeguard the natural world and promote a harmonious relationship between humans and nature."
-          ]
+          ], :short_story, :male
         ],
         [
           "Consumer Behavior and Marketing Strategies",
@@ -2300,7 +2323,7 @@ module Seeds
             "Effective segmentation leads to more targeted and efficient marketing efforts, maximizing the impact and return on investment.",
             "Moreover, the use of data analytics and consumer insights allows marketers to anticipate trends and adapt to changing consumer behaviors proactively.",
             "In conclusion, a comprehensive understanding of consumer behavior is essential for devising marketing strategies that not only attract but also retain customers in a dynamic and evolving market landscape."
-          ]
+          ], :short_story, :male
         ],
         [
           "The Evolution of Language in the Digital Age",
@@ -2325,7 +2348,7 @@ module Seeds
             "These niche linguistic developments contribute to the richness and diversity of modern language but can also create barriers to understanding across different groups.",
             "In summary, the digital age continues to drive the evolution of language, making it more adaptable, inclusive, and reflective of our interconnected world.",
             "As technology advances, so too will the ways in which we use and perceive language, highlighting the enduring relationship between communication and innovation."
-          ]
+          ], :short_story, :male
         ]
       ]
     end

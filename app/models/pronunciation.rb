@@ -21,6 +21,8 @@
 #  fk_rails_...  (word_id => words.id)
 #
 class Pronunciation < ApplicationRecord
+  BUCKET_FOLDER = "pronunciations".freeze
+
   belongs_to :word
   belongs_to :tts_voice
 
@@ -45,6 +47,9 @@ class Pronunciation < ApplicationRecord
 
     audio_data = tts_service.synthesize_speech
 
+    filename = "#{self.word.text}_#{name}_#{language_code}_#{gender}.mp3"
+    bucket_key = "#{BUCKET_FOLDER}/#{filename}"
+
     Tempfile.create(['pronunciation_', '.mp3']) do |tempfile|
       tempfile.binmode
       tempfile.write(audio_data)
@@ -52,8 +57,9 @@ class Pronunciation < ApplicationRecord
 
       self.audio.attach(
         io: tempfile,
-        filename: "#{name}_#{language_code}_#{gender}_#{self.word.text}.mp3",
-        content_type: 'audio/mpeg'
+        filename: filename,
+        content_type: 'audio/mpeg',
+        key: bucket_key
       )
     end
   end

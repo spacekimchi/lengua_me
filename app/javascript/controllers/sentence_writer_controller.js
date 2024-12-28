@@ -175,7 +175,28 @@ export default class extends Controller {
     this.fetchWordPronunciation(word).then(wordPronunciation => {
       // Get the TooltipController instance
       let contentHTML = this.createPronunciationContent(word, wordPronunciation);
-      tooltipController.show(parent, rect, contentHTML); // Adjust based on your fetchWordPronunciation response
+
+      if (wordPronunciation.error) {
+        tooltipController.show(parent, rect, contentHTML); // Adjust based on your fetchWordPronunciation response
+        return;
+      }
+      const pronunciation = this.wordPronunciations[word];
+      const gender = 'male';
+      if (pronunciation && pronunciation[gender]) {
+        const url = pronunciation[gender].url;
+        const audio = new Audio(url);
+        audio.play().then(() => {
+          tooltipController.show(parent, rect, contentHTML); // Adjust based on your fetchWordPronunciation response
+        }).catch(error => {
+          console.error("Error playing audio:", error)
+          let contentHTML = document.createElement('div');
+          contentHTML.className = 'word-pronunciation-container';
+          const noPronunciation = document.createElement('p');
+          noPronunciation.textContent = "Error fetching the audio.";
+          contentHTML.appendChild(noPronunciation);
+          tooltipController.show(parent, rect, contentHTML); // Adjust based on your fetchWordPronunciation response
+        });
+      }
 
       // Optionally, manage event listeners in the main controller if needed
     })
@@ -206,12 +227,11 @@ export default class extends Controller {
           word,
           "Play male pronunciation"
        );
-        maleButton.setAttribute('data-gender', 'male')
+        maleButton.setAttribute('data-gender', 'male');
         buttonContainer.appendChild(maleButton);
-
-        const url = pronunciation['male'].url;
-        const audio = new Audio(url);
-        audio.play().catch(error => console.error("Error playing audio:", error));
+        const male_url = pronunciation['male'].url;
+        const audio = new Audio(male_url);
+        audio.load();
       }
 
       if (pronunciation.female) {
@@ -224,6 +244,9 @@ export default class extends Controller {
         buttonContainer.appendChild(femaleButton);
       }
       contentHTML.appendChild(buttonContainer);
+      const female_url = pronunciation['female'].url;
+      const audio = new Audio(female_url);
+      audio.load();
     }
     return contentHTML;
   }
@@ -477,10 +500,6 @@ export default class extends Controller {
       });
   }
 
-  toggleMismatch() {
-      // this.checkResultTarget.textContent = resultTokens.join("");
-  }
-
   skip() {
     // You can define what should happen on skip, for now do nothing or implement logic
     this.showSkipDiv();
@@ -490,16 +509,10 @@ export default class extends Controller {
   }
 
   displayNextButtons() {
-    if (this.currentIndex === this.sentences.length - 1) {
-      // this.correctDivTarget.querySelector('button.success-button').classList.add('hidden');
-      this.skipDivTarget.querySelector('button.action-button').classList.add('hidden');
-      // this.checkAndSkipDivTarget.querySelector('button.neutral-button').classList.add('hidden');
-    } else {
-      this.correctDivTarget.querySelector('button.success-button').classList.remove('hidden');
-      this.skipDivTarget.querySelector('button.action-button').classList.remove('hidden');
-      this.checkAndSkipDivTarget.querySelector('button.neutral-button').classList.remove('hidden');
-      this.incorrectDivTarget.querySelector('button.warning-button').classList.remove('hidden');
-    }
+    this.correctDivTarget.querySelector('button.success-button').classList.remove('hidden');
+    this.skipDivTarget.querySelector('button.action-button').classList.remove('hidden');
+    this.checkAndSkipDivTarget.querySelector('button.neutral-button').classList.remove('hidden');
+    this.incorrectDivTarget.querySelector('button.warning-button').classList.remove('hidden');
   }
 
   showCorrectDiv() {
@@ -577,22 +590,29 @@ export default class extends Controller {
 
   renderSentence(index) {
     const writerContainer = this.writerContainerTarget;
-    const sentence = this.sentences[index];
+    const prev_sentence = this.sentences[Math.max(index - 1, 0)];
+    const next_sentence = this.sentences[index + 1];
+    [next_sentence].forEach(sentence => {
+      if (sentence && sentence.audio_url) {
+        const url = sentence.audio_url;
+        const audio = new Audio(url);
+        audio.load();
+      }
+    });
 
-    // If there is an audio file, add an audio player
+    const sentence = this.sentences[index];
     if (sentence.audio_url) {
       const audio = writerContainer.querySelector('audio');
       audio.id = `audio-${index}`;
       audio.src = sentence.audio_url;
       audio.onplay = this.focusTextArea.bind(this);
-
-      writerContainer.appendChild(audio);
+      audio.load();
     }
 
     // Show the correct sentence (this might be optional if you want to hide it from the user)
     const sentenceDiv = writerContainer.querySelector('div#sentence-blur-hint');
     if (sentence.prefix) {
-      sentenceDiv.querySelector('.sentence-prefix').textContent = `${sentence.prefix}:`;
+      sentenceDiv.querySelector('.sentence-prefix').textContent = `${sentence.prefix}: \u00A0`;
     }
     sentenceDiv.querySelector('.content-blur').classList.add("blur");
     sentenceDiv.querySelector('.content-blur').textContent = sentence.content;

@@ -195,12 +195,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_21_010732) do
     t.uuid "difficulty_id", null: false
     t.text "title", default: ""
     t.integer "position", null: false
-    t.text "search_text", default: ""
+    t.integer "category", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["difficulty_id", "position"], name: "index_passages_on_difficulty_id_and_position", unique: true
     t.index ["difficulty_id"], name: "index_passages_on_difficulty_id"
-    t.index ["search_text"], name: "index_passages_on_search_text_trgm", opclass: :gin_trgm_ops, using: :gin
+    t.index ["title"], name: "index_passages_on_title_trgm", opclass: :gin_trgm_ops, using: :gin
   end
 
   create_table "product_prices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -264,6 +264,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_21_010732) do
   create_table "sentences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "language_id"
     t.uuid "passage_id"
+    t.uuid "tts_voice_id", null: false
     t.text "content", default: ""
     t.integer "order_idx", default: 0
     t.text "prefix"
@@ -272,6 +273,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_21_010732) do
     t.datetime "updated_at", null: false
     t.index ["language_id"], name: "index_sentences_on_language_id"
     t.index ["passage_id"], name: "index_sentences_on_passage_id"
+    t.index ["tts_voice_id"], name: "index_sentences_on_tts_voice_id"
   end
 
   create_table "stripe_webhook_errors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -393,6 +395,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_21_010732) do
   add_foreign_key "sentence_translations", "sentences"
   add_foreign_key "sentences", "languages"
   add_foreign_key "sentences", "passages"
+  add_foreign_key "sentences", "tts_voices"
   add_foreign_key "support_ticket_messages", "support_tickets"
   add_foreign_key "support_ticket_messages", "users"
   add_foreign_key "support_tickets", "users"

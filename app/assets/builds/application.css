@@ -1030,9 +1030,16 @@ footer .footer-container a {
   width: 100%;
 }
 .passage-writer-show-container .sentence-writer-sentence-text {
-  display: inline-block;
-  margin: 11px 0;
+  display: flex;
+  align-items: center;
+  margin: 7px 0;
   cursor: pointer;
+}
+.passage-writer-show-container .sentence-writer-sentence-text .hint-icon {
+  margin-left: 10px;
+  height: 25px;
+  width: 25px;
+  fill: yellow;
 }
 .passage-writer-show-container .sentence-writer-sentence-text .sentence-prefix {
   font-weight: bold;
