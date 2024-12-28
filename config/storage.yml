@@ -13,7 +13,7 @@ wasabi:
   secret_access_key: <%= Rails.application.credentials.dig(:wasabi, :secret_access_key) %>
   region: us-central-1
   endpoint: https://s3.us-central-1.wasabisys.com
-  bucket: basedlingodev
+  bucket: <%= Rails.application.credentials.dig(:wasabi, :bucket) %>
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:

@@ -2,8 +2,7 @@ require 'csv'
 
 class Tmp
   def self.translate_passages
-    languages = %w[Spanish Korean Japanese Hindi French Italian Portuguese German Russian Mandarin Arabic]
-    languages = %w[Spanish]
+    languages = %w[Spanish Korean Japanese Hindi French Italian Portuguese German Russian Mandarin Arabic Vietnamese]
 
     difficulties = Difficulty.find_by(level: 5)
     passages = Passage.where(difficulty: difficulties, title: "Embracing Sustainable Living Practices").includes(:sentences).limit(1)

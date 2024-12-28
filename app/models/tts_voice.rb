@@ -20,13 +20,14 @@ class TtsVoice < ApplicationRecord
 
   has_many :pronunciations
   has_many :words, through: :pronunciations, source: :word
+  has_many :sentences
 
   validates :language_code, presence: true
   validates :name, presence: true
   validates :provider_id, presence: true
 
   enum :provider, [:google, :elevenlabs, :playht], default: :google
-  enum :gender, [:female, :male], default: :female
+  enum :gender, [:male, :female], default: :male
 
   def self.default_voices(language_code:, gender:)
     case language_code

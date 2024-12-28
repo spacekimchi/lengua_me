@@ -36,10 +36,11 @@
                <div class="passage-options-items popup">
                  <% if @previous_passage.present? %>
                    <%= link_to 'Previous Passage', passage_writer_path(@difficulty.name, @previous_passage.title) %>
+                   <br>
                  <% end %>
                  <% if @next_passage.present? %>
-                   <br>
                    <%= link_to 'Next Passage', passage_writer_path(@difficulty.name, @next_passage.title) %>
+                   <br>
                  <% end %>
                  <button type="button" onclick="navigator.clipboard.writeText(window.location.href).then(() => {})" data-action="popup#hidePopup">
                    Copy passage url
@@ -65,12 +66,15 @@
                onclick: "this.querySelector('.content-blur').classList.toggle('blur');" do %>
                <span class="sentence-prefix">
                  <% if @sentences_data[@current_index][:prefix].present? %>
-                   <%= @sentences_data[@current_index][:prefix] %>: 
+                   <%= @sentences_data[@current_index][:prefix] %>: &nbsp;
                  <% end %>
                </span>
 
                <span class="content-blur blur">
                  <%= @sentences_data[@current_index][:content] %>
+               </span>
+               <span>
+                 <%= inline_svg('lightbulb-exclamation.svg', class: 'icon hint-icon') %>
                </span>
              <% end %>
            </div>
@@ -84,9 +88,6 @@
              &nbsp;
              <span>Try again</span>
              <div class="check-result-actions">
-               <button class="button neutral-button" data-action="click->sentence-writer#toggleMismatch">
-                 Hint
-               </button>
                <button class="button warning-button" data-action="click->sentence-writer#skip keydown.enter->sentence-writer#skip">
                  Skip
                </button>
