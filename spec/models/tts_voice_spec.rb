@@ -4,7 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  accent        :text
-#  gender        :integer          default("female"), not null
+#  gender        :integer          default("male"), not null
 #  language_code :text             not null
 #  name          :text             not null
 #  provider      :integer          default("google"), not null
