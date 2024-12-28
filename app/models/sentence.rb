@@ -47,6 +47,7 @@ class Sentence < ApplicationRecord
   def self.generate_missing_audio
     without_audio.find_each do |sentence|
       sentence.generate_audio
+      sleep(3)
     end
   end
 
