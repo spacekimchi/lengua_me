@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_21_010732) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_29_030716) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -198,7 +198,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_21_010732) do
     t.integer "category", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["difficulty_id", "position"], name: "index_passages_on_difficulty_id_and_position", unique: true
     t.index ["difficulty_id"], name: "index_passages_on_difficulty_id"
     t.index ["title"], name: "index_passages_on_title_trgm", opclass: :gin_trgm_ops, using: :gin
   end
