@@ -1353,14 +1353,14 @@ footer .footer-container a {
   border-radius: 3px;
 }
 .passages-index-container .difficulties-list .difficulties-list-item .difficulties-list-item-main .difficulties-list-item-info {
-  display: flex;
-  flex-direction: column;
   padding-left: 0.5rem;
   overflow: hidden;
   width: 100%;
   line-height: 1.5rem;
 }
 .passages-index-container .difficulties-list .difficulties-list-item .difficulties-list-item-main .difficulties-list-item-info .passages-difficulty-title {
+  display: flex;
+  flex-direction: column;
   font-size: 1.5rem;
   font-weight: bold;
   color: #0D6EFD;
@@ -1373,7 +1373,7 @@ footer .footer-container a {
 .passages-index-container .difficulties-list .difficulties-list-item .difficulties-list-item-main .difficulties-list-item-info .passages-difficulty-title:hover {
   text-decoration: underline;
 }
-.passages-index-container .difficulties-list .difficulties-list-item .difficulties-list-item-main .difficulties-list-item-info span {
+.passages-index-container .difficulties-list .difficulties-list-item .difficulties-list-item-main .difficulties-list-item-info .passages-difficulty-title span {
   font-size: 1rem;
   color: #686D76;
 }

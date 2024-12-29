@@ -12,11 +12,15 @@
           <div class="difficulties-list-item-info">
             <% name = Passage.categories.key(category.name) %>
             <% titleized_name = Passage.categories.key(category.name).gsub('_', ' ').titleize %>
-            <%= link_to titleized_name, passages_by_category_path(category_name: name), class: 'passages-difficulty-title' %>
-            <span>
-              Difficulty: <%= Difficulty::LEVEL_TO_NAME[category.min_difficulty].to_s.titleize %> - <%= Difficulty::LEVEL_TO_NAME[category.max_difficulty].to_s.titleize %>
-            </span>
-            <span><%= category.total_passages %> <%= category.total_passages == 1 ? 'passage' : 'passages' %></span>
+            <%= link_to passages_by_category_path(category_name: name), class: 'passages-difficulty-title' do %>
+              <div>
+                <%= titleized_name %>
+              </div>
+              <span>
+                Difficulty: <%= Difficulty::LEVEL_TO_NAME[category.min_difficulty].to_s.titleize %> - <%= Difficulty::LEVEL_TO_NAME[category.max_difficulty].to_s.titleize %>
+              </span>
+              <span><%= category.total_passages %> <%= category.total_passages == 1 ? 'passage' : 'passages' %></span>
+            <% end %>
           </div>
         </div>
         <div class="hidden">
