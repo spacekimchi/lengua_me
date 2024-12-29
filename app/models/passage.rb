@@ -72,6 +72,17 @@ class Passage < ApplicationRecord
   # Callback to set position before creation
   before_create :set_position
 
+  def self.category_image(category)
+    case category
+    when 1
+      '/images/short_stories.png'
+    when 2
+      '/images/conversations.png'
+    else
+      '/images/ruby.png'
+    end
+  end
+
   def translate(language:)
     PassageTranslatorService.new(sentences: sentences.pluck(:content, :id), language: language).call
   end

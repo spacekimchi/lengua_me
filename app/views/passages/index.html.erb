@@ -1,14 +1,11 @@
 <div class="passages-index-container">
   <h1>All Passages</h1>
-
-  <h3>By Category</h3>
+  <br>
   <ul class="difficulties-list">
     <% @categories.each do |category| %>
       <li class="difficulties-list-item">
         <div class="difficulties-list-item-main">
-          <div style="height: 75px; width: 75px;">
-            <img src="/images/ruby.png">
-          </div>
+          <img src="<%= Passage.category_image(category.name) %>">
           <div class="difficulties-list-item-info">
             <% name = Passage.categories.key(category.name) %>
             <% titleized_name = Passage.categories.key(category.name).gsub('_', ' ').titleize %>

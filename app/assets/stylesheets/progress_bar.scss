@@ -23,7 +23,9 @@
   height: 0.5rem; /* Can be anything */
   position: relative;
   width: 100%;
-  padding-left: 0.5rem;
+  margin-left: 10px;
+  border: solid 1px v.$shadow-color;
+  border-radius: 25px;
 }
 .meter > span {
   display: block;
