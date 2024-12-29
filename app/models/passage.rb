@@ -67,7 +67,7 @@ class Passage < ApplicationRecord
   }
 
   # Validation to ensure position uniqueness within a difficulty
-  validates :position, uniqueness: { scope: :difficulty_id }, allow_nil: false
+  validates :position, uniqueness: { scope: :category }, allow_nil: false
 
   # Callback to set position before creation
   before_create :set_position
