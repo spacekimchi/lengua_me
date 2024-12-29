@@ -83,6 +83,7 @@ class PassagesController < ApplicationController
         'passages.id as id, passages.title, passages.position, count(sentences.id) as total_sentences, difficulties.id as difficulty_id, difficulties.name as difficulty_name'
       )
         .group('passages.id, difficulties.id')
+        .ordered_by_difficulty_and_position
 
     aggregated_passages = aggregated_passages.where(difficulty: Difficulty.find_by(name: difficulty_filter.downcase)) if difficulty_filter.present?
     aggregated_passages = aggregated_passages.search_like(search_query) if search_query.present?
@@ -90,7 +91,6 @@ class PassagesController < ApplicationController
     passages = Passage
       .from(aggregated_passages, :aggregated_passages)
       .select('*')
-      .ordered
 
     @pagy, @passages = pagy(passages, limit: 30)
 

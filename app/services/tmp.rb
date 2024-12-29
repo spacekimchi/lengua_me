@@ -24,7 +24,16 @@ class Tmp
   end
 
   def self.fix_categories
-    Passage.where(category: 1).update_all(2)
-    Passage.where(category: 0).update_all(1)
+    Passage.where(category: 1).update_all(category: 2)
+    Passage.where(category: 0).update_all(category 1)
+  end
+
+  def self.update_positions
+    Passage.joins(:difficulty).where(category: 1).ordered_by_difficulty_and_position.each_with_index do |p, idx|
+      p.update(position: idx + 1)
+    end
+    Passage.joins(:difficulty).where(category: 2).ordered_by_difficulty_and_position.each_with_index do |p, idx|
+      p.update(position: idx + 1)
+    end
   end
 end

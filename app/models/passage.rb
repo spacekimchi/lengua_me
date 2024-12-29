@@ -51,6 +51,12 @@ class Passage < ApplicationRecord
     where("CAST(position AS TEXT) || '. ' || title ILIKE :q", q: sanitized_query)
   }
   scope :ordered, -> { order(:position) }
+  scope :ordered_by_difficulty, -> {
+    order('difficulties.level ASC')
+  }
+  scope :ordered_by_difficulty_and_position, -> {
+    order('difficulties.level ASC, passages.position ASC')
+  }
   scope :by_difficulty, -> (difficulty) { where(difficulty: difficulty) }
   scope :by_category, -> (category) { where(category: category) }
   scope :with_user_progress, -> (user) {
