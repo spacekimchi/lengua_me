@@ -4,6 +4,7 @@
 @use "headers";
 @use "links";
 @use "buttons";
+@use "select";
 @use "form";
 @use "table";
 @use "pagy";
@@ -18,7 +19,7 @@
 @use "progress_bar";
 @use "faq";
 @use "topics/passage_writer/show";
-@use "passages/by_difficulty";
+@use "passages/by_category";
 @use "passages/index";
 
 html, body {
@@ -71,41 +72,3 @@ body {
         }
     }
 }
-
-.translation-select {
-  /* Remove default styling on some browsers */
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-
-  /* Basic box styling */
-  padding: 0.25rem 0.25rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-
-  /* Font styles */
-  font-size: 1rem;
-  line-height: 1.4;
-  font-family: inherit;
-
-  /* Optionally add a custom arrow (using a background image or pseudo-element) */
-  background-image: url('data:image/svg+xml;utf8,<svg fill="%23AAA" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6.516 7.548a.75.75 0 10-1.032 1.088l4.036 3.83a.75.75 0 001.032 0l4.036-3.83a.75.75 0 00-1.032-1.088L10 11.43 6.516 7.548z"></path></svg>');
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 1rem;
-
-  /* Give extra space for the arrow */
-  padding-right: 2rem;
-
-  /* Hover/Focus styles */
-  cursor: pointer;
-
-  margin-bottom: 0.5rem;
-}
-
-.translation-select:focus {
-  border-color: #666;
-  outline: none;
-}
-
