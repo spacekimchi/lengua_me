@@ -1,64 +1,68 @@
 <div class="top-nav-container" data-controller="navigation">
-  <nav id="top-nav">
-    <%= link_to root_path, style: 'display: flex; align-items: center;' do %>
-      <img src="/images/logo_small.png" alt="Logo" style="height: 31px;"> <span style="padding-left: 1rem; font-weight: bold; font-size: 1.5rem;">BasedLingo</span>
-    <% end %>
-
-    <!-- Hamburger Icon -->
-    <button class="menu-toggle" id="menu-toggle" data-navigation-target="menuToggle"  data-action="navigation#toggleHamburger" aria-label="Toggle navigation" aria-expanded="false">
-      <span class="hamburger"></span>
-    </button>
-
-    <ul class="nav-links" id="nav-links" data-navigation-target="navLinks">
-      <li><%= link_to 'Home', root_path %></li>
-      <% if admin_route? %>
-        <li><%= link_to 'Users', admin_users_path %></li>
-        <li><%= link_to 'Products', admin_products_path %></li>
-        <li><%= link_to 'Prices', admin_stripe_prices_path %></li>
-        <li><%= link_to 'Support', admin_support_tickets_path %></li>
-        <li><%= link_to 'Errors', admin_application_errors_path %></li>
-      <% else %>
-        <li><%= link_to 'Passages', passages_path %></li>
-        <li><%= link_to 'Support', new_support_tickets_path %></li>
-        <li><%= link_to 'FAQ', faq_index_path %></li>
+  <div class="primary-nav-container">
+    <nav id="top-nav">
+      <%= link_to root_path, style: 'display: flex; align-items: center;' do %>
+        <img src="/images/logo_small.png" alt="Logo" style="height: 31px;"> <span style="padding-left: 1rem; font-weight: bold; font-size: 1.5rem;">BasedLingo</span>
       <% end %>
-      <div class="nav-right-actions">
-        <% if signed_in? %>
-          <% if current_user&.super_admin? %>
-            <li>
-              <%= link_to 'Admin', admin_root_path %>
-            </li>
-          <% end %>
-          <li>
-            <%= link_to current_user.email, root_path %>
-          </li>
-          <%# if current_user.stripe_customer_id.present? %>
-          <%#= button_to 'Billing Portal', stripe_billing_portal_sessions_path, data: { turbo: false } %>
-          <%# end %>
-          <li>
-            <%= button_to 'Sign out', sign_out_path, method: :delete %>
-          </li>
-        <% else %>
-          <li><%= link_to 'Sign in', sign_in_path %></li>
-          <li><%= link_to 'Sign up', sign_up_path %></li>
-        <% end %>
-      </div>
-    </ul>
-  </nav>
-  <% if current_user.present? %>
-    <nav id="top-nav-secondary">
-      <span class="right-section">
-        <div style="position: relative; display: inline-block;" data-controller="popup">
-          <%= link_to "In-progress", passages_in_progress_path,
-            data: { action: "click->popup#showLoading", turbo_frame: "in_progress_popup", turbo_stream: true },
-            class: "button" %>
 
-          <turbo-frame id="in_progress_popup" class="hidden" data-popup-target="popupFrame">
-            <!-- Initially empty; will show loading spinner on click, then content after response -->
-          </turbo-frame>
+      <!-- Hamburger Icon -->
+      <button class="menu-toggle" id="menu-toggle" data-navigation-target="menuToggle"  data-action="navigation#toggleHamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+
+      <ul class="nav-links" id="nav-links" data-navigation-target="navLinks">
+        <li><%= link_to 'Home', root_path %></li>
+        <% if admin_route? %>
+          <li><%= link_to 'Users', admin_users_path %></li>
+          <li><%= link_to 'Products', admin_products_path %></li>
+          <li><%= link_to 'Prices', admin_stripe_prices_path %></li>
+          <li><%= link_to 'Support', admin_support_tickets_path %></li>
+          <li><%= link_to 'Errors', admin_application_errors_path %></li>
+        <% else %>
+          <li><%= link_to 'Passages', passages_path %></li>
+          <li><%= link_to 'Support', new_support_tickets_path %></li>
+          <li><%= link_to 'FAQ', faq_index_path %></li>
+        <% end %>
+        <div class="nav-right-actions">
+          <% if signed_in? %>
+            <% if current_user&.super_admin? %>
+              <li>
+                <%= link_to 'Admin', admin_root_path %>
+              </li>
+            <% end %>
+            <li>
+              <%= link_to current_user.email, root_path %>
+            </li>
+            <%# if current_user.stripe_customer_id.present? %>
+            <%#= button_to 'Billing Portal', stripe_billing_portal_sessions_path, data: { turbo: false } %>
+            <%# end %>
+            <li>
+              <%= button_to 'Sign out', sign_out_path, method: :delete %>
+            </li>
+          <% else %>
+            <li><%= link_to 'Sign in', sign_in_path %></li>
+            <li><%= link_to 'Sign up', sign_up_path %></li>
+          <% end %>
         </div>
-      </span>
+      </ul>
     </nav>
+  </div>
+  <% if current_user.present? %>
+    <div class="secondary-nav-container">
+      <nav id="top-nav-secondary">
+        <span class="right-section">
+          <div style="position: relative; display: inline-block;" data-controller="popup">
+            <%= link_to "In-progress", passages_in_progress_path,
+              data: { action: "click->popup#showLoading", turbo_frame: "in_progress_popup", turbo_stream: true },
+              class: "button" %>
+
+            <turbo-frame id="in_progress_popup" class="hidden" data-popup-target="popupFrame">
+              <!-- Initially empty; will show loading spinner on click, then content after response -->
+            </turbo-frame>
+          </div>
+        </span>
+      </nav>
+    </div>
   <% end %>
 </div>
 

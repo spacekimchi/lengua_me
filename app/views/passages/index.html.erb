@@ -16,7 +16,12 @@
               <span>
                 Difficulty: <%= Difficulty::LEVEL_TO_NAME[category.min_difficulty].to_s.titleize %> - <%= Difficulty::LEVEL_TO_NAME[category.max_difficulty].to_s.titleize %>
               </span>
-              <span><%= category.total_passages %> <%= category.total_passages == 1 ? 'passage' : 'passages' %></span>
+              <span>
+                <% if current_user %>
+                  <%= @completed_passages_count_by_category[name].to_i %> /
+                <% end %>
+                <%= category.total_passages %> <%= category.total_passages == 1 ? 'passage' : 'passages' %> completed
+              </span>
             <% end %>
           </div>
         </div>

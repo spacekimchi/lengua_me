@@ -498,13 +498,20 @@ table tbody td {
   position: fixed;
   z-index: 1000;
   width: 100%;
-  padding: 0.5rem 0rem;
+  padding: 0.5rem 0rem 0rem 0rem;
   transition: box-shadow 0.3s ease;
   flex-direction: column;
   align-items: center;
 }
 .top-nav-container.scrolled {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow when scrolled */
+}
+.top-nav-container .primary-nav-container {
+  width: 100%;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+}
+.top-nav-container .secondary-nav-container {
+  width: 100%;
 }
 .top-nav-container nav#top-nav-secondary {
   display: flex;
@@ -513,6 +520,8 @@ table tbody td {
   position: relative;
   max-width: 1280px;
   width: 100%;
+  margin: auto;
+  padding: 0.5rem 0;
 }
 .top-nav-container nav#top-nav-secondary .right-section {
   margin-left: auto;
@@ -528,6 +537,7 @@ table tbody td {
   position: relative;
   max-width: 1280px;
   width: 100%;
+  margin: auto;
   /* Hamburger Menu Toggle Button */
   /* Navigation Links */
   /* Right-aligned actions */
