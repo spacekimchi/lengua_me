@@ -39,10 +39,10 @@ class PassagesController < ApplicationController
 
     respond_to do |format|
       if @passage.present?
-        flash.now[:success] = "The passage was successfully created."
+        flash.now[:success] = t('controllers.passages.create.success')
         format.turbo_stream
       else
-        flash.now[:error] = "Failed to create the passage."
+        flash.now[:error] = t('controllers.passages.create.error')
         format.turbo_stream { render partial: 'partials/flash', status: :unprocessable_entity }
       end
     end
@@ -53,10 +53,10 @@ class PassagesController < ApplicationController
     language = Language.find(params[:language_id])
     respond_to do |format|
       if PassageTranslatorService.new(sentences: @passage.sentences.pluck(:content), language: language).call
-        flash.now[:success] = "The passage was successfully translated."
+        flash.now[:success] = t('controllers.passages.translate.success')
         format.turbo_stream
       else
-        flash.now[:error] = "Failed to translate the passage."
+        flash.now[:error] = t('controllers.passages.translate.error')
         format.turbo_stream { render partial: 'partials/flash', status: :unprocessable_entity }
       end
     end
@@ -79,7 +79,7 @@ class PassagesController < ApplicationController
     difficulty_filter = params[:difficulty]
 
     unless Passage.categories.keys.include?(params[:category_name])
-      redirect_to root_path, alert: "Category not found."
+      redirect_to root_path, alert: t('controllers.passages.category.not_found')
       return
     end
 
@@ -113,16 +113,15 @@ class PassagesController < ApplicationController
 
   def passage_writer
     unless Passage.categories.keys.include?(params[:category_name])
-      redirect_to root_path, alert: "Category not found."
+      redirect_to root_path, alert: t('controllers.passages.category.not_found')
       return
     end
 
     @category = params[:category_name].gsub('_', ' ').titleize
 
     @passage = Passage.by_category(params[:category_name]).find_by(title: params[:passage_name])
-
     unless @passage
-      redirect_to by_category_path(category_name: params[:category_name]), alert: "Passage not found."
+      redirect_to by_category_path(category_name: params[:category_name]), alert: t('controllers.passages.passage_writer.not_found')
       return
     end
 
@@ -155,7 +154,7 @@ class PassagesController < ApplicationController
     respond_to do |format|
       format.turbo_stream
       format.json { render json: { passage_progresses: @passage_progresses }, status: :ok }
-      format.html { redirect_back fallback_location: root_path, error: "Please enable JavaScript to see the in-progress popup." }
+      format.html { redirect_back fallback_location: root_path, error: t('controllers.passages.in_progress.enable_js') }
     end
   end
 

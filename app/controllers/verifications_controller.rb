@@ -5,9 +5,9 @@ class VerificationsController < ApplicationController
     if user && !user.verified?
       user.complete_verification
       sign_in user
-      redirect_to root_url, notice: "Your account has been verified successfully!"
+      redirect_to root_url, notice: t('controllers.verifications.edit.success')
     else
-      redirect_to sign_in_path, alert: "Invalid or expired verification link!"
+      redirect_to sign_in_path, alert: t('controllers.verifications.edit.error')
     end
   end
 end
