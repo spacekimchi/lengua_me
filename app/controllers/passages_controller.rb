@@ -8,6 +8,15 @@ class PassagesController < ApplicationController
 
   def index
     @categories = Passage.joins(:difficulty).group(:category).select("passages.category as name, count(passages.id) as total_passages, min(difficulties.level) as min_difficulty, max(difficulties.level) as max_difficulty")
+
+    if current_user
+      @completed_passages_count_by_category = PassageProgress
+        .joins(:passage)
+        .where(user: current_user)
+        .where('completed_count >= ?', 1)
+        .group('passages.category')
+        .count
+    end
   end
 
   def create
