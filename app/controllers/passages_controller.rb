@@ -67,6 +67,7 @@ class PassagesController < ApplicationController
 
   def by_category
     search_query = params[:q]
+    difficulty_filter = params[:difficulty]
 
     unless Passage.categories.keys.include?(params[:category_name])
       redirect_to root_path, alert: "Category not found."
@@ -75,12 +76,21 @@ class PassagesController < ApplicationController
 
     @category = params[:category_name].gsub('_', ' ').titleize
 
-    passages = Passage.by_category(params[:category_name])
-      .joins(:sentences)
-      .select('passages.id, passages.title, passages.position, count(sentences) as total_sentences')
-      .group('passages.id')
+    aggregated_passages = Passage
+      .by_category(params[:category_name])
+      .joins(:sentences, :difficulty)
+      .select(
+        'passages.id as id, passages.title, passages.position, count(sentences.id) as total_sentences, difficulties.id as difficulty_id, difficulties.name as difficulty_name'
+      )
+        .group('passages.id, difficulties.id')
+
+    aggregated_passages = aggregated_passages.where(difficulty: Difficulty.find_by(name: difficulty_filter.downcase)) if difficulty_filter.present?
+    aggregated_passages = aggregated_passages.search_like(search_query) if search_query.present?
+
+    passages = Passage
+      .from(aggregated_passages, :aggregated_passages)
+      .select('*')
       .ordered
-    passages = passages.search_like(search_query) if search_query.present?
 
     @pagy, @passages = pagy(passages, limit: 30)
 
@@ -103,7 +113,7 @@ class PassagesController < ApplicationController
     @passage = Passage.by_category(params[:category_name]).find_by(title: params[:passage_name])
 
     unless @passage
-      redirect_to difficulty_path(@difficulty), alert: "Passage not found."
+      redirect_to by_category_path(category_name: params[:category_name]), alert: "Passage not found."
       return
     end
 

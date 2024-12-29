@@ -19,6 +19,7 @@ class Difficulty < ApplicationRecord
   DIFFICULTY_LEVELS = {
     basic: 0, a1: 1, a2: 2, b1: 3, b2: 4, c1: 5, c2: 6, native: 7
   }.freeze
+  LEVEL_TO_NAME = DIFFICULTY_LEVELS.invert.freeze
 
   has_many :passages
 

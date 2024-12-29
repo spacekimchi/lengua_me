@@ -250,6 +250,36 @@ button.button.arrow-button:hover {
   color: #0F64CD;
 }
 
+select {
+  /* Remove default styling on some browsers */
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  /* Basic box styling */
+  padding: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  /* Font styles */
+  font-size: 1rem;
+  font-family: inherit;
+  /* Optionally add a custom arrow (using a background image or pseudo-element) */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23AAA" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6.516 7.548a.75.75 0 10-1.032 1.088l4.036 3.83a.75.75 0 001.032 0l4.036-3.83a.75.75 0 00-1.032-1.088L10 11.43 6.516 7.548z"></path></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  /* Give extra space for the arrow */
+  padding-right: 2rem;
+  /* Hover/Focus styles */
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+select:focus {
+  border-color: #666;
+  outline: none;
+}
+
 form.form {
   display: grid;
   grid-template-columns: max-content 1fr;
@@ -622,8 +652,7 @@ table tbody td {
 footer {
   border-top: solid 1px rgba(0, 0, 0, 0.2);
   margin-top: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem;
 }
 footer .footer-container {
   display: flex;
@@ -880,36 +909,66 @@ footer .footer-container a {
   margin-left: 5px;
   /* Progress Text */
 }
-.progress-container .progress-bar {
-  position: relative;
-  background-color: #e0e0e0;
-  border-radius: 15px;
-  height: 0.5rem;
-  width: 100%;
-  overflow: hidden;
-  /* Optional: Add a subtle shadow */
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-  /* Use the CSS variable --progress to set the fill width */
-  --progress: 0%;
-  /* Positioning the fill and text */
-  display: flex;
-  align-items: center;
-  /* Progress Fill */
-}
-.progress-container .progress-bar .progress-fill {
-  background-color: #3498db;
-  height: 100%;
-  width: var(--progress);
-  transition: width 0.5s ease;
-  border-radius: 15px 0 0 15px;
-}
 .progress-container .progress-text {
   text-align: center;
-  color: black;
+  font-size: 0.75rem;
+  color: #343131;
   pointer-events: none;
-  margin-right: 5px;
 }
 
+.meter {
+  box-sizing: content-box;
+  height: 0.5rem; /* Can be anything */
+  position: relative;
+  width: 100%;
+  padding-left: 0.5rem;
+}
+
+.meter > span {
+  display: block;
+  height: 100%;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: rgb(43, 194, 83);
+  background-image: linear-gradient(center bottom, rgb(43, 194, 83) 37%, rgb(84, 240, 84) 69%);
+  box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3), inset 0 -2px 6px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.meter > span:after,
+.animate > span > span {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+  z-index: 1;
+  background-size: 50px 50px;
+  animation: move 2s linear infinite;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  overflow: hidden;
+}
+
+.animate > span:after {
+  display: none;
+}
+
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
 .faq-container {
   padding-top: 1rem;
 }
@@ -1134,42 +1193,42 @@ footer .footer-container a {
   }
 }
 
-.passages-by-difficulty-container .pagy-container {
+.passages-by-category-container .pagy-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
 }
-.passages-by-difficulty-container .pagy-container .search-input {
+.passages-by-category-container .pagy-container .search-input {
   border: solid 1px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   padding: 0.25rem 0.25rem 0.25rem 0.5rem;
 }
-.passages-by-difficulty-container .pagy-container .search-button {
+.passages-by-category-container .pagy-container .search-button {
   padding: 0.25rem 1rem;
   border: solid 1px #0F64CD;
   color: #F6F1E9;
   background-color: #0F64CD;
   border-radius: 3px;
 }
-.passages-by-difficulty-container .pagy-container .search-button:hover {
+.passages-by-category-container .pagy-container .search-button:hover {
   cursor: pointer;
   filter: brightness(110%);
 }
-.passages-by-difficulty-container .pagy-container .search-button:hover:active {
+.passages-by-category-container .pagy-container .search-button:hover:active {
   transform: scale(97%);
 }
-.passages-by-difficulty-container .pagy-container .search-button:last-child {
+.passages-by-category-container .pagy-container .search-button:last-child {
   margin-left: 1rem;
 }
-.passages-by-difficulty-container .passages-list {
+.passages-by-category-container .passages-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.75rem;
   justify-items: start;
   align-items: start;
 }
-.passages-by-difficulty-container .passages-list .passage-link {
+.passages-by-category-container .passages-list .passage-link {
   border: solid 1px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   display: flex;
@@ -1178,61 +1237,82 @@ footer .footer-container a {
   box-sizing: border-box;
   width: 100%;
 }
-.passages-by-difficulty-container .passages-list .passage-link .passage-title-container {
+.passages-by-category-container .passages-list .passage-link:hover {
+  transition: border-color 0.3s ease;
+  border-color: #343131;
+}
+.passages-by-category-container .passages-list .passage-link:hover:active {
+  transform: scale(99.5%);
+}
+.passages-by-category-container .passages-list .passage-link .passage-title-container {
   display: flex;
   align-items: center;
   width: 100%;
   padding-left: 0.25rem;
 }
-.passages-by-difficulty-container .passages-list .passage-list-item {
+.passages-by-category-container .passages-list .passage-list-item {
   display: block;
   width: 100%;
   padding: 0.5rem 0.5rem 0.5rem 0.25rem;
+  text-decoration: none;
 }
-.passages-by-difficulty-container .star-icon {
+.passages-by-category-container .passages-list .passage-list-item:hover {
+  text-decoration: none;
+}
+.passages-by-category-container .passages-list .passage-list-item div {
+  color: #343131;
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+.passages-by-category-container .star-icon {
   height: 25px;
   width: 25px;
   margin-right: 0.25rem;
   fill: black;
 }
-.passages-by-difficulty-container .star-icon.star-filled {
+.passages-by-category-container .star-icon.star-filled {
   height: 21px;
   width: 21px;
 }
-.passages-by-difficulty-container .star-icon.star-1 {
+.passages-by-category-container .star-icon.star-1 {
   fill: #7E1891;
 }
-.passages-by-difficulty-container .star-icon.star-2 {
+.passages-by-category-container .star-icon.star-2 {
   fill: #E73879;
 }
-.passages-by-difficulty-container .star-icon.star-3 {
+.passages-by-category-container .star-icon.star-3 {
   fill: #F26B0F;
 }
-.passages-by-difficulty-container .star-icon.star-4 {
+.passages-by-category-container .star-icon.star-4 {
   fill: #FCC737;
 }
-.passages-by-difficulty-container .star-icon.star-5 {
+.passages-by-category-container .star-icon.star-5 {
   animation: fillAnimation 5s infinite linear;
 }
 @media (min-width: 769px) and (max-width: 1024px) {
-  .passages-by-difficulty-container .passages-list {
+  .passages-by-category-container .passages-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 768px) {
-  .passages-by-difficulty-container .pagy-container {
+  .passages-by-category-container .pagy-container {
     align-items: flex-start;
     flex-direction: column-reverse;
   }
-  .passages-by-difficulty-container .pagy-container .search-form {
+  .passages-by-category-container .pagy-container .search-button:last-child {
+    margin-left: 0;
+  }
+  .passages-by-category-container .pagy-container .search-form {
     display: flex;
+    flex-direction: column;
     width: 100%;
     margin: 0 0 0.75rem 0;
   }
-  .passages-by-difficulty-container .pagy-container .search-form .search-input {
+  .passages-by-category-container .pagy-container .search-form .search-input {
     flex: 1;
+    margin-bottom: 0.5rem;
   }
-  .passages-by-difficulty-container .passages-list {
+  .passages-by-category-container .passages-list {
     grid-template-columns: 1fr;
   }
 }
@@ -1278,6 +1358,7 @@ footer .footer-container a {
   padding-left: 0.5rem;
   overflow: hidden;
   width: 100%;
+  line-height: 1.5rem;
 }
 .passages-index-container .difficulties-list .difficulties-list-item .difficulties-list-item-main .difficulties-list-item-info .passages-difficulty-title {
   font-size: 1.5rem;
@@ -1294,7 +1375,7 @@ footer .footer-container a {
 }
 .passages-index-container .difficulties-list .difficulties-list-item .difficulties-list-item-main .difficulties-list-item-info span {
   font-size: 1rem;
-  color: black;
+  color: #686D76;
 }
 .passages-index-container .difficulties-list .difficulties-list-item .hidden {
   display: none;
@@ -1380,35 +1461,4 @@ body .line-separator {
   body .main-content {
     padding: 4.5rem 0.75rem 0.5rem 0.75rem;
   }
-}
-
-.translation-select {
-  /* Remove default styling on some browsers */
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  /* Basic box styling */
-  padding: 0.25rem 0.25rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-  /* Font styles */
-  font-size: 1rem;
-  line-height: 1.4;
-  font-family: inherit;
-  /* Optionally add a custom arrow (using a background image or pseudo-element) */
-  background-image: url('data:image/svg+xml;utf8,<svg fill="%23AAA" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6.516 7.548a.75.75 0 10-1.032 1.088l4.036 3.83a.75.75 0 001.032 0l4.036-3.83a.75.75 0 00-1.032-1.088L10 11.43 6.516 7.548z"></path></svg>');
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 1rem;
-  /* Give extra space for the arrow */
-  padding-right: 2rem;
-  /* Hover/Focus styles */
-  cursor: pointer;
-  margin-bottom: 0.5rem;
-}
-
-.translation-select:focus {
-  border-color: #666;
-  outline: none;
 }

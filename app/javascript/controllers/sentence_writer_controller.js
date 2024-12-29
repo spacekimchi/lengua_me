@@ -377,7 +377,7 @@ export default class extends Controller {
       return;
     }
 
-    const inputText = this.textAreaTarget.value;
+    const inputText = this.textAreaTarget.value.trim();
     const currentSentence = this.sentences[this.currentIndex].content;
     this.displayNextButtons();
 

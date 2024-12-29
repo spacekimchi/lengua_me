@@ -169,7 +169,7 @@
            <div class="completed-nav-links">
              <% if @next_passage.present? %>
                <%= link_to passage_writer_path(params[:category_name], @next_passage.title), id: 'completed-next-link', class: 'link-button success-link' do %>
-                 Continue
+                 Next
                <% end %>
              <% end %>
              <%= link_to passage_writer_path(params[:category_name], @passage.title), id: 'completed-repeat-link', class: 'link-button' do %>

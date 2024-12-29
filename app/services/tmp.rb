@@ -22,4 +22,9 @@ class Tmp
       Passage.where(title: titles).update_all(category: :conversation)
     end
   end
+
+  def self.fix_categories
+    Passage.where(category: 1).update_all(2)
+    Passage.where(category: 0).update_all(1)
+  end
 end
