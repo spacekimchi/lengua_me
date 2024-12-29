@@ -93,6 +93,44 @@ en:
       sign_in: Sign in
       title: Sign up
       submit: Sign Up
+  controllers:
+    passages:
+      create:
+        success: "The passages was successfully created."
+        error: "Failed to create the passage."
+      translate:
+        success: "The passage was successfully translated."
+        error: "Failed to translate the passage."
+      category:
+        not_found: "Category not found."
+      in_progress:
+        enable_js: "Please enable JavaScript to see the in-progress popup."
+      passage_writer:
+        not_found: "Passage not found."
+    checkouts:
+      new:
+        already_subscribed: "You are already subscribed to %{product_name}."
+      show:
+        error: "Sorry, something went wrong with processing your payment: %{message}"
+    verifications:
+      edit:
+        success: "Your account has been verified successflly!"
+        error: "Invalid or expired verification link!"
+    admin:
+      products:
+        create:
+          success: "Product was successfully created."
+        update:
+          success: "Product was successfully updated."
+        destroy:
+          success: "Product was successfully destroyed."
+      users:
+        create:
+          success: "User was successfully created."
+        update:
+          success: "User was successfully updated."
+        destroy:
+          success: "User was successfully destroyed."
   difficulties:
     basic:
       description: "Foundational understanding, limited vocabulary, basic phrases and greetings."

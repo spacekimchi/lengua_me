@@ -15,7 +15,7 @@ module Admin
     def create
       @product = Product.new(product_params)
       if @product.save
-        redirect_to admin_product_path(@product), notice: 'Product was successfully created'
+        redirect_to admin_product_path(@product), notice: t('controllers.admin.products.create.success')
       else
         render :new
       end
@@ -28,7 +28,7 @@ module Admin
     def update
       @product = Product.find(params[:id])
       if @product.update(product_params)
-        redirect_to [:admin, @product], notice: 'Product was successfully updated.'
+        redirect_to [:admin, @product], notice: t('controllers.admin.products.update.success')
       else
         render :edit
       end
@@ -37,7 +37,7 @@ module Admin
     def destroy
       @product = Product.find(params[:id])
       @product.destroy
-      redirect_to products_url, notice: 'Product was successfully destroyed.'
+      redirect_to products_url, notice: t('controllers.admin.products.destroy.success')
     end
 
     private

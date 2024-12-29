@@ -29,7 +29,7 @@ class PassageTranslatorService
   # grade_level: grade level for the generator
   def initialize(sentences:, language:)
     @client = OpenAI::Client.new
-    @model = 'gpt-4o-mini-2024-07-18' # Correct model name
+    @model = 'gpt-4o-2024-11-20' # Correct model name
     @language = language
     @sentences = sentences
   end

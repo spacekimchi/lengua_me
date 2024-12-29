@@ -7,7 +7,7 @@ class CheckoutsController < ApplicationController
     # We are redirecting if the user is already subscribed to an product
     # We don't want a user to have multiple subscriptions to the same product
     if product.present? && current_user.is_subscribed_to_product?(product)
-      redirect_to root_path, notice: "You are already subscribed to #{product.name}"
+      redirect_to root_path, notice: t('controllers.checkouts.new.already_subscribed', product_name: product.name)
       return
     end
     args = {
@@ -59,6 +59,6 @@ class CheckoutsController < ApplicationController
     # What do we do in this route
     Stripe::Checkout::Session.retrieve(params[:session_id])
   rescue Stripe::InvalidRequestError => e
-    redirect_to products_url, notice: "Sorry, something went wrong with processing your payment: #{e.message}"
+    redirect_to products_url, notice: t('controllers.checkouts.show.error', message: e.message)
   end
 end
