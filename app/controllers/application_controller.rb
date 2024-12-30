@@ -18,13 +18,11 @@ class ApplicationController < ActionController::Base
   private
 
   def set_locale
-    I18n.locale = extract_locale || I18n.default_locale
+    I18n.locale = params[:locale] || I18n.default_locale
   end
 
-  def extract_locale
-    # Example: Get the locale from the `locale` parameter in the URL
-    locale = 'es'
-    I18n.available_locales.map(&:to_s).include?(locale) ? locale : nil
+  def default_url_options
+    { locale: I18n.locale }
   end
 
   def set_app_name

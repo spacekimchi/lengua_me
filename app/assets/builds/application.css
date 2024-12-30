@@ -526,6 +526,8 @@ table tbody td {
 .top-nav-container nav#top-nav-secondary .right-section {
   margin-left: auto;
   margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
 }
 .top-nav-container nav#top-nav-secondary .in-progress-popup {
   min-width: 250px;

@@ -51,8 +51,20 @@
     <div class="secondary-nav-container">
       <nav id="top-nav-secondary">
         <span class="right-section">
+          <select
+              style="margin-bottom: 0px; line-height: 1rem; margin-right: 1rem; padding-right: 0; width: 75px;"
+              name="locale"
+              onchange="window.location.href = this.value;">
+            <% I18n.available_locales.uniq.each do |locale| %>
+              <option value="<%= url_for(locale: locale) %>" <%= 'selected' if I18n.locale == locale %>>
+              <%= locale.to_s.upcase %>
+              </option>
+            <% end %>
+          </select>
+
+
           <div style="position: relative; display: inline-block;" data-controller="popup">
-            <%= link_to t('.in-progress'), passages_in_progress_path,
+            <%= link_to t('.in_progress'), passages_in_progress_path,
               data: { action: "click->popup#showLoading", turbo_frame: "in_progress_popup", turbo_stream: true },
               class: "button" %>
 
