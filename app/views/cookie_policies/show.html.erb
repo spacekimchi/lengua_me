@@ -1,58 +1,58 @@
 <h1>
-  Cookie Policy
+  <%= t('.header') %>
 </h1>
 
 <h4>
-  Last Updated: <%= @date %>
+  <%= t('.last_updated_date', date: @date) %>
 </h4>
 
 <h4>
-  What Are Cookies?
+  <%= t('.what_are_cookies') %>
 </h4>
 <p>
-Cookies are small text files placed on your device to help websites function, remember your preferences, and provide analytics and personalized content.
+<%= t('.what_are_cookies_description') %>
 </p>
 
 <h4>
-  Types of Cookies We Use
+  <%= t('.types_of_cookies') %>
 </h4>
 <p>
-Essential Cookies: We use authentication cookies to maintain your login session and ensure the proper functioning of our website.
+<%= t('.types_of_cookies_essential') %>
 <br>
-Advertising Cookies (Third-Party): We use third-party advertising partners, including Google, that may use cookies to serve ads based on your prior visits to this or other websites. These partners may collect non-personal data to tailor advertisements to your interests.
+<%= t('.types_of_cookies_ads') %>
 </p>
 
 <h4>
-  GDPR & Consent
+  <%= t('.gdpr_consent') %>
 </h4>
 <p>
-If you are in the EU or a jurisdiction with similar data protection laws, the use of non-essential cookies (such as advertising cookies) may require your consent. Where applicable, we will request your consent before placing these cookies and you can withdraw it at any time.
+<%= t('.gdpr_consent_description') %>
 </p>
 
 <h4>
-  Managing Cookies
+  <%= t('.managing_cookies') %>
 </h4>
 <p>
-You can control and/or delete cookies as you wish. Most browsers allow you to refuse or remove cookies via their settings. Please note that disabling cookies may affect certain website functionalities, such as staying logged in.
+<%= t('.managing_cookies_description') %>
 </p>
 
 <h4>
-  Third-Party Advertising
+  <%= t('.third_party_ads') %>
 </h4>
 <p>
-For more details on how Google uses information from sites or apps that use their services, please visit <a href="https://policies.google.com/">Google's Privacy & Terms</a>.
+<%= t('.third_party_ads_description') %> <a href="https://policies.google.com/"><%= t('.google_privacy_and_terms') %></a>.
 </p>
 
 <h4>
-  Changes to This Cookie Policy
+  <%= t('.policy_changes') %>
 </h4>
 <p>
-We may update this Cookie Policy from time to time. Any changes will be posted here with an updated “Last Updated” date.
+<%= t('.policy_changes_description') %>
 </p>
 
 <h4>
-  Contact Us
+  <%= t('.contact_us') %>
 </h4>
 <p>
-For questions regarding this Cookie Policy, please contact us here: <%= link_to 'Contact', new_support_tickets_path %>.
+<%= t('.contact_us_description') %> <%= link_to t('.contact'), new_support_tickets_path %>.
 </p>

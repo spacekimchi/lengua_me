@@ -1,19 +1,19 @@
 <footer>
   <div class="footer-container">
     <div>
-      <%= link_to 'Home', root_path %>
-      <%= link_to 'Passages', passages_path %>
-      <%= link_to 'Contact Us', new_support_tickets_path %>
+      <%= link_to t('.home'), root_path %>
+      <%= link_to t('.exercises'), passages_path %>
+      <%= link_to t('.contact_us'), new_support_tickets_path %>
     </div>
     <div>
-      <%= link_to 'FAQ', faq_index_path %>
-      <%= link_to 'About Us', root_path %>
-      <%= link_to 'Additional Resources', root_path %>
+      <%= link_to t('.faq'), faq_index_path %>
+      <%= link_to t('.about_us'), root_path %>
+      <%= link_to t('.additional_resources'), root_path %>
     </div>
     <div>
-      <%= link_to 'Terms of Service', terms_of_service_path %>
-      <%= link_to 'Privacy Policy', privacy_policy_path %>
-      <%= link_to 'Cookie Policy', cookie_policy_path %>
+      <%= link_to t('.terms_of_service'), terms_of_service_path %>
+      <%= link_to t('.privacy_policy'), privacy_policy_path %>
+      <%= link_to t('.cookie_policy'), cookie_policy_path %>
     </div>
   </div>
 </footer>

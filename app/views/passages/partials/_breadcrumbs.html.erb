@@ -1,5 +1,5 @@
 <div class="breadcrumbs">
-  <%= link_to 'All Passages', passages_path %>
+  <%= link_to t('.all_exercises'), passages_path %>
   <% if @category.present? %>
     <span> / </span>
     <%= link_to @category, passages_by_category_path(category_name: params[:category_name]) %>

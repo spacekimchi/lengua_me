@@ -68,7 +68,7 @@ body {
 
     @include variables.respond-to(mobile) {
         .main-content {
-            padding: 4.5rem 0.75rem 0.5rem 0.75rem;
+            padding: 5.5rem 0.75rem 0.5rem 0.75rem;
         }
     }
 }

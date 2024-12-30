@@ -1,86 +1,87 @@
 <h1>
-  Privacy Policy
+  <%= t('.privacy_policy') %>
 </h1>
 
 <h4>
-  Last Updated: <%= @date %>
+  <%= t('.last_updated_date', date: @date) %>
 </h4>
 
 <h4>
-  Introduction
+  <%= t('.introduction') %>
 </h4>
 <p>
-We are committed to protecting your privacy and complying with applicable data protection laws, including the EU General Data Protection Regulation (GDPR), where relevant. This Privacy Policy explains the personal data we collect, how we use it, how we store it, and your rights regarding your personal data.
+<%= t('.introduction_description') %>
 </p>
 
 <h4>
-  Information We Collect
+  <%= t('.information_we_collect') %>
 </h4>
 <p>
-Email Address: We collect your email address when you sign up, log in, or otherwise interact with our services. We do not collect any other personally identifiable information (PII).
+<%= t('.information_we_collect_description') %>
 </p>
 
 <h4>
-  How We Use Your Information
+  <%= t('.how_we_use_your_info') %>
 </h4>
 <p>
-Your email is used solely to authenticate your account, manage your login sessions, and send transactional updates (such as password reset links or account notifications). We do not use your email for marketing purposes or share it with third parties for advertising. No personaly identifiable information is ever saved by us. 
+<%= t('.how_we_use_your_info_description') %>
 </p>
 
 <h4>
-  Lawful Basis for Processing (GDPR)
+  <%= t('.gdpr_laws.default') %>
 </h4>
 <p>
-Authentication & Account Management: We process your email address as it is necessary for the performance of our services (Article 6(1)(b) GDPR).
+<%= t('.gdpr_laws.description_1') %>
 <br>
-We do not process any special categories of personal data and do not engage in profiling or automated decision-making.
+<%= t('.gdpr_laws.description_2') %>
 </p>
 
 <h4>
-  Data Retention & Security
+  <%= t('.data_retention') %>
 </h4>
 <p>
-We retain your email for as long as your account remains active or as required by law. We take reasonable measures to protect your data, but no method of electronic storage is completely secure.
+<%= t('.data_retention_description') %>
 </p>
 
 <h4>
-  Your GDPR Rights
+  <%= t('.gdpr_rights.default') %>
 </h4>
 <p>
-If you are located in the EU or another jurisdiction with similar data protection laws, you have the right to:
+<%= t('.gdpr_rights.description') %>
 <ul>
   <li>
-    Access: Request a copy of the personal data we hold about you.
+    <%= t('.gdpr_rights.access') %>
   </li>
   <li>
-    Rectification: Correct inaccuracies in your personal data.
+    <%= t('.gdpr_rights.rectification') %>
   </li>
   <li>
-    Erasure ("Right to be Forgotten"): Request deletion of your personal data.
+    <%= t('.gdpr_rights.erasure') %>
   </li>
   <li>
-    Restriction: Request limitations on how we process your personal data.
+    <%= t('.gdpr_rights.restriction') %>
   </li>
   <li>
-    Objection: Object to certain types of processing.
+    <%= t('.gdpr_rights.objection') %>
   </li>
   <li>
-    Data Portability: Receive your personal data in a machine-readable format.
+    <%= t('.gdpr_rights.data_portability') %>
   </li>
 </ul>
-To exercise these rights, please contact [support@yourwebsite.com].
+<%= t('.gdpr.exercise') %> <%= link_to t('.contact'), new_support_tickets_path %>.
 </p>
 
 <h4>
-  Changes to This Policy
+  <%= t('.policy_changes.default') %>
 </h4>
 <p>
-We may update this Privacy Policy from time to time. Any changes will be posted with an updated “Last Updated” date.
+<%= t('.policy_changes.description') %>
 </p>
 
 <h4>
-  Contact Us
+  <%= t('.contact_us.default') %>
 </h4>
 <p>
-If you have questions or concerns about this Privacy Policy, please contact us here: <%= link_to 'Contact', new_support_tickets_path %>.
+<%= t('.contact_us.description') %>
+<%= link_to t('.contact'), new_support_tickets_path %>.
 </p>
