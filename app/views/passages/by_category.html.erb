@@ -23,7 +23,7 @@
         <li class="passage-link">
           <div class="passage-title-container">
             <% if current_user %>
-              <% if completed_count > 0 %>
+              <% if 0 < completed_count %>
                 <%= inline_svg('star-filled.svg', class: "icon star-icon star-filled star-#{[completed_count, 5].min}") %>
               <% else %>
                 <%= inline_svg('empty-star.svg', class: 'icon star-icon') %>
@@ -32,7 +32,7 @@
             <%= link_to passage_writer_path(params[:category_name], passage.title), class: 'passage-list-item' do %>
               <%= passage.position %>. <%= passage.title %>
               <div>
-                <%= t('.difficulty_level', level: passage.difficulty_name.titleize) %>, <%= t('.total_parts', parts: passage.total_sentences) %><% if 0 < completed_count %>, <%= t('.completed_count', completed: completed_count) %><% end %>
+                <%= t('.difficulty_level', level: passage.difficulty_name.titleize) %>, <%= t('.total_parts', parts: passage.total_sentences) %><% if 0 < completed_count %>, <%= t('.completed_count', count: completed_count) %><% end %>
               </div>
             <% end %>
           </div>
