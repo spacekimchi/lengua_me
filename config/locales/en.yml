@@ -74,6 +74,8 @@ en:
       what_are_cookies: "What are Cookies?"
       what_are_cookies_description: "Cookies are small text files placed on your device to help websites function, remember your preferences, and provide analytics and personalized content."
   faq:
+    index:
+      faq: "Frequently Asked Questions"
     partials:
       faqs:
         question_1: "Is it free?"
