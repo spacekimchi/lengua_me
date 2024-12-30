@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   include Clearance::Controller
+  include HttpAcceptLanguage::AutoLocale
 
   before_action :set_app_name
   before_action :set_locale
@@ -18,7 +19,12 @@ class ApplicationController < ActionController::Base
   private
 
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    I18n.locale = if params[:locale].present?
+                    params[:locale]
+                  else
+                    # http_accept_language helper picks the best match
+                    http_accept_language.compatible_language_from(I18n.available_locales) || I18n.default_locale
+                  end
   end
 
   def default_url_options

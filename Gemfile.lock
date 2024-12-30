@@ -264,6 +264,7 @@ GEM
       google-protobuf (>= 3.25, < 5.0)
       googleapis-common-protos-types (~> 1.0)
     hashdiff (1.1.2)
+    http_accept_language (2.1.1)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.3)
@@ -496,6 +497,7 @@ DEPENDENCIES
   faker
   good_job
   google-cloud-text_to_speech
+  http_accept_language
   importmap-rails
   jbuilder
   json-schema
