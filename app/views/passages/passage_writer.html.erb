@@ -17,6 +17,7 @@
   <div class="sentence-writer-card"
        data-controller="sentence-writer"
        data-sentence-writer-id-value="<%= @passage.id %>"
+       data-translation-default-locale="<%= I18n.locale %>"
        data-sentences="<%= @sentences_data.to_json %>"
        data-current-index="<%= @current_index %>">
        <div class="sentence-writer-navigation" data-sentence-writer-target="navigation">

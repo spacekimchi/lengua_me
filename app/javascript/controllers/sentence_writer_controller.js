@@ -35,7 +35,7 @@ export default class extends Controller {
 
   connect() {
     // Set the selected language in the dropdown based on localStorage
-    const defaultLanguage = "en";
+    const defaultLanguage = this.element.dataset.translationDefaultLocale;
     const storedTranslateLanguageCode = localStorage.getItem("translateLanguageCode") || defaultLanguage;
     this.fetchTranslations(storedTranslateLanguageCode);
     this.translateLanguageSelectTarget.value = storedTranslateLanguageCode;
