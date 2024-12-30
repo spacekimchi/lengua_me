@@ -9,11 +9,11 @@
           type="text"
           name="q"
           value="<%= params[:q] %>"
-          placeholder="Search"
+          placeholder="<%= t('.search') %>"
           class="search-input"
         >
-        <%= select_tag :difficulty, options_for_select(Difficulty::DIFFICULTY_LEVELS.keys.map { |l| l.to_s.titleize }, params[:difficulty]), include_blank: 'All Difficulties', class: 'difficulty-select' %>
-        <%= submit_tag 'Search', class: 'search-button' %>
+        <%= select_tag :difficulty, options_for_select(Difficulty::DIFFICULTY_LEVELS.keys.map { |l| l.to_s.titleize }, params[:difficulty]), include_blank: t('.all_difficulties'), class: 'difficulty-select' %>
+        <%= submit_tag t('.search'), class: 'search-button' %>
       <% end %>
     </div>
     <ul class="passages-list">
@@ -32,7 +32,7 @@
             <%= link_to passage_writer_path(params[:category_name], passage.title), class: 'passage-list-item' do %>
               <%= passage.position %>. <%= passage.title %>
               <div>
-                Difficulty: <%= passage.difficulty_name.titleize %>, Total: <%= passage.total_sentences %><% if 0 < completed_count %>, Completed: <%= completed_count %><% end %>
+                <%= t('.difficulty_level', level: passage.difficulty_name.titleize) %>, <%= t('.total_parts', parts: passage.total_sentences) %><% if 0 < completed_count %>, <%= t('.completed_count', completed: completed_count) %><% end %>
               </div>
             <% end %>
           </div>

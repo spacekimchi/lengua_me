@@ -83,7 +83,7 @@ class PassagesController < ApplicationController
       return
     end
 
-    @category = params[:category_name].gsub('_', ' ').titleize
+    @category = Passage.translated_category(params[:category_name])
 
     aggregated_passages = Passage
       .by_category(params[:category_name])
@@ -117,7 +117,7 @@ class PassagesController < ApplicationController
       return
     end
 
-    @category = params[:category_name].gsub('_', ' ').titleize
+    @category = Passage.translated_category(params[:category_name])
 
     @passage = Passage.by_category(params[:category_name]).find_by(title: params[:passage_name])
     unless @passage

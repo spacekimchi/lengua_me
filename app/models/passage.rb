@@ -83,6 +83,17 @@ class Passage < ApplicationRecord
     end
   end
 
+  def self.translated_category(category)
+    case category
+    when 1, "short_stories"
+      I18n.t('passages.short_stories')
+    when 2, "conversations"
+      I18n.t('passages.conversations')
+    else
+      "Uncategorized"
+    end
+  end
+
   def translate(language:)
     PassageTranslatorService.new(sentences: sentences.pluck(:content, :id), language: language).call
   end

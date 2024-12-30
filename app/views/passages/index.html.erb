@@ -1,5 +1,5 @@
 <div class="passages-index-container">
-  <h1>All Passages</h1>
+  <h1><%= t('.header') %></h1>
   <br>
   <ul class="difficulties-list">
     <% @categories.each do |category| %>
@@ -14,19 +14,16 @@
                 <%= titleized_name %>
               </div>
               <span>
-                Difficulty: <%= Difficulty::LEVEL_TO_NAME[category.min_difficulty].to_s.titleize %> - <%= Difficulty::LEVEL_TO_NAME[category.max_difficulty].to_s.titleize %>
+                <%= t('.difficulty') %>: <%= Difficulty::LEVEL_TO_NAME[category.min_difficulty].to_s.titleize %> - <%= Difficulty::LEVEL_TO_NAME[category.max_difficulty].to_s.titleize %>
               </span>
               <span>
                 <% if current_user %>
-                  <%= @completed_passages_count_by_category[name].to_i %> /
+                  <%= category.total_passages == 1 ? t('.single_exercise_completed') : t('.plural_exercises_completed', numerator: @completed_passages_count_by_category[name].to_i, denominator: category.total_passages) %> completed
                 <% end %>
-                <%= category.total_passages %> <%= category.total_passages == 1 ? 'passage' : 'passages' %> completed
+                <%= category.total_passages == 1 ? t('.single_exercise') : t('.plural_exercises', number: category.total_passages) %>
               </span>
             <% end %>
           </div>
-        </div>
-        <div class="hidden">
-          Some kind of description
         </div>
       </li>
     <% end %>

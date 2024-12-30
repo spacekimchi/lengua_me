@@ -28,6 +28,19 @@
 #       enabled: "ON"
 
 en:
+  date:
+    formats:
+      default: "%Y-%m-%d"       # Example: 2024-12-29
+      short: "%b %d"            # Example: Dec 29
+      long: "%B %d, %Y"         # Example: December 29, 2024
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M" # Example: 2024-12-29 14:35
+      short: "%b %d %H:%M"      # Example: Dec 29 14:35
+      long: "%B %d, %Y %H:%M"   # Example: December 29, 2024 14:35
+  datetime:
+    formats:
+      default: "%Y-%m-%d %H:%M:%S" # Example: 2024-12-29 14:35:00
   clearance:
     models:
       clearance_mailer:
@@ -39,6 +52,40 @@ en:
       link_text: Change my password
       opening: "Someone, hopefully you, requested we send you a link to change
         your password:"
+  cookie_policies:
+    show:
+      contact: "Contact"
+      contact_us: "Contact Us"
+      contact_us_description: "For questions regarding this Cookie Policy, please contact us here:"
+      gdpr_consent: "GDPR & Consent"
+      gdpr_consent_description: "If you are in the EU or a jurisdiction with similar data protection laws, the use of non-essential cookies (such as advertising cookies) may require your consent. Where applicable, we will request your consent before placing these cookies and you can withdraw it at any time."
+      google_privacy_and_terms: "Google's Privacy and Terms"
+      header: "Cookies Policy"
+      last_updated_date: "Last updated: %{date}"
+      managing_cookies: "Managing Cookies"
+      managing_cookies: "You can control and/or delete cookies as you wish. Most browsers allow you to refuse or remove cookies via their settings. Please note that disabling cookies may affect certain website functionalities, such as staying logged in."
+      policy_changes: "Changes to This Cookie Policy"
+      policy_changes_description: "We may update this Cookie Policy from time to time. Any changes will be posted here with an updated 'Last Updated' date."
+      third_party_ads: "Third-Party Advertising"
+      third_party_ads_description: "For more details on how Google uses information from sites or apps that use their services, please visit:"
+      types_of_cookies: "Types of Cookies We Use"
+      types_of_cookies_ads: "Advertising Cookies (Third-Party): We use third-party advertising partners, including Google, that may use cookies to serve ads based on your prior visits to this or other websites. These partners may collect non-personal data to tailor advertisements to your interests."
+      types_of_cookies_essential: "Essential Cookies: We use authentication cookies to maintain your login session and ensure the proper functioning of our website."
+      what_are_cookies: "What are Cookies?"
+      what_are_cookies_description: "Cookies are small text files placed on your device to help websites function, remember your preferences, and provide analytics and personalized content."
+  faq:
+    partials:
+      faqs:
+        question_1: "Is it free?"
+        answer_1: "Yes! We are 100% free with new lessons and features being added regularly."
+        question_2: "Can I save new phrases and vocabulary words I see?"
+        answer_2: "Struggling to find the right words when learning a new language can be frustrating. Imagine having a tool that helps you lock in new phrases and vocabulary effortlessly. We’re excited to bring you flashcards with spaced repetition, designed to make learning fast, effective, and unforgettable. Stay tuned!"
+        question_3: "Can I learn a new language with no pervious knowledge here?"
+        answer_3: "It's best to know the basics like the alphabet and sentence structure before jumping into listening practice. Head over to our Grammar and Common Words and Phrases sections to create a solid foundation for learning a new language."
+        question_4: "What other things can I do to improve?"
+        answer_4: "Use it or lose it! Go out and use your new found abilites to discover new cultures."
+        question_5: "What languages do you support?"
+        answer_5: "Exercises are currently all in English with translations in Spanish, Korean, Japanese, Hindi, French, Italian, Portuguese, German, Russian, and Mandarin. Please let us know if there is another you wish to add!"
   flashes:
     failure_after_create: Bad email or password.
     failure_after_update: Password can't be blank.
@@ -65,10 +112,93 @@ en:
         submit: Sign in
       user:
         create: Sign up
+  home:
+    index:
+      listen_and_learn: Listen and learn!
+      language_fun_for_everyone: Language fun for everyone!
+      header_detail_1: 100% free! Hundreds of exercises in A1 - C2 difficulties to learn with new ones added regularly!
+      header_detail_2: Practice by listening to the audio and writing what you hear to quickly improve your listening, speaking, grammar, and vocabulary all at once!
+      start_button: Start Now!
+      how_to_practice_header: How to practice useing the based method.
+      follow_these_steps: Following these simple steps to start learning now.
+      listen: Listen
+      listen_description: Listen to the audio. This will help you pick up vocabulary, grammar, pronunciation, and flow naturally.
+      write: Write
+      write_description: Write what you hear. Writing strengthens language learning by reinforcing vocabulary, grammar, and sentence structure through active practice.
+      correct_mistakes: Correct Mistakes
+      correct_mistakes_description: Correcting mistakes helps by turning mistakes into valuable lessons.
+      read: Read
+      read_description: Read out loud and use the pronunciation examples to gain speaking cadence and confidence.
+      faq: Frequently asked questions
   layouts:
     application:
       sign_in: Sign in
       sign_out: Sign out
+    partials:
+      footer:
+        home: "Home"
+        exercises: "Exercises"
+        contact_us: "Contact Us"
+        faq: "FAQ"
+        about_us: "About Us"
+        additional_resources: "Additional Resources"
+        terms_of_service: "Terms of Service"
+        privacy_policy: "Privacy Policy"
+        cookie_policy: "Cookie Policy"
+      navigation:
+        admin: "Admin"
+        errors: "Errors"
+        exercises: "exercises"
+        faq: "FAQ"
+        home: "Home"
+        in_progress: "In-progress"
+        prices: "Prices"
+        products: "Products"
+        sign_in: "Sign in"
+        sign_out: "Sign out"
+        sign_up: "Sign up"
+        support: "Support"
+        users: "Users"
+  passages:
+    by_category:
+      all_difficulties: "All Difficulties"
+      completed_count: "Completed: %{count}"
+      conversations: "Conversations"
+      difficulty_level: "Difficulty: %{level}"
+      search: "Search"
+      short_stories: "Short Stories"
+      total_parts: "Total: %{parts}"
+    conversations: "Conversations"
+    index:
+      header: "All Exercises"
+      difficulty: "Difficulty"
+      single_exercise: "1 exercise"
+      single_exercise_completed: "1 / 1 exercise completed"
+      plural_exercises: "%{number} exercises"
+      plural_exercises_completed: "%{numerator} / %{denominator} exercises completed"
+    partials:
+      breadcrumbs:
+        all_exercises: "All Exercises"
+    passage_writer:
+      all_exercises: "All Exercises"
+      check: "Check"
+      comments: "Comments"
+      completed_title: "You have completed this exercise."
+      completed_encouragement: "Awesome work!"
+      copy_passage_link: "Copy exercise link"
+      incorrect: "Incorrect!"
+      great_job: "Great Job!"
+      next: "Next"
+      next_exercise: "Next Exercise"
+      previous: "Previous"
+      previous_exercise: "Previous Exercise"
+      pronunciations: "Pronunciations"
+      repeat: "Repeat"
+      reset_progress: "Reset exercise"
+      skip: "Skip"
+      try_again: "Try again"
+      type_what_you_hear: "Type what you hear.."
+    short_stories: "Short Stories"
   passwords:
     create:
       description: You will receive an email within the next few minutes containing instructions for changing your password.
@@ -81,6 +211,40 @@ en:
       title: Reset your password
       sign_in: Sign in
       submit: Reset Password
+  privacy_policies:
+    show:
+      contact: "Contact"
+      contact_us:
+        default: "Contact Us"
+        description: "If you have questions or concerns about this Privacy Policy, please contact us here:"
+      data_retention: "Data Retention & Security"
+      data_retention_description: "We retain your email for as long as your account remains active or as required by law. We take reasonable measures to protect your data, but no method of electronic storage is completely secure."
+      gdpr_laws:
+        description_1: "Authentication & Account Management: We process your email address as it is necessary for the performance of our services (Article 6(1)(b) GDPR)."
+        description_2: "We do not process any special categories of personal data and do not engage in profiling or automated decision-making."
+        default: "Lawful Basis for Processing (GDPR)"
+      gdpr_rights:
+        access: "Access: Request a copy of the personal data we hold about you."
+        contact: "Contact"
+        data_portability: "Data Portability: Receive your personal data in a machine-readable format."
+        default: "Your GDPR Rights"
+        description: "If you are located in the EU or another jurisdiction with similar data protection laws, you have the right to:"
+        erasure: 'Erasure ("Right to be Forgotten"): Request deletion of your personal data.'
+        exercise: "To exercise these rights, please contact:"
+        objection: "Objection: Object to certain types of processing."
+        rectification: "Rectification: Correct inaccuracies in your personal data."
+        restriction: "Restriction: Request limitations on how we process your personal data."
+      how_we_use_your_info: "How We Use Your Information"
+      how_we_use_your_info_description: "Your email is used solely to authenticate your account, manage your login sessions, and send transactional updates (such as password reset links or account notifications). We do not use your email for marketing purposes or share it with third parties for advertising. No personaly identifiable information is ever saved by us."
+      informtaion_we_collect: "Information We Collect"
+      information_we_collect_description: "Email Address: We collect your email address when you sign up, log in, or otherwise interact with our services. We do not collect any other personally identifiable information (PII)."
+      introduction: "Introduction"
+      introduction_description: "We are committed to protecting your privacy and complying with applicable data protection laws, including the EU General Data Protection Regulation (GDPR), where relevant. This Privacy Policy explains the personal data we collect, how we use it, how we store it, and your rights regarding your personal data."
+      last_updated_date: "Last updated: %{date}"
+      policy_changes:
+        default: "Changes to this Policy"
+        description: 'We may update this Privacy Policy from time to time. Any changes will be posted with an updated "Last Updated" date.'
+      privacy_policy: "Privacy Policy"
   sessions:
     form:
       forgot_password: Forgot password?
@@ -88,34 +252,53 @@ en:
       submit: Sign In
     new:
       title: Sign in
+  support_tickets:
+    new:
+      contact_us: "Contact us"
+      contact_us_header: "We're here to help! Please do not hesitate to contact us with any questions, comments, or concerns."
+      contact_us_description: "Once you submit this form, someone from our team will get back to you as soon as possible."
+      email: "Email"
+      subject: "Subject"
+      content: "Content"
+      submit: "Submit"
+  terms_of_services:
+    title: "Terms of Service"
+    last_updated: "Last Updated: %{date}"
+    use_of_service:
+      title: "Use of the Service"
+      description: "This language learning app is provided free of charge. By using our service, you agree to use it only for lawful purposes and in accordance with these Terms."
+    no_guarantee_of_results:
+      title: "No Guarantee of Results"
+      description: "We make no guarantees about your language learning progress, speed, or fluency. The service is provided on an 'as-is' basis."
+    intellectual_property:
+      title: "Intellectual Property"
+      description: "All text, images, logos, and other content on this site are the property of %{app_name} or are used with permission. You may not copy, distribute, or otherwise use our content without express written permission."
+    limitation_of_liability:
+      title: "Limitation of Liability"
+      description: "To the fullest extent permitted by law, %{app_name} and its affiliates will not be liable for any indirect, incidental, or consequential damages arising from the use of our service."
+    modifications_to_service:
+      title: "Modifications to the Service"
+      description: "We reserve the right to modify, suspend, or discontinue the service at any time without notice."
+    governing_law:
+      title: "Governing Law"
+      description: "These Terms shall be governed by and construed in accordance with the laws of California, United States."
+    compliance_with_data_protection:
+      title: "Compliance with Data Protection Laws"
+      description: "By using our service, you agree to comply with all applicable data protection laws, including the General Data Protection Regulation (GDPR) if you are accessing the service from the European Union (EU) or the European Economic Area (EEA). We are committed to ensuring that your personal data is protected and used in accordance with these regulations."
+    privacy_policy:
+      title: "Privacy Policy"
+      description: "Our %{privacy_policy_link} governs the collection, use, and protection of your personal data. By using our service, you consent to the practices described in the Privacy Policy."
+    contact_information:
+      title: "Contact Information"
+      description: "If you have any questions or concerns about these Terms, please contact us here: %{contact_link}."
+
   users:
     new:
       sign_in: Sign in
       title: Sign up
       submit: Sign Up
   controllers:
-    passages:
-      create:
-        success: "The passages was successfully created."
-        error: "Failed to create the passage."
-      translate:
-        success: "The passage was successfully translated."
-        error: "Failed to translate the passage."
-      category:
-        not_found: "Category not found."
-      in_progress:
-        enable_js: "Please enable JavaScript to see the in-progress popup."
-      passage_writer:
-        not_found: "Passage not found."
-    checkouts:
-      new:
-        already_subscribed: "You are already subscribed to %{product_name}."
-      show:
-        error: "Sorry, something went wrong with processing your payment: %{message}"
-    verifications:
-      edit:
-        success: "Your account has been verified successflly!"
-        error: "Invalid or expired verification link!"
+    internal_server_error: "Internal Server Error"
     admin:
       products:
         create:
@@ -131,6 +314,35 @@ en:
           success: "User was successfully updated."
         destroy:
           success: "User was successfully destroyed."
+    checkouts:
+      new:
+        already_subscribed: "You are already subscribed to %{product_name}."
+      show:
+        error: "Sorry, something went wrong with processing your payment: %{message}"
+    passages:
+      create:
+        success: "The passages was successfully created."
+        error: "Failed to create the passage."
+      translate:
+        success: "The passage was successfully translated."
+        error: "Failed to translate the passage."
+      category:
+        not_found: "Category not found."
+      in_progress:
+        enable_js: "Please enable JavaScript to see the in-progress popup."
+      passage_writer:
+        not_found: "Passage not found."
+    passage_progresses:
+      update_progress:
+        success: "Passage progress updated!"
+        error: "Failed to update progress!"
+    support_tickets:
+      create:
+        success: "Your message has been sent."
+    verifications:
+      edit:
+        success: "Your account has been verified successflly!"
+        error: "Invalid or expired verification link!"
   difficulties:
     basic:
       description: "Foundational understanding, limited vocabulary, basic phrases and greetings."
@@ -159,3 +371,10 @@ en:
     true_false: "True/False"
     fill_in_blank: "Fill in the Blank"
     summary: "Summarization"
+  user_mailer:
+    send_verification_email:
+      subject: "Account Verification"
+      greeting: "Hello %{email},"
+      body: "Thank you for registering. Please verify your account by clicking the link below:"
+      verify_link: "Verify your account"
+      ignore_message: "If you did not request this email, please ignore it."

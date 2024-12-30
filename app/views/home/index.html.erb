@@ -1,15 +1,15 @@
 <div class="home-container">
-  <h1>Listen and Learn <br> Language Fun for Everyone!</h1>
+  <h1><%= t('.listen_and_learn') %><br><%= t('.language_fun_for_everyone') %></h1>
   <div class="header-details">
     <p>
-    Turbocharge your language learning 100% free! Practice by listening and writing what you hear. Improve your listening, speaking, grammar, and vocabulary all at once!
+    <%= t('.header_detail_1') %>
     </p>
     <p>
-    We have hundreds of exercises in different difficulties and add new ones daily!
+    <%= t('.header_detail_2') %>
     </p>
     <div>
       <%= link_to passages_path, class: 'link-button' do %>
-        Start Now!
+        <%= t('.start_button') %>
       <% end %>
     </div>
   </div>
@@ -17,46 +17,44 @@
   </div>
   <div class="learning-methods-container">
     <h2>
-      How to practice using the based method
+        <%= t('.how_to_practice_header') %>
     </h2>
     <p class="learning-methods-text">
-    We recommend following these simple steps to begin improving at the speed of light.
-    <br>
-    <%= link_to 'Select your difficulty level', passages_path %> based on the Common European Framework of Reference for Languages (CEFR) from A1 - C2 <br> and choose from the hundreds of different passages covering a wide range of topics.
+    <%= t('.follow_these_steps') %>
     </p>
     <div class="learning-method-group">
       <div class="learning-method-item">
-        <h3>1. Listen</h3>
+        <h3>1. <%= t('.listen') %></h3>
         <img src="/images/listen-man.png">
         <p>
-        Listening supercharges language learning by exposing you to real-world speech, helping you pick up vocabulary, grammar, pronunciation, and flow naturally.
+        <%= t('.listen_description') %>
         </p>
       </div>
       <div class="learning-method-item">
-        <h3>2. Write</h3>
+        <h3>2. <%= t('.write') %></h3>
         <img src="/images/typing-woman.png">
         <p>
-        Writing strengthens language learning by reinforcing vocabulary, grammar, and sentence structure through active practice.
+        <%= t('.write_description') %>
         </p>
       </div>
     </div>
     <div class="learning-method-group">
       <div class="learning-method-item">
-        <h3>3. Correct Mistakes</h3>
+        <h3>3. <%= t('.correct_mistakes') %></h3>
         <img src="/images/correct.png">
         <p>
-        Correcting mistakes accelerates language learning by turning errors into valuable lessons.
+        <%= t('.correct_mistakes_description') %>
         </p>
       </div>
       <div class="learning-method-item">
-        <h3>4. Read</h3>
+        <h3>4. <%= t('.read') %></h3>
         <img src="/images/speak-woman.png">
         <p>
-        Reading out loud improves language learning by enhancing pronunciation, fluency, and listening skills. It helps you internalize the language’s rhythm while boosting speaking confidence.
+        <%= t('.read_description') %>
         </p>
       </div>
     </div>
-    <div class="learning-method-group">
+    <!--div class="learning-method-group">
       <div class="learning-method-item">
         <h3>5. Recall (Flashcards coming soon)</h3>
         <img src="/images/thinking-man.png">
@@ -65,11 +63,11 @@
         </p>
       </div>
     </div>
-  </div>
+  </div -->
   <div class="line-separator">
   </div>
   <div class="home-faq-container">
-    <h2>Frequently Asked Questions</h2>
+    <h2><%= t('.faq') %></h2>
     <%= render partial: 'faq/partials/faqs' %>
   </div>
 </div>

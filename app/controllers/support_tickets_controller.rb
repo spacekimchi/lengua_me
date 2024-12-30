@@ -8,7 +8,7 @@ class SupportTicketsController < ApplicationController
     @support_ticket.user = current_user if signed_in?
     if @support_ticket.save
       # Send email notification, etc.
-      redirect_to root_path, notice: 'Your message has been sent.'
+      redirect_to root_path, notice: t('controllers.support_tickets.create.success')
     else
       render :new
     end

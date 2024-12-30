@@ -1,70 +1,71 @@
 <h1>
-  Terms of Service
+  <%= t('terms_of_service.title') %>
 </h1>
 
 <h4>
-  Last Updated: <%= @date %>
+  <%= t('terms_of_service.last_updated', date: @date) %>
 </h4>
 
 <h4>
-  Use of the Service
+  <%= t('terms_of_service.use_of_service.title') %>
 </h4>
 <p>
-This language learning app is provided free of charge. By using our service, you agree to use it only for lawful purposes and in accordance with these Terms.
+  <%= t('terms_of_service.use_of_service.description') %>
 </p>
 
 <h4>
-  No Guarantee of Results
+  <%= t('terms_of_service.no_guarantee_of_results.title') %>
 </h4>
 <p>
-We make no guarantees about your language learning progress, speed, or fluency. The service is provided on an "as-is" basis.
+  <%= t('terms_of_service.no_guarantee_of_results.description') %>
 </p>
 
 <h4>
-  Intellectual Property
+  <%= t('terms_of_service.intellectual_property.title') %>
 </h4>
 <p>
-All text, images, logos, and other content on this site are the property of <%= @app_name %> or are used with permission. You may not copy, distribute, or otherwise use our content without express written permission.
+  <%= t('terms_of_service.intellectual_property.description', app_name: @app_name) %>
 </p>
 
 <h4>
-  Limitation of Liability
+  <%= t('terms_of_service.limitation_of_liability.title') %>
 </h4>
 <p>
-To the fullest extent permitted by law, <%= @app_name %> and its affiliates will not be liable for any indirect, incidental, or consequential damages arising from the use of our service.
+  <%= t('terms_of_service.limitation_of_liability.description', app_name: @app_name) %>
 </p>
 
 <h4>
-  Modifications to the Service
+  <%= t('terms_of_service.modifications_to_service.title') %>
 </h4>
 <p>
-We reserve the right to modify, suspend, or discontinue the service at any time without notice.
+  <%= t('terms_of_service.modifications_to_service.description') %>
 </p>
 
 <h4>
-  Governing Law
+  <%= t('terms_of_service.governing_law.title') %>
 </h4>
 <p>
-These Terms shall be governed by and construed in accordance with the laws of the California, United States.
+  <%= t('terms_of_service.governing_law.description') %>
 </p>
 
 <h4>
-  Compliance with Data Protection Laws
+  <%= t('terms_of_service.compliance_with_data_protection.title') %>
 </h4>
 <p>
-By using our service, you agree to comply with all applicable data protection laws, including the General Data Protection Regulation (GDPR) if you are accessing the service from the European Union (EU) or the European Economic Area (EEA). We are committed to ensuring that your personal data is protected and used in accordance with these regulations.
+  <%= t('terms_of_service.compliance_with_data_protection.description') %>
 </p>
 
 <h4>
-  Privacy Policy
+  <%= t('terms_of_service.privacy_policy.title') %>
 </h4>
 <p>
-Our <%= link_to 'Privacy Policy', privacy_policy_path %> governs the collection, use, and protection of your personal data. By using our service, you consent to the practices described in the Privacy Policy.
+  <%= t('terms_of_service.privacy_policy.description', privacy_policy_link: link_to(t('terms_of_service.privacy_policy.title'), privacy_policy_path)) %>
 </p>
 
 <h4>
-  Contact Information
+  <%= t('terms_of_service.contact_information.title') %>
 </h4>
 <p>
-If you have any questions or concerns about these Terms, please contact us here: <%= link_to 'Contact', new_support_tickets_path %>.
+  <%= t('terms_of_service.contact_information.description', contact_link: link_to(t('terms_of_service.contact_information.title'), new_support_tickets_path)) %>
 </p>
+

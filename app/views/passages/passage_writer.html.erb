@@ -35,19 +35,19 @@
              <div class="hidden" style="position: relative;" data-popup-target="popupFrame">
                <div class="passage-options-items popup">
                  <% if @previous_passage.present? %>
-                   <%= link_to 'Previous Passage', passage_writer_path(params[:category_name], @previous_passage.title) %>
+                   <%= link_to t('.previous_exercise'), passage_writer_path(params[:category_name], @previous_passage.title) %>
                    <br>
                  <% end %>
                  <% if @next_passage.present? %>
-                   <%= link_to 'Next Passage', passage_writer_path(params[:category_name], @next_passage.title) %>
+                   <%= link_to t('.previous_exercise'), passage_writer_path(params[:category_name], @next_passage.title) %>
                    <br>
                  <% end %>
-                 <button type="button" onclick="navigator.clipboard.writeText(window.location.href).then(() => {})" data-action="popup#hidePopup">
-                   Copy passage url
+                 <button type="button" style="text-align: left;" onclick="navigator.clipboard.writeText(window.location.href).then(() => {})" data-action="popup#hidePopup">
+                   <%= t('.copy_passage_link') %>
                  </button>
                  <% if current_user.present? %>
                    <br>
-                   <button type="button" data-action="click->sentence-writer#resetProgress popup#hidePopup">Reset progress</button>
+                   <button type="button" data-action="click->sentence-writer#resetProgress popup#hidePopup"><%= t('.reset_progress') %></button>
                  <% end %>
                </div>
              </div>
@@ -79,27 +79,27 @@
              <% end %>
            </div>
            <div>
-             <textarea placeholder="Type what you hear.." data-sentence-writer-target="textArea" data-action="keydown.enter->sentence-writer#check"></textarea>
+             <textarea placeholder="<%= t('.type_what_you_hear') %>" data-sentence-writer-target="textArea" data-action="keydown.enter->sentence-writer#check"></textarea>
            </div>
 
            <div style="display: none;" class="check-result" data-sentence-writer-target="incorrectDiv">
              <%= inline_svg('alert-triangle.svg', class: 'icon warning') %>
-             <span class="bold">Incorrect!</span>
+             <span class="bold"><%= t('.incorrect') %></span>
              &nbsp;
-             <span>Try again</span>
+             <span><%= t('.try_again') %></span>
              <div class="check-result-actions">
                <button class="button warning-button" data-action="click->sentence-writer#skip keydown.enter->sentence-writer#skip">
-                 Skip
+                 <%= t('.skip') %>
                </button>
              </div>
            </div>
 
            <div style="display: none;" class="check-result" data-sentence-writer-target="correctDiv">
              <%= inline_svg('circle-check.svg', class: 'icon success') %>
-             <span class="bold">Great Job!</span>
+             <span class="bold"><%= t('.great_job') %></span>
              <div class="check-result-actions">
                <button class="button success-button" data-action="click->sentence-writer#next keydown.enter->sentence-writer#next">
-                 Next
+                 <%= t('.next') %>
                </button>
              </div>
            </div>
@@ -107,18 +107,18 @@
            <div style="display: none;" class="check-result" data-sentence-writer-target="skipDiv">
              <div class="check-result-actions">
                <button class="button action-button" data-action="click->sentence-writer#next keydown.enter->sentence-writer#next">
-                 Next
+                 <%= t('.next') %>
                </button>
              </div>
            </div>
 
            <div data-sentence-writer-target="checkAndSkipDiv">
              <button class="button action-button" data-action="click->sentence-writer#check keydown.enter->sentence-writer#check">
-               Check
+               <%= t('.check') %>
              </button>
              &nbsp;
              <button class="button neutral-button" data-action="click->sentence-writer#skip keydown.enter->sentence-writer#skip">
-               Skip
+               <%= t('.skip') %>
              </button>
            </div>
 
@@ -141,7 +141,7 @@
 
            <div class="sentence-pronunciations-container" data-sentence-writer-target="wordPronunciationsDiv" data-controller="tooltip">
              <div>
-               Pronunciations
+               <%= t('.pronunciations') %>
              </div>
              <div class="pronunciation-words" data-sentence-writer-target="wordPronunciationsText">
              </div>
@@ -153,7 +153,7 @@
 
            </div>
            <div class="sentence-comments-container hidden" data-controller="comments">
-             Comments
+             <%= t('.comments') %>
            </div>
          </div>
        </div>
@@ -162,28 +162,28 @@
          <div class="passage-completed-content">
 
            <div class="passage-completed-text">
-             You have completed this passage.
+             <%= t('.completed_title') %>
              <br>
-             Awesome work!
+             <%= t('.completed_encouragement') %>
            </div>
            <div class="completed-nav-links">
              <% if @next_passage.present? %>
                <%= link_to passage_writer_path(params[:category_name], @next_passage.title), id: 'completed-next-link', class: 'link-button success-link' do %>
-                 Next
+                 <%= t('.next') %>
                <% end %>
              <% end %>
              <%= link_to passage_writer_path(params[:category_name], @passage.title), id: 'completed-repeat-link', class: 'link-button' do %>
-               Repeat
+               <%= t('.repeat') %>
              <% end %>
              <% if @previous_passage.present? %>
                <%= link_to passage_writer_path(params[:category_name], @previous_passage.title), id: 'completed-prev-link', class: 'link-button neutral-link' do %>
-                 Previous
+                 <%= t('.previous') %>
                <% end %>
              <% end %>
            </div>
            <div>
              <%= link_to passages_by_category_path(params[:category_name]), id: 'all-passages-link' do %>
-               All Passages
+               <%= t('.all_exercises') %>
              <% end %>
            </div>
          </div>
