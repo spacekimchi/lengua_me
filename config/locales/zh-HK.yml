@@ -1,0 +1,371 @@
+zh-HK:
+  date:
+    formats:
+      default: "%Y-%m-%d"       # 範例：2024-12-29
+      short: "%b %d"            # 範例：12月 29
+      long: "%B %d, %Y"         # 範例：12月 29, 2024
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M" # 範例：2024-12-29 14:35
+      short: "%b %d %H:%M"      # 範例：12月 29 14:35
+      long: "%B %d, %Y %H:%M"   # 範例：12月 29, 2024 14:35
+  datetime:
+    formats:
+      default: "%Y-%m-%d %H:%M:%S" # 範例：2024-12-29 14:35:00
+
+  clearance:
+    models:
+      clearance_mailer:
+        change_password: "更改密碼"
+
+  clearance_mailer:
+    change_password:
+      closing: "如果你並無要求重設密碼，請忽略此電郵，你的密碼不會被更改。"
+      link_text: "更改我的密碼"
+      opening: "有人（希望是你本人）要求寄出更改密碼的連結，請按以下連結更改："
+
+  cookie_policies:
+    show:
+      contact: "聯絡方式"
+      contact_us: "聯絡我們"
+      contact_us_description: "如果你對本 Cookie 政策有任何疑問，請在此聯絡我們："
+      gdpr_consent: "GDPR 及同意"
+      gdpr_consent_description: "如果你位於歐盟或其他受類似資料保護法規管的地區，使用非必要的 Cookie（例如廣告 Cookie）可能需要你的同意。如適用，我們會在使用這些 Cookie 前徵求你的同意，你亦可隨時撤回該同意。"
+      google_privacy_and_terms: "Google 私隱權及服務條款"
+      header: "Cookie 政策"
+      last_updated_date: "最後更新：%{date}"
+      managing_cookies: "管理 Cookie"
+      managing_cookies_description: "你可以自行控制或刪除 Cookie。大多數瀏覽器允許你在設定中拒絕或移除 Cookie。請注意，停用 Cookie 可能影響網站的部分功能（如維持登入狀態）。"
+      policy_changes: "Cookie 政策的變更"
+      policy_changes_description: "我們或會不時更新此 Cookie 政策。所有變更會在此公佈，並附上新的「最後更新」日期。"
+      third_party_ads: "第三方廣告"
+      third_party_ads_description: "欲了解 Google 如何使用在使用其服務的網站或應用程式所收集的資訊，請參閱："
+      types_of_cookies: "我們所使用的 Cookie 類型"
+      types_of_cookies_ads: "廣告 Cookie（第三方）：我們使用包括 Google 在內的第三方廣告合作夥伴，他們可能會透過 Cookie 依據你之前瀏覽本站或其他網站的紀錄，向你投放廣告。這些合作夥伴或會收集非個人資料，用於投放與你的興趣相符的定向廣告。"
+      types_of_cookies_essential: "必需的 Cookie：我們使用認證 Cookie 以維持你的登入狀態，確保網站正常運作。"
+      what_are_cookies: "甚麼是 Cookie？"
+      what_are_cookies_description: "Cookie 是儲存在你裝置上的小型文字檔，用於協助網站運作、記住你的喜好，並提供分析及個人化內容。"
+
+  faq:
+    index:
+      faq: "常見問題 (FAQ)"
+    partials:
+      faqs:
+        question_1: "是否免費？"
+        answer_1: "是的！我們是百分百免費的，而且會定期加入新課程和新功能。"
+        question_2: "我可以儲存自己看到的新詞彙或片語嗎？"
+        answer_2: "學新語言時，有時難以迅速找到合適的詞語。我們即將推出配合間隔重複（spaced repetition）的字卡功能，令學習更快、更有效、更難忘。請密切留意！"
+        question_3: "我完全沒有基礎，也可以在這裡學習嗎？"
+        answer_3: "最好先了解基本知識，例如字母表及句子結構，再進行聽力練習。請先到「文法」及「常用字詞和片語」部分建立穩固基礎。"
+        question_4: "我可以做些甚麼來進一步提升？"
+        answer_4: "唔用就會生疏！嘗試運用你的新技能，去感受和體驗不同的文化。"
+        question_5: "你們支援哪些語言？"
+        answer_5: "目前所有練習都是英文為主，並提供西班牙文、韓文、日文、印地文、法文、意大利文、葡萄牙文、德文、俄文，以及中文（普通話）的翻譯。如想加入其他語言，請告訴我們！"
+
+  flashes:
+    failure_after_create: "電郵或密碼錯誤。"
+    failure_after_update: "密碼不可留空。"
+    failure_when_forbidden: "請檢查網址或重試提交表單。"
+    failure_when_not_signed_in: "請先登入才可繼續。"
+    failure_when_missing_email: "電郵地址不可留空。"
+
+  helpers:
+    label:
+      password:
+        email: "電郵地址"
+      password_reset:
+        password: "設定密碼"
+      session:
+        password: "密碼"
+      user:
+        password: "密碼"
+    submit:
+      password:
+        submit: "重設密碼"
+      password_reset:
+        submit: "儲存此密碼"
+      session:
+        submit: "登入"
+      user:
+        create: "註冊"
+
+  home:
+    index:
+      listen_and_learn: "聽住學！"
+      language_fun_for_everyone: "語言學習，全民同樂！"
+      header_detail_1: "100%免費！提供多個 A1 - C2 難度的練習，並定期新增！"
+      header_detail_2: "聽音訊並寫下聽到的內容，能快速同時提升你的聽力、口語、文法和詞彙量！"
+      start_button: "立即開始！"
+      how_to_practice_header: "運用基本方法進行練習。"
+      follow_these_steps: "依照以下步驟，馬上開始學習。"
+      listen: "聆聽"
+      listen_description: "聆聽音訊，有助於你自然地掌握詞彙、文法、發音及語調。"
+      write: "寫作"
+      write_description: "將聽到的內容寫出來。寫作能鞏固詞彙、文法及句子結構，並提供主動練習的機會。"
+      correct_mistakes: "修正錯誤"
+      correct_mistakes_description: "修正錯誤能將失誤轉化為學習機會。"
+      read: "閱讀"
+      read_description: "大聲朗讀並參考發音示例，提升說話的流暢度與自信。"
+      faq: "常見問題"
+
+  layouts:
+    application:
+      sign_in: "登入"
+      sign_out: "登出"
+    partials:
+      footer:
+        home: "主頁"
+        exercises: "練習"
+        contact_us: "聯絡我們"
+        faq: "FAQ"
+        about_us: "關於我們"
+        additional_resources: "其他資源"
+        terms_of_service: "服務條款"
+        privacy_policy: "私隱政策"
+        cookie_policy: "Cookie 政策"
+      navigation:
+        admin: "管理"
+        errors: "錯誤"
+        exercises: "練習"
+        faq: "FAQ"
+        home: "主頁"
+        in_progress: "進行中"
+        prices: "價格"
+        products: "產品"
+        sign_in: "登入"
+        sign_out: "登出"
+        sign_up: "註冊"
+        support: "支援"
+        users: "用戶"
+
+  passages:
+    by_category:
+      all_difficulties: "所有難度"
+      completed_count: "已完成：%{count}"
+      conversations: "對話"
+      difficulty_level: "難度：%{level}"
+      search: "搜尋"
+      short_stories: "短篇故事"
+      total_parts: "總數：%{parts}"
+    conversations: "對話"
+    index:
+      header: "所有練習"
+      difficulty: "難度"
+      single_exercise: "1 個練習"
+      single_exercise_completed: "已完成 1 / 1 個練習"
+      plural_exercises: "%{number} 個練習"
+      plural_exercises_completed: "%{numerator} / %{denominator} 個練習已完成"
+    partials:
+      breadcrumbs:
+        all_exercises: "所有練習"
+    passage_writer:
+      all_exercises: "所有練習"
+      check: "檢查"
+      comments: "評論"
+      completed_title: "你已完成此練習。"
+      completed_encouragement: "做得好！"
+      copy_passage_link: "複製練習連結"
+      incorrect: "錯誤！"
+      great_job: "好叻！"
+      next: "下一步"
+      next_exercise: "下一個練習"
+      previous: "返回"
+      previous_exercise: "上一個練習"
+      pronunciations: "發音"
+      repeat: "重複"
+      reset_progress: "重設進度"
+      skip: "跳過"
+      try_again: "再試一次"
+      type_what_you_hear: "輸入你聽到的內容..."
+
+    short_stories: "短篇故事"
+
+  passwords:
+    create:
+      description: "你即將在幾分鐘內收到一封電郵，內有重設密碼的說明。"
+    edit:
+      description: "你的密碼已被重設。請在下方輸入新的密碼。"
+      title: "更改密碼"
+      submit: "更改密碼"
+    new:
+      description: "請輸入你的電郵地址以重設密碼。"
+      title: "重設密碼"
+      sign_in: "登入"
+      submit: "重設密碼"
+
+  privacy_policies:
+    show:
+      contact: "聯絡"
+      contact_us:
+        default: "聯絡我們"
+        description: "如果你對本私隱政策有任何疑問或顧慮，請在此聯絡我們："
+      data_retention: "資料保存及安全"
+      data_retention_description: "只要你的帳戶仍然有效或法律要求，我們會保存你的電郵地址。我們會採取合理的措施去保障你的資料，但沒有任何電子存儲方式能完全安全。"
+      gdpr_laws:
+        description_1: "驗證及帳戶管理：我們處理你的電郵地址，因為這對提供我們的服務是必要的（GDPR 第 6(1)(b) 條）。"
+        description_2: "我們不會處理任何特殊類別的個人資料，也不會進行資料分析或自動化決策。"
+        default: "資料處理的法律基礎 (GDPR)"
+      gdpr_rights:
+        access: "查閱：你可要求我們提供一份你個人資料的副本。"
+        contact: "聯絡"
+        data_portability: "資料可移植性：以機器可讀的格式獲取你的個人資料。"
+        default: "你在 GDPR 下的權利"
+        description: "如果你位於歐盟或其他有類似資料保護法律的地區，你擁有以下權利："
+        erasure: '刪除權（“被遺忘權”）：請求刪除你的個人資料。'
+        exercise: "如要行使這些權利，請在此聯絡我們："
+        objection: "反對：反對某些類型的處理方式。"
+        rectification: "更正：修正你的個人資料中的不準確之處。"
+        restriction: "限制：要求限制我們對你的個人資料的處理。"
+      how_we_use_your_info: "我們如何使用你的資訊"
+      how_we_use_your_info_description: "你的電郵地址僅用於驗證帳戶、管理登入狀態，以及寄送交易性通知（如重設密碼連結或帳戶提醒）。我們不會將你的電郵用於行銷用途，也不會提供給第三方作廣告用途。我們絕不會保存任何可識別你身份的資料。"
+      informtaion_we_collect: "我們收集哪些資訊"
+      information_we_collect_description: "電郵地址：當你註冊、登入或以其他方式使用我們的服務時，我們會收集你的電郵地址。我們不會收集任何其他個人識別資訊（PII）。"
+      introduction: "簡介"
+      introduction_description: "我們致力於保護你的私隱，並遵守適用的資料保護法律（包括 GDPR）。本私隱政策會說明我們收集哪些個人資料，如何使用、保存，以及你對這些個人資料擁有哪些權利。"
+      last_updated_date: "最後更新：%{date}"
+      policy_changes:
+        default: "政策變更"
+        description: "我們或會不時更新此私隱政策。所有變更將會附上新的「最後更新」日期。"
+      privacy_policy: "私隱政策"
+
+  sessions:
+    form:
+      forgot_password: "忘記密碼？"
+      sign_up: "註冊"
+      submit: "登入"
+    new:
+      title: "登入"
+
+  support_tickets:
+    new:
+      contact_us: "聯絡我們"
+      contact_us_header: "我們隨時樂意為你提供協助！有任何疑問、意見或顧慮，歡迎隨時聯絡。"
+      contact_us_description: "提交表單後，我們的團隊成員會盡快答覆你。"
+      email: "電郵"
+      subject: "主題"
+      content: "內容"
+      submit: "提交"
+
+  terms_of_services:
+    title: "服務條款"
+    last_updated: "最後更新：%{date}"
+    use_of_service:
+      title: "服務的使用"
+      description: "此語言學習應用以免費方式提供。你使用我們的服務，即表示你同意只用於合法目的，並遵守本條款。"
+    no_guarantee_of_results:
+      title: "不保證學習成果"
+      description: "我們不保證你的學習進度、速度或流利程度。服務以「現狀」提供。"
+    intellectual_property:
+      title: "智慧財產權"
+      description: "本網站的文字、圖片、標誌，以及其他內容均屬 %{app_name} 所有或已獲授權使用。未經書面許可，你不可複製、分發或以任何方式使用我們的內容。"
+    limitation_of_liability:
+      title: "責任限制"
+      description: "在法律允許的範圍內，%{app_name} 及其關聯單位將不對使用本服務所引發的任何間接、偶發或後果性損害承擔責任。"
+    modifications_to_service:
+      title: "服務變更"
+      description: "我們保留隨時更改、暫停或終止服務的權利，恕不另行通知。"
+    governing_law:
+      title: "管轄法律"
+      description: "本條款受美國加州法律管轄，並根據該法律解釋。"
+    compliance_with_data_protection:
+      title: "符合資料保護法律"
+      description: "你使用我們的服務，即表示你同意遵守所有適用的資料保護法律，若你從歐盟（EU）或歐洲經濟區（EEA）存取本服務，則包括遵守 GDPR。我們承諾按照這些法規保護並使用你的個人資料。"
+    privacy_policy:
+      title: "私隱政策"
+      description: "我們的 %{privacy_policy_link} 載明了收集、使用及保護你個人資料的方式。使用我們的服務，即表示你同意此私隱政策所述的做法。"
+    contact_information:
+      title: "聯絡資訊"
+      description: "若對本條款有任何疑問或顧慮，請在此聯絡我們：%{contact_link}"
+
+  users:
+    new:
+      sign_in: "登入"
+      title: "註冊"
+      submit: "註冊"
+
+  controllers:
+    internal_server_error: "伺服器內部錯誤"
+    admin:
+      products:
+        create:
+          success: "產品已成功建立。"
+        update:
+          success: "產品已成功更新。"
+        destroy:
+          success: "產品已成功刪除。"
+      users:
+        create:
+          success: "用戶已成功建立。"
+        update:
+          success: "用戶已成功更新。"
+        destroy:
+          success: "用戶已成功刪除。"
+    checkouts:
+      new:
+        already_subscribed: "你已訂閱 %{product_name}。"
+      show:
+        error: "抱歉，處理付款時出現問題：%{message}"
+    passages:
+      create:
+        success: "段落已成功建立。"
+        error: "無法建立此段落。"
+      translate:
+        success: "段落已成功翻譯。"
+        error: "翻譯段落時出錯。"
+      category:
+        not_found: "未找到分類。"
+      in_progress:
+        enable_js: "請啟用 JavaScript 以查看進行中的彈出視窗。"
+      passage_writer:
+        not_found: "未找到段落。"
+    passage_progresses:
+      update_progress:
+        success: "段落進度已更新！"
+        error: "更新進度失敗！"
+    support_tickets:
+      create:
+        success: "你的訊息已成功傳送。"
+    verifications:
+      edit:
+        success: "你的帳戶已成功驗證！"
+        error: "驗證連結無效或已過期！"
+
+  difficulties:
+    basic:
+      description: "基礎理解、詞彙量有限、簡單片語和問候語。"
+    a1:
+      description: "能理解並使用日常簡單常用語句。"
+    a2:
+      description: "能用簡單方式進行交流，需要直接交換熟悉主題的信息。"
+    b1:
+      description: "能以簡易連貫語言處理旅遊、工作及日常事務。"
+    b2:
+      description: "能與母語者相當流暢地交流，並清晰、詳細地討論熟悉的主題。"
+    c1:
+      description: "能流暢且自發地表達複雜概念，幾乎不需思考用詞。"
+    c2:
+      description: "幾乎能理解聽到或閱讀到的所有內容，並能即時、非常流利且準確地表達自己。"
+    native:
+      description: "對語言掌握完整，如同受過教育的母語使用者。"
+
+  categories:
+    dialogue: "對話"
+    narrative: "敘事"
+    informational: "資訊文本"
+    descriptive: "描述性段落"
+    practical_scenario: "實用情境"
+
+  exercise_types:
+    mcq: "多項選擇題"
+    true_false: "是非題"
+    fill_in_blank: "填充題"
+    summary: "摘要"
+
+  user_mailer:
+    send_verification_email:
+      subject: "帳戶驗證"
+      greeting: "你好，%{email}："
+      body: "感謝你的註冊。請按以下連結驗證你的帳戶："
+      verify_link: "驗證帳戶"
+      ignore_message: "如果你並無要求寄出此電郵，請忽略。"
+

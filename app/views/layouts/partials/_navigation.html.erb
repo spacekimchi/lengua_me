@@ -47,7 +47,6 @@
       </ul>
     </nav>
   </div>
-  <% if current_user.present? %>
     <div class="secondary-nav-container">
       <nav id="top-nav-secondary">
         <span class="right-section">
@@ -63,19 +62,20 @@
           </select>
 
 
-          <div style="position: relative; display: inline-block;" data-controller="popup">
-            <%= link_to t('.in_progress'), passages_in_progress_path,
-              data: { action: "click->popup#showLoading", turbo_frame: "in_progress_popup", turbo_stream: true },
-              class: "button" %>
+          <% if current_user.present? %>
+            <div style="position: relative; display: inline-block;" data-controller="popup">
+              <%= link_to t('.in_progress'), passages_in_progress_path,
+                data: { action: "click->popup#showLoading", turbo_frame: "in_progress_popup", turbo_stream: true },
+                class: "button" %>
 
-            <turbo-frame id="in_progress_popup" class="hidden" data-popup-target="popupFrame">
-              <!-- Initially empty; will show loading spinner on click, then content after response -->
-            </turbo-frame>
-          </div>
+              <turbo-frame id="in_progress_popup" class="hidden" data-popup-target="popupFrame">
+                <!-- Initially empty; will show loading spinner on click, then content after response -->
+              </turbo-frame>
+            </div>
+          <% end %>
         </span>
       </nav>
     </div>
-  <% end %>
 </div>
 
 <script>

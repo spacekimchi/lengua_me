@@ -8,10 +8,10 @@
           <img src="<%= Passage.category_image(category.name) %>">
           <div class="difficulties-list-item-info">
             <% name = Passage.categories.key(category.name) %>
-            <% titleized_name = Passage.categories.key(category.name).gsub('_', ' ').titleize %>
+            <% translated_name = Passage.translated_category(name) %>
             <%= link_to passages_by_category_path(category_name: name), class: 'passages-difficulty-title' do %>
               <div>
-                <%= titleized_name %>
+                <%= translated_name %>
               </div>
               <span>
                 <%= t('.difficulty') %>: <%= Difficulty::LEVEL_TO_NAME[category.min_difficulty].to_s.titleize %> - <%= Difficulty::LEVEL_TO_NAME[category.max_difficulty].to_s.titleize %>

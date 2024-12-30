@@ -1,0 +1,370 @@
+vi:
+  date:
+    formats:
+      default: "%Y-%m-%d"       # Ví dụ: 2024-12-29
+      short: "%b %d"            # Ví dụ: Thg 12 29
+      long: "%B %d, %Y"         # Ví dụ: Tháng 12 29, 2024
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M" # Ví dụ: 2024-12-29 14:35
+      short: "%b %d %H:%M"      # Ví dụ: Thg 12 29 14:35
+      long: "%B %d, %Y %H:%M"   # Ví dụ: Tháng 12 29, 2024 14:35
+  datetime:
+    formats:
+      default: "%Y-%m-%d %H:%M:%S" # Ví dụ: 2024-12-29 14:35:00
+
+  clearance:
+    models:
+      clearance_mailer:
+        change_password: "Đổi mật khẩu"
+
+  clearance_mailer:
+    change_password:
+      closing: "Nếu bạn không yêu cầu đặt lại mật khẩu, hãy bỏ qua email này. Mật khẩu của bạn sẽ không bị thay đổi."
+      link_text: "Đổi mật khẩu"
+      opening: "Có ai đó (hi vọng là chính bạn) đã yêu cầu gửi liên kết để đổi mật khẩu của bạn. Vui lòng truy cập vào liên kết dưới đây:"
+
+  cookie_policies:
+    show:
+      contact: "Liên hệ"
+      contact_us: "Liên hệ chúng tôi"
+      contact_us_description: "Nếu bạn có bất kỳ câu hỏi nào liên quan đến Chính sách Cookie này, vui lòng liên hệ với chúng tôi tại đây:"
+      gdpr_consent: "GDPR & Sự đồng ý"
+      gdpr_consent_description: "Nếu bạn ở EU hoặc khu vực pháp lý có luật bảo vệ dữ liệu tương tự, việc sử dụng cookie không thiết yếu (ví dụ cookie quảng cáo) có thể yêu cầu sự đồng ý của bạn. Nếu áp dụng, chúng tôi sẽ yêu cầu sự đồng ý của bạn trước khi sử dụng những cookie này, và bạn có thể rút lại sự đồng ý bất kỳ lúc nào."
+      google_privacy_and_terms: "Chính sách bảo mật và Điều khoản của Google"
+      header: "Chính sách Cookie"
+      last_updated_date: "Cập nhật lần cuối: %{date}"
+      managing_cookies: "Quản lý Cookie"
+      managing_cookies_description: "Bạn có toàn quyền kiểm soát hoặc xóa cookie tùy ý. Hầu hết các trình duyệt cho phép bạn từ chối hoặc xóa cookie trong phần cài đặt. Lưu ý rằng việc vô hiệu hóa cookie có thể ảnh hưởng đến một số tính năng của trang web, chẳng hạn như duy trì trạng thái đăng nhập."
+      policy_changes: "Các thay đổi đối với Chính sách Cookie này"
+      policy_changes_description: "Chúng tôi có thể cập nhật Chính sách Cookie này theo thời gian. Bất kỳ thay đổi nào sẽ được đăng tại đây cùng với ngày “Cập nhật lần cuối” mới."
+      third_party_ads: "Quảng cáo bên thứ ba"
+      third_party_ads_description: "Để biết thêm chi tiết về cách Google sử dụng thông tin từ các trang web hoặc ứng dụng sử dụng dịch vụ của họ, vui lòng truy cập:"
+      types_of_cookies: "Các loại Cookie chúng tôi sử dụng"
+      types_of_cookies_ads: "Cookie Quảng cáo (bên thứ ba): Chúng tôi sử dụng các đối tác quảng cáo bên thứ ba (bao gồm Google), họ có thể sử dụng cookie để hiển thị quảng cáo dựa trên những lần bạn truy cập trước đó vào trang web này hoặc các trang web khác. Các đối tác này có thể thu thập dữ liệu phi cá nhân để cung cấp quảng cáo phù hợp với sở thích của bạn."
+      types_of_cookies_essential: "Cookie thiết yếu: Chúng tôi sử dụng cookie xác thực để duy trì phiên đăng nhập và đảm bảo trang web hoạt động bình thường."
+      what_are_cookies: "Cookie là gì?"
+      what_are_cookies_description: "Cookie là tệp văn bản nhỏ được lưu trên thiết bị của bạn giúp trang web hoạt động, ghi nhớ tùy chọn của bạn, đồng thời cung cấp khả năng phân tích và nội dung cá nhân hóa."
+
+  faq:
+    index:
+      faq: "Các Câu Hỏi Thường Gặp (FAQ)"
+    partials:
+      faqs:
+        question_1: "Dịch vụ này có miễn phí không?"
+        answer_1: "Có! Chúng tôi hoàn toàn miễn phí và liên tục bổ sung các bài học cũng như tính năng mới."
+        question_2: "Tôi có thể lưu các cụm từ hoặc từ vựng mới mà tôi nhìn thấy không?"
+        answer_2: "Khi học một ngôn ngữ mới, việc tìm đúng từ có thể khá khó khăn. Chúng tôi sắp ra mắt tính năng thẻ nhớ (flashcard) với phương pháp lặp lại ngắt quãng (spaced repetition), giúp việc học trở nên nhanh chóng, hiệu quả và khó quên. Hãy đón chờ nhé!"
+        question_3: "Tôi không biết gì trước đó, liệu tôi có thể bắt đầu học ở đây không?"
+        answer_3: "Bạn nên nắm vững những kiến thức cơ bản như bảng chữ cái và cấu trúc câu trước khi luyện kỹ năng nghe. Hãy truy cập mục Ngữ pháp (Grammar) và Các từ và cụm từ thông dụng (Common Words and Phrases) để xây dựng một nền tảng vững chắc."
+        question_4: "Tôi còn có thể làm gì khác để tiến bộ?"
+        answer_4: "Nếu không sử dụng, bạn sẽ quên! Hãy dùng những kỹ năng mới của bạn để khám phá các nền văn hóa khác nhau."
+        question_5: "Trang web hỗ trợ những ngôn ngữ nào?"
+        answer_5: "Hiện tại, tất cả bài tập đều bằng tiếng Anh, kèm bản dịch sang tiếng Tây Ban Nha, Hàn Quốc, Nhật Bản, Hindi, Pháp, Ý, Bồ Đào Nha, Đức, Nga và Trung Quốc (Quan Thoại). Hãy cho chúng tôi biết nếu bạn muốn thêm ngôn ngữ khác!"
+
+  flashes:
+    failure_after_create: "Email hoặc mật khẩu không đúng."
+    failure_after_update: "Mật khẩu không được để trống."
+    failure_when_forbidden: "Vui lòng kiểm tra lại URL hoặc thử gửi biểu mẫu một lần nữa."
+    failure_when_not_signed_in: "Vui lòng đăng nhập để tiếp tục."
+    failure_when_missing_email: "Không được để trống địa chỉ email."
+
+  helpers:
+    label:
+      password:
+        email: "Địa chỉ Email"
+      password_reset:
+        password: "Chọn mật khẩu"
+      session:
+        password: "Mật khẩu"
+      user:
+        password: "Mật khẩu"
+    submit:
+      password:
+        submit: "Đặt lại mật khẩu"
+      password_reset:
+        submit: "Lưu mật khẩu này"
+      session:
+        submit: "Đăng nhập"
+      user:
+        create: "Đăng ký"
+
+  home:
+    index:
+      listen_and_learn: "Nghe và học!"
+      language_fun_for_everyone: "Học ngôn ngữ thật vui cho tất cả mọi người!"
+      header_detail_1: "Hoàn toàn miễn phí! Có hàng trăm bài tập ở cấp độ A1 - C2, cùng nhiều nội dung mới được thêm thường xuyên!"
+      header_detail_2: "Hãy nghe đoạn âm thanh và viết lại những gì bạn nghe được. Phương pháp này giúp bạn cải thiện nhanh chóng kỹ năng nghe, nói, ngữ pháp và từ vựng cùng lúc!"
+      start_button: "Bắt đầu ngay!"
+      how_to_practice_header: "Cách luyện tập với phương pháp cơ bản."
+      follow_these_steps: "Hãy làm theo những bước đơn giản sau để bắt đầu học ngay."
+      listen: "Lắng nghe"
+      listen_description: "Hãy nghe đoạn âm thanh. Việc này sẽ giúp bạn thu nạp từ vựng, ngữ pháp, phát âm và nhịp điệu một cách tự nhiên."
+      write: "Viết"
+      write_description: "Hãy viết lại những gì bạn nghe được. Viết sẽ giúp củng cố từ vựng, ngữ pháp và cấu trúc câu thông qua việc luyện tập chủ động."
+      correct_mistakes: "Sửa lỗi"
+      correct_mistakes_description: "Việc sửa lỗi biến sai lầm thành cơ hội học tập quý giá."
+      read: "Đọc"
+      read_description: "Hãy đọc thành tiếng và sử dụng các ví dụ về phát âm để nâng cao khả năng nói và sự tự tin."
+      faq: "Các Câu Hỏi Thường Gặp"
+
+  layouts:
+    application:
+      sign_in: "Đăng nhập"
+      sign_out: "Đăng xuất"
+    partials:
+      footer:
+        home: "Trang chủ"
+        exercises: "Bài tập"
+        contact_us: "Liên hệ chúng tôi"
+        faq: "FAQ"
+        about_us: "Về chúng tôi"
+        additional_resources: "Tài nguyên bổ sung"
+        terms_of_service: "Điều khoản dịch vụ"
+        privacy_policy: "Chính sách bảo mật"
+        cookie_policy: "Chính sách Cookie"
+      navigation:
+        admin: "Quản trị"
+        errors: "Lỗi"
+        exercises: "Bài tập"
+        faq: "FAQ"
+        home: "Trang chủ"
+        in_progress: "Đang thực hiện"
+        prices: "Giá"
+        products: "Sản phẩm"
+        sign_in: "Đăng nhập"
+        sign_out: "Đăng xuất"
+        sign_up: "Đăng ký"
+        support: "Hỗ trợ"
+        users: "Người dùng"
+
+  passages:
+    by_category:
+      all_difficulties: "Tất cả mức độ khó"
+      completed_count: "Hoàn thành: %{count}"
+      conversations: "Hội thoại"
+      difficulty_level: "Độ khó: %{level}"
+      search: "Tìm kiếm"
+      short_stories: "Truyện ngắn"
+      total_parts: "Tổng số: %{parts}"
+    conversations: "Hội thoại"
+    index:
+      header: "Tất cả bài tập"
+      difficulty: "Độ khó"
+      single_exercise: "1 bài tập"
+      single_exercise_completed: "Đã hoàn thành 1 / 1 bài tập"
+      plural_exercises: "%{number} bài tập"
+      plural_exercises_completed: "Đã hoàn thành %{numerator} / %{denominator} bài tập"
+    partials:
+      breadcrumbs:
+        all_exercises: "Tất cả bài tập"
+    passage_writer:
+      all_exercises: "Tất cả bài tập"
+      check: "Kiểm tra"
+      comments: "Bình luận"
+      completed_title: "Bạn đã hoàn thành bài tập này."
+      completed_encouragement: "Làm tốt lắm!"
+      copy_passage_link: "Sao chép liên kết bài tập"
+      incorrect: "Sai rồi!"
+      great_job: "Tuyệt vời!"
+      next: "Tiếp theo"
+      next_exercise: "Bài tập tiếp theo"
+      previous: "Trước đó"
+      previous_exercise: "Bài tập trước đó"
+      pronunciations: "Phát âm"
+      repeat: "Lặp lại"
+      reset_progress: "Đặt lại bài tập"
+      skip: "Bỏ qua"
+      try_again: "Thử lại"
+      type_what_you_hear: "Nhập những gì bạn nghe..."
+    short_stories: "Truyện ngắn"
+
+  passwords:
+    create:
+      description: "Bạn sẽ nhận được email trong vài phút nữa với hướng dẫn về cách đặt lại mật khẩu."
+    edit:
+      description: "Mật khẩu của bạn đã được đặt lại. Hãy chọn một mật khẩu mới bên dưới."
+      title: "Đổi mật khẩu"
+      submit: "Đổi mật khẩu"
+    new:
+      description: "Nhập địa chỉ email của bạn để đặt lại mật khẩu."
+      title: "Đặt lại mật khẩu"
+      sign_in: "Đăng nhập"
+      submit: "Đặt lại mật khẩu"
+
+  privacy_policies:
+    show:
+      contact: "Liên hệ"
+      contact_us:
+        default: "Liên hệ chúng tôi"
+        description: "Nếu bạn có thắc mắc hoặc lo ngại về Chính sách Bảo mật này, hãy liên hệ với chúng tôi tại đây:"
+      data_retention: "Lưu trữ & Bảo mật dữ liệu"
+      data_retention_description: "Chúng tôi lưu trữ email của bạn miễn là tài khoản của bạn còn hoạt động hoặc theo yêu cầu của pháp luật. Chúng tôi áp dụng các biện pháp hợp lý để bảo vệ dữ liệu, nhưng không có phương pháp lưu trữ điện tử nào là hoàn toàn an toàn."
+      gdpr_laws:
+        description_1: "Xác thực & Quản lý tài khoản: Chúng tôi xử lý địa chỉ email của bạn vì điều đó cần thiết để cung cấp dịch vụ của chúng tôi (Điều 6(1)(b) GDPR)."
+        description_2: "Chúng tôi không xử lý bất kỳ danh mục dữ liệu cá nhân đặc biệt nào và không tiến hành phân tích hồ sơ (profiling) hoặc đưa ra quyết định tự động."
+        default: "Cơ sở pháp lý cho xử lý dữ liệu (GDPR)"
+      gdpr_rights:
+        access: "Quyền truy cập: Yêu cầu một bản sao dữ liệu cá nhân mà chúng tôi đang lưu trữ về bạn."
+        contact: "Liên hệ"
+        data_portability: "Quyền chuyển dữ liệu: Nhận dữ liệu cá nhân của bạn ở định dạng máy có thể đọc được."
+        default: "Quyền của bạn theo GDPR"
+        description: "Nếu bạn đang ở EU hoặc khu vực có luật bảo vệ dữ liệu tương tự, bạn có quyền:"
+        erasure: 'Quyền xóa ("Quyền được lãng quên"): Yêu cầu xóa dữ liệu cá nhân của bạn.'
+        exercise: "Để thực thi các quyền này, vui lòng liên hệ chúng tôi tại:"
+        objection: "Quyền phản đối: Phản đối một số loại xử lý dữ liệu nhất định."
+        rectification: "Quyền đính chính: Sửa sai thông tin cá nhân không chính xác của bạn."
+        restriction: "Quyền hạn chế xử lý: Yêu cầu hạn chế cách chúng tôi xử lý dữ liệu cá nhân của bạn."
+      how_we_use_your_info: "Chúng tôi sử dụng thông tin của bạn như thế nào"
+      how_we_use_your_info_description: "Email của bạn chỉ được sử dụng để xác thực tài khoản, quản lý phiên đăng nhập và gửi thông báo liên quan đến giao dịch (chẳng hạn như liên kết đặt lại mật khẩu hoặc thông báo tài khoản). Chúng tôi không sử dụng email của bạn cho mục đích tiếp thị hoặc chia sẻ với bên thứ ba cho mục đích quảng cáo. Chúng tôi không bao giờ lưu trữ thông tin nhận dạng cá nhân."
+      informtaion_we_collect: "Chúng tôi thu thập thông tin gì"
+      information_we_collect_description: "Địa chỉ email: Chúng tôi thu thập địa chỉ email của bạn khi bạn đăng ký, đăng nhập, hoặc tương tác với dịch vụ của chúng tôi. Chúng tôi không thu thập thêm bất kỳ thông tin nhận dạng cá nhân nào khác (PII)."
+      introduction: "Giới thiệu"
+      introduction_description: "Chúng tôi cam kết bảo vệ quyền riêng tư của bạn và tuân thủ các luật bảo vệ dữ liệu hiện hành, bao gồm cả Quy định Chung về Bảo vệ Dữ liệu (GDPR) của EU nếu áp dụng. Chính sách Bảo mật này giải thích loại dữ liệu cá nhân chúng tôi thu thập, cách chúng tôi sử dụng, cách lưu trữ, và quyền của bạn liên quan đến dữ liệu cá nhân."
+      last_updated_date: "Cập nhật lần cuối: %{date}"
+      policy_changes:
+        default: "Những thay đổi trong Chính sách này"
+        description: 'Thỉnh thoảng chúng tôi có thể cập nhật Chính sách Bảo mật này. Mọi thay đổi sẽ được đăng kèm ngày "Cập nhật lần cuối" mới.'
+      privacy_policy: "Chính sách Bảo mật"
+
+  sessions:
+    form:
+      forgot_password: "Quên mật khẩu?"
+      sign_up: "Đăng ký"
+      submit: "Đăng nhập"
+    new:
+      title: "Đăng nhập"
+
+  support_tickets:
+    new:
+      contact_us: "Liên hệ chúng tôi"
+      contact_us_header: "Chúng tôi sẵn sàng trợ giúp! Hãy liên hệ nếu bạn có bất cứ câu hỏi, góp ý hoặc băn khoăn nào."
+      contact_us_description: "Sau khi bạn gửi biểu mẫu này, đội ngũ của chúng tôi sẽ phản hồi sớm nhất có thể."
+      email: "Email"
+      subject: "Chủ đề"
+      content: "Nội dung"
+      submit: "Gửi"
+
+  terms_of_services:
+    title: "Điều khoản Dịch vụ"
+    last_updated: "Cập nhật lần cuối: %{date}"
+    use_of_service:
+      title: "Việc sử dụng Dịch vụ"
+      description: "Ứng dụng học ngôn ngữ này được cung cấp miễn phí. Bằng việc sử dụng dịch vụ của chúng tôi, bạn đồng ý chỉ sử dụng nó cho các mục đích hợp pháp và tuân theo các Điều khoản này."
+    no_guarantee_of_results:
+      title: "Không Đảm bảo Kết quả"
+      description: "Chúng tôi không đảm bảo kết quả, tốc độ hay mức độ thành thạo ngôn ngữ của bạn. Dịch vụ được cung cấp “nguyên trạng” (as-is)."
+    intellectual_property:
+      title: "Quyền Sở hữu Trí tuệ"
+      description: "Tất cả văn bản, hình ảnh, biểu trưng và nội dung khác trên trang này là tài sản của %{app_name} hoặc được sử dụng với sự cho phép. Bạn không được sao chép, phân phối hoặc sử dụng nội dung của chúng tôi theo bất kỳ cách nào nếu không có sự cho phép rõ ràng bằng văn bản."
+    limitation_of_liability:
+      title: "Giới hạn Trách nhiệm Pháp lý"
+      description: "Trong phạm vi tối đa được pháp luật cho phép, %{app_name} và các công ty liên kết sẽ không chịu trách nhiệm đối với bất kỳ thiệt hại gián tiếp, ngẫu nhiên hoặc hậu quả nào phát sinh từ việc sử dụng dịch vụ của chúng tôi."
+    modifications_to_service:
+      title: "Thay đổi đối với Dịch vụ"
+      description: "Chúng tôi có quyền sửa đổi, tạm ngừng hoặc ngừng cung cấp dịch vụ bất cứ lúc nào, không cần báo trước."
+    governing_law:
+      title: "Luật Điều chỉnh"
+      description: "Các Điều khoản này được điều chỉnh và diễn giải theo pháp luật của bang California, Hoa Kỳ."
+    compliance_with_data_protection:
+      title: "Tuân thủ Luật Bảo vệ Dữ liệu"
+      description: "Bằng việc sử dụng dịch vụ của chúng tôi, bạn đồng ý tuân thủ tất cả các luật bảo vệ dữ liệu hiện hành, bao gồm Quy định chung về Bảo vệ Dữ liệu (GDPR) nếu bạn truy cập dịch vụ từ Liên minh Châu Âu (EU) hoặc Khu vực Kinh tế Châu Âu (EEA). Chúng tôi cam kết đảm bảo rằng dữ liệu cá nhân của bạn được bảo vệ và sử dụng theo các quy định này."
+    privacy_policy:
+      title: "Chính sách Bảo mật"
+      description: "Chính sách Bảo mật của chúng tôi (%{privacy_policy_link}) quy định về cách thu thập, sử dụng và bảo vệ dữ liệu cá nhân của bạn. Bằng việc sử dụng dịch vụ của chúng tôi, bạn đồng ý với các thực tiễn được mô tả trong Chính sách Bảo mật."
+    contact_information:
+      title: "Thông tin Liên hệ"
+      description: "Nếu bạn có bất kỳ thắc mắc hoặc lo ngại nào về các Điều khoản này, vui lòng liên hệ chúng tôi tại đây: %{contact_link}"
+
+  users:
+    new:
+      sign_in: "Đăng nhập"
+      title: "Đăng ký"
+      submit: "Đăng ký"
+
+  controllers:
+    internal_server_error: "Lỗi Máy chủ Nội bộ"
+    admin:
+      products:
+        create:
+          success: "Sản phẩm đã được tạo thành công."
+        update:
+          success: "Sản phẩm đã được cập nhật thành công."
+        destroy:
+          success: "Sản phẩm đã được xóa thành công."
+      users:
+        create:
+          success: "Người dùng đã được tạo thành công."
+        update:
+          success: "Người dùng đã được cập nhật thành công."
+        destroy:
+          success: "Người dùng đã được xóa thành công."
+    checkouts:
+      new:
+        already_subscribed: "Bạn đã đăng ký %{product_name}."
+      show:
+        error: "Rất tiếc, có lỗi xảy ra trong quá trình xử lý thanh toán: %{message}"
+    passages:
+      create:
+        success: "Đoạn văn đã được tạo thành công."
+        error: "Không thể tạo đoạn văn."
+      translate:
+        success: "Đoạn văn đã được dịch thành công."
+        error: "Không thể dịch đoạn văn."
+      category:
+        not_found: "Không tìm thấy danh mục."
+      in_progress:
+        enable_js: "Vui lòng bật JavaScript để xem cửa sổ bật lên trong quá trình thực hiện."
+      passage_writer:
+        not_found: "Không tìm thấy đoạn văn."
+    passage_progresses:
+      update_progress:
+        success: "Tiến độ đoạn văn đã được cập nhật!"
+        error: "Không thể cập nhật tiến độ!"
+    support_tickets:
+      create:
+        success: "Tin nhắn của bạn đã được gửi."
+    verifications:
+      edit:
+        success: "Tài khoản của bạn đã được xác minh thành công!"
+        error: "Liên kết xác minh không hợp lệ hoặc đã hết hạn!"
+
+  difficulties:
+    basic:
+      description: "Hiểu biết nền tảng, vốn từ hạn chế, các cụm từ chào hỏi cơ bản."
+    a1:
+      description: "Có thể hiểu và sử dụng các cụm từ hàng ngày quen thuộc và câu rất đơn giản."
+    a2:
+      description: "Có thể giao tiếp trong các tình huống đơn giản, liên quan đến trao đổi thông tin trực tiếp về chủ đề quen thuộc."
+    b1:
+      description: "Có thể xử lý các tình huống du lịch, công việc và nhiệm vụ hàng ngày với đoạn hội thoại đơn giản, liên kết."
+    b2:
+      description: "Có thể tương tác khá trôi chảy với người bản xứ và tạo văn bản rõ ràng, chi tiết về các chủ đề quen thuộc."
+    c1:
+      description: "Có thể diễn đạt các ý tưởng phức tạp một cách rõ ràng, lưu loát và tự nhiên, ít phải dừng lại để tìm từ."
+    c2:
+      description: "Hầu như có thể hiểu tất cả những gì nghe hoặc đọc được và diễn đạt một cách tự nhiên, rất lưu loát và chính xác."
+    native:
+      description: "Hoàn toàn thành thạo ngôn ngữ, tương đương với người bản xứ có giáo dục."
+
+  categories:
+    dialogue: "Đối thoại"
+    narrative: "Văn tường thuật"
+    informational: "Văn bản thông tin"
+    descriptive: "Văn bản miêu tả"
+    practical_scenario: "Tình huống thực tế"
+
+  exercise_types:
+    mcq: "Câu hỏi trắc nghiệm"
+    true_false: "Đúng/Sai"
+    fill_in_blank: "Điền vào chỗ trống"
+    summary: "Tóm tắt"
+
+  user_mailer:
+    send_verification_email:
+      subject: "Xác minh tài khoản"
+      greeting: "Xin chào %{email},"
+      body: "Cảm ơn bạn đã đăng ký. Vui lòng xác minh tài khoản bằng cách nhấn vào liên kết bên dưới:"
+      verify_link: "Xác minh tài khoản"
+      ignore_message: "Nếu bạn không yêu cầu email này, hãy bỏ qua."
+

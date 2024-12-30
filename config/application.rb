@@ -24,7 +24,7 @@ module LenguaMe
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
 
-    config.i18n.available_locales = [:en, :es]
+    config.i18n.available_locales = [:en, :es, :ko, :"zh-CN", :"zh-HK", :vi, :ja, :hi, :it, :fr, :pt, :de, :ru]
     config.i18n.default_locale = :en
 
     # Configuration for the application, engines, and railties goes here.
