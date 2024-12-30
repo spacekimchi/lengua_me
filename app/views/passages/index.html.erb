@@ -18,7 +18,7 @@
               </span>
               <span>
                 <% if current_user %>
-                  <%= category.total_passages == 1 ? t('.single_exercise_completed') : t('.plural_exercises_completed', numerator: @completed_passages_count_by_category[name].to_i, denominator: category.total_passages) %> completed
+                  <%= category.total_passages == 1 ? t('.single_exercise_completed') : t('.plural_exercises_completed', numerator: @completed_passages_count_by_category[name].to_i, denominator: category.total_passages) %>
                 <% else %>
                   <%= category.total_passages == 1 ? t('.single_exercise') : t('.plural_exercises', number: category.total_passages) %>
                 <% end %>
