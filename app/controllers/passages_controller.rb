@@ -132,7 +132,7 @@ class PassagesController < ApplicationController
     @passage_progress = @passage.passage_progresses.find_by(user: current_user)
     @current_index = @passage_progress&.current_index || 0
 
-    @language_codes = Constants::LANGUAGE_CODES
+    @language_codes = Language::SUPPORTED_LANGUAGES
     @sentences_data = @sentences.map do |sentence|
       {
         id: sentence.id,

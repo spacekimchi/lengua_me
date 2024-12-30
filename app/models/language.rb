@@ -44,7 +44,7 @@ class Language < ApplicationRecord
     'ce' => 'Chechen',
     'ch' => 'Chamorro',
     'co' => 'Corsican',
-    'cmn' => 'Mandarin',
+    'zh-CN' => 'Mandarin',
     'cr' => 'Cree',
     'cs' => 'Czech',
     'cu' => 'Church Slavic',
@@ -201,16 +201,22 @@ class Language < ApplicationRecord
     'xh' => 'Xhosa',
     'yi' => 'Yiddish',
     'yo' => 'Yoruba',
-    'yue' => 'Cantonese',
+    'zh-HK' => 'Cantonese',
     'za' => 'Zhuang',
     'zu' => 'Zulu'
   }.freeze
+
+  SUPPORTED_LANGUAGES = [['es-ES', 'Spanish (Spain)'], ['es-419', 'Spanish (Latin America)'], ['ko', 'Korean'], ['ja', 'Japanese'], ['hi', 'Hindi'], ['fr', 'French'], ['it', 'Italian'], ['pt', 'Portuguese'], ['de', 'German'], ['ru', 'Russian'], ['zh-CN', 'Mandarin'], ['vi', 'Vietnamese'], ['zh-HK', 'Cantonese']].freeze
 
   has_many :sentences
   has_many :pronunciations
 
   validates :name, presence: true
   validates :code, presence: true, inclusion: { in: LANGUAGE_CODES.keys }
+
+  scope :supported_languages, -> {
+    where(code: SUPPORTED_LANGUAGES.map { |sl| sl[0] })
+  }
 
   def self.english
     Language.find_by!(name: ENGLISH)

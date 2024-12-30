@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
-  scope "(:locale)", locale: /en|es|fr/ do
+
+  scope "(:locale)", locale: /en|es|ko|zh-CN|zh-HK|vi|ja|hi|it|fr|pt|de|ru/ do
     # Reveal health status
 
     # Defines the root path route ("/")

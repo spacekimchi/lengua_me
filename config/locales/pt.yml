@@ -1,0 +1,370 @@
+pt:
+  date:
+    formats:
+      default: "%Y-%m-%d"       # Exemplo: 2024-12-29
+      short: "%b %d"            # Exemplo: dez 29
+      long: "%B %d, %Y"         # Exemplo: dezembro 29, 2024
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M" # Exemplo: 2024-12-29 14:35
+      short: "%b %d %H:%M"      # Exemplo: dez 29 14:35
+      long: "%B %d, %Y %H:%M"   # Exemplo: dezembro 29, 2024 14:35
+  datetime:
+    formats:
+      default: "%Y-%m-%d %H:%M:%S" # Exemplo: 2024-12-29 14:35:00
+
+  clearance:
+    models:
+      clearance_mailer:
+        change_password: "Alterar sua senha"
+
+  clearance_mailer:
+    change_password:
+      closing: "Se você não solicitou esta alteração, ignore este e-mail. Sua senha não foi alterada."
+      link_text: "Alterar minha senha"
+      opening: "Alguém (esperamos que seja você) solicitou o envio de um link para alterar sua senha:"
+
+  cookie_policies:
+    show:
+      contact: "Contato"
+      contact_us: "Fale Conosco"
+      contact_us_description: "Se você tiver alguma dúvida sobre esta Política de Cookies, entre em contato conosco aqui:"
+      gdpr_consent: "RGPD & Consentimento"
+      gdpr_consent_description: "Se você estiver na UE ou em uma jurisdição com leis semelhantes de proteção de dados, o uso de cookies não essenciais (como cookies de publicidade) pode exigir seu consentimento. Quando aplicável, solicitaremos seu consentimento antes de usar esses cookies, e você pode retirá-lo a qualquer momento."
+      google_privacy_and_terms: "Privacidade e Termos do Google"
+      header: "Política de Cookies"
+      last_updated_date: "Última atualização: %{date}"
+      managing_cookies: "Gerenciando Cookies"
+      managing_cookies_description: "Você pode controlar e/ou excluir cookies conforme desejar. A maioria dos navegadores permite recusar ou remover cookies em suas configurações. Observe que desabilitar cookies pode afetar certas funcionalidades do site, como permanecer logado."
+      policy_changes: "Alterações nesta Política de Cookies"
+      policy_changes_description: "Podemos atualizar esta Política de Cookies de tempos em tempos. Quaisquer alterações serão publicadas aqui, juntamente com a data revisada de 'Última atualização'."
+      third_party_ads: "Publicidade de Terceiros"
+      third_party_ads_description: "Para mais detalhes sobre como o Google usa informações de sites ou aplicativos que utilizam seus serviços, visite:"
+      types_of_cookies: "Tipos de Cookies que Usamos"
+      types_of_cookies_ads: "Cookies de Publicidade (Terceiros): Utilizamos parceiros de publicidade de terceiros, incluindo o Google, que podem usar cookies para exibir anúncios com base em visitas anteriores a este ou outros sites. Esses parceiros podem coletar dados não pessoais para direcionar anúncios de acordo com seus interesses."
+      types_of_cookies_essential: "Cookies Essenciais: Usamos cookies de autenticação para manter sua sessão de login e garantir o funcionamento adequado do nosso site."
+      what_are_cookies: "O que são Cookies?"
+      what_are_cookies_description: "Cookies são pequenos arquivos de texto colocados em seu dispositivo para ajudar os sites a funcionar, lembrar de suas preferências e fornecer análises e conteúdo personalizado."
+
+  faq:
+    index:
+      faq: "Perguntas Frequentes (FAQ)"
+    partials:
+      faqs:
+        question_1: "É gratuito?"
+        answer_1: "Sim! É totalmente gratuito, com novas lições e funcionalidades adicionadas regularmente."
+        question_2: "Posso salvar novas frases e palavras de vocabulário que encontrar?"
+        answer_2: "Aprender uma nova língua pode ser frustrante quando você não encontra as palavras certas. Estamos animados para lançar flashcards com repetição espaçada, tornando o aprendizado rápido, eficaz e inesquecível. Fique ligado!"
+        question_3: "Posso aprender um idioma novo aqui, sem nenhum conhecimento prévio?"
+        answer_3: "É melhor conhecer o básico, como o alfabeto e a estrutura de frases, antes de mergulhar na prática auditiva. Visite nossas seções de Gramática e Palavras e Frases Comuns para construir uma base sólida."
+        question_4: "O que mais posso fazer para melhorar?"
+        answer_4: "Use ou perca! Vá em frente e pratique suas novas habilidades para descobrir novas culturas."
+        question_5: "Quais idiomas vocês suportam?"
+        answer_5: "No momento, todos os exercícios estão em inglês, com traduções em espanhol, coreano, japonês, hindi, francês, italiano, português, alemão, russo e mandarim. Avise-nos se desejar adicionar outro idioma!"
+
+  flashes:
+    failure_after_create: "E-mail ou senha incorretos."
+    failure_after_update: "A senha não pode ficar em branco."
+    failure_when_forbidden: "Verifique a URL ou tente enviar o formulário novamente."
+    failure_when_not_signed_in: "Por favor, faça login para continuar."
+    failure_when_missing_email: "O e-mail não pode ficar em branco."
+
+  helpers:
+    label:
+      password:
+        email: "Endereço de e-mail"
+      password_reset:
+        password: "Escolha uma senha"
+      session:
+        password: "Senha"
+      user:
+        password: "Senha"
+    submit:
+      password:
+        submit: "Redefinir senha"
+      password_reset:
+        submit: "Salvar esta senha"
+      session:
+        submit: "Entrar"
+      user:
+        create: "Inscrever-se"
+
+  home:
+    index:
+      listen_and_learn: "Ouça e aprenda!"
+      language_fun_for_everyone: "Aprender idiomas é divertido para todos!"
+      header_detail_1: "100% grátis! Centenas de exercícios nos níveis A1 - C2, com novos adicionados regularmente!"
+      header_detail_2: "Ouça o áudio e escreva o que ouvir para melhorar rapidamente sua compreensão auditiva, fala, gramática e vocabulário ao mesmo tempo!"
+      start_button: "Comece agora!"
+      how_to_practice_header: "Como praticar usando o método básico."
+      follow_these_steps: "Siga estes passos simples para começar a aprender agora."
+      listen: "Ouça"
+      listen_description: "Ouça o áudio. Isso o ajudará a adquirir vocabulário, gramática, pronúncia e fluência de maneira natural."
+      write: "Escreva"
+      write_description: "Escreva o que ouviu. Escrever reforça o aprendizado de vocabulário, gramática e estrutura de frases por meio de prática ativa."
+      correct_mistakes: "Corrija os erros"
+      correct_mistakes_description: "Corrigir erros transforma falhas em oportunidades de aprendizagem."
+      read: "Leia"
+      read_description: "Leia em voz alta e use os exemplos de pronúncia para ganhar ritmo e confiança ao falar."
+      faq: "Perguntas frequentes"
+
+  layouts:
+    application:
+      sign_in: "Entrar"
+      sign_out: "Sair"
+    partials:
+      footer:
+        home: "Início"
+        exercises: "Exercícios"
+        contact_us: "Fale Conosco"
+        faq: "FAQ"
+        about_us: "Sobre Nós"
+        additional_resources: "Recursos Adicionais"
+        terms_of_service: "Termos de Serviço"
+        privacy_policy: "Política de Privacidade"
+        cookie_policy: "Política de Cookies"
+      navigation:
+        admin: "Admin"
+        errors: "Erros"
+        exercises: "Exercícios"
+        faq: "FAQ"
+        home: "Início"
+        in_progress: "Em andamento"
+        prices: "Preços"
+        products: "Produtos"
+        sign_in: "Entrar"
+        sign_out: "Sair"
+        sign_up: "Inscrever-se"
+        support: "Suporte"
+        users: "Usuários"
+
+  passages:
+    by_category:
+      all_difficulties: "Todas as dificuldades"
+      completed_count: "Concluídos: %{count}"
+      conversations: "Conversas"
+      difficulty_level: "Dificuldade: %{level}"
+      search: "Pesquisar"
+      short_stories: "Histórias Curtas"
+      total_parts: "Total: %{parts}"
+    conversations: "Conversas"
+    index:
+      header: "Todos os Exercícios"
+      difficulty: "Dificuldade"
+      single_exercise: "1 exercício"
+      single_exercise_completed: "1 / 1 exercício concluído"
+      plural_exercises: "%{number} exercícios"
+      plural_exercises_completed: "%{numerator} / %{denominator} exercícios concluídos"
+    partials:
+      breadcrumbs:
+        all_exercises: "Todos os Exercícios"
+    passage_writer:
+      all_exercises: "Todos os Exercícios"
+      check: "Verificar"
+      comments: "Comentários"
+      completed_title: "Você concluiu este exercício."
+      completed_encouragement: "Excelente trabalho!"
+      copy_passage_link: "Copiar link do exercício"
+      incorrect: "Incorreto!"
+      great_job: "Ótimo trabalho!"
+      next: "Próximo"
+      next_exercise: "Próximo Exercício"
+      previous: "Anterior"
+      previous_exercise: "Exercício Anterior"
+      pronunciations: "Pronúncias"
+      repeat: "Repetir"
+      reset_progress: "Redefinir exercício"
+      skip: "Pular"
+      try_again: "Tentar novamente"
+      type_what_you_hear: "Digite o que você ouviu..."
+    short_stories: "Histórias Curtas"
+
+  passwords:
+    create:
+      description: "Você receberá um e-mail nos próximos minutos com instruções sobre como alterar sua senha."
+    edit:
+      description: "Sua senha foi redefinida. Escolha uma nova senha abaixo."
+      title: "Alterar sua senha"
+      submit: "Alterar Senha"
+    new:
+      description: "Insira seu endereço de e-mail para redefinir sua senha."
+      title: "Redefinir sua senha"
+      sign_in: "Entrar"
+      submit: "Redefinir Senha"
+
+  privacy_policies:
+    show:
+      contact: "Contato"
+      contact_us:
+        default: "Fale Conosco"
+        description: "Se você tiver dúvidas ou preocupações sobre esta Política de Privacidade, entre em contato conosco aqui:"
+      data_retention: "Retenção e Segurança de Dados"
+      data_retention_description: "Mantemos seu e-mail enquanto sua conta permanecer ativa ou conforme exigido por lei. Adotamos medidas razoáveis para proteger seus dados, mas nenhum método de armazenamento eletrônico é completamente seguro."
+      gdpr_laws:
+        description_1: "Autenticação e Gerenciamento de Conta: Processamos seu endereço de e-mail porque ele é necessário para fornecer nossos serviços (Artigo 6(1)(b) do RGPD)."
+        description_2: "Não processamos categorias especiais de dados pessoais e não fazemos profilagem ou decisões automatizadas."
+        default: "Base Legal para o Processamento (RGPD)"
+      gdpr_rights:
+        access: "Acesso: Solicitar uma cópia dos dados pessoais que possuímos a seu respeito."
+        contact: "Contato"
+        data_portability: "Portabilidade de Dados: Receber seus dados pessoais em um formato legível por máquina."
+        default: "Seus Direitos sob o RGPD"
+        description: "Se você estiver na UE ou em outra jurisdição com leis semelhantes de proteção de dados, você tem o direito de:"
+        erasure: 'Exclusão ("Direito de ser esquecido"): Solicitar a exclusão de seus dados pessoais.'
+        exercise: "Para exercer esses direitos, entre em contato conosco em:"
+        objection: "Objeção: Contestar certos tipos de processamento."
+        rectification: "Retificação: Corrigir imprecisões em seus dados pessoais."
+        restriction: "Restrição: Solicitar limitações sobre como processamos seus dados pessoais."
+      how_we_use_your_info: "Como Usamos Suas Informações"
+      how_we_use_your_info_description: "Seu e-mail é usado unicamente para autenticar sua conta, gerenciar suas sessões de login e enviar notificações transacionais (como links de redefinição de senha ou avisos de conta). Não utilizamos seu e-mail para fins de marketing nem o compartilhamos com terceiros para publicidade. Nunca salvamos informações pessoalmente identificáveis."
+      informtaion_we_collect: "Quais Informações Coletamos"
+      information_we_collect_description: "Endereço de e-mail: Coletamos seu e-mail quando você se inscreve, faz login ou interage de outra forma com nossos serviços. Não coletamos nenhuma outra informação pessoal identificável (PII)."
+      introduction: "Introdução"
+      introduction_description: "Estamos comprometidos em proteger sua privacidade e cumprir as leis aplicáveis de proteção de dados, incluindo o Regulamento Geral de Proteção de Dados (RGPD) da UE, quando aplicável. Esta Política de Privacidade explica quais dados pessoais coletamos, como os usamos, como os armazenamos e quais são seus direitos em relação aos seus dados pessoais."
+      last_updated_date: "Última atualização: %{date}"
+      policy_changes:
+        default: "Alterações nesta Política"
+        description: "Podemos atualizar esta Política de Privacidade de tempos em tempos. Quaisquer mudanças serão publicadas com uma data de 'Última Atualização' revisada."
+      privacy_policy: "Política de Privacidade"
+
+  sessions:
+    form:
+      forgot_password: "Esqueceu a senha?"
+      sign_up: "Inscrever-se"
+      submit: "Entrar"
+    new:
+      title: "Entrar"
+
+  support_tickets:
+    new:
+      contact_us: "Fale Conosco"
+      contact_us_header: "Estamos aqui para ajudar! Não hesite em entrar em contato conosco se tiver quaisquer dúvidas, comentários ou preocupações."
+      contact_us_description: "Depois de enviar este formulário, alguém da nossa equipe retornará o contato o mais rápido possível."
+      email: "E-mail"
+      subject: "Assunto"
+      content: "Conteúdo"
+      submit: "Enviar"
+
+  terms_of_services:
+    title: "Termos de Serviço"
+    last_updated: "Última Atualização: %{date}"
+    use_of_service:
+      title: "Uso do Serviço"
+      description: "Este aplicativo de aprendizado de idiomas é fornecido gratuitamente. Ao usar nosso serviço, você concorda em utilizá-lo apenas para fins legais e de acordo com estes Termos."
+    no_guarantee_of_results:
+      title: "Nenhuma Garantia de Resultados"
+      description: "Não oferecemos garantias sobre seu progresso, velocidade ou fluência no aprendizado de idiomas. O serviço é fornecido 'como está'."
+    intellectual_property:
+      title: "Propriedade Intelectual"
+      description: "Todos os textos, imagens, logotipos e outros conteúdos neste site são propriedade de %{app_name} ou usados com permissão. Você não pode copiar, distribuir ou usar nosso conteúdo de qualquer forma sem permissão escrita explícita."
+    limitation_of_liability:
+      title: "Limitação de Responsabilidade"
+      description: "Na extensão máxima permitida pela lei, %{app_name} e seus afiliados não serão responsáveis por danos indiretos, incidentais ou consequentes decorrentes do uso do nosso serviço."
+    modifications_to_service:
+      title: "Modificações no Serviço"
+      description: "Reservamo-nos o direito de modificar, suspender ou descontinuar o serviço a qualquer momento, sem aviso prévio."
+    governing_law:
+      title: "Lei Aplicável"
+      description: "Estes Termos serão regidos e interpretados de acordo com as leis da Califórnia, Estados Unidos."
+    compliance_with_data_protection:
+      title: "Conformidade com as Leis de Proteção de Dados"
+      description: "Ao usar nosso serviço, você concorda em cumprir todas as leis de proteção de dados aplicáveis, incluindo o Regulamento Geral de Proteção de Dados (RGPD) se você estiver acessando o serviço na União Europeia (UE) ou no Espaço Econômico Europeu (EEE). Comprometemo-nos a garantir que seus dados pessoais sejam protegidos e usados de acordo com essas regulamentações."
+    privacy_policy:
+      title: "Política de Privacidade"
+      description: "Nossa %{privacy_policy_link} rege a coleta, uso e proteção de seus dados pessoais. Ao usar nosso serviço, você concorda com as práticas descritas na Política de Privacidade."
+    contact_information:
+      title: "Informações de Contato"
+      description: "Se você tiver quaisquer dúvidas ou preocupações sobre estes Termos, entre em contato conosco aqui: %{contact_link}"
+
+  users:
+    new:
+      sign_in: "Entrar"
+      title: "Inscrever-se"
+      submit: "Inscrever-se"
+
+  controllers:
+    internal_server_error: "Erro Interno do Servidor"
+    admin:
+      products:
+        create:
+          success: "Produto criado com sucesso."
+        update:
+          success: "Produto atualizado com sucesso."
+        destroy:
+          success: "Produto excluído com sucesso."
+      users:
+        create:
+          success: "Usuário criado com sucesso."
+        update:
+          success: "Usuário atualizado com sucesso."
+        destroy:
+          success: "Usuário excluído com sucesso."
+    checkouts:
+      new:
+        already_subscribed: "Você já está inscrito em %{product_name}."
+      show:
+        error: "Desculpe, houve um problema ao processar seu pagamento: %{message}"
+    passages:
+      create:
+        success: "A passagem foi criada com sucesso."
+        error: "Falha ao criar a passagem."
+      translate:
+        success: "A passagem foi traduzida com sucesso."
+        error: "Falha ao traduzir a passagem."
+      category:
+        not_found: "Categoria não encontrada."
+      in_progress:
+        enable_js: "Ative o JavaScript para ver o pop-up em andamento."
+      passage_writer:
+        not_found: "Passagem não encontrada."
+    passage_progresses:
+      update_progress:
+        success: "Progresso da passagem atualizado!"
+        error: "Falha ao atualizar o progresso!"
+    support_tickets:
+      create:
+        success: "Sua mensagem foi enviada."
+    verifications:
+      edit:
+        success: "Sua conta foi verificada com sucesso!"
+        error: "Link de verificação inválido ou expirado!"
+
+  difficulties:
+    basic:
+      description: "Compreensão fundamental, vocabulário limitado, frases e saudações básicas."
+    a1:
+      description: "Capaz de entender e usar expressões cotidianas familiares e frases muito básicas."
+    a2:
+      description: "Pode se comunicar em tarefas simples que envolvam troca direta de informações sobre assuntos familiares."
+    b1:
+      description: "Consegue lidar com viagens, trabalho e tarefas cotidianas com discurso simples e conectado."
+    b2:
+      description: "Consegue interagir fluentemente com falantes nativos e produzir texto claro e detalhado sobre assuntos familiares."
+    c1:
+      description: "Consegue expressar ideias complexas de forma clara, fluente e espontânea, com mínima busca por expressões."
+    c2:
+      description: "Consegue entender praticamente tudo que ouve ou lê e se expressar espontaneamente, de forma muito fluente e precisa."
+    native:
+      description: "Domínio completo do idioma, equivalente a um falante nativo educado."
+
+  categories:
+    dialogue: "Diálogo"
+    narrative: "Narração"
+    informational: "Texto informativo"
+    descriptive: "Passagem descritiva"
+    practical_scenario: "Cenário prático"
+
+  exercise_types:
+    mcq: "Questão de múltipla escolha"
+    true_false: "Verdadeiro/Falso"
+    fill_in_blank: "Preencha a lacuna"
+    summary: "Resumo"
+
+  user_mailer:
+    send_verification_email:
+      subject: "Verificação de Conta"
+      greeting: "Olá %{email},"
+      body: "Obrigado por se inscrever. Verifique sua conta clicando no link abaixo:"
+      verify_link: "Verificar minha conta"
+      ignore_message: "Se você não solicitou este e-mail, ignore-o."
+

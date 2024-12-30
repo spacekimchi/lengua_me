@@ -94,6 +94,47 @@ class Passage < ApplicationRecord
     end
   end
 
+  def self.passages_without_any_translations
+    # 1) Find the corresponding Language records for your target names:
+    target_languages = Language.supported_languages
+
+    # 2) Get all passages that do NOT have any SentenceTranslations
+    #    for any of the above languages:
+    Passage
+      .left_joins(sentences: :translations)
+      .where(sentences: { id: Sentence.select(:id) })  # ensure we only consider passages that actually have sentences
+      .group("passages.id")
+      .having("SUM(CASE WHEN sentence_translations.language_id IN (?) THEN 1 ELSE 0 END) = 0", target_languages.ids)
+      .distinct
+  end
+
+  def self.with_some_translations
+    target_languages = Language.supported_languages
+
+    Passage
+      .joins(sentences: :translations)
+      .where(sentence_translations: { language_id: target_languages })
+      .group("passages.id")
+    # "some but not all" means > 0 and < target_languages.size
+      .having(
+        "COUNT(DISTINCT sentence_translations.language_id) > 0
+     AND COUNT(DISTINCT sentence_translations.language_id) < ?",
+     target_languages.size
+      )
+        .distinct
+  end
+
+  def self.passages_with_all_translations
+    target_languages = Language.supported_languages
+
+    Passage
+      .joins(sentences: :translations)
+      .where(sentence_translations: { language_id: target_languages })
+      .group("passages.id")
+      .having("COUNT(DISTINCT sentence_translations.language_id) = ?", target_languages.size)
+      .distinct
+  end
+
   def translate(language:)
     PassageTranslatorService.new(sentences: sentences.pluck(:content, :id), language: language).call
   end

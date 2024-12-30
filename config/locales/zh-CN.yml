@@ -1,0 +1,370 @@
+zh-CN:
+  date:
+    formats:
+      default: "%Y-%m-%d"       # 示例: 2024-12-29
+      short: "%b %d"            # 示例: 12月 29
+      long: "%B %d, %Y"         # 示例: 12月 29, 2024
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M" # 示例: 2024-12-29 14:35
+      short: "%b %d %H:%M"      # 示例: 12月 29 14:35
+      long: "%B %d, %Y %H:%M"   # 示例: 12月 29, 2024 14:35
+  datetime:
+    formats:
+      default: "%Y-%m-%d %H:%M:%S" # 示例: 2024-12-29 14:35:00
+
+  clearance:
+    models:
+      clearance_mailer:
+        change_password: "修改密码"
+
+  clearance_mailer:
+    change_password:
+      closing: "如果您并未请求此操作，请忽略此邮件。您的密码不会被修改。"
+      link_text: "修改我的密码"
+      opening: "有人（希望是您本人）请求发送了一个修改密码的链接，您可以通过以下链接修改密码："
+
+  cookie_policies:
+    show:
+      contact: "联系"
+      contact_us: "联系我们"
+      contact_us_description: "如果您对本Cookie政策有任何疑问，请在此联系我们："
+      gdpr_consent: "GDPR 和同意"
+      gdpr_consent_description: "如果您在欧盟或具有类似数据保护法律的司法管辖区，则使用非必要Cookie（例如广告Cookie）可能需要您的同意。在适用的情况下，我们会在使用这些Cookie之前请求您的同意，并且您可以随时撤回同意。"
+      google_privacy_and_terms: "Google隐私与条款"
+      header: "Cookie政策"
+      last_updated_date: "最后更新：%{date}"
+      managing_cookies: "管理Cookie"
+      managing_cookies_description: "您可以自由地管理或删除Cookie。大多数浏览器允许您在设置中拒绝或删除Cookie。请注意，禁用Cookie可能会影响网站的某些功能，例如保持登录状态。"
+      policy_changes: "Cookie政策的变更"
+      policy_changes_description: "我们可能会不时更新此Cookie政策。任何更改都会在此公布，并注明更新的“最后更新”日期。"
+      third_party_ads: "第三方广告"
+      third_party_ads_description: "要了解更多有关Google如何使用其服务所涉及的网站或应用程序中的信息，请参阅："
+      types_of_cookies: "我们使用的Cookie类型"
+      types_of_cookies_ads: "广告Cookie（第三方）：我们使用包括Google在内的第三方广告合作伙伴，这些合作伙伴可能会使用Cookie根据您之前访问本网站或其他网站的记录来投放广告。他们可能会收集非个人信息并根据您的兴趣投放定向广告。"
+      types_of_cookies_essential: "必要Cookie：我们使用验证Cookie来维持您的登录会话，以确保网站的正常功能。"
+      what_are_cookies: "什么是Cookie？"
+      what_are_cookies_description: "Cookie是一种保存在您设备上的小型文本文件，可帮助网站正常运行、记住您的偏好设置，并提供分析及个性化内容。"
+
+  faq:
+    index:
+      faq: "常见问题 (FAQ)"
+    partials:
+      faqs:
+        question_1: "这是免费的吗？"
+        answer_1: "是的！本平台完全免费，而且我们会定期添加新的课程和功能。"
+        question_2: "我可以保存看到的新短语和单词吗？"
+        answer_2: "在学习一门新语言时，寻找合适的单词可能会让人感到沮丧。我们即将推出使用间隔重复（spaced repetition）的闪卡功能，让学习更加迅速、高效，并且令人印象深刻，敬请期待！"
+        question_3: "我没有任何基础，可以在这里学习一门新语言吗？"
+        answer_3: "在开始听力练习之前，最好先学习字母和句子结构等基础内容。请先访问我们的“语法”和“常用单词与短语”部分，为学习打下坚实的基础。"
+        question_4: "我还能做些什么来提高学习效果？"
+        answer_4: "不使用就会遗忘！将新学到的技能应用到实际生活中，去探索新的文化吧。"
+        question_5: "你们支持哪些语言？"
+        answer_5: "目前所有练习均为英文，支持西班牙语、韩语、日语、印地语、法语、意大利语、葡萄牙语、德语、俄语及中文（普通话）的翻译。如需增加其他语言，请告诉我们！"
+
+  flashes:
+    failure_after_create: "邮箱或密码错误。"
+    failure_after_update: "密码不能为空。"
+    failure_when_forbidden: "请检查网址或重新提交表单。"
+    failure_when_not_signed_in: "请先登录以继续。"
+    failure_when_missing_email: "邮箱地址不能为空。"
+
+  helpers:
+    label:
+      password:
+        email: "邮箱地址"
+      password_reset:
+        password: "设置密码"
+      session:
+        password: "密码"
+      user:
+        password: "密码"
+    submit:
+      password:
+        submit: "重置密码"
+      password_reset:
+        submit: "保存此密码"
+      session:
+        submit: "登录"
+      user:
+        create: "注册"
+
+  home:
+    index:
+      listen_and_learn: "听和学！"
+      language_fun_for_everyone: "语言学习，人人都能乐在其中！"
+      header_detail_1: "100%免费！拥有数百个A1 - C2水平的练习，并定期新增！"
+      header_detail_2: "通过听音频并写下所听到的内容，可快速同时提升听力、口语、语法和词汇量！"
+      start_button: "立即开始！"
+      how_to_practice_header: "如何利用基础方法进行练习。"
+      follow_these_steps: "按照以下简单步骤开始学习。"
+      listen: "聆听"
+      listen_description: "聆听音频。这有助于您自然地学习词汇、语法、发音和语调。"
+      write: "写作"
+      write_description: "写下所听到的内容。写作可以通过主动练习来强化词汇、语法和句子结构。"
+      correct_mistakes: "纠正错误"
+      correct_mistakes_description: "纠正错误能让错误变成宝贵的学习机会。"
+      read: "朗读"
+      read_description: "大声朗读并结合发音示例来提升语速和自信心。"
+      faq: "常见问题"
+
+  layouts:
+    application:
+      sign_in: "登录"
+      sign_out: "退出"
+    partials:
+      footer:
+        home: "首页"
+        exercises: "练习"
+        contact_us: "联系我们"
+        faq: "常见问题"
+        about_us: "关于我们"
+        additional_resources: "附加资源"
+        terms_of_service: "服务条款"
+        privacy_policy: "隐私政策"
+        cookie_policy: "Cookie政策"
+      navigation:
+        admin: "管理"
+        errors: "错误"
+        exercises: "练习"
+        faq: "FAQ"
+        home: "首页"
+        in_progress: "进行中"
+        prices: "价格"
+        products: "产品"
+        sign_in: "登录"
+        sign_out: "退出"
+        sign_up: "注册"
+        support: "支持"
+        users: "用户"
+
+  passages:
+    by_category:
+      all_difficulties: "所有难度"
+      completed_count: "已完成：%{count}"
+      conversations: "对话"
+      difficulty_level: "难度：%{level}"
+      search: "搜索"
+      short_stories: "短篇故事"
+      total_parts: "总数：%{parts}"
+    conversations: "对话"
+    index:
+      header: "所有练习"
+      difficulty: "难度"
+      single_exercise: "1个练习"
+      single_exercise_completed: "已完成 1 / 1 练习"
+      plural_exercises: "%{number} 个练习"
+      plural_exercises_completed: "%{numerator} / %{denominator} 个练习已完成"
+    partials:
+      breadcrumbs:
+        all_exercises: "所有练习"
+    passage_writer:
+      all_exercises: "所有练习"
+      check: "检查"
+      comments: "评论"
+      completed_title: "您已完成此练习。"
+      completed_encouragement: "干得好！"
+      copy_passage_link: "复制练习链接"
+      incorrect: "不正确！"
+      great_job: "做得好！"
+      next: "下一步"
+      next_exercise: "下一个练习"
+      previous: "上一步"
+      previous_exercise: "上一个练习"
+      pronunciations: "发音"
+      repeat: "重复"
+      reset_progress: "重置练习"
+      skip: "跳过"
+      try_again: "再试一次"
+      type_what_you_hear: "输入您所听到的内容……"
+    short_stories: "短篇故事"
+
+  passwords:
+    create:
+      description: "您将在几分钟内收到一封电子邮件，其中包含有关如何修改密码的说明。"
+    edit:
+      description: "您的密码已重置。请在下方设置新密码。"
+      title: "修改密码"
+      submit: "修改密码"
+    new:
+      description: "请输入您的邮箱地址来重置密码。"
+      title: "重置密码"
+      sign_in: "登录"
+      submit: "重置密码"
+
+  privacy_policies:
+    show:
+      contact: "联系"
+      contact_us:
+        default: "联系我们"
+        description: "如果您对本隐私政策有任何疑问或顾虑，请在此联系我们："
+      data_retention: "数据保留与安全"
+      data_retention_description: "只要您的账号保持活跃或者法律要求，我们就会保留您的邮箱。我们采取合理措施来保护您的数据，但任何电子存储方式都不可能完全安全。"
+      gdpr_laws:
+        description_1: "身份验证与账户管理：我们处理您的邮箱地址是因为它对于提供服务是必要的（GDPR第6(1)(b)条）。"
+        description_2: "我们不处理任何特殊类别的个人数据，也不进行画像分析或自动化决策。"
+        default: "处理的合法依据 (GDPR)"
+      gdpr_rights:
+        access: "访问权：请求获取我们所持有的您的个人数据副本。"
+        contact: "联系"
+        data_portability: "数据可移植性：以机器可读的格式获取您的个人数据。"
+        default: "您在GDPR下的权利"
+        description: "如果您位于欧盟或其他具有类似数据保护法律的地区，您拥有以下权利："
+        erasure: '删除权（“被遗忘权”）：请求删除您的个人数据。'
+        exercise: "如要行使这些权利，请联系我们："
+        objection: "反对权：有权对某些类型的处理提出异议。"
+        rectification: "更正权：更正您的个人数据中的不准确之处。"
+        restriction: "限制权：请求对我们处理您个人数据的方式进行限制。"
+      how_we_use_your_info: "我们如何使用您的信息"
+      how_we_use_your_info_description: "您的邮箱仅用于验证账号、管理您的登录会话，以及发送交易性质的通知（例如密码重置链接或账户提醒）。我们不会将您的邮箱用于营销目的，也不会将其提供给第三方做广告之用。我们绝不会保存任何可识别个人身份的信息。"
+      informtaion_we_collect: "我们收集哪些信息"
+      information_we_collect_description: "邮箱地址：当您注册、登录或以其他方式使用我们的服务时，我们会收集您的邮箱地址。我们不收集任何其他可识别个人身份的信息（PII）。"
+      introduction: "简介"
+      introduction_description: "我们致力于保护您的隐私，并遵守适用的数据保护法律（如GDPR）。本隐私政策说明了我们收集哪些个人数据、如何使用和存储这些数据，以及您对个人数据拥有的权利。"
+      last_updated_date: "最后更新：%{date}"
+      policy_changes:
+        default: "本政策的变更"
+        description: "我们可能会不时更新本隐私政策。所有更改将以新的“最后更新”日期发布。"
+      privacy_policy: "隐私政策"
+
+  sessions:
+    form:
+      forgot_password: "忘记密码？"
+      sign_up: "注册"
+      submit: "登录"
+    new:
+      title: "登录"
+
+  support_tickets:
+    new:
+      contact_us: "联系我们"
+      contact_us_header: "我们随时为您提供帮助！如有任何疑问、意见或担忧，请随时联系我们。"
+      contact_us_description: "提交此表单后，我们团队成员会尽快回复您。"
+      email: "邮箱"
+      subject: "主题"
+      content: "内容"
+      submit: "提交"
+
+  terms_of_services:
+    title: "服务条款"
+    last_updated: "最后更新：%{date}"
+    use_of_service:
+      title: "服务的使用"
+      description: "这款语言学习应用是免费提供的。使用我们的服务即表示您同意仅出于合法目的并遵守本条款使用它。"
+    no_guarantee_of_results:
+      title: "不保证学习结果"
+      description: "我们不对您的语言学习进度、速度或熟练程度做出任何保证。服务按“原样”提供。"
+    intellectual_property:
+      title: "知识产权"
+      description: "本网站上的所有文字、图片、徽标及其他内容均为%{app_name}所有或经许可使用。未获得书面许可，您不得复制、分发或以其他方式使用我们的内容。"
+    limitation_of_liability:
+      title: "责任限制"
+      description: "在法律允许的最大范围内，%{app_name}及其关联方对因使用我们服务而产生的任何间接、偶然或衍生的损害不承担责任。"
+    modifications_to_service:
+      title: "对服务的修改"
+      description: "我们保留随时修改、中断或停止提供本服务的权利，恕不另行通知。"
+    governing_law:
+      title: "适用法律"
+      description: "本条款受美国加利福尼亚州法律管辖，并按照其解释。"
+    compliance_with_data_protection:
+      title: "遵守数据保护法律"
+      description: "使用我们的服务即表示您同意遵守所有适用的数据保护法律，包括当您在欧盟（EU）或欧洲经济区（EEA）访问服务时需要遵守的GDPR。我们承诺在这些法规的要求下保护和使用您的个人数据。"
+    privacy_policy:
+      title: "隐私政策"
+      description: "我们的%{privacy_policy_link}规定了我们对您的个人数据的收集、使用和保护方式。使用我们的服务即表示您同意隐私政策中描述的做法。"
+    contact_information:
+      title: "联系信息"
+      description: "如果您对本条款有任何疑问或担忧，请在此联系我们：%{contact_link}"
+
+  users:
+    new:
+      sign_in: "登录"
+      title: "注册"
+      submit: "注册"
+
+  controllers:
+    internal_server_error: "服务器内部错误"
+    admin:
+      products:
+        create:
+          success: "产品已成功创建。"
+        update:
+          success: "产品已成功更新。"
+        destroy:
+          success: "产品已成功删除。"
+      users:
+        create:
+          success: "用户已成功创建。"
+        update:
+          success: "用户已成功更新。"
+        destroy:
+          success: "用户已成功删除。"
+    checkouts:
+      new:
+        already_subscribed: "您已订阅了 %{product_name}。"
+      show:
+        error: "抱歉，处理您的付款时出现问题：%{message}"
+    passages:
+      create:
+        success: "该文本内容已成功创建。"
+        error: "创建文本内容失败。"
+      translate:
+        success: "该文本内容已成功翻译。"
+        error: "翻译文本内容失败。"
+      category:
+        not_found: "未找到对应分类。"
+      in_progress:
+        enable_js: "请启用JavaScript以查看进行中的弹窗。"
+      passage_writer:
+        not_found: "未找到文本内容。"
+    passage_progresses:
+      update_progress:
+        success: "文本进度已更新！"
+        error: "更新进度失败！"
+    support_tickets:
+      create:
+        success: "您的消息已发送。"
+    verifications:
+      edit:
+        success: "您的账号已成功验证！"
+        error: "无效或已过期的验证链接！"
+
+  difficulties:
+    basic:
+      description: "基础理解，词汇量有限，主要为简单短语和问候语。"
+    a1:
+      description: "能理解并使用日常熟悉的常见表达方式和非常简单的短语。"
+    a2:
+      description: "能在熟悉的情景下进行简单的对话，通常需要对明确的信息进行直接交流。"
+    b1:
+      description: "能在旅行、工作和日常任务中使用简单且连贯的语言进行交流。"
+    b2:
+      description: "能与母语者进行相对流利的互动，并就熟悉话题撰写清晰、详细的文本。"
+    c1:
+      description: "能清晰、流利且自发地表达复杂想法，几乎不需要过多地搜索词语。"
+    c2:
+      description: "能理解几乎所有听到或读到的内容，并能自发地、十分流畅而准确地表达自己。"
+    native:
+      description: "对语言的完全掌握，与受过良好教育的母语者水平相当。"
+
+  categories:
+    dialogue: "对话"
+    narrative: "叙事"
+    informational: "信息性文本"
+    descriptive: "描述性段落"
+    practical_scenario: "实用场景"
+
+  exercise_types:
+    mcq: "多项选择题"
+    true_false: "判断题（真/假）"
+    fill_in_blank: "填空题"
+    summary: "摘要"
+
+  user_mailer:
+    send_verification_email:
+      subject: "账号验证"
+      greeting: "您好，%{email}："
+      body: "感谢您的注册。请点击以下链接验证您的账号："
+      verify_link: "验证我的账号"
+      ignore_message: "如果您并未请求此邮件，请忽略。"
+

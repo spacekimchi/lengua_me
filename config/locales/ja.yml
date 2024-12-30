@@ -1,0 +1,370 @@
+ja:
+  date:
+    formats:
+      default: "%Y-%m-%d"       # 例: 2024-12-29
+      short: "%b %d"            # 例: 12月 29
+      long: "%B %d, %Y"         # 例: 12月 29, 2024
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M" # 例: 2024-12-29 14:35
+      short: "%b %d %H:%M"      # 例: 12月 29 14:35
+      long: "%B %d, %Y %H:%M"   # 例: 12月 29, 2024 14:35
+  datetime:
+    formats:
+      default: "%Y-%m-%d %H:%M:%S" # 例: 2024-12-29 14:35:00
+
+  clearance:
+    models:
+      clearance_mailer:
+        change_password: "パスワードを変更"
+
+  clearance_mailer:
+    change_password:
+      closing: "もしこのリクエストに心当たりがない場合は、このメールを無視してください。パスワードは変更されませんでした。"
+      link_text: "パスワードを変更"
+      opening: "（おそらくあなたが）誰かがパスワードを変更するためのリンクを送るよう依頼しました。こちらからパスワードを変更できます。"
+
+  cookie_policies:
+    show:
+      contact: "お問い合わせ"
+      contact_us: "お問い合わせ"
+      contact_us_description: "このクッキーポリシーについてご質問がある場合は、こちらにお問い合わせください："
+      gdpr_consent: "GDPR と同意"
+      gdpr_consent_description: "EUまたは類似したデータ保護法が存在する管轄にお住まいの場合、（広告クッキーなど）必須でないクッキーの使用について同意が必要となる場合があります。必要に応じて、これらのクッキーを設置する前に同意を求め、いつでも撤回できます。"
+      google_privacy_and_terms: "Googleのプライバシーと利用規約"
+      header: "クッキーポリシー"
+      last_updated_date: "最終更新日: %{date}"
+      managing_cookies: "クッキーの管理"
+      managing_cookies_description: "ご希望に応じてクッキーを管理、削除できます。ほとんどのブラウザでは設定からクッキーを拒否または削除できます。ただし、クッキーを無効にすると、ログイン状態の維持など一部の機能に影響が出る可能性があります。"
+      policy_changes: "本クッキーポリシーの変更"
+      policy_changes_description: "必要に応じて本クッキーポリシーを更新する場合があります。変更はすべて、更新された「最終更新日」とともにここに掲載されます。"
+      third_party_ads: "第三者広告"
+      third_party_ads_description: "Googleのサービスを使用しているサイトまたはアプリからの情報の使用方法について詳しくは、以下のURLをご覧ください："
+      types_of_cookies: "使用しているクッキーの種類"
+      types_of_cookies_ads: "広告クッキー（第三者）：当サイトではGoogleを含む第三者広告パートナーを利用しており、これらのパートナーがクッキーを使用して、過去の訪問履歴などに基づいて広告を配信する場合があります。これらのパートナーは非個人情報を収集し、興味に合った広告を配信するために使用する場合があります。"
+      types_of_cookies_essential: "必須クッキー：ログインセッションを維持し、ウェブサイトを正常に機能させるために認証クッキーを使用しています。"
+      what_are_cookies: "クッキーとは？"
+      what_are_cookies_description: "クッキーとは、ウェブサイトの機能、ユーザーの好みの記憶、分析やパーソナライズされたコンテンツを提供するためにデバイスに保存される小さなテキストファイルです。"
+
+  faq:
+    index:
+      faq: "よくある質問"
+    partials:
+      faqs:
+        question_1: "無料で利用できますか？"
+        answer_1: "はい！100%無料です。新しいレッスンや機能が定期的に追加されています。"
+        question_2: "見かけた新しいフレーズや単語を保存できますか？"
+        answer_2: "新しい言語を学ぶとき、適切な単語を見つけるのに苦労することがあります。フラッシュカードと間隔反復を組み合わせた学習ツールを提供予定です。これにより、効率的で忘れにくい学習が可能になります。お楽しみに！"
+        question_3: "まったく初めての状態でもここで言語を学習できますか？"
+        answer_3: "アルファベットや文構造などの基礎を学んでからリスニング練習に取り組むのがおすすめです。文法や基本フレーズのセクションでしっかり基礎を固めてから学習を始めてください。"
+        question_4: "学習効果を高めるために、他に何ができますか？"
+        answer_4: "使わなければ忘れてしまいます！新たに身につけたスキルを使って文化を体験してみましょう。"
+        question_5: "サポートしている言語は何ですか？"
+        answer_5: "現在は英語の演習に加え、スペイン語、韓国語、日本語、ヒンディー語、フランス語、イタリア語、ポルトガル語、ドイツ語、ロシア語、中国語（マンダリン）での翻訳をサポートしています。ほかに追加してほしい言語があればお知らせください！"
+
+  flashes:
+    failure_after_create: "メールアドレスまたはパスワードが違います。"
+    failure_after_update: "パスワードが空白のままでは更新できません。"
+    failure_when_forbidden: "URLを再確認するか、もう一度フォームを送信してください。"
+    failure_when_not_signed_in: "続行するにはログインしてください。"
+    failure_when_missing_email: "メールアドレスを入力してください。"
+
+  helpers:
+    label:
+      password:
+        email: "メールアドレス"
+      password_reset:
+        password: "パスワードを設定"
+      session:
+        password: "パスワード"
+      user:
+        password: "パスワード"
+    submit:
+      password:
+        submit: "パスワードをリセット"
+      password_reset:
+        submit: "このパスワードを保存"
+      session:
+        submit: "ログイン"
+      user:
+        create: "サインアップ"
+
+  home:
+    index:
+      listen_and_learn: "聞いて学ぼう！"
+      language_fun_for_everyone: "みんなで楽しく言語学習！"
+      header_detail_1: "100%無料！A1～C2レベルの練習問題が数百以上あり、定期的に新しいものが追加されます！"
+      header_detail_2: "音声を聞き取り、聞いた内容を書くことで、リスニング・スピーキング・文法・語彙を一度に向上させましょう！"
+      start_button: "今すぐ始める！"
+      how_to_practice_header: "基本的な方法を使った練習方法"
+      follow_these_steps: "これらの簡単なステップを守って、今すぐ学習を始めましょう。"
+      listen: "聞く"
+      listen_description: "音声を聞いてみましょう。語彙、文法、発音、自然な流れを身につけるのに役立ちます。"
+      write: "書く"
+      write_description: "聞いた内容を書き留めましょう。語彙や文法、文章構造を強化でき、能動的な学習に繋がります。"
+      correct_mistakes: "間違いを訂正する"
+      correct_mistakes_description: "間違いを訂正することで、失敗を学びの機会に変えられます。"
+      read: "読む"
+      read_description: "声に出して読みましょう。発音例を参考にすれば、話すテンポや自信を高めることができます。"
+      faq: "よくある質問"
+
+  layouts:
+    application:
+      sign_in: "ログイン"
+      sign_out: "ログアウト"
+    partials:
+      footer:
+        home: "ホーム"
+        exercises: "練習"
+        contact_us: "お問い合わせ"
+        faq: "よくある質問"
+        about_us: "運営者情報"
+        additional_resources: "追加リソース"
+        terms_of_service: "利用規約"
+        privacy_policy: "プライバシーポリシー"
+        cookie_policy: "クッキーポリシー"
+      navigation:
+        admin: "管理"
+        errors: "エラー"
+        exercises: "練習"
+        faq: "FAQ"
+        home: "ホーム"
+        in_progress: "進行中"
+        prices: "料金"
+        products: "製品"
+        sign_in: "ログイン"
+        sign_out: "ログアウト"
+        sign_up: "サインアップ"
+        support: "サポート"
+        users: "ユーザー"
+
+  passages:
+    by_category:
+      all_difficulties: "すべての難易度"
+      completed_count: "完了数: %{count}"
+      conversations: "会話"
+      difficulty_level: "難易度: %{level}"
+      search: "検索"
+      short_stories: "短いストーリー"
+      total_parts: "合計: %{parts}"
+    conversations: "会話"
+    index:
+      header: "すべての練習問題"
+      difficulty: "難易度"
+      single_exercise: "1つの練習"
+      single_exercise_completed: "1 / 1 の練習が完了"
+      plural_exercises: "%{number} の練習"
+      plural_exercises_completed: "%{numerator} / %{denominator} の練習が完了"
+    partials:
+      breadcrumbs:
+        all_exercises: "すべての練習"
+    passage_writer:
+      all_exercises: "すべての練習"
+      check: "チェック"
+      comments: "コメント"
+      completed_title: "この練習を完了しました。"
+      completed_encouragement: "素晴らしい仕事です！"
+      copy_passage_link: "練習のリンクをコピー"
+      incorrect: "不正解です！"
+      great_job: "よくできました！"
+      next: "次へ"
+      next_exercise: "次の練習へ"
+      previous: "前へ"
+      previous_exercise: "前の練習へ"
+      pronunciations: "発音"
+      repeat: "繰り返し"
+      reset_progress: "進捗をリセット"
+      skip: "スキップ"
+      try_again: "もう一度試す"
+      type_what_you_hear: "聞こえた内容を入力してください..."
+    short_stories: "短いストーリー"
+
+  passwords:
+    create:
+      description: "パスワード変更用の手順が記載されたメールを数分以内に送信します。"
+    edit:
+      description: "パスワードがリセットされました。新しいパスワードを以下に入力してください。"
+      title: "パスワードを変更"
+      submit: "パスワードを変更"
+    new:
+      description: "パスワードをリセットするには、メールアドレスを入力してください。"
+      title: "パスワードのリセット"
+      sign_in: "ログイン"
+      submit: "パスワードをリセット"
+
+  privacy_policies:
+    show:
+      contact: "お問い合わせ"
+      contact_us:
+        default: "お問い合わせ"
+        description: "プライバシーポリシーに関してご質問やご不明な点がある場合は、こちらにお問い合わせください："
+      data_retention: "データ保存とセキュリティ"
+      data_retention_description: "アカウントが有効である限り、または法的に必要な場合、メールアドレスを保持します。当社はお客様のデータを保護するための合理的な措置を講じますが、電子的な保存方法が完全に安全とは限りません。"
+      gdpr_laws:
+        description_1: "認証とアカウント管理：サービスを提供するために（GDPR 第6条1項(b)）として、メールアドレスを処理します。"
+        description_2: "当社は特別なカテゴリの個人データを処理せず、自動化された意思決定やプロファイリングを行いません。"
+        default: "処理の法的根拠（GDPR）"
+      gdpr_rights:
+        access: "アクセス権：当社が保有する個人データのコピーを要求できます。"
+        contact: "お問い合わせ"
+        data_portability: "データポータビリティ：個人データを機械的に読み取り可能な形式で受け取る権利があります。"
+        default: "GDPRに基づく権利"
+        description: "EUやその他の類似のデータ保護法が適用される地域にお住まいの場合、以下の権利があります："
+        erasure: "消去権（「忘れられる権利」）：個人データの削除を求めることができます。"
+        exercise: "これらの権利を行使するには、以下にご連絡ください："
+        objection: "異議権：特定の種類の処理に異議を唱えることができます。"
+        rectification: "訂正権：個人データの不正確さを修正することができます。"
+        restriction: "処理の制限権：個人データの処理方法の制限を求めることができます。"
+      how_we_use_your_info: "収集情報の利用方法"
+      how_we_use_your_info_description: "メールアドレスはアカウント認証、ログインセッション管理、パスワードリセットリンクやアカウント通知などのトランザクション連絡を送信するためだけに使用します。広告目的でメールアドレスを使用したり、第三者と共有することはありません。当社では、個人を特定できる情報を一切保存していません。"
+      informtaion_we_collect: "収集する情報"
+      information_we_collect_description: "メールアドレス：サインアップ、ログイン、または当サービスとのやり取りをする際にメールアドレスを収集します。その他の個人を特定できる情報は収集していません。"
+      introduction: "はじめに"
+      introduction_description: "当社はお客様のプライバシーを保護することに取り組んでおり、該当する場合はEU一般データ保護規則（GDPR）を含む適用されるデータ保護法を遵守します。本プライバシーポリシーでは、当社が収集する個人データの種類、その利用方法、保管方法、および個人データに関するお客様の権利を説明します。"
+      last_updated_date: "最終更新日: %{date}"
+      policy_changes:
+        default: "本ポリシーの変更"
+        description: "必要に応じて本プライバシーポリシーを更新する場合があります。すべての変更は、更新された「最終更新日」とともに掲載されます。"
+      privacy_policy: "プライバシーポリシー"
+
+  sessions:
+    form:
+      forgot_password: "パスワードをお忘れですか？"
+      sign_up: "サインアップ"
+      submit: "ログイン"
+    new:
+      title: "ログイン"
+
+  support_tickets:
+    new:
+      contact_us: "お問い合わせ"
+      contact_us_header: "何かご質問、ご意見、ご不明な点があれば、遠慮なくご連絡ください。"
+      contact_us_description: "このフォームを送信すると、当社のチームよりできるだけ早くご連絡いたします。"
+      email: "メールアドレス"
+      subject: "件名"
+      content: "本文"
+      submit: "送信"
+
+  terms_of_services:
+    title: "利用規約"
+    last_updated: "最終更新日: %{date}"
+    use_of_service:
+      title: "サービスの利用"
+      description: "この言語学習アプリは無料で提供されています。当サービスを利用する場合は、合法的な目的のみに利用し、本規約に従うことに同意するものとします。"
+    no_guarantee_of_results:
+      title: "結果保証なし"
+      description: "言語学習の進捗、スピード、または流暢さについて、当社はいかなる保証も行いません。サービスは「現状のまま」で提供されます。"
+    intellectual_property:
+      title: "知的財産権"
+      description: "当サイトのテキスト、画像、ロゴなどのコンテンツは、%{app_name}が所有または許可を得て使用しています。書面による許可なく、当社のコンテンツをコピー、配布、またはその他の方法で使用することはできません。"
+    limitation_of_liability:
+      title: "責任の制限"
+      description: "法律で最大限認められる範囲において、%{app_name}およびその関連会社は、当サービスの利用によるいかなる間接的、付随的、または結果的損害についても責任を負いません。"
+    modifications_to_service:
+      title: "サービスの変更"
+      description: "当社は、予告なしにサービスを変更、中断、または終了する権利を有します。"
+    governing_law:
+      title: "準拠法"
+      description: "本規約は、アメリカ合衆国カリフォルニア州の法律に準拠し、これに従って解釈されるものとします。"
+    compliance_with_data_protection:
+      title: "データ保護法の遵守"
+      description: "EUまたは欧州経済領域（EEA）からサービスにアクセスする場合、GDPRを含むすべての適用されるデータ保護法を遵守することに同意するものとします。当社はお客様の個人データをこれらの規則に従って保護し、使用することを約束します。"
+    privacy_policy:
+      title: "プライバシーポリシー"
+      description: "当社の%{privacy_policy_link}は、お客様の個人データの収集、利用、保護に関する事項を規定しています。当サービスを利用することで、本プライバシーポリシーに記載された慣行に同意したものとみなされます。"
+    contact_information:
+      title: "お問い合わせ先"
+      description: "本規約に関するご質問やご不明な点がある場合は、こちらへお問い合わせください：%{contact_link}"
+
+  users:
+    new:
+      sign_in: "ログイン"
+      title: "サインアップ"
+      submit: "サインアップ"
+
+  controllers:
+    internal_server_error: "サーバー内部エラー"
+    admin:
+      products:
+        create:
+          success: "製品が正常に作成されました。"
+        update:
+          success: "製品が正常に更新されました。"
+        destroy:
+          success: "製品が正常に削除されました。"
+      users:
+        create:
+          success: "ユーザーが正常に作成されました。"
+        update:
+          success: "ユーザーが正常に更新されました。"
+        destroy:
+          success: "ユーザーが正常に削除されました。"
+    checkouts:
+      new:
+        already_subscribed: "あなたは既に%{product_name}に登録しています。"
+      show:
+        error: "申し訳ありませんが、支払い処理中に問題が発生しました: %{message}"
+    passages:
+      create:
+        success: "パッセージが正常に作成されました。"
+        error: "パッセージの作成に失敗しました。"
+      translate:
+        success: "パッセージが正常に翻訳されました。"
+        error: "パッセージの翻訳に失敗しました。"
+      category:
+        not_found: "カテゴリーが見つかりません。"
+      in_progress:
+        enable_js: "進行状況ポップアップを見るにはJavaScriptを有効にしてください。"
+      passage_writer:
+        not_found: "パッセージが見つかりません。"
+    passage_progresses:
+      update_progress:
+        success: "パッセージの進捗が更新されました！"
+        error: "進捗の更新に失敗しました！"
+    support_tickets:
+      create:
+        success: "お問い合わせ内容を送信しました。"
+    verifications:
+      edit:
+        success: "アカウントが正常に認証されました！"
+        error: "無効または期限切れの認証リンクです！"
+
+  difficulties:
+    basic:
+      description: "基礎的な理解レベル。限られた語彙で簡単なフレーズや挨拶が中心。"
+    a1:
+      description: "日常的な表現や基本フレーズを理解し、使用できる。"
+    a2:
+      description: "身近な話題に関する簡単な情報交換など、簡単なコミュニケーションができる。"
+    b1:
+      description: "旅行や仕事、日常の場面でシンプルながらつながりのある話し方ができる。"
+    b2:
+      description: "母国語話者とも流暢にやり取りでき、身近なトピックにおいて明確で詳細な文章を作成できる。"
+    c1:
+      description: "表現に悩むことがほとんどなく、複雑な考えを明確かつ流暢に伝えられる。"
+    c2:
+      description: "ほぼすべての内容を聞き取り、読解し、即座に自然で正確な言葉で表現できる。"
+    native:
+      description: "教育を受けたネイティブスピーカーと同等の完全な言語運用能力。"
+
+  categories:
+    dialogue: "対話"
+    narrative: "物語"
+    informational: "情報テキスト"
+    descriptive: "描写的パッセージ"
+    practical_scenario: "実用的なシナリオ"
+
+  exercise_types:
+    mcq: "多肢選択式問題"
+    true_false: "○×問題"
+    fill_in_blank: "穴埋め問題"
+    summary: "要約"
+
+  user_mailer:
+    send_verification_email:
+      subject: "アカウント認証"
+      greeting: "こんにちは %{email} 様、"
+      body: "ご登録ありがとうございます。以下のリンクをクリックして、アカウントを認証してください。"
+      verify_link: "アカウントを認証する"
+      ignore_message: "このメールに覚えがない場合は、無視してください。"
+
