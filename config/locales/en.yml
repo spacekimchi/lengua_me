@@ -148,8 +148,8 @@ en:
       navigation:
         admin: "Admin"
         errors: "Errors"
-        exercises: "exercises"
-        faq: "FAQ"
+        exercises: "Exercises"
+        faq: "Faq"
         home: "Home"
         in_progress: "In-progress"
         prices: "Prices"
