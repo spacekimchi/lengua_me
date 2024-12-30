@@ -2,7 +2,8 @@ require 'csv'
 
 class Tmp
   def self.translate_passages
-    languages = %w[Spanish Korean Japanese Hindi French Italian Portuguese German Russian Mandarin Arabic Vietnamese]
+    languages = ["Spanish (Spain)", "Spanish (Latin America)", "Korean", "Japanese", "Hindi", "French", "Italian", "Portuguese", "German", "Russian", "Mandarin", "Arabic", "Vietnamese", "Cantonese"]
+    passages = Passage.all
     passages.each do |passage|
       languages.each do |lang|
         sentences = passage.sentences.order(:order_idx).pluck(:content, :id)
