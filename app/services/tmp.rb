@@ -2,7 +2,7 @@ require 'csv'
 
 class Tmp
   def self.translate_passages
-    languages = ["Spanish (Spain)", "Spanish (Latin America)", "Korean", "Japanese", "Hindi", "French", "Italian", "Portuguese", "German", "Russian", "Mandarin", "Arabic", "Vietnamese", "Cantonese"]
+    languages = ["Spanish (Spain)", "Spanish (Latin America)", "Korean", "Japanese", "Hindi", "French", "Italian", "Portuguese", "German", "Russian", "Mandarin", "Vietnamese", "Cantonese"]
     passages = Passage.all
     passages.each do |passage|
       languages.each do |lang|
