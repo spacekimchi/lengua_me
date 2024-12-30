@@ -3,18 +3,13 @@ require 'csv'
 class Tmp
   def self.translate_passages
     languages = %w[Spanish Korean Japanese Hindi French Italian Portuguese German Russian Mandarin Arabic Vietnamese]
-
-    d = Difficulty.find_by(level: 6)
-
-    passages = Passage.where(difficulty: d)
-    debugger
-    # passages.each do |passage|
-    #   languages.each do |lang|
-    #     sentences = passage.sentences.order(:order_idx).pluck(:content, :id)
-    #     language = Language.find_by(name: lang)
-    #     res = PassageTranslatorService.new(sentences: sentences, language: language).call
-    #   end
-    # end
+    passages.each do |passage|
+      languages.each do |lang|
+        sentences = passage.sentences.order(:order_idx).pluck(:content, :id)
+        language = Language.find_by(name: lang)
+        res = PassageTranslatorService.new(sentences: sentences, language: language).call
+      end
+    end
   end
 
   def self.fix_category_conversations
