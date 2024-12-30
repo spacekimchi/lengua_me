@@ -993,6 +993,10 @@ footer .footer-container a {
   margin-bottom: 1.5rem;
 }
 
+.home-faq-container {
+  text-align: left;
+}
+
 .passage-writer-show-container .passage-writer-title-container {
   display: flex;
   align-items: center;
