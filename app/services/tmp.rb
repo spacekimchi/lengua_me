@@ -1,9 +1,12 @@
 require 'csv'
 
 class Tmp
+  def self.available_languages
+    ["Spanish (Spain)", "Spanish (Latin America)", "Korean", "Japanese", "Hindi", "French", "Italian", "Portuguese", "German", "Russian", "Mandarin", "Vietnamese", "Cantonese"]
+  end
   def self.translate_passages
-    languages = ["Spanish (Spain)", "Spanish (Latin America)", "Korean", "Japanese", "Hindi", "French", "Italian", "Portuguese", "German", "Russian", "Mandarin", "Vietnamese", "Cantonese"]
-    passages = Passage.all
+    languages = available_languages
+    passages = passages_without_any_translations
     passages.each do |passage|
       languages.each do |lang|
         sentences = passage.sentences.order(:order_idx).pluck(:content, :id)
@@ -11,6 +14,33 @@ class Tmp
         res = PassageTranslatorService.new(sentences: sentences, language: language).call
       end
     end
+  end
+
+  def self.passages_with_all_translations
+    languages = available_languages
+    target_languages = Language.where(name: languages)
+
+    Passage
+      .joins(sentences: :translations)
+      .where(sentence_translations: { language_id: target_languages })
+      .group("passages.id")
+      .having("COUNT(DISTINCT sentence_translations.language_id) = ?", target_languages.size)
+      .distinct
+  end
+
+  def self.passages_without_any_translations
+    # 1) Find the corresponding Language records for your target names:
+    languages = available_languages
+    target_languages = Language.where(name: languages)
+
+    # 2) Get all passages that do NOT have any SentenceTranslations
+    #    for any of the above languages:
+    Passage
+      .left_joins(sentences: :translations)
+      .where(sentences: { id: Sentence.select(:id) })  # ensure we only consider passages that actually have sentences
+      .group("passages.id")
+      .having("SUM(CASE WHEN sentence_translations.language_id IN (?) THEN 1 ELSE 0 END) = 0", target_languages.ids)
+      .distinct
   end
 
   def self.fix_category_conversations

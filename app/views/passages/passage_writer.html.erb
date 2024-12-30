@@ -39,7 +39,7 @@
                    <br>
                  <% end %>
                  <% if @next_passage.present? %>
-                   <%= link_to t('.previous_exercise'), passage_writer_path(params[:category_name], @next_passage.title) %>
+                   <%= link_to t('.next_exercise'), passage_writer_path(params[:category_name], @next_passage.title) %>
                    <br>
                  <% end %>
                  <button type="button" style="text-align: left;" onclick="navigator.clipboard.writeText(window.location.href).then(() => {})" data-action="popup#hidePopup">
