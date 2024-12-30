@@ -181,3 +181,4 @@ Run `rails tts:list_voices` to see a list of voices
 # Restart database
 
 Restart database: `docker compose run --rm web bundle exec rails db:drop`
+
