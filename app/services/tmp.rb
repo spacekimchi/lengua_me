@@ -4,6 +4,7 @@ class Tmp
   def self.available_languages
     ["Spanish (Spain)", "Spanish (Latin America)", "Korean", "Japanese", "Hindi", "French", "Italian", "Portuguese", "German", "Russian", "Mandarin", "Vietnamese", "Cantonese"]
   end
+
   def self.translate_passages
     languages = available_languages
     passages = passages_without_any_translations
@@ -41,6 +42,23 @@ class Tmp
       .group("passages.id")
       .having("SUM(CASE WHEN sentence_translations.language_id IN (?) THEN 1 ELSE 0 END) = 0", target_languages.ids)
       .distinct
+  end
+
+  def self.with_some_translations
+    languages = available_languages
+    target_languages = Language.where(name: languages)
+
+    Passage
+      .joins(sentences: :translations)
+      .where(sentence_translations: { language_id: target_languages })
+      .group("passages.id")
+    # "some but not all" means > 0 and < target_languages.size
+      .having(
+        "COUNT(DISTINCT sentence_translations.language_id) > 0
+     AND COUNT(DISTINCT sentence_translations.language_id) < ?",
+     target_languages.size
+      )
+        .distinct
   end
 
   def self.fix_category_conversations
