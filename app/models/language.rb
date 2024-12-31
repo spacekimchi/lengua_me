@@ -206,7 +206,23 @@ class Language < ApplicationRecord
     'zu' => 'Zulu'
   }.freeze
 
-  SUPPORTED_LANGUAGES = [['es-ES', 'Spanish (Spain)'], ['es-419', 'Spanish (Latin America)'], ['ko', 'Korean'], ['ja', 'Japanese'], ['hi', 'Hindi'], ['fr', 'French'], ['it', 'Italian'], ['pt', 'Portuguese'], ['de', 'German'], ['ru', 'Russian'], ['zh-CN', 'Mandarin'], ['vi', 'Vietnamese'], ['zh-HK', 'Cantonese']].freeze
+  LOCALE_COUNTRY_MAP = {
+    'en'    => 'US',
+    'es'    => 'ES',
+    'ko'    => 'KR',
+    'ja'    => 'JP',
+    'hi'    => 'IN',
+    'fr'    => 'FR',
+    'it'    => 'IT',
+    'pt'    => 'PT',
+    'de'    => 'DE',
+    'ru'    => 'RU',
+    'zh-CN' => 'CN',
+    'zh-HK' => 'HK',
+    'vi'    => 'VN'
+  }.freeze
+
+  SUPPORTED_LANGUAGES = [['en', 'English'], ['es-ES', 'Spanish (Spain)'], ['es-419', 'Spanish (Latin America)'], ['ko', 'Korean'], ['ja', 'Japanese'], ['hi', 'Hindi'], ['fr', 'French'], ['it', 'Italian'], ['pt', 'Portuguese'], ['de', 'German'], ['ru', 'Russian'], ['zh-CN', 'Mandarin'], ['vi', 'Vietnamese'], ['zh-HK', 'Cantonese']].freeze
 
   has_many :sentences
   has_many :pronunciations

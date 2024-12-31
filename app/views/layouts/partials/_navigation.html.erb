@@ -51,12 +51,12 @@
       <nav id="top-nav-secondary">
         <span class="right-section">
           <select
-              style="margin-bottom: 0px; line-height: 1rem; margin-right: 1rem; padding-right: 0; width: 75px;"
+              style="margin-bottom: 0px; line-height: 1rem; margin-right: 1rem; padding-right: 0; width: 117px;"
               name="locale"
               onchange="window.location.href = this.value;">
             <% I18n.available_locales.uniq.each do |locale| %>
               <option value="<%= url_for(locale: locale) %>" <%= 'selected' if I18n.locale == locale %>>
-              <%= locale.to_s.upcase %>
+              <%= flag_emoji(locale) %> <%= locale.to_s.upcase %>
               </option>
             <% end %>
           </select>
