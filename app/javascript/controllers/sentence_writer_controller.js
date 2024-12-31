@@ -70,7 +70,7 @@ export default class extends Controller {
 
   fetchTranslations(languageCode) {
     const passageId = this.idValue;
-    fetch(`/passages/${passageId}/translations?language_code=${languageCode}`, {
+    fetch(`/passages/${passageId}/translations?language_code=${languageCode === 'es' ? encodeURIComponent('es-ES') : languageCode }`, {
       headers: {
         'Accept': 'application/json'
       }
