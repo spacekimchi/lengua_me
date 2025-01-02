@@ -31,12 +31,13 @@ class PassageProgress < ApplicationRecord
       .select(
         'passage_progresses.id',
         'passages.title',
+        'passages.category',
         'difficulties.name as difficulty',
         'COUNT(sentences.id) AS sentences_count',
         'passage_progresses.current_index',
         'ROUND((passage_progresses.current_index::decimal / COUNT(sentences.id)::decimal)*100)::int AS percent_complete'
       )
-        .group('passage_progresses.id, passages.title, passage_progresses.current_index, difficulties.name')
+        .group('passage_progresses.id, passages.title, passages.category, passage_progresses.current_index, difficulties.name')
   }
 
   before_save :check_current_index

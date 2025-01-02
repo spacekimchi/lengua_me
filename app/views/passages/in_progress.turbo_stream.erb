@@ -6,7 +6,7 @@
           <ul>
             <% @passage_progresses.each do |progress| %>
               <li>
-                <strong><%= link_to progress.title, passage_writer_path(progress.difficulty, progress.title), data: { turbo: false } %></strong>
+                <strong><%= link_to progress.title, passage_writer_path(Passage.categories.key(progress.category), progress.title), data: { turbo: false } %></strong>
                 <%= render partial: 'partials/progress_bar', formats: :html, locals: { current_index: progress.current_index, total: progress.sentences_count } %>
               </li>
             <% end %>
