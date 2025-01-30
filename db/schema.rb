@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_29_030716) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_03_044225) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -62,6 +62,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_29_030716) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "decks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.text "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "name"], name: "index_decks_on_user_id_and_name", unique: true
+    t.index ["user_id"], name: "index_decks_on_user_id"
+  end
+
   create_table "difficulties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "name", null: false
     t.integer "level", null: false
@@ -70,6 +79,21 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_29_030716) do
     t.datetime "updated_at", null: false
     t.index ["level"], name: "index_difficulties_on_level", unique: true
     t.index ["name"], name: "index_difficulties_on_name", unique: true
+  end
+
+  create_table "flashcards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "deck_id", null: false
+    t.integer "flashcard_type", default: 0
+    t.text "front"
+    t.text "back"
+    t.text "cloze"
+    t.text "additional_info"
+    t.datetime "due_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deck_id"], name: "index_flashcards_on_deck_id"
+    t.index ["user_id"], name: "index_flashcards_on_user_id"
   end
 
   create_table "good_job_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -382,6 +406,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_29_030716) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "decks", "users"
+  add_foreign_key "flashcards", "decks"
+  add_foreign_key "flashcards", "users"
   add_foreign_key "notes", "passages"
   add_foreign_key "notes", "users"
   add_foreign_key "passage_progresses", "passages"
