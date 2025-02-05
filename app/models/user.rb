@@ -31,6 +31,8 @@ class User < ApplicationRecord
   has_many :user_subscriptions, dependent: :destroy
   has_many :support_tickets, dependent: :destroy
   has_many :passage_progresses, dependent: :destroy
+  has_many :decks, dependent: :destroy
+  has_many :flashcards, through: :decks
 
   scope :active_users, lambda {
     joins(:user_subscriptions)
