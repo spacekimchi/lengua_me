@@ -1,8 +1,11 @@
-<div id="data-modal" class="modal" data-modal-target="modal" role="dialog" aria-modal="true">
+<div class="modal modal-overlay hidden" role="dialog" aria-modal="true">
   <div class="modal-content">
+    <!-- Close button -->
     <span class="close-button" data-action="click->modal#close" aria-label="Close">&times;</span>
+    <!-- Modal content target -->
     <div data-modal-target="content">
-      <!-- The fetched data will be displayed here -->
+      <!-- Render your form partial or passed partial content -->
+      <%= render partial: partial_name %>
     </div>
   </div>
 </div>

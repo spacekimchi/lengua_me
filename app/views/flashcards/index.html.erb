@@ -1,0 +1,37 @@
+<div class="flashcards-index-container">
+  <div class="flashcard-deck-actions">
+
+    <div data-controller="modal">
+      <button type="button" class="button action-button" data-action="click->modal#open">
+        Create Deck
+      </button>
+
+      <%= render partial: 'layouts/partials/modal', locals: { partial_name: 'flashcards/add_deck_form' } %>
+      <!-- Reusable Modal -->
+    </div>
+
+    <%#= render partial: "add_deck_form" %>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Total</th>
+        <th>New</th>
+        <th>Learning</th>
+        <th>Due</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @decks.each do |deck| %>
+        <tr>
+          <td><%= deck.name %></td>
+          <td><%= deck.flashcards.count %></td>
+          <td>New count</td>
+          <td>Learning</td>
+          <td>Due</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

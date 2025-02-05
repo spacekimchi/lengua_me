@@ -1,0 +1,8 @@
+<h3>
+  Create a deck
+</h3>
+<%= form_with model: @deck, url: decks_path, method: :post do |form| %>
+  <%= form.label :name, "Name:" %>
+  <%= form.text_field :name, value: "Untitled", style: "text-align: center;" %>
+  <%= form.submit "Submit", class: "submit-field" %>
+<% end %>
