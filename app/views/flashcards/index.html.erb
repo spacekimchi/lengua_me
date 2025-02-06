@@ -1,16 +1,11 @@
 <div class="flashcards-index-container">
   <div class="flashcard-deck-actions">
-
     <div data-controller="modal">
       <button type="button" class="button action-button" data-action="click->modal#open">
         Create Deck
       </button>
-
       <%= render partial: 'layouts/partials/modal', locals: { partial_name: 'flashcards/add_deck_form' } %>
-      <!-- Reusable Modal -->
     </div>
-
-    <%#= render partial: "add_deck_form" %>
   </div>
   <table>
     <thead>

@@ -1,5 +1,23 @@
 @use "variables" as v;
 
+form {
+  #error_explanation {
+    padding-bottom: 13px;
+
+    h4 {
+      color: red;
+    }
+  }
+
+  .field_with_errors {
+    color: red;
+    display: inline-block;
+  }
+  label {
+    font-weight: bold;
+  }
+}
+
 form.form {
     display: grid;
     grid-template-columns: max-content 1fr; // 150px for labels, remaining space for inputs
