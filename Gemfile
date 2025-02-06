@@ -52,6 +52,8 @@ gem "pg_search"
 
 gem "aws-sdk-s3"
 
+gem 'fsrs', git: 'https://github.com/open-spaced-repetition/rb-fsrs.git', branch: 'master'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
