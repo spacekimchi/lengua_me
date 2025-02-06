@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/open-spaced-repetition/rb-fsrs.git
+  revision: f975450334d6826efe0d8037816252065eb57a93
+  branch: master
+  specs:
+    fsrs (0.9.0)
+      activesupport (>= 7.0, < 9.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -495,6 +503,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   faker
+  fsrs!
   good_job
   google-cloud-text_to_speech
   http_accept_language
