@@ -1,85 +1,68 @@
-class FlashcardReviewService
-  MIN_EASE_FACTOR = 1.3
+# This uses the FSRS4.5 algorithm
+class FlashcardSchedulerService
+  # rating should be one of FSRS::Rating::AGAIN, FSRS::Rating::HARD,
+  # FSRS::Rating::GOOD, or FSRS::Rating::EASY
+  def self.schedule_review(flashcard, rating, now = Time.now.utc)
+    fsrs_card = FSRS::Card.new
+    fsrs_card.due         = flashcard.due_at || now
+    fsrs_card.stability   = flashcard.stability   || 0.0
+    fsrs_card.difficulty  = flashcard.difficulty  || 0.0
+    fsrs_card.reps        = flashcard.reps        || 0
+    fsrs_card.lapses      = flashcard.lapses      || 0
+    fsrs_card.state       = flashcard.state       || FSRS::State::NEW
+    fsrs_card.last_review = flashcard.last_review || now
 
-  def initialize(flashcard:, quality:, user:)
-    @flashcard = flashcard
-    @quality = quality.to_i  # Ensure it's an integer between 0 and 5
-    @user = user
-  end
+    fsrs_card.elapsed_days = if flashcard.last_review
+                               (now.to_date - flashcard.last_review.to_date).to_i
+                             else
+                               0
+                             end
 
-  def process_review
-    # Capture previous state
-    previous_interval = @flashcard.interval || 0
-    previous_ease_factor = @flashcard.ease_factor || 2.5
-    previous_review_count = @flashcard.review_count || 0
+    scheduler = FSRS::Scheduler.new
+    scheduling_logs = scheduler.repeat(fsrs_card, now)
+    # This returns a hash keyed by each rating, e.g.: {
+    #   FSRS::Rating::AGAIN => Fsrs::SchedulingInfo,
+    #   FSRS::Rating::HARD  => Fsrs::SchedulingInfo,
+    #   ...
+    # }
 
-    # Determine if the review is successful (quality >= 3)
-    if @quality < 3
-      # If the quality is too low, reset the repetition count.
-      new_review_count = 0
-      new_interval = 1  # Or choose to keep it low, such as 1 day.
-      new_ease_factor = previous_ease_factor  # Alternatively, you can adjust it slightly.
-    else
-      # Successful review
-      new_review_count = previous_review_count + 1
+    scheduling_info = scheduling_logs[rating]         # Fsrs::SchedulingInfo
+    updated_fsrs_card = scheduling_info.card          # The updated Fsrs::Card
+    review_log        = scheduling_info.review_log    # Fsrs::ReviewLog
 
-      # Update the ease factor based on SM-2 formula
-      new_ease_factor = previous_ease_factor - 0.8 + (0.28 * @quality) - (0.02 * @quality * @quality)
-      new_ease_factor = [new_ease_factor, MIN_EASE_FACTOR].max
+    # Update the flashcard with new scheduling info.
+    flashcard.due_at     = updated_fsrs_card.due
+    flashcard.stability  = updated_fsrs_card.stability
+    flashcard.difficulty = updated_fsrs_card.difficulty
+    flashcard.reps       = updated_fsrs_card.reps
+    flashcard.lapses     = updated_fsrs_card.lapses
+    flashcard.state      = updated_fsrs_card.state
+    flashcard.last_review = now
+    flashcard.save!
 
-      # Determine the new interval
-      new_interval =
-        case new_review_count
-        when 1
-          1  # 1 day for the first review
-        when 2
-          6  # 6 days for the second review
-        else
-          # Multiply the previous interval by the new ease factor.
-          (previous_interval * new_ease_factor).floor
-        end
-    end
-
-    # Compute the new due date
-    new_due_at = Time.current + new_interval.days
-
-    # Update the flashcard's state
-    @flashcard.update!(
-      last_reviewed_at: Time.current,
-      review_count: new_review_count,
-      interval: new_interval,
-      ease_factor: new_ease_factor,
-      due_at: new_due_at
-    )
-
-    # Log the review in flashcard_reviews
-    FlashcardReview.create!(
-      user: @user,
-      flashcard: @flashcard,
-      reviewed_at: Time.current,
-      quality: @quality,
-      previous_interval: previous_interval,
-      new_interval: new_interval,
-      previous_ease_factor: previous_ease_factor,
-      new_ease_factor: new_ease_factor
+    # Record the review event in the flashcard_reviews table.
+    flashcard.flashcard_reviews.create!(
+      rating:         review_log.rating,        # e.g., 1 = AGAIN, 2 = HARD, etc.
+      scheduled_days: review_log.scheduled_days,
+      elapsed_days:   review_log.elapsed_days,
+      previous_state: review_log.state,         # state of the card before scheduling
+      review_time:    now                       # or review_log.review if you prefer
     )
   end
 
-=begin
-  # This should be somewhere in a controller action
-  def review
-    @flashcard = Flashcard.find(params[:id])
-    quality = params[:quality].to_i  # e.g., from a form submission (0–5)
+  # This should be a controller method somewhere
+  # def review
+  #   flashcard = Flashcard.find(params[:id])
+  #   # rating is one of [1, 2, 3, 4] corresponding to
+  #   # FSRS::Rating::AGAIN, HARD, GOOD, EASY
+  #   rating = params[:rating].to_i
 
-    begin
-      FlashcardReviewService.new(@flashcard, quality).process_review
-      flash[:notice] = "Review processed successfully!"
-    rescue => e
-      flash[:alert] = "There was an error processing your review: #{e.message}"
-    end
+  #   FlashcardSchedulerService.schedule_review(flashcard, rating)
 
-    redirect_to some_path
-  end
-=end
+  #   render json: {
+  #     success: true,
+  #     next_review_at: flashcard.reload.due_at
+  #   }
+  # end
 end
 
