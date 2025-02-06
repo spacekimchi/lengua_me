@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_30_235017) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_06_033832) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -81,6 +81,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_30_235017) do
     t.index ["name"], name: "index_difficulties_on_name", unique: true
   end
 
+  create_table "flashcard_reviews", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "flashcard_id", null: false
+    t.integer "rating", null: false
+    t.integer "scheduled_days", default: 0, null: false
+    t.integer "elapsed_days", default: 0, null: false
+    t.integer "previous_state", default: 0, null: false
+    t.datetime "review_time", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flashcard_id"], name: "index_flashcard_reviews_on_flashcard_id"
+  end
+
   create_table "flashcards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "deck_id", null: false
@@ -92,6 +104,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_30_235017) do
     t.datetime "due_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "reps", default: 0, null: false
+    t.integer "lapses", default: 0, null: false
+    t.integer "state", default: 0, null: false
+    t.float "stability", default: 0.0, null: false
+    t.float "difficulty", default: 0.0, null: false
+    t.datetime "last_review"
     t.index ["deck_id"], name: "index_flashcards_on_deck_id"
     t.index ["user_id", "deck_id"], name: "index_flashcards_on_user_id_and_deck_id", unique: true
     t.index ["user_id"], name: "index_flashcards_on_user_id"
@@ -408,6 +426,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_30_235017) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "decks", "users"
+  add_foreign_key "flashcard_reviews", "flashcards"
   add_foreign_key "flashcards", "decks"
   add_foreign_key "flashcards", "users"
   add_foreign_key "notes", "passages"

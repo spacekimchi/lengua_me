@@ -1,0 +1,16 @@
+<div>
+  <h2><%= @deck.name %></h2>
+  <div>
+    <div>
+      total: <%= @deck.flashcards.count %>
+      <br>
+      new: <!-- Should be how many unstudied cards are in the due pile -->
+      <br>
+      learning: <!-- How many cards still need to be reviewed -->
+      <br>
+      due: <!-- How many cards are due -->
+    </div>
+    <button type="button" class="button action-button">Study</button>
+    <button type="button" class="button action-button">Add New Cards</button>
+  </div>
+</div>
