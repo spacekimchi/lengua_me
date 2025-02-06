@@ -17,6 +17,15 @@ class DecksController < ApplicationController
     end
   end
 
+  def index
+    @decks = current_user.decks.includes(:flashcards)
+    @deck = current_user.decks.new
+  end
+
+  def show
+    @deck = current_user.decks.find(params[:id])
+  end
+
   private
 
   def deck_params
