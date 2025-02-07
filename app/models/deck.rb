@@ -18,9 +18,23 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Deck < ApplicationRecord
+  DEFAULT_NEW_CARDS_PER_DAY = 20;
+
   belongs_to :user
 
   has_many :flashcards
 
-  validates :name, uniqueness: { scope: :user_id }
+  validates :name, uniqueness: { scope: :user_id }, presence: true
+
+  def new_cards
+    flashcards.where("state = ?", Fsrs::State::NEW)
+      .order(:created_at)
+      .limit(DEFAULT_NEW_CARDS_PER_DAY)
+  end
+
+  def due_cards
+    flashcards.where("due_at <= ?", Time.current)
+      .where.not("state = ?", Fsrs::State::NEW)
+      .order(:due_at)
+  end
 end

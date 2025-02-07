@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_06_033832) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_06_172819) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -111,7 +111,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_06_033832) do
     t.float "difficulty", default: 0.0, null: false
     t.datetime "last_review"
     t.index ["deck_id"], name: "index_flashcards_on_deck_id"
-    t.index ["user_id", "deck_id"], name: "index_flashcards_on_user_id_and_deck_id", unique: true
     t.index ["user_id"], name: "index_flashcards_on_user_id"
   end
 

@@ -73,8 +73,16 @@ Rails.application.routes.draw do
       end
       post 'update_passage_progress', to: 'passage_progresses#update_progress', as: :update_passage_progress
 
-      resources :flashcards, only: %i[index show]
-      resources :decks, only: %i[index create show]
+      resources :flashcards, only: %i[index show create] do
+        member do
+          post 'review'
+        end
+      end
+      resources :decks, only: %i[index create show] do
+        member do
+          get 'study'
+        end
+      end
     end
 
     if Rails.env.development?

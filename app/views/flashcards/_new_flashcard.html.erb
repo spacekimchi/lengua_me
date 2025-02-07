@@ -1,0 +1,32 @@
+<div id="new_flashcard_modal">
+  <h3>Add Flashcards</h3>
+  <%= form_with model: @flashcard, url: flashcards_path, method: :post do |form| %>
+    <% if @flashcard.errors.any? %>
+      <div id="error_explanation">
+        <h4>
+          <%= pluralize(@flashcard.errors.count, "error") %> prohibited this flashcard from being saved:
+        </h4>
+        <ul>
+          <% @flashcard.errors.full_messages.each_with_index do |message, index| %>
+            <li><%= index + 1 %>. <%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= form.hidden_field :deck_id, value: @deck.id %>
+
+    <%= form.label :flashcard_type, "Type:" %>
+    <%= form.select :flashcard_type, Flashcard.flashcard_types.keys.map { |key| [key.humanize, key] }, {} %>
+    <br>
+    <%= form.label :front, "Front:" %>
+    <%= form.textarea :front %>
+    <br>
+    <%= form.label :back, "Back:" %>
+    <%= form.textarea :back %>
+    <br>
+    <%= form.label :additional_info, "Additional Info:" %>
+    <%= form.textarea :additional_info %>
+    <br>
+    <%= form.submit "Submit", class: "submit-field" %>
+  <% end %>
+</div>

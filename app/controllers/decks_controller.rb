@@ -1,6 +1,24 @@
 class DecksController < ApplicationController
   before_action :require_login
 
+  def index
+    @decks = current_user.decks.includes(:flashcards)
+    @deck = current_user.decks.new
+  end
+
+  def show
+    @deck = current_user.decks.find(params[:id])
+    @flashcard = @deck.flashcards.new
+  end
+
+  def study
+    @deck = current_user.decks.find(params[:id])
+    @new_cards = @deck.new_cards
+    @due_cards = @deck.due_cards
+    @flashcards = @new_cards + @due_cards
+    @current_card = @flashcards.present? ? @flashcards[0] : nil
+  end
+
   def create
     @deck = current_user.decks.new(deck_params)
     respond_to do |format|
@@ -15,15 +33,6 @@ class DecksController < ApplicationController
         format.html { render :new }
       end
     end
-  end
-
-  def index
-    @decks = current_user.decks.includes(:flashcards)
-    @deck = current_user.decks.new
-  end
-
-  def show
-    @deck = current_user.decks.find(params[:id])
   end
 
   private

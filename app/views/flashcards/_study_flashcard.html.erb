@@ -1,0 +1,49 @@
+<% if flashcard.present? %>
+  <div data-controller="study-flashcard">
+    <div data-study-flashcard-target="hiddenCard">
+      <% case flashcard.flashcard_type.to_sym %>
+      <% when :normal %>
+        <div id="study_flashcard_front" class="">
+          <%= flashcard.front %>
+        </div>
+      <% when :cloze %>
+        <%= flashcard.cloze %>
+      <% else %>
+        Flashcard Type Not Found!
+      <% end %>
+    </div>
+    <div class="hidden" data-study-flashcard-target="revealedCard">
+      <div id="study_flashcard_back">
+        <%= flashcard.back %>
+      </div>
+      <div id="study_flashcard_notes">
+      </div>
+      <div id="study_rating_options" class="flashcard-rating-options">
+        <%= button_to "Again",
+          review_flashcard_path(flashcard, rating: Fsrs::Rating::AGAIN),
+          class: 'button fatal-button',
+          data: { study_flashcard_target: "againButton" },
+          form: { class: "button_to" } %>
+        <%= button_to "Hard",
+          review_flashcard_path(flashcard, rating: Fsrs::Rating::HARD),
+          class: 'button neutral-button',
+          data: { study_flashcard_target: "hardButton" },
+          form: { class: "button_to" } %>
+        <%= button_to "Good",
+        review_flashcard_path(flashcard, rating: Fsrs::Rating::GOOD),
+        class: 'button action-button',
+        data: { study_flashcard_target: "goodButton" },
+        form: { class: "button_to" } %>
+      <%= button_to "Easy",
+        review_flashcard_path(flashcard, rating: Fsrs::Rating::EASY),
+        class: 'button success-button empty',
+        data: { study_flashcard_target: "easyButton" },
+        form: { class: "button_to" } %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div>
+    Finished! Nothing left to study
+  </div>
+<% end %>

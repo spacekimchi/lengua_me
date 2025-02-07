@@ -33,6 +33,17 @@ button.button {
         &:hover {
             filter: brightness(110%);
         }
+
+        &.empty {
+          border: solid 1px v.$success;
+          background-color: white;
+          color: v.$success;
+
+          &:hover {
+            background-color: v.$success;
+            color: white;
+          }
+        }
     }
 
     &.action-button {
@@ -64,6 +75,18 @@ button.button {
 
         &:hover {
             filter: brightness(95%);
+        }
+
+        &.empty {
+          background-color: white;
+          border: solid 1px v.$gold-warning;
+          color: v.$gold-warning;
+
+          &:hover {
+            background-color: v.$gold-warning;
+            color: white;
+            filter: brightness(95%);
+          }
         }
     }
 

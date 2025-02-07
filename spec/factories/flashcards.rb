@@ -33,6 +33,41 @@
 #
 FactoryBot.define do
   factory :flashcard do
-    
+    association :user
+    association :deck
+
+    trait :new do
+      state { Fsrs::State::NEW }
+    end
+
+    trait :learning do
+      state { Fsrs::State::LEARNING }
+      due_at { Time.now }
+      reps { 1 }
+      lapses { 0 }
+      stability { 0.4 }
+      difficulty { 6.81 }
+      last_review { Time.now - 1 }
+    end
+
+    trait :review do
+      state { Fsrs::State::REVIEW }
+      due_at { Time.now }
+      reps { 2 }
+      lapses { 0 }
+      stability { 0.4 }
+      difficulty { 6.81 }
+      last_review { Time.now - 1 }
+    end
+
+    trait :relearning do
+      state { Fsrs::State::RELEARNING }
+      due_at { Time.now }
+      reps { 3 }
+      lapses { 0 }
+      stability { 2.206888932398359 }
+      difficulty { 6.791199999999999 }
+      last_review { Time.now - 1 }
+    end
   end
 end
