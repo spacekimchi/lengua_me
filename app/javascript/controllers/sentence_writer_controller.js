@@ -478,7 +478,7 @@ export default class extends Controller {
       current_index: idx
     };
 
-    fetch(`/update_passage_progress`, {
+    fetch("/update_passage_progress", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

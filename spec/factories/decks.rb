@@ -19,6 +19,6 @@
 #
 FactoryBot.define do
   factory :deck do
-    
+    name { Faker::name }
   end
 end

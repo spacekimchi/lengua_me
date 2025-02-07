@@ -1,0 +1,6 @@
+<h2><%= @deck.name %></h2>
+<div class="study-decks-container">
+  <div id="study_flashcard">
+    <%= render partial: 'flashcards/study_flashcard', locals: { flashcard: @current_card } %>
+  </div>
+</div>

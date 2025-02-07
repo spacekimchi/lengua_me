@@ -29,7 +29,7 @@ RSpec.describe CheckoutsController, type: :controller do
       it 'redirects to the product price page with a notice' do
         get :new, params: { product_price_id: product_price.id }
         expect(response).to redirect_to(root_path)
-        expect(flash[:notice]).to eq("You are already subscribed to #{product.name}")
+        expect(flash[:notice]).to eq("You are already subscribed to #{product.name}.")
       end
     end
 

@@ -205,6 +205,15 @@ button.button.success-button {
 button.button.success-button:hover {
   filter: brightness(110%);
 }
+button.button.success-button.empty {
+  border: solid 1px green;
+  background-color: white;
+  color: green;
+}
+button.button.success-button.empty:hover {
+  background-color: green;
+  color: white;
+}
 button.button.action-button {
   background-color: white;
   border: solid 1px #0F64CD;
@@ -229,6 +238,16 @@ button.button.warning-button {
   color: white;
 }
 button.button.warning-button:hover {
+  filter: brightness(95%);
+}
+button.button.warning-button.empty {
+  background-color: white;
+  border: solid 1px #F3C623;
+  color: #F3C623;
+}
+button.button.warning-button.empty:hover {
+  background-color: #F3C623;
+  color: white;
   filter: brightness(95%);
 }
 button.button.fatal-button {
@@ -1029,6 +1048,11 @@ footer .footer-container a {
 }
 .flashcards-index-container .flashcard-deck-actions form input[type=submit]:hover:active {
   transform: scale(0.96);
+}
+
+.study-decks-container .flashcard-rating-options {
+  display: flex;
+  flex-direction: row;
 }
 
 .passage-writer-show-container .passage-writer-title-container {

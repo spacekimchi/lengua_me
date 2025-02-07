@@ -21,7 +21,7 @@
        data-sentences="<%= @sentences_data.to_json %>"
        data-current-index="<%= @current_index %>">
        <div class="sentence-writer-navigation" data-sentence-writer-target="navigation">
-         <button  type="button" class="button arrow-button<%= @current_index == 0 ? ' hidden-vis' : '' %>" data-sentence-writer-target="leftNav" data-action="click->sentence-writer#prev keydown.enter->sentence-writer#prev">
+         <button type="button" class="button arrow-button<%= @current_index == 0 ? ' hidden-vis' : '' %>" data-sentence-writer-target="leftNav" data-action="click->sentence-writer#prev keydown.enter->sentence-writer#prev">
            &larr;
          </button>
          <span data-sentence-writer-target="currentIndexNavigation"><%= "#{@current_index + 1} / #{@sentences_data.length}" %></span>
