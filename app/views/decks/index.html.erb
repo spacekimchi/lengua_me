@@ -13,14 +13,14 @@
         <th>Name</th>
         <th>Total</th>
         <th>New</th>
-        <th>Learning</th>
+        <th>Learn</th>
         <th>Due</th>
       </tr>
     </thead>
     <tbody>
       <% @decks.each do |deck| %>
         <tr>
-          <td><%= link_to deck.name, deck_path(deck) %></td>
+          <td><%= link_to deck.name, deck_path(deck), class: "table-link" %></td>
           <td><%= deck.flashcards.count %></td>
           <td>New count</td>
           <td>Learning</td>
