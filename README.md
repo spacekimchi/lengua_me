@@ -5,7 +5,7 @@ The purpose of this project is to create a fast, easy, and insightful way for pr
 # Ruby and Rails versions
 
 - Ruby: 3.3.0
-- Rails: 7.1.3
+- Rails: 8.0.1
 
 # Docker
 
