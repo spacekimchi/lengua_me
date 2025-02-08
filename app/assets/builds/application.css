@@ -1050,9 +1050,30 @@ footer .footer-container a {
   transform: scale(0.96);
 }
 
+.study-decks-container {
+  display: flex;
+  justify-content: center;
+}
+.study-decks-container .hidden-card-content {
+  display: flex;
+  justify-content: center;
+}
+.study-decks-container .revealed-card-content {
+  display: flex;
+  justify-content: center;
+}
 .study-decks-container .flashcard-rating-options {
   display: flex;
   flex-direction: row;
+  position: absolute;
+  transform: translateX(-37%);
+  bottom: 13px;
+}
+.study-decks-container .flashcard-rating-options form:not(:first-child) {
+  margin-left: 3px;
+}
+.study-decks-container .flashcard-rating-options form:not(:last-child) {
+  margin-right: 3px;
 }
 
 .passage-writer-show-container .passage-writer-title-container {
