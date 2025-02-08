@@ -1,21 +1,28 @@
-<div>
+<div class="show-deck-container">
   <h2><%= @deck.name %></h2>
-  <div>
+  <div data-controller="modal">
+    <button type="button" class="button action-button add-flashcards-button" data-action="click->modal#open">
+      Add Flashcards
+    </button>
+    <%= render partial: 'layouts/partials/modal', locals: { partial_name: 'flashcards/new_flashcard' } %>
+  </div>
+  <div class="deck-info-container">
     <div>
-      total: <%= @deck.flashcards.count %>
-      <br>
-      new: <!-- Should be how many unstudied cards are in the due pile -->
-      <br>
-      learning: <!-- How many cards still need to be reviewed -->
-      <br>
-      due: <!-- How many cards are due -->
+      <div>
+        <span>Total:</span> <%= @deck.flashcards.count %>
+      </div>
+      <div>
+        <span>New:</span> <%= @deck.flashcards.where(state: Flashcard::NEW).count %>
+      </div>
+      <div>
+        <span>Learning:</span> <%= @deck.flashcards.where(state: Flashcard::LEARNING).count %>
+      </div>
+      <div>
+        <span>Due:</span> <%= @deck.flashcards.where('due_at <= ?', Time.now).count %>
+      </div>
     </div>
-    <%= link_to "Study", study_deck_path(@deck), class: "button-link" %>
-    <div data-controller="modal">
-      <button type="button" class="button action-button" data-action="click->modal#open">
-        Add Flashcards
-      </button>
-      <%= render partial: 'layouts/partials/modal', locals: { partial_name: 'flashcards/new_flashcard' } %>
+    <div>
+      <%= link_to "Study", study_deck_path(@deck), class: "link-button" %>
     </div>
   </div>
 </div>

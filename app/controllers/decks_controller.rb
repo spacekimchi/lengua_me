@@ -2,8 +2,12 @@ class DecksController < ApplicationController
   before_action :require_login
 
   def index
-    @decks = current_user.decks.includes(:flashcards)
-    @deck = current_user.decks.new
+    @decks = current_user.decks
+    @total_counts_by_deck_id = current_user.flashcards.where(deck: @decks).group(:deck_id).count
+    @new_counts_by_deck_id = current_user.flashcards.where(deck: @decks).where(state: Flashcard::NEW).group(:deck_id).count
+    @learning_counts_by_deck_id = current_user.flashcards.where(deck: @decks).where(state: Flashcard::LEARNING).group(:deck_id).count
+    @due_counts_by_deck_id = current_user.flashcards.where(deck: @decks).where('due_at <= ?', Time.now).group(:deck_id).count
+    @deck = Deck.new
   end
 
   def show

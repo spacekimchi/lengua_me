@@ -1,4 +1,5 @@
 <div id="study_flashcard" class="study-decks-container">
+  <h2><%= @deck.name %></h2>
   <% if flashcard.present? %>
     <div class="study-flashcard-container" data-controller="study-flashcard">
       <div class="hidden-card-content" data-study-flashcard-target="hiddenCard">
@@ -40,7 +41,7 @@
       </div>
     </div>
   <% else %>
-    <div>
+    <div class="finished-deck-study-container">
       Finished! Nothing left to study
     </div>
   <% end %>

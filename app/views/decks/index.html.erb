@@ -1,7 +1,8 @@
 <div class="flashcards-index-container">
+  <h2>Decks</h2>
   <div class="flashcard-deck-actions">
     <div data-controller="modal">
-      <button type="button" class="button action-button" data-action="click->modal#open">
+      <button type="button" class="button action-button create-deck-button" data-action="click->modal#open">
         Create Deck
       </button>
       <%= render partial: 'layouts/partials/modal', locals: { partial_name: 'flashcards/add_deck_form' } %>
@@ -21,10 +22,10 @@
       <% @decks.each do |deck| %>
         <tr>
           <td><%= link_to deck.name, deck_path(deck), class: "table-link" %></td>
-          <td><%= deck.flashcards.count %></td>
-          <td>New count</td>
-          <td>Learning</td>
-          <td>Due</td>
+          <td><%= @total_counts_by_deck_id[deck.id] || 0 %></td>
+          <td><%= @new_counts_by_deck_id[deck.id] || 0 %></td>
+          <td><%= @learning_counts_by_deck_id[deck.id] || 0 %></td>
+          <td><%= @due_counts_by_deck_id[deck.id] || 0 %></td>
         </tr>
       <% end %>
     </tbody>

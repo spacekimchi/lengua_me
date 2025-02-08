@@ -1,6 +1,11 @@
 .study-decks-container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+
+  h2 {
+    text-align: center;
+  }
 
   .hidden-card-content {
     display: flex;
@@ -12,11 +17,20 @@
     justify-content: center;
   }
 
+  > div {
+    padding-top: 23px;
+  }
+
+  .finished-deck-study-container {
+    text-align: center;
+  }
+
   .flashcard-rating-options {
     display: flex;
     flex-direction: row;
     position: absolute;
-    transform: translateX(-37%);
+    transform: translateX(-50%);
+    left: 50%;
     bottom: 13px;
 
     form {
@@ -26,6 +40,57 @@
       &:not(:last-child) {
         margin-right: 3px;
       }
+    }
+  }
+}
+
+.show-deck-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+
+  h2 {
+    text-align: center;
+  }
+
+  .add-flashcards-button {
+    float: right;
+  }
+
+  .deck-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 17px;
+  }
+
+  .deck-info-container > div:first-child {
+    display: grid;
+    grid-template-columns: auto auto; /* Two columns: One for labels, one for numbers */
+    column-gap: 10px; /* Space between the two columns */
+    row-gap: 5px; /* Space between rows */
+  }
+
+  .deck-info-container > div:first-child > div {
+    display: contents; /* Allows the children to behave as grid items */
+  }
+
+  .deck-info-container > div:first-child span {
+    text-align: right;
+    display: inline-block;
+    min-width: 80px; /* Adjust width as needed to align colons */
+  }
+
+  .deck-info-container > div:first-child div:last-child {
+    text-align: left;
+  }
+
+  .deck-info-container > div {
+    flex: 1;
+    
+    &:last-child {
+      text-align: center;
     }
   }
 }

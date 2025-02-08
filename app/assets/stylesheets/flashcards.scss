@@ -3,8 +3,12 @@
 .flashcards-index-container {
   display: flex;
   flex-direction: column;
-  width: 85%;
+  max-width: 400px;
   margin: auto;
+
+  h2 {
+    text-align: center;
+  }
 
   table {
     width: 100%;
@@ -41,6 +45,10 @@
 
   .flashcard-deck-actions {
     margin-bottom: 13px;
+
+    .create-deck-button {
+      float: right;
+    }
 
     form {
       #deck_name {

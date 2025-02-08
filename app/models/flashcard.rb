@@ -32,6 +32,12 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Flashcard < ApplicationRecord
+  NEW = 0
+  LEARNING = 1
+  REVIEW = 2
+  RELEARNING = 3
+  STATES = [NEW, LEARNING, REVIEW, RELEARNING].freeze
+
   belongs_to :user
   belongs_to :deck
 
