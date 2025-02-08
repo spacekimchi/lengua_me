@@ -19,9 +19,7 @@ class FlashcardsController < ApplicationController
     @current_card = @flashcards.present? ? @flashcards[0] : nil
 
     respond_to do |format|
-      format.turbo_stream do
-          render turbo_stream: turbo_stream.replace("study_flashcard", partial: "flashcards/study_flashcard", locals: { flashcard: @current_card })
-      end
+      format.turbo_stream
     end
   end
 

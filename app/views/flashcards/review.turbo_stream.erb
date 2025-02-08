@@ -1,0 +1,3 @@
+<%= turbo_stream.replace 'study_flashcard' do %>
+  <%= render partial: 'flashcards/study_flashcard', locals: { flashcard: @current_card } %>
+<% end %>

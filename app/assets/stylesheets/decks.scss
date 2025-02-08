@@ -1,6 +1,31 @@
 .study-decks-container {
+  display: flex;
+  justify-content: center;
+
+  .hidden-card-content {
+    display: flex;
+    justify-content: center;
+  }
+
+  .revealed-card-content {
+    display: flex;
+    justify-content: center;
+  }
+
   .flashcard-rating-options {
     display: flex;
     flex-direction: row;
+    position: absolute;
+    transform: translateX(-37%);
+    bottom: 13px;
+
+    form {
+      &:not(:first-child) {
+        margin-left: 3px;
+      }
+      &:not(:last-child) {
+        margin-right: 3px;
+      }
+    }
   }
 }

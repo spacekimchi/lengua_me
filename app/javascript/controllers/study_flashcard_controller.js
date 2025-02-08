@@ -30,6 +30,9 @@ export default class extends Controller {
   handleKeyDown(event) {
     if (this.hiddenCardTarget.classList.contains("hidden")) {
       switch(event.key) {
+        case "ArrowLeft":
+          this.toggleFlashcard();
+          break;
         case "Enter":
         case " ":
         case "ArrowRight":
