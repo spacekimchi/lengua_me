@@ -1030,6 +1030,43 @@ footer .footer-container a {
   text-align: left;
 }
 
+.flashcards-index-container {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  margin: auto;
+}
+.flashcards-index-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.flashcards-index-container table th, .flashcards-index-container table td {
+  text-align: left;
+  padding: 8px;
+}
+.flashcards-index-container table .table-link {
+  height: 100%;
+  width: 100%;
+  display: inline-table;
+}
+.flashcards-index-container table th:nth-child(2),
+.flashcards-index-container table th:nth-child(3),
+.flashcards-index-container table th:nth-child(4),
+.flashcards-index-container table th:nth-child(5),
+.flashcards-index-container table td:nth-child(2),
+.flashcards-index-container table td:nth-child(3),
+.flashcards-index-container table td:nth-child(4),
+.flashcards-index-container table td:nth-child(5) {
+  width: 7%;
+  text-align: right;
+}
+.flashcards-index-container table th:nth-child(1),
+.flashcards-index-container table td:nth-child(1) {
+  width: auto;
+}
+.flashcards-index-container .flashcard-deck-actions {
+  margin-bottom: 13px;
+}
 .flashcards-index-container .flashcard-deck-actions form #deck_name {
   border-bottom: solid black 1px;
   width: 100px;
