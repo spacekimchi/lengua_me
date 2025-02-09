@@ -20,18 +20,9 @@
           <li><%= link_to t('.errors'), admin_application_errors_path %></li>
         <% else %>
           <li><%= link_to t('.exercises'), passages_path %></li>
-<<<<<<< Updated upstream
-          <%= if current_user.admin? %>
-            <li><%= link_to t('.flashcards'), decks_path %></li>
-          <% end %>
-=======
-<<<<<<< Updated upstream
-=======
           <% if current_user.admin? %>
             <li><%= link_to t('.flashcards'), decks_path %></li>
           <% end %>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
           <li><%= link_to t('.support'), new_support_tickets_path %></li>
           <li><%= link_to t('.faq'), faq_index_path %></li>
         <% end %>
