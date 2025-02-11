@@ -1,0 +1,7 @@
+<tr>
+  <td><%= link_to deck.name, deck_path(deck), class: "table-link" %></td>
+  <td><%= total_counts_by_deck_id[deck.id] || 0 %></td>
+  <td><%= new_counts_by_deck_id[deck.id] || 0 %></td>
+  <td><%= learning_counts_by_deck_id[deck.id] || 0 %></td>
+  <td><%= due_counts_by_deck_id[deck.id] || 0 %></td>
+</tr>

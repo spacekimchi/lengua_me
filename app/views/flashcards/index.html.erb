@@ -4,7 +4,7 @@
       <button type="button" class="button action-button" data-action="click->modal#open">
         Create Deck
       </button>
-      <%= render partial: 'layouts/partials/modal', locals: { partial_name: 'flashcards/add_deck_form' } %>
+      <%= render partial: 'layouts/partials/modal', locals: { partial_name: 'flashcards/add_deck_form', locals: { deck: @deck } } %>
     </div>
   </div>
   <table>

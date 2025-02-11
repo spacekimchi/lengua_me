@@ -1,1 +1,9 @@
 <%= render partial: 'partials/flash' %>
+
+<%= turbo_stream.append 'decks' do %>
+  <%= render partial: 'decks/index_table_row', locals: { deck: @deck, total_counts_by_deck_id: @total_counts_by_deck_id, new_counts_by_deck_id: @new_counts_by_deck_id, learning_counts_by_deck_id: @learning_counts_by_deck_id, due_counts_by_deck_id: @due_counts_by_deck_id } %>
+<% end %>
+
+<%= turbo_stream.replace 'deck_form' do %>
+  <%= render partial: 'flashcards/add_deck_form', locals: { deck: @new_deck } %>
+<% end %>

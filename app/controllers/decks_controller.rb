@@ -27,12 +27,18 @@ class DecksController < ApplicationController
     @deck = current_user.decks.new(deck_params)
     respond_to do |format|
       if @deck.save
+        @total_counts_by_deck_id = current_user.flashcards.where(deck: @decks).group(:deck_id).count
+        @new_counts_by_deck_id = current_user.flashcards.where(deck: @decks).where(state: Flashcard::NEW).group(:deck_id).count
+        @learning_counts_by_deck_id = current_user.flashcards.where(deck: @decks).where(state: Flashcard::LEARNING).group(:deck_id).count
+        @due_counts_by_deck_id = current_user.flashcards.where(deck: @decks).where('due_at <= ?', Time.now).group(:deck_id).count
+        @new_deck = Deck.new
+
         flash[:success] = "Successfully created a new deck."
         format.turbo_stream
         format.html { redirect_to decks_path, notice: "Deck created." }
       else
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace("deck_form", partial: "flashcards/add_deck_form")
+          render turbo_stream: turbo_stream.replace("deck_form", partial: "flashcards/add_deck_form", locals: { deck: @deck })
         end
         format.html { render :new }
       end

@@ -5,7 +5,7 @@
     <!-- Modal content target -->
     <div data-modal-target="content">
       <!-- Render your form partial or passed partial content -->
-      <%= render partial: partial_name %>
+      <%= render partial: partial_name, locals: (locals rescue {}) %>
     </div>
   </div>
 </div>

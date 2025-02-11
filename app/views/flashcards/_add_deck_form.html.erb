@@ -1,13 +1,13 @@
 <div id="deck_form">
   <h3>Create a deck</h3>
-  <%= form_with model: @deck, url: decks_path, method: :post do |form| %>
-    <% if @deck.errors.any? %>
+  <%= form_with model: deck, url: decks_path, method: :post, data: { turbo_stream: false } do |form| %>
+    <% if deck.errors.any? %>
       <div id="error_explanation">
         <h4>
-          <%= pluralize(@deck.errors.count, "error") %> prohibited this deck from being saved:
+          <%= pluralize(deck.errors.count, "error") %> prohibited this deck from being saved:
         </h4>
         <ul>
-          <% @deck.errors.full_messages.each_with_index do |message, index| %>
+          <% deck.errors.full_messages.each_with_index do |message, index| %>
             <li><%= index + 1 %>. <%= message %></li>
           <% end %>
         </ul>
@@ -15,7 +15,7 @@
     <% end %>
 
     <%= form.label :name, "Name:" %>
-    <%= form.text_field :name, style: "text-align: center;" %>
+    <%= form.text_field :name, style: "border-bottom: solid 1px black;" %>
     <%= form.submit "Submit", class: "submit-field" %>
   <% end %>
 </div>

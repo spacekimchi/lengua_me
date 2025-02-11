@@ -5,7 +5,7 @@
       <button type="button" class="button action-button create-deck-button" data-action="click->modal#open">
         Create Deck
       </button>
-      <%= render partial: 'layouts/partials/modal', locals: { partial_name: 'flashcards/add_deck_form' } %>
+      <%= render partial: 'layouts/partials/modal', locals: { partial_name: 'flashcards/add_deck_form', locals: { deck: @deck } } %>
     </div>
   </div>
   <table>
@@ -18,15 +18,9 @@
         <th>Due</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="decks">
       <% @decks.each do |deck| %>
-        <tr>
-          <td><%= link_to deck.name, deck_path(deck), class: "table-link" %></td>
-          <td><%= @total_counts_by_deck_id[deck.id] || 0 %></td>
-          <td><%= @new_counts_by_deck_id[deck.id] || 0 %></td>
-          <td><%= @learning_counts_by_deck_id[deck.id] || 0 %></td>
-          <td><%= @due_counts_by_deck_id[deck.id] || 0 %></td>
-        </tr>
+        <%= render partial: 'decks/index_table_row', locals: { deck: deck, total_counts_by_deck_id: @total_counts_by_deck_id, new_counts_by_deck_id: @new_counts_by_deck_id, learning_counts_by_deck_id: @learning_counts_by_deck_id, due_counts_by_deck_id: @due_counts_by_deck_id } %>
       <% end %>
     </tbody>
   </table>
