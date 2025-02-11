@@ -879,7 +879,6 @@ footer .footer-container a {
   background-color: #fff;
   padding: 20px 30px;
   border-radius: 8px;
-  width: 80%;
   max-width: 600px;
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -1072,10 +1071,6 @@ footer .footer-container a {
 }
 .flashcards-index-container .flashcard-deck-actions .create-deck-button {
   float: right;
-}
-.flashcards-index-container .flashcard-deck-actions form #deck_name {
-  border-bottom: solid black 1px;
-  width: 100px;
 }
 .flashcards-index-container .flashcard-deck-actions form input[type=submit] {
   padding: 0 7px;
