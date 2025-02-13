@@ -29,6 +29,7 @@ export default class extends Controller {
 
   handleKeyDown(event) {
     if (this.hiddenCardTarget.classList.contains("hidden")) {
+      console.log("I AM HIDDEN AND CLICKED event:", event);
       switch(event.key) {
         case "ArrowLeft":
           this.toggleFlashcard();
@@ -37,16 +38,16 @@ export default class extends Controller {
         case " ":
         case "ArrowRight":
         case "ArrowDown":
-        case 3:
+        case "3":
           this.goodButtonTarget.click();
           break;
-        case 1:
+        case "1":
           this.againButtonTarget.click();
           break;
-        case 2:
+        case "2":
           this.hardButtonTarget.click();
           break;
-        case 4:
+        case "4":
           this.easyButtonTarget.click();
       }
     } else {
@@ -55,10 +56,10 @@ export default class extends Controller {
         case " ":
         case "ArrowRight":
         case "ArrowDown":
-        case 1:
-        case 2:
-        case 3:
-        case 4:
+        case "1":
+        case "2":
+        case "3":
+        case "4":
           this.toggleFlashcard();
       }
     }

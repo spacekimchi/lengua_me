@@ -39,6 +39,7 @@ class FlashcardSchedulerService
   end
 
   def self.get_due_dates(flashcard, now = Time.now.utc)
+    return nil if not flashcard.present?
     fsrs_card = setup_fsrs_card(flashcard, now)
     # rating should be one of Fsrs::Rating::AGAIN, Fsrs::Rating::HARD,
     # Fsrs::Rating::GOOD, or Fsrs::Rating::EASY
