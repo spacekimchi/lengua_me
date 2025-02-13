@@ -1,1 +1,9 @@
 <%= render partial: 'partials/flash' %>
+
+<%= turbo_stream.replace 'deck_show_info_container' do %>
+  <%= render partial: 'flashcards/deck_show_info_container', locals: { deck: @deck } %>
+<% end %>
+
+<%= turbo_stream.replace 'new_flashcard_modal' do %>
+  <%= render partial: 'flashcards/new_flashcard', locals: { flashcard: @new_flashcard, deck: @deck } %>
+<% end %>

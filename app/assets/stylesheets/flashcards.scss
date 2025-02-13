@@ -49,30 +49,5 @@
     .create-deck-button {
       float: right;
     }
-
-    form {
-      input[type="submit"] {
-        padding: 0 7px;
-        border-radius: 3px;
-        cursor: pointer;
-        background-color: white;
-        border: solid 1px v.$korean-blue;
-        color: v.$korean-blue;
-
-        &:hover {
-          background-color: v.$korean-blue;
-          color: white;
-
-          &:active {
-            transform: scale(0.96);
-          }
-        }
-      }
-
-      textarea {
-        border: solid 1px black;
-        border-radius: 3px;
-      }
-    }
   }
 }
