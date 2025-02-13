@@ -14,9 +14,11 @@
       </div>
     <% end %>
     <%= form.hidden_field :deck_id, value: @deck.id %>
+    <%= form.hidden_field :flashcard_type, value: 0 %>
 
-    <%= form.label :flashcard_type, "Type:" %>
-    <%= form.select :flashcard_type, Flashcard.flashcard_types.keys.map { |key| [key.humanize, key] }, {} %>
+    <%#= form.label :flashcard_type, "Type:" %>
+    <%#= form.select :flashcard_type, Flashcard.flashcard_types.keys.map { |key| [key.humanize, key] }, {} %>
+
     <br>
     <%= form.label :front, "Front:" %>
     <%= form.textarea :front %>

@@ -1087,6 +1087,10 @@ footer .footer-container a {
 .flashcards-index-container .flashcard-deck-actions form input[type=submit]:hover:active {
   transform: scale(0.96);
 }
+.flashcards-index-container .flashcard-deck-actions form textarea {
+  border: solid 1px black;
+  border-radius: 3px;
+}
 
 .study-decks-container {
   display: flex;
@@ -1165,6 +1169,10 @@ footer .footer-container a {
 }
 .show-deck-container .deck-info-container > div:last-child {
   text-align: center;
+}
+.show-deck-container textarea {
+  border: solid 1px black;
+  border-radius: 3px;
 }
 
 .passage-writer-show-container .passage-writer-title-container {
