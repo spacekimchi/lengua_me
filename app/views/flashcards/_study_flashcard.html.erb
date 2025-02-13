@@ -17,22 +17,22 @@
           <%= flashcard.back %>
         </div>
         <div id="study_rating_options" class="flashcard-rating-options">
-          <%= button_to "Again",
+          <%= button_to "Again #{stom(@due_dates[Fsrs::Rating::AGAIN])}",
             review_flashcard_path(flashcard, rating: Fsrs::Rating::AGAIN),
             class: 'button fatal-button',
             data: { study_flashcard_target: "againButton" },
             form: { class: "button_to" } %>
-          <%= button_to "Hard",
+          <%= button_to "Hard #{stom(@due_dates[Fsrs::Rating::HARD])}",
           review_flashcard_path(flashcard, rating: Fsrs::Rating::HARD),
           class: 'button neutral-button',
           data: { study_flashcard_target: "hardButton" },
           form: { class: "button_to" } %>
-        <%= button_to "Good",
+        <%= button_to "Good #{stom(@due_dates[Fsrs::Rating::GOOD])}",
           review_flashcard_path(flashcard, rating: Fsrs::Rating::GOOD),
           class: 'button action-button',
           data: { study_flashcard_target: "goodButton" },
           form: { class: "button_to" } %>
-        <%= button_to "Easy",
+        <%= button_to "Easy #{stom(@due_dates[Fsrs::Rating::EASY])}",
           review_flashcard_path(flashcard, rating: Fsrs::Rating::EASY),
           class: 'button success-button empty',
           data: { study_flashcard_target: "easyButton" },

@@ -37,6 +37,8 @@ class Flashcard < ApplicationRecord
   REVIEW = 2
   RELEARNING = 3
   STATES = [NEW, LEARNING, REVIEW, RELEARNING].freeze
+  NORMAL = :normal
+  CLOZE = :cloze
 
   belongs_to :user
   belongs_to :deck

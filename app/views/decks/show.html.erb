@@ -4,25 +4,7 @@
     <button type="button" class="button action-button add-flashcards-button" data-action="click->modal#open">
       Add Flashcards
     </button>
-    <%= render partial: 'layouts/partials/modal', locals: { partial_name: 'flashcards/new_flashcard' } %>
+    <%= render partial: 'layouts/partials/modal', locals: { partial_name: 'flashcards/new_flashcard', locals: { flashcard: @flashcard, deck: @deck } } %>
   </div>
-  <div class="deck-info-container">
-    <div>
-      <div>
-        <span>Total:</span> <%= @deck.flashcards.count %>
-      </div>
-      <div>
-        <span>New:</span> <%= @deck.flashcards.where(state: Flashcard::NEW).count %>
-      </div>
-      <div>
-        <span>Learning:</span> <%= @deck.flashcards.where(state: Flashcard::LEARNING).count %>
-      </div>
-      <div>
-        <span>Due:</span> <%= @deck.flashcards.where('due_at <= ?', Time.now).count %>
-      </div>
-    </div>
-    <div>
-      <%= link_to "Study", study_deck_path(@deck), class: "link-button" %>
-    </div>
-  </div>
+  <%= render partial: 'flashcards/deck_show_info_container', locals: { deck: @deck } %>
 </div>

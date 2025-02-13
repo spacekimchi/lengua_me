@@ -1,0 +1,19 @@
+<div id="deck_show_info_container" class="deck-info-container">
+  <div>
+    <div>
+      <span>Total:</span> <%= deck.flashcards.count %>
+    </div>
+    <div>
+      <span>New:</span> <%= deck.flashcards.where(state: Flashcard::NEW).count %>
+    </div>
+    <div>
+      <span>Learning:</span> <%= deck.flashcards.where(state: Flashcard::LEARNING).count %>
+    </div>
+    <div>
+      <span>Due:</span> <%= deck.flashcards.where('due_at <= ?', Time.now).count %>
+    </div>
+  </div>
+  <div>
+    <%= link_to "Study", study_deck_path(deck), class: "link-button" %>
+  </div>
+</div>

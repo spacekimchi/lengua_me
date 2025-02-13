@@ -17,10 +17,12 @@ class DecksController < ApplicationController
 
   def study
     @deck = current_user.decks.find(params[:id])
+
     @new_cards = @deck.new_cards
     @due_cards = @deck.due_cards
     @flashcards = @new_cards + @due_cards
     @current_card = @flashcards.present? ? @flashcards[0] : nil
+    @due_dates = FlashcardSchedulerService.get_due_dates(@current_card)
   end
 
   def create

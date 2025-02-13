@@ -14,6 +14,25 @@ module ApplicationHelper
     end
   end
 
+  def stom(seconds)
+    return "0s" if !seconds || seconds == 0
+
+    days = seconds / 86400
+    seconds %= 86400
+    hours = seconds / 3600
+    seconds %= 3600
+    minutes = seconds / 60
+    seconds %= 60
+
+    result = []
+    result << "#{days}d" if days > 0
+    result << "#{hours}h" if hours > 0
+    result << "#{minutes}m" if minutes > 0
+    result << "#{seconds}s" if seconds > 0
+
+    result.join(" ")
+  end
+
   def flag_emoji(locale)
     country_code = Language::LOCALE_COUNTRY_MAP[locale.to_s]
     # Ensure the locale corresponds to a valid country code

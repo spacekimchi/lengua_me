@@ -17,6 +17,7 @@ class FlashcardsController < ApplicationController
     @due_cards = @deck.due_cards
     @flashcards = @new_cards + @due_cards
     @current_card = @flashcards.present? ? @flashcards[0] : nil
+    @due_dates = FlashcardSchedulerService.get_due_dates(@current_card)
 
     respond_to do |format|
       format.turbo_stream
@@ -30,6 +31,7 @@ class FlashcardsController < ApplicationController
 
     respond_to do |format|
       if @flashcard.save
+        @new_flashcard = Flashcard.new
         flash[:success] = "Successfully added a flashcard"
         format.turbo_stream
       else
