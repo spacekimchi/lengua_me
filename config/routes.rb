@@ -31,6 +31,11 @@ Rails.application.routes.draw do
 
     resources :verifications, only: [:edit], param: :verification_token
 
+    if Rails.env.development?
+      mount GoodJob::Engine => 'good_job'
+      mount LetterOpenerWeb::Engine, at: "/letter_opener"
+    end
+
     constraints Clearance::Constraints::SignedIn.new { |user| user.super_admin? } do
       namespace :admin do
         root 'dashboard#show'
@@ -72,22 +77,17 @@ Rails.application.routes.draw do
         post 'billing_portal_sessions', to: 'billing_portal_sessions#create'
       end
       post 'update_passage_progress', to: 'passage_progresses#update_progress', as: :update_passage_progress
-
-      resources :flashcards, only: %i[index show create] do
-        member do
-          post 'review'
-        end
-      end
-      resources :decks, only: %i[index create show] do
-        member do
-          get 'study'
-        end
-      end
     end
 
-    if Rails.env.development?
-      mount GoodJob::Engine => 'good_job'
-      mount LetterOpenerWeb::Engine, at: "/letter_opener"
+    resources :flashcards, only: %i[index show create] do
+      member do
+        post 'review'
+      end
+    end
+    resources :decks, only: %i[index create show] do
+      member do
+        get 'study'
+      end
     end
 
     # For Stripe webhooks
