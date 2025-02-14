@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_06_172819) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_14_001751) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -412,6 +412,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_06_172819) do
     t.index ["stripe_customer_id"], name: "index_users_on_stripe_customer_id", unique: true
   end
 
+  create_table "word_definitions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "word_id", null: false
+    t.text "definition", null: false
+    t.text "part_of_speech"
+    t.text "example_sentence"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["word_id"], name: "index_word_definitions_on_word_id"
+  end
+
   create_table "words", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "language_id", null: false
     t.boolean "is_name", default: false
@@ -450,5 +460,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_06_172819) do
   add_foreign_key "user_subscriptions", "product_prices"
   add_foreign_key "user_subscriptions", "products"
   add_foreign_key "user_subscriptions", "users"
+  add_foreign_key "word_definitions", "words"
   add_foreign_key "words", "languages"
 end

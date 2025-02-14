@@ -20,6 +20,6 @@
 #
 FactoryBot.define do
   factory :word do
-    
+    text { Faker::Lorem.word }
   end
 end

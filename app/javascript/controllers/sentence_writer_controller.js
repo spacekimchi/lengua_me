@@ -25,7 +25,8 @@ export default class extends Controller {
     "mainContainer",
     "completedContainer",
     "navigation",
-    "resetPassageProgress"
+    "resetPassageProgress",
+    "vocabularyDiv"
   ];
 
   initialize() {
