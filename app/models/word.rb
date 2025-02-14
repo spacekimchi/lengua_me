@@ -20,7 +20,9 @@
 #
 class Word < ApplicationRecord
   belongs_to :language
-  has_many :pronunciations
+
+  has_many :pronunciations, dependent: :destroy
+  has_many :word_definitions, dependent: :destroy
 
   validates :text, presence: true
 
