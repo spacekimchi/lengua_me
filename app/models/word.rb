@@ -20,9 +20,11 @@
 #
 class Word < ApplicationRecord
   belongs_to :language
+  belongs_to :base_word, class_name: "Word", optional: true
 
   has_many :pronunciations, dependent: :destroy
   has_many :word_definitions, dependent: :destroy
+  has_many :inflections, class_name: "Word", foreign_key: :base_word_id
 
   validates :text, presence: true
 

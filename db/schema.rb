@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_14_001751) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_14_032718) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -428,6 +428,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_14_001751) do
     t.text "text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "base_word_id"
+    t.index ["base_word_id"], name: "index_words_on_base_word_id"
     t.index ["language_id", "text"], name: "index_words_on_language_id_and_text", unique: true
     t.index ["language_id"], name: "index_words_on_language_id"
   end
@@ -462,4 +464,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_14_001751) do
   add_foreign_key "user_subscriptions", "users"
   add_foreign_key "word_definitions", "words"
   add_foreign_key "words", "languages"
+  add_foreign_key "words", "words", column: "base_word_id"
 end
