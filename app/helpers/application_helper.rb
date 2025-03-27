@@ -43,8 +43,18 @@ module ApplicationHelper
     end
   end
 
+  def teachers_route?
+    country_codes = Language::LOCALE_COUNTRY_MAP.keys
+    regex_pattern = Regexp.new("^/(#{country_codes.join('|')})?/teachers")
+
+    request.path.match?(regex_pattern)
+  end
+
   def admin_route?
-    request.path.start_with?('/admin')
+    country_codes = Language::LOCALE_COUNTRY_MAP.keys
+    regex_pattern = Regexp.new("^/(#{country_codes.join('|')})?/admin")
+
+    request.path.match?(regex_pattern)
   end
 
   def urlify(string)

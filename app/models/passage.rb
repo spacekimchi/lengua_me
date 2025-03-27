@@ -9,15 +9,18 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  difficulty_id :uuid             not null
+#  user_id       :uuid
 #
 # Indexes
 #
 #  index_passages_on_difficulty_id  (difficulty_id)
 #  index_passages_on_title_trgm     (title) USING gin
+#  index_passages_on_user_id        (user_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (difficulty_id => difficulties.id)
+#  fk_rails_...  (user_id => users.id)
 #
 class Passage < ApplicationRecord
   include PgSearch::Model
@@ -25,9 +28,12 @@ class Passage < ApplicationRecord
   enum :category, [:unassigned, :short_stories, :conversations], default: :unassigned
 
   belongs_to :difficulty
+  belongs_to :user, optional: true
 
   has_many :sentences, dependent: :destroy
   has_many :passage_progresses, dependent: :destroy
+
+  accepts_nested_attributes_for :sentences, allow_destroy: true
 
   pg_search_scope :search_by_position_and_title,
                   against: [:position, :title],

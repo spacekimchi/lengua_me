@@ -12,9 +12,9 @@
 #
 # Indexes
 #
-#  index_tts_voices_on_language_code             (language_code)
-#  index_tts_voices_on_provider                  (provider)
-#  index_tts_voices_on_provider_id_and_provider  (provider_id,provider) UNIQUE
+#  index_tts_voices_on_language_code                               (language_code)
+#  index_tts_voices_on_provider                                    (provider)
+#  index_tts_voices_on_provider_id_and_provider_and_language_code  (provider_id,provider,language_code) UNIQUE
 #
 require 'rails_helper'
 

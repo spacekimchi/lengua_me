@@ -11,4 +11,21 @@ class Tmp
       Passage.where(title: titles).update_all(category: :conversation)
     end
   end
+
+  def self.tts_voices
+    english_voices = [
+      ['Australia', 'en-AU', 'en-AU-Chirp-HD-D', 'male', 'Australian'],
+      ['Australia', 'en-AU', 'en-AU-Chirp3-HD-Leda', 'female', 'Australian'],
+
+      ['Britain', 'en-GB', 'en-GB-Chirp3-HD-Charon', 'male', 'British'],
+      ['Britain', 'en-GB', 'en-GB-Chirp-HD-F', 'female', 'British'],
+
+      ['United States', 'en-US', 'en-US-Chirp-HD-D', 'male', 'United States'],
+      ['United States', 'en-US', 'en-US-Chirp-HD-F', 'female', 'United States']
+    ]
+
+    english_voices.each do |voice|
+      TtsVoice.find_or_create_by(accent: voice[0], language_code: voice[1], provider_id: voice[2], gender: voice[3], provider: 'google', name: voice[4])
+    end
+  end
 end

@@ -17,9 +17,10 @@ class Role < ApplicationRecord
   ADMIN = 'admin'.freeze
   REGULAR = 'regular'.freeze
   SUPER_ADMIN = 'super_admin'.freeze
+  TEACHER = 'teacher'.freeze
 
-  NAMES = [ADMIN, REGULAR, SUPER_ADMIN].freeze
-  enum :name, [:regular, :admin, :super_admin], default: :regular
+  NAMES = [ADMIN, REGULAR, SUPER_ADMIN, TEACHER].freeze
+  enum :name, [:regular, :admin, :super_admin, :teacher], default: :regular
 
   has_many :user_roles
   has_many :users, through: :user_roles
@@ -39,6 +40,10 @@ class Role < ApplicationRecord
     Role.find_by(name: SUPER_ADMIN)
   end
 
+  def self.create_teacher_role
+    find_or_create_by(name: :teacher)
+  end
+
   def regular?
     name == REGULAR
   end
@@ -49,5 +54,9 @@ class Role < ApplicationRecord
 
   def super_admin?
     name == SUPER_ADMIN
+  end
+
+  def teacher?
+    name == TEACHER
   end
 end

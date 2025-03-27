@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_14_032718) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_05_022322) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -240,8 +240,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_14_032718) do
     t.integer "category", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_id"
     t.index ["difficulty_id"], name: "index_passages_on_difficulty_id"
     t.index ["title"], name: "index_passages_on_title_trgm", opclass: :gin_trgm_ops, using: :gin
+    t.index ["user_id"], name: "index_passages_on_user_id"
   end
 
   create_table "product_prices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -366,7 +368,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_14_032718) do
     t.integer "provider", default: 0, null: false
     t.index ["language_code"], name: "index_tts_voices_on_language_code"
     t.index ["provider"], name: "index_tts_voices_on_provider"
-    t.index ["provider_id", "provider"], name: "index_tts_voices_on_provider_id_and_provider", unique: true
+    t.index ["provider_id", "provider", "language_code"], name: "index_tts_voices_on_provider_id_and_provider_and_language_code", unique: true
   end
 
   create_table "user_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -445,6 +447,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_14_032718) do
   add_foreign_key "passage_progresses", "passages"
   add_foreign_key "passage_progresses", "users"
   add_foreign_key "passages", "difficulties"
+  add_foreign_key "passages", "users"
   add_foreign_key "product_prices", "products"
   add_foreign_key "pronunciations", "tts_voices"
   add_foreign_key "pronunciations", "words"

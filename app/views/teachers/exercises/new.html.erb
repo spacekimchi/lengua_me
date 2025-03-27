@@ -1,0 +1,88 @@
+<div class="teachers-exercises-new-container">
+  <h1>New Exercise</h1>
+  <!-- app/views/passages/_form.html.erb (for example) -->
+  <% if @passage.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@passage.errors.count, "error") %> prohibited this passage from being saved:</h2>
+      <ul>
+        <% @passage.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with(model: @passage, url: teachers_exercises_path, local: true, data: { controller: "nested-forms" }) do |f| %>
+    <div>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+
+    <div>
+      <%= f.label :category %>
+      <%= f.select(:category, Passage.categories.map { |name, _| [name.titleize, name] }) %>
+    </div>
+
+    <div>
+      <%= f.label :difficulty %>
+      <%= f.select(:difficulty_id, Difficulty.select(:id, :name).map { |d| [d.name.titleize, d.id] }) %>
+    </div>
+
+    <hr>
+
+    <!-- Container for nested Sentence fields -->
+    <div data-nested-forms-target="container">
+      <%= f.fields_for :sentences do |sentence_form| %>
+        <div class="nested-fields" data-new-record="false">
+          <%= sentence_form.hidden_field :id %>
+          <%= sentence_form.hidden_field :language_id, @english.id %>
+
+          <%= sentence_form.label :content, "Sentence Content" %>
+          <%= sentence_form.text_field :content %>
+
+          <%= sentence_form.label :voice, "Voice" %>
+          <%= sentence_form.select(:tts_voice_id, TtsVoice.default_english.map { |voice| ["#{voice.name} #{voice.gender}", voice.id]}) %>
+
+          <!-- Hidden field for destruction -->
+          <%= sentence_form.hidden_field :_destroy %>
+
+          <button type="button"
+                  data-action="click->nested-forms#removeAssociation">
+                  Remove
+          </button>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Button to add a new Sentence -->
+    <button type="button"
+            data-action="click->nested-forms#addAssociation">
+            Add Another Sentence
+    </button>
+
+    <!-- Hidden template for new sentence fields -->
+    <template data-nested-forms-target="template">
+      <div class="nested-fields" data-new-record="true">
+        <input type="hidden" name="passage[sentences_attributes][NEW_RECORD][id]" id="passage_sentences_attributes_NEW_RECORD_id" value="" />
+        <input type="hidden" name="passage[sentences_attributes]NEW_RECORD][language_id]" id="passage_sentences_attributes_NEW_RECORD_language_d" value="<%= @english.id %>" />
+
+        <label for="passage_sentences_attributes_NEW_RECORD_content">Sentence Content</label>
+        <input type="text" name="passage[sentences_attributes][NEW_RECORD][content]" id="passage_sentences_attributes_NEW_RECORD_content" />
+
+        <!-- TTS Voice -->
+        <label for="passage_sentences_attributes_NEW_RECORD_tts_voice_id">Voice</label>
+        <select name="passage[sentences_attributes][NEW_RECORD][tts_voice_id]" id="passage_sentences_attributes_NEW_RECORD_tts_voice_id">
+          <% TtsVoice.default_english.each do |voice| %>
+            <option value="<%= voice.id %>"><%= "#{voice.name} #{voice.gender}" %></option>
+          <% end %>
+        </select>
+
+        <input type="hidden" name="passage[sentences_attributes][NEW_RECORD][_destroy]" id="passage_sentences_attributes_NEW_RECORD__destroy" value="false" />
+
+        <button type="button" data-action="click->nested-forms#removeAssociation">Remove</button>
+      </div>
+    </template>
+    <hr>
+    <%= f.submit "Save Passage" %>
+  <% end %>
+</div>

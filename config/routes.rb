@@ -95,6 +95,12 @@ Rails.application.routes.draw do
       post 'webhooks', to: 'webhooks#create'
     end
 
+    resources :teachers, only: %i[index]
+
+    namespace :teachers do
+      resources :exercises, only: %i[index show create new]
+    end
+
     resources :topics, param: :name do
       resources :passage_reader, controller: 'topics/passage_reader'
       resources :passage_writer, controller: 'topics/passage_writer'

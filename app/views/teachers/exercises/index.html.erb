@@ -1,0 +1,11 @@
+<div class="teachers-exercises-index-container">
+  <%= link_to 'New', new_teachers_exercise_path, class: 'link link-button' %>
+
+  <div class="items-grid">
+    <% @passages.each_with_index do |item, index| %>
+      <div class="grid-item">
+        <div><%= index %></div>
+      </div>
+    <% end %>
+  </div>
+</div>

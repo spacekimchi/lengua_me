@@ -33,6 +33,7 @@ class User < ApplicationRecord
   has_many :passage_progresses, dependent: :destroy
   has_many :decks, dependent: :destroy
   has_many :flashcards, through: :decks
+  has_many :passages
 
   scope :active_users, lambda {
     joins(:user_subscriptions)
@@ -74,6 +75,10 @@ class User < ApplicationRecord
     ApplicationError.new(application_error_params).with_backtrace_from_error(e).save
   rescue Stripe::StripeError => e
     puts "Another problem occurred, maybe unrelated to Stripe. error: #{e}"
+  end
+
+  def teacher?
+    roles.teacher.present?
   end
 
   def admin?

@@ -12,9 +12,9 @@
 #
 # Indexes
 #
-#  index_tts_voices_on_language_code             (language_code)
-#  index_tts_voices_on_provider                  (provider)
-#  index_tts_voices_on_provider_id_and_provider  (provider_id,provider) UNIQUE
+#  index_tts_voices_on_language_code                               (language_code)
+#  index_tts_voices_on_provider                                    (provider)
+#  index_tts_voices_on_provider_id_and_provider_and_language_code  (provider_id,provider,language_code) UNIQUE
 #
 class TtsVoice < ApplicationRecord
 
@@ -28,6 +28,17 @@ class TtsVoice < ApplicationRecord
 
   enum :provider, [:google, :elevenlabs, :playht], default: :google
   enum :gender, [:male, :female], default: :male
+
+  scope :default_english, -> {
+    where(provider_id: ['en-AU-Chirp-HD-D',
+                        'en-AU-Chirp3-HD-Leda',
+                        'en-GB-Chirp3-HD-Charon',
+                        'en-GB-Chirp-HD-F',
+                        'en-US-Chirp-HD-D',
+                        'en-US-Chirp-HD-F'])
+    .order(:name, :gender)
+    .select(:id, :name, :gender)
+  }
 
   def self.default_voices(language_code:, gender:)
     case language_code

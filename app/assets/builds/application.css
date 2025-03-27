@@ -1616,6 +1616,10 @@ footer .footer-container a {
   color: red;
 }
 
+.teachers-exercises-index-container {
+  color: pink;
+}
+
 html, body {
   height: 100%;
 }
@@ -1628,7 +1632,7 @@ body .main-content {
   max-width: 1280px;
   width: 100%;
   margin: auto;
-  padding: 6.75rem 0.5rem 0.5rem 0.5rem;
+  padding: 6.9rem 0.5rem 0.5rem 0.5rem;
   flex: 1;
 }
 body .main-content .other-links {
@@ -1656,6 +1660,6 @@ body .line-separator {
 }
 @media (max-width: 768px) {
   body .main-content {
-    padding: 6.5rem 0.75rem 0.5rem 0.75rem;
+    padding: 6.9rem 0.75rem 0.5rem 0.75rem;
   }
 }

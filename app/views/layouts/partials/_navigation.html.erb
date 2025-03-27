@@ -11,13 +11,15 @@
       </button>
 
       <ul class="nav-links" id="nav-links" data-navigation-target="navLinks">
-        <li><%= link_to t('.home'), root_path %></li>
         <% if admin_route? %>
           <li><%= link_to t('.users'), admin_users_path %></li>
           <li><%= link_to t('.products'), admin_products_path %></li>
           <li><%= link_to t('.prices'), admin_stripe_prices_path %></li>
           <li><%= link_to t('.support'), admin_support_tickets_path %></li>
           <li><%= link_to t('.errors'), admin_application_errors_path %></li>
+        <% elsif teachers_route? %>
+          <li><%= link_to t('.home'), teachers_path %></li>
+          <li><%= link_to t('.exercises'), teachers_exercises_path %></li>
         <% else %>
           <li><%= link_to t('.exercises'), passages_path %></li>
           <% if current_user.present? %>
@@ -28,6 +30,9 @@
         <% end %>
         <div class="nav-right-actions">
           <% if signed_in? %>
+            <% if current_user&.teacher? || current_user&.super_admin? %>
+              <li><%= link_to t('.teachers'), teachers_path %></li>
+            <% end %>
             <% if current_user&.super_admin? %>
               <li>
                 <%= link_to t('.admin'), admin_root_path %>

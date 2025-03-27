@@ -10,6 +10,7 @@
 
 admin_role = Role.find_or_create_by(name: :admin)
 super_admin = Role.find_or_create_by(name: :super_admin)
+teacher_role = Role.find_or_create_by(name: :teacher)
 
 super_admin_user = User.find_or_create_by(email: 'jin@jinz.co') do |user|
   user.password = "password"
@@ -22,6 +23,12 @@ admin_user = User.find_or_create_by(email: 'admin@jinz.co') do |user|
   user.username = "admin"
 end
 UserRole.find_or_create_by(user: admin_user, role: admin_role)
+
+teacher_user = User.find_or_create_by(email: 'teacher@jinz.co') do |user|
+  user.password = "password"
+  user.username = "teacher"
+end
+UserRole.find_or_create_by(user: teacher_user, role: teacher_role)
 
 regular_user = User.find_or_create_by(email: 'reg@jinz.co') do |user|
   user.password = "password"
